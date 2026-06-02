@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>SBE — L2 Ép.01 · Enregistrer les slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{
+  --navy:#1B2A4A;--blue:#2D5BE3;--sky:#5B8DEF;
+  --cream:#F5F0E8;--white:#FFFFFF;--gold:#C9A84C;
+  --light:#EEF3FD;--muted:#8A9CC4;--dark:#0E1B35;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0E1B35;font-family:'DM Sans',sans-serif;color:#fff;padding:16px;}
+
+/* HEADER */
+.header{background:rgba(27,42,74,0.8);border:1px solid rgba(45,91,227,0.3);border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;}
+.header h1{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;}
+.header h1 span{color:var(--gold);}
+.header p{font-size:13px;color:var(--muted);line-height:1.5;}
+.header .tip{background:rgba(45,91,227,0.15);border:1px solid rgba(45,91,227,0.3);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:12px;color:var(--sky);line-height:1.5;}
+.tip strong{color:#fff;}
+
+/* SLIDE SECTION */
+.slide-section{margin-bottom:28px;}
+.slide-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;padding:0 2px;}
+
+/* IMAGE CONTAINER — affiche l'image PNG directement */
+.img-wrap{
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  position:relative;
+  background:#111;
+}
+.img-wrap img{
+  width:100%;
+  display:block;
+}
+.img-wrap .loading{
+  aspect-ratio:9/16;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;
+  color:var(--muted);font-size:13px;
+}
+.spinner{
+  width:32px;height:32px;
+  border:3px solid rgba(45,91,227,0.2);
+  border-top-color:var(--blue);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* SAVE BADGE */
+.save-badge{
+  position:absolute;bottom:10px;right:10px;
+  background:rgba(0,0,0,0.7);
+  color:#fff;font-size:10px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:6px 10px;border-radius:6px;
+  backdrop-filter:blur(8px);
+  pointer-events:none;
+}
+
+/* STATUS */
+.status{text-align:center;padding:12px;font-size:12px;color:var(--muted);margin-top:4px;}
+.status.done{color:#4ade80;}
+.status.error{color:#f87171;}
+
+/* PROGRESS */
+.progress-bar{background:rgba(255,255,255,0.05);border-radius:4px;height:4px;margin:16px 0 8px;}
+.progress-fill{height:100%;background:var(--blue);border-radius:4px;transition:width .4s;}
+.progress-label{text-align:center;font-size:11px;color:var(--muted);}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--navy);border:1px solid var(--blue);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SBE<span>.</span> · L2 Épisode 01</h1>
+  <p>Les images se génèrent automatiquement ci-dessous.</p>
+  <div class="tip">
+    📱 <strong>Pour enregistrer :</strong> appuie <strong>longtemps</strong> sur une image → "Enregistrer l'image" → elle ira dans ta <strong>Galerie Photos</strong>
+  </div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="progress-label" id="progressLabel">Génération en cours… 0/6</div>
+
+<!-- Les 6 containers d'images -->
+<div class="slide-section">
+  <div class="slide-label">Slide 01 · Accroche</div>
+  <div class="img-wrap" id="wrap1"><div class="loading"><div class="spinner"></div><span>Génération…</span></div></div>
+  <div class="status" id="status1"></div>
+</div>
+<div class="slide-section">
+  <div class="slide-label">Slide 02 · Réalité</div>
+  <div class="img-wrap" id="wrap2"><div class="loading"><div class="spinner"></div><span>Génération…</span></div></div>
+  <div class="status" id="status2"></div>
+</div>
+<div class="slide-section">
+  <div class="slide-label">Slide 03 · L1 vs L2</div>
+  <div class="img-wrap" id="wrap3"><div class="loading"><div class="spinner"></div><span>Génération…</span></div></div>
+  <div class="status" id="status3"></div>
+</div>
+<div class="slide-section">
+  <div class="slide-label">Slide 04 · Causes d'échec</div>
+  <div class="img-wrap" id="wrap4"><div class="loading"><div class="spinner"></div><span>Génération…</span></div></div>
+  <div class="status" id="status4"></div>
+</div>
+<div class="slide-section">
+  <div class="slide-label">Slide 05 · La série</div>
+  <div class="img-wrap" id="wrap5"><div class="loading"><div class="spinner"></div><span>Génération…</span></div></div>
+  <div class="status" id="status5"></div>
+</div>
+<div class="slide-section">
+  <div class="slide-label">Slide 06 · CTA</div>
+  <div class="img-wrap" id="wrap6"><div class="loading"><div class="spinner"></div><span>Génération…</span></div></div>
+  <div class="status" id="status6"></div>
+</div>
+
+<!-- SLIDES CACHÉES pour générer les images -->
+<div id="slideFactory" style="position:fixed;left:-9999px;top:0;width:360px;pointer-events:none;z-index:-1;">
+
+  <!-- SLIDE 1 — HOOK -->
+  <div id="s1" style="width:360px;height:640px;background:linear-gradient(155deg,#1B2A4A 0%,#0E1B35 100%);position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;">
+    <div style="position:absolute;width:100%;height:3px;background:linear-gradient(90deg,#2D5BE3,#C9A84C,transparent);top:0;left:0;"></div>
+    <div style="position:absolute;width:60%;height:60%;background:radial-gradient(circle,rgba(45,91,227,0.25),transparent 70%);top:-10%;right:-15%;border-radius:50%;"></div>
+    <div style="position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:110px;color:rgba(255,255,255,0.05);right:4%;top:8%;letter-spacing:-4px;line-height:1;">01</div>
+    <div style="padding:7% 8%;height:100%;display:flex;flex-direction:column;position:relative;z-index:2;">
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:auto;">SBE<span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#C9A84C;margin:0 4px;vertical-align:middle;position:relative;top:-1px;"></span></div>
+      <div style="display:inline-flex;background:rgba(45,91,227,0.2);color:#5B8DEF;border:1px solid rgba(45,91,227,0.4);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;">Épisode 01 · Série L2</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#C9A84C;margin-bottom:8px;opacity:.9;">Survivre & Cartonner en L2</div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:22px;line-height:1.15;color:#fff;margin-bottom:16px;">La L2 a un taux d'échec bien plus élevé que la L1.</div>
+        <div style="width:36px;height:2px;background:#C9A84C;border-radius:2px;margin-bottom:16px;"></div>
+        <div style="font-size:12px;line-height:1.65;color:#F5F0E8;opacity:.85;">Ce n'est pas un mythe. Et <strong>personne ne t'explique vraiment pourquoi.</strong><br>Jusqu'à maintenant. 👇</div>
+      </div>
+      <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);">
+        <div style="font-size:7px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.3;color:#fff;">@sbe</div>
+        <div style="font-size:7px;font-weight:600;letter-spacing:1px;opacity:.35;color:#fff;">1 / 6</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 — RÉALITÉ -->
+  <div id="s2" style="width:360px;height:640px;background:#F5F0E8;position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;">
+    <div style="position:absolute;width:4px;height:60%;background:linear-gradient(180deg,#2D5BE3,#C9A84C);left:0;top:20%;border-radius:0 4px 4px 0;"></div>
+    <div style="padding:7% 8% 7% 10%;height:100%;display:flex;flex-direction:column;position:relative;z-index:2;">
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1B2A4A;margin-bottom:auto;">SBE<span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#2D5BE3;margin:0 4px;vertical-align:middle;position:relative;top:-1px;"></span></div>
+      <div style="display:inline-flex;background:rgba(27,42,74,0.08);color:#1B2A4A;border:1px solid rgba(27,42,74,0.15);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;">La réalité brute</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#2D5BE3;margin-bottom:8px;opacity:.8;">Ce que personne ne te dit</div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:20px;line-height:1.15;color:#1B2A4A;margin-bottom:14px;">La L2 n'est pas juste "la suite de la L1"</div>
+        <div style="width:36px;height:2px;background:#2D5BE3;border-radius:2px;margin-bottom:14px;"></div>
+        <div style="font-size:11px;line-height:1.65;color:#1B2A4A;opacity:.85;">C'est une <strong>montée en puissance brutale</strong> sur tous les plans — niveau des cours, charge de travail, autonomie exigée.</div>
+        <div style="background:rgba(27,42,74,0.07);border-radius:8px;padding:12px 14px;margin-top:14px;">
+          <p style="font-size:11px;color:#1B2A4A;">La difficulté n'est pas une rumeur. <strong>C'est une réalité que tu peux anticiper.</strong></p>
+        </div>
+      </div>
+      <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(0,0,0,0.1);">
+        <div style="font-size:7px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.3;color:#1B2A4A;">@sbe</div>
+        <div style="font-size:7px;font-weight:600;letter-spacing:1px;opacity:.35;color:#1B2A4A;">2 / 6</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — L1 VS L2 -->
+  <div id="s3" style="width:360px;height:640px;background:#0E1B35;position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;">
+    <div style="position:absolute;width:80%;height:80%;background:radial-gradient(circle,rgba(45,91,227,0.12),transparent 60%);bottom:-30%;left:-20%;border-radius:50%;"></div>
+    <div style="position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);top:22%;left:0;"></div>
+    <div style="position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:110px;color:rgba(255,255,255,0.05);right:4%;top:8%;letter-spacing:-4px;line-height:1;">03</div>
+    <div style="padding:7% 8%;height:100%;display:flex;flex-direction:column;position:relative;z-index:2;">
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:auto;">SBE<span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#C9A84C;margin:0 4px;vertical-align:middle;position:relative;top:-1px;"></span></div>
+      <div style="display:inline-flex;background:rgba(201,168,76,0.12);color:#C9A84C;border:1px solid rgba(201,168,76,0.25);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;">Comparaison concrète</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#5B8DEF;margin-bottom:8px;opacity:.9;">Ce qui change vraiment</div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:22px;line-height:1.15;color:#fff;margin-bottom:14px;">L1 vs L2</div>
+        <div style="width:36px;height:2px;background:#C9A84C;border-radius:2px;margin-bottom:14px;"></div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;color:rgba(239,68,68,0.9);font-size:11px;"><span style="font-weight:700;flex-shrink:0;">✕</span><span>En L1 : tu découvres, on te laisse le temps</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start;color:rgba(239,68,68,0.9);font-size:11px;"><span style="font-weight:700;flex-shrink:0;">✕</span><span>En L2 : on suppose que tu sais déjà</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start;color:#F5F0E8;font-size:11px;margin-top:6px;"><span style="color:#C9A84C;font-weight:700;flex-shrink:0;">→</span><span>Les cours sont plus longs, plus techniques</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start;color:#F5F0E8;font-size:11px;"><span style="color:#C9A84C;font-weight:700;flex-shrink:0;">→</span><span>Les profs attendent <strong>de l'analyse</strong></span></div>
+        </div>
+      </div>
+      <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,0.1);">
+        <div style="font-size:7px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.3;color:#fff;">@sbe</div>
+        <div style="font-size:7px;font-weight:600;letter-spacing:1px;opacity:.35;color:#fff;">3 / 6</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — CAUSES -->
+  <div id="s4" style="width:360px;height:640px;background:linear-gradient(160deg,#1B2A4A 0%,#0E1B35 100%);position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;">
+    <div style="position:absolute;width:50%;height:50%;background:radial-gradient(circle,rgba(201,168,76,0.1),transparent 70%);top:-5%;right:-10%;border-radius:50%;"></div>
+    <div style="padding:7% 8%;height:100%;display:flex;flex-direction:column;position:relative;z-index:2;">
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:auto;">SBE<span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#C9A84C;margin:0 4px;vertical-align:middle;position:relative;top:-1px;"></span></div>
+      <div style="display:inline-flex;background:rgba(201,168,76,0.1);color:#C9A84C;border:1px solid rgba(201,168,76,0.2);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;">Les 3 raisons</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#5B8DEF;margin-bottom:8px;opacity:.9;">Pourquoi les étudiants décrochent</div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:20px;line-height:1.15;color:#fff;margin-bottom:14px;">3 causes d'échec en L2</div>
+        <div style="width:36px;height:2px;background:#C9A84C;border-radius:2px;margin-bottom:14px;"></div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(45,91,227,0.12);border-left:3px solid #2D5BE3;border-radius:0 8px 8px 0;padding:10px 12px;">
+            <div style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5B8DEF;margin-bottom:4px;">Cause 01</div>
+            <div style="font-size:11px;color:#fff;font-weight:500;">Mauvaises bases de L1</div>
+            <div style="font-size:9px;color:#8A9CC4;margin-top:2px;">Les lacunes non comblées explosent en L2</div>
+          </div>
+          <div style="background:rgba(45,91,227,0.12);border-left:3px solid #5B8DEF;border-radius:0 8px 8px 0;padding:10px 12px;">
+            <div style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5B8DEF;margin-bottom:4px;">Cause 02</div>
+            <div style="font-size:11px;color:#fff;font-weight:500;">Sous-estimation du rythme</div>
+            <div style="font-size:9px;color:#8A9CC4;margin-top:2px;">"J'ai réussi la L1, la L2 ira" = piège</div>
+          </div>
+          <div style="background:rgba(201,168,76,0.08);border-left:3px solid #C9A84C;border-radius:0 8px 8px 0;padding:10px 12px;">
+            <div style="font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#C9A84C;margin-bottom:4px;">Cause 03</div>
+            <div style="font-size:11px;color:#fff;font-weight:500;">Absence de méthode</div>
+            <div style="font-size:9px;color:#8A9CC4;margin-top:2px;">Ce qui marchait en L1 ne suffit plus</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,0.1);">
+        <div style="font-size:7px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.3;color:#fff;">@sbe</div>
+        <div style="font-size:7px;font-weight:600;letter-spacing:1px;opacity:.35;color:#fff;">4 / 6</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — INTRO SÉRIE -->
+  <div id="s5" style="width:360px;height:640px;background:#EEF3FD;position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;">
+    <div style="position:absolute;width:100%;height:2px;background:linear-gradient(90deg,#2D5BE3,transparent);top:0;left:0;"></div>
+    <div style="position:absolute;width:100%;height:2px;background:linear-gradient(90deg,#C9A84C,transparent);top:4px;left:0;opacity:.5;"></div>
+    <div style="padding:7% 8%;height:100%;display:flex;flex-direction:column;position:relative;z-index:2;">
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1B2A4A;margin-bottom:auto;">SBE<span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#2D5BE3;margin:0 4px;vertical-align:middle;position:relative;top:-1px;"></span></div>
+      <div style="display:inline-flex;background:rgba(27,42,74,0.08);color:#1B2A4A;border:1px solid rgba(27,42,74,0.15);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;">Ce que tu vas apprendre</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#2D5BE3;margin-bottom:8px;opacity:.8;">Bienvenue dans la série</div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:20px;line-height:1.15;color:#1B2A4A;margin-bottom:14px;">Survivre &amp; Cartonner en L2 Éco-Gestion</div>
+        <div style="width:36px;height:2px;background:#2D5BE3;border-radius:2px;margin-bottom:14px;"></div>
+        <div style="font-size:11px;line-height:1.65;color:#1B2A4A;opacity:.85;">Chaque épisode = <strong>un sujet clé de ta L2</strong> décrypté honnêtement.</div>
+        <div style="background:rgba(27,42,74,0.06);border-left:3px solid #2D5BE3;border-radius:0 6px 6px 0;padding:12px 14px;margin-top:14px;">
+          <p style="color:#1B2A4A;font-style:italic;font-family:'Playfair Display',serif;font-size:12px;">"Tout ce que tu aurais voulu savoir avant de commencer."</p>
+        </div>
+      </div>
+      <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(0,0,0,0.1);">
+        <div style="font-size:7px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.3;color:#1B2A4A;">@sbe</div>
+        <div style="font-size:7px;font-weight:600;letter-spacing:1px;opacity:.35;color:#1B2A4A;">5 / 6</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 — CTA -->
+  <div id="s6" style="width:360px;height:640px;background:#2D5BE3;position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;">
+    <div style="position:absolute;width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.4),rgba(201,168,76,0.6),rgba(255,255,255,0.4));top:0;left:0;"></div>
+    <div style="position:absolute;width:100%;height:60%;background:radial-gradient(ellipse,rgba(255,255,255,0.08),transparent 70%);top:-20%;left:-10%;"></div>
+    <div style="position:absolute;width:60%;height:40%;background:radial-gradient(circle,rgba(201,168,76,0.2),transparent 70%);bottom:5%;right:-10%;border-radius:50%;"></div>
+    <div style="padding:7% 8%;height:100%;display:flex;flex-direction:column;position:relative;z-index:2;">
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.85);margin-bottom:auto;">SBE<span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#C9A84C;margin:0 4px;vertical-align:middle;position:relative;top:-1px;"></span></div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <div style="font-size:40px;margin-bottom:14px;">💾</div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:24px;line-height:1.1;color:#fff;margin-bottom:14px;">Sauvegarde pour ne pas perdre la série</div>
+        <div style="width:36px;height:2px;background:#C9A84C;border-radius:2px;margin:0 auto 14px;"></div>
+        <div style="font-size:12px;line-height:1.6;color:rgba(255,255,255,0.8);">Tu es en L2 ou tu t'y prépares ?<br>Dis-moi en commentaire 👇</div>
+        <div style="margin-top:14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:8px 18px;">
+          <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;">Épisode 2 → Les matières de L2</span>
+        </div>
+      </div>
+      <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,0.2);">
+        <div style="font-size:7px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.4;color:#fff;">@sbe</div>
+        <div style="font-size:7px;font-weight:600;letter-spacing:1px;opacity:.4;color:#fff;">6 / 6</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end slideFactory -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SLIDES = ['s1','s2','s3','s4','s5','s6'];
+const LABELS = ['01_accroche','02_realite','03_l1vsl2','04_causes','05_serie','06_cta'];
+let generated = 0;
+
+function toast(msg, dur=2000){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), dur);
+}
+
+function updateProgress(){
+  const pct = Math.round((generated/SLIDES.length)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent =
+    generated < SLIDES.length
+      ? `Génération en cours… ${generated}/${SLIDES.length}`
+      : `✓ ${SLIDES.length} slides prêtes — appuie longtemps sur chaque image pour enregistrer`;
+}
+
+async function generateSlide(index){
+  const id = SLIDES[index];
+  const label = LABELS[index];
+  const wrapEl = document.getElementById('wrap'+(index+1));
+  const statusEl = document.getElementById('status'+(index+1));
+  const sourceEl = document.getElementById(id);
+
+  try {
+    const canvas = await html2canvas(sourceEl, {
+      scale: 3,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null,
+      logging: false,
+      width: 360,
+      height: 640,
+    });
+
+    const dataURL = canvas.toDataURL('image/png');
+
+    // Remplace le loader par l'image réelle
+    wrapEl.innerHTML = `
+      <img src="${dataURL}" alt="Slide ${index+1}" style="width:100%;display:block;" />
+      <div class="save-badge">📱 Appuie longtemps pour enregistrer</div>
+    `;
+
+    statusEl.textContent = '✓ Prête — appuie longtemps pour enregistrer dans ta galerie';
+    statusEl.className = 'status done';
+
+    generated++;
+    updateProgress();
+
+    if(generated === SLIDES.length){
+      toast('✓ Toutes les slides sont prêtes !', 3000);
+    }
+
+  } catch(e) {
+    console.error('Erreur slide', index+1, e);
+    wrapEl.innerHTML = `<div class="loading" style="aspect-ratio:9/16;"><span style="color:#f87171;">❌ Erreur de génération</span></div>`;
+    statusEl.textContent = 'Erreur — recharge la page';
+    statusEl.className = 'status error';
+  }
+}
+
+// Génère les slides une par une avec délai pour ne pas surcharger
+async function generateAll(){
+  updateProgress();
+  for(let i = 0; i < SLIDES.length; i++){
+    await generateSlide(i);
+    if(i < SLIDES.length - 1){
+      await new Promise(r => setTimeout(r, 300));
+    }
+  }
+}
+
+// Lance au chargement
+window.addEventListener('load', () => {
+  setTimeout(generateAll, 500);
+});
+</script>
+</body>
+</html>

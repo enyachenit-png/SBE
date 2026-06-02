@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBE TikTok — MENTAL · Pourquoi tu procrastines (et ce n'est pas de la paresse)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --paper: #FAF6F0;
+  --ink: #2E3A5C;
+  --ink2: #1E2540;
+  --accent: #A8C4A2;
+  --accentText: #1E2540;
+  --sage: #A8C4A2;
+  --sagef: #EBF1E9;
+  --rose: #E4BBB1;
+  --rosef: #FBEFEB;
+  --indigo: #2E3A5C;
+  --ash: #8A92AB;
+  --gold: #C9A84C;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#1E2540;font-family:'DM Sans',sans-serif;color:#FAF6F0;}
+
+.topbar{background:#2E3A5C;color:#FAF6F0;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,0.3);border-bottom:1px solid rgba(255,255,255,0.08);}
+.tb-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;color:#FAF6F0;letter-spacing:-0.5px;}
+.tb-logo span.dot{color:#A8C4A2;}
+.tb-badge{background:#A8C4A2;color:#1E2540;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:4px 10px;margin-left:12px;border-radius:12px;}
+.tb-info{font-size:11px;color:#8A92AB;margin-left:8px;letter-spacing:0.5px;}
+.btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 18px;border-radius:12px;border:none;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.btn-primary{background:#A8C4A2;color:#1E2540;}
+.btn-primary:hover{filter:brightness(1.1);}
+.btn-ghost{background:rgba(255,255,255,0.07);color:#FAF6F0;border:1px solid rgba(255,255,255,0.15);}
+.btn-ghost:hover{background:rgba(255,255,255,0.12);}
+.btn-sm{padding:5px 12px;font-size:10px;}
+
+.page{padding:32px;max-width:1600px;margin:0 auto;}
+.ep-section{margin-bottom:60px;}
+.ep-header{display:flex;align-items:center;gap:18px;margin-bottom:24px;padding:20px 26px;background:#2E3A5C;border:1px solid rgba(255,255,255,0.08);border-left:4px solid #A8C4A2;border-radius:12px;}
+.ep-tag{font-family:'Playfair Display',serif;font-weight:900;font-size:32px;color:#A8C4A2;opacity:0.55;line-height:1;flex-shrink:0;letter-spacing:-1px;}
+.ep-info{flex:1;}
+.ep-serie{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin-bottom:6px;}
+.ep-title-txt{font-family:'Playfair Display',serif;font-size:clamp(14px,1.9vw,19px);font-weight:700;color:#FAF6F0;letter-spacing:-0.2px;}
+.ep-actions{display:flex;gap:8px;}
+
+.slides-and-desc{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;}
+.slides-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+
+.desc-panel{background:#2E3A5C;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;position:sticky;top:80px;}
+.desc-panel-head{background:#A8C4A2;padding:12px 16px;}
+.desc-panel-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#1E2540;}
+.desc-section{padding:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.desc-section:last-child{border-bottom:none;}
+.desc-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8A92AB;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.desc-text{font-size:12px;line-height:1.65;color:#FAF6F0;white-space:pre-wrap;cursor:text;user-select:all;}
+.hashtag-wrap{font-size:11px;color:#C9A84C;line-height:1.8;cursor:text;user-select:all;}
+.copy-btn{background:rgba(255,255,255,0.07);color:#FAF6F0;border:1px solid rgba(255,255,255,0.15);font-size:9px;font-weight:700;letter-spacing:0.6px;padding:3px 8px;border-radius:3px;cursor:pointer;text-transform:uppercase;}
+.copy-btn:hover{background:#A8C4A2;color:#1E2540;border-color:#A8C4A2;}
+.copy-btn.copied{background:rgba(13,148,136,0.2);color:#4ade80;border-color:#0D9488;}
+
+.sw{display:flex;flex-direction:column;gap:8px;}
+.sw-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8A92AB;display:flex;justify-content:space-between;align-items:center;}
+
+.slide{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;container-type:inline-size;container-name:slide;border-radius:12px;box-shadow:0 12px 36px rgba(0,0,0,0.4),0 0 0 1px rgba(0,0,0,0.15);cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.slide:hover{transform:translateY(-3px);box-shadow:0 18px 48px rgba(0,0,0,0.5),0 0 0 2px #A8C4A2;}
+
+
+.bg-paper{background:#FAF6F0;}
+.bg-indigo{background:#2E3A5C;}
+.bg-indigo2{background:#1E2540;}
+.bg-sage{background:#A8C4A2;}
+.bg-sagef{background:#EBF1E9;}
+.bg-rosef{background:#FBEFEB;}
+.bg-rose{background:#E4BBB1;}
+.bg-grad-indigo{background:linear-gradient(165deg,#2E3A5C 0%,#1E2540 100%);}
+.bg-grad-sage{background:linear-gradient(165deg,#EBF1E9 0%,#A8C4A2 100%);}
+
+
+.si{width:100%;height:100%;padding:7% 8%;display:flex;flex-direction:column;position:relative;z-index:2;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
+.slide *{word-wrap:break-word;overflow-wrap:anywhere;}
+.dc{position:absolute;pointer-events:none;}
+
+.s-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(9px,2.5cqw,30px);letter-spacing:3px;text-transform:uppercase;margin-bottom:auto;}
+.s-logo .dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin:0 4px;vertical-align:middle;position:relative;top:-2px;}
+.s-stamp{display:inline-flex;align-items:center;gap:6px;font-size:clamp(7px,1.5cqw,20px);font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:4px 11px;margin-bottom:5%;width:fit-content;border-radius:3px;border:1.5px solid currentColor;background:transparent;}
+.s-badge{display:inline-flex;align-items:center;font-size:clamp(7px,1.5cqw,20px);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;}
+.s-eye{font-size:clamp(8px,1.7cqw,22px);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:3%;opacity:.7;}
+.s-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(13px,5cqw,66px);line-height:1.12;letter-spacing:-0.3px;margin-bottom:4%;}
+.s-h em{font-style:italic;font-weight:700;}
+.s-div{width:38px;height:2.5px;margin-bottom:4%;border-radius:2px;}
+.s-body{font-size:clamp(9px,2cqw,28px);line-height:1.6;font-weight:300;opacity:0.88;}
+.s-body strong{font-weight:600;opacity:1;}
+.s-list{display:flex;flex-direction:column;gap:3%;}
+.s-li{display:flex;align-items:flex-start;gap:8px;font-size:clamp(9px,1.9cqw,26px);line-height:1.4;}
+.s-num{display:inline-flex;align-items:center;justify-content:center;width:clamp(18px,3.2cqw,42px);height:clamp(18px,3.2cqw,42px);border:1.5px solid currentColor;border-radius:50%;font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(9px,1.8cqw,24px);flex-shrink:0;line-height:1;}
+.s-arr{font-size:clamp(11px,2.4cqw,30px);font-weight:700;flex-shrink:0;line-height:1;margin-top:1px;}
+.s-box{border-radius:12px;padding:4% 5%;margin:3% 0;position:relative;}
+.s-box p{font-size:clamp(9px,2cqw,26px);line-height:1.5;}
+.s-cite{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;}
+.s-nbg{position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(60px,22cqw,300px);line-height:0.85;opacity:0.06;pointer-events:none;letter-spacing:-4px;}
+
+.s-card{padding:3.5% 4.5%;border-radius:12px;border-left:3px solid #A8C4A2;background:rgba(0,0,0,0.04);}
+.s-card-head{font-size:clamp(9px,2cqw,26px);font-weight:600;margin-bottom:0.5%;display:flex;align-items:center;gap:8px;}
+.s-card-num{font-family:'Playfair Display',serif;font-weight:900;color:#A8C4A2;font-size:clamp(11px,2.4cqw,30px);}
+.s-card-sub{font-size:clamp(8px,1.6cqw,22px);opacity:0.65;font-style:italic;line-height:1.4;}
+
+.s-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:4%;}
+.s-foot.b-light{border-top:1px dashed rgba(0,0,0,0.15);}
+.s-foot.b-dark{border-top:1px dashed rgba(255,255,255,0.18);}
+.s-wm{font-size:clamp(7px,1.3cqw,18px);font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:0.35;}
+.s-pg{font-size:clamp(7px,1.3cqw,18px);font-weight:700;letter-spacing:1.5px;opacity:0.4;}
+.s-content{flex:1;display:flex;flex-direction:column;justify-content:center;}
+
+.s-fold{position:absolute;top:0;right:0;width:clamp(24px,5cqw,70px);height:clamp(24px,5cqw,70px);background:linear-gradient(225deg,transparent 50%,rgba(0,0,0,0.08) 50%,rgba(0,0,0,0.12));pointer-events:none;z-index:3;}
+
+.cta-icon{font-size:clamp(22px,7cqw,90px);margin-bottom:4%;text-align:center;line-height:1;}
+.cta-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(16px,6cqw,80px);line-height:1.05;letter-spacing:-0.3px;margin-bottom:5%;text-align:center;}
+.cta-pill{display:inline-block;border-radius:100px;padding:3% 7%;font-size:clamp(8px,1.8cqw,24px);font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-top:5%;border:1.5px solid currentColor;background:transparent;}
+
+.toast{position:fixed;bottom:20px;right:20px;background:#2E3A5C;border:1.5px solid #A8C4A2;color:#FAF6F0;padding:10px 18px;border-radius:4px;font-size:12px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:1100px){.slides-and-desc{grid-template-columns:1fr;}.desc-panel{position:static;}}
+@media(max-width:600px){.page{padding:16px;}.topbar{padding:12px 16px;}.slides-row{grid-template-columns:repeat(3,1fr);gap:10px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:6px;">
+    <div class="tb-logo">SBE<span class="dot">.</span><span class="tb-badge">Mental · Neurosciences</span></div>
+    <div class="tb-info">Carrousel unique · Comprendre pour agir</div>
+  </div>
+  <button class="btn btn-primary" onclick="dlAll()">⬇ Tout télécharger</button>
+</div>
+
+<div class="page">
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-tag">Ψ</div>
+    <div class="ep-info">
+      <div class="ep-serie">Carrousel unique · MENTAL</div>
+      <div class="ep-title-txt">Pourquoi tu procrastines (et ce n'est pas de la paresse)</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlAll()">⬇ 6 slides</button></div>
+  </div>
+
+  <div class="slides-and-desc">
+    <div class="slides-row">
+      <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('mentals1','mental_01')">⬇</button></div>
+        <div class="slide bg-grad-indigo" id="mentals1" onclick="dl('mentals1','mental_01')"><div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,#A8C4A2,#E4BBB1,transparent);top:0;left:0;"></div><div class="dc" style="width:65%;height:65%;background:radial-gradient(circle,rgba(168,196,162,0.15),transparent 70%);top:-15%;right:-15%;border-radius:50%;"></div><div class="s-nbg" style="color:#FAF6F0;right:5%;bottom:8%;">Ψ</div>
+          <div class="si">
+            <div class="s-logo" style="color:#FAF6F0;">SBE<span class="dot" style="background:#A8C4A2"></span></div>
+            <div class="s-stamp" style="color:#A8C4A2;">Ψ Mental · Neurosciences</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#E4BBB1;">Avant de te juger</div>
+              <div class="s-h" style="color:#FAF6F0;">Tu procrastines. <em>Et si</em> ce n'était pas de la paresse ?</div>
+              <div class="s-div" style="background:#A8C4A2;"></div>
+              <div class="s-body" style="color:rgba(250,246,240,0.82);">Mais ton cerveau qui te <strong style="color:#A8C4A2;">protège d'une menace mal identifiée</strong>. 👇</div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:#FAF6F0;">@sbe · mental</div><div class="s-pg" style="color:#FAF6F0;">01/06</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">02 · Science <button class="btn btn-ghost btn-sm" onclick="dl('mentals2','mental_02')">⬇</button></div>
+        <div class="slide bg-paper" id="mentals2" onclick="dl('mentals2','mental_02')"><div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,#2E3A5C,#A8C4A2,transparent);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:#2E3A5C;">SBE<span class="dot" style="background:#A8C4A2"></span></div>
+            <div class="s-stamp" style="color:#2E3A5C;background:#EBF1E9;border-color:#A8C4A2;">Ce que dit la science</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#2E3A5C;">La vraie nature</div>
+              <div class="s-h" style="color:#2E3A5C;">La procrastination n'est pas un problème de <em>temps</em>.</div>
+              <div class="s-div" style="background:#A8C4A2;"></div>
+              <div class="s-body" style="color:#2E3A5C;">C'est une <strong>réponse émotionnelle</strong>. Ton cerveau associe cette tâche à une émotion négative — ennui, peur de l'échec, incompétence ressentie — et il <em>fuit pour se protéger</em>.</div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#2E3A5C;">@sbe · mental</div><div class="s-pg" style="color:#2E3A5C;">02/06</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">03 · 3 déclencheurs <button class="btn btn-ghost btn-sm" onclick="dl('mentals3','mental_03')">⬇</button></div>
+        <div class="slide bg-sagef" id="mentals3" onclick="dl('mentals3','mental_03')"><div class="dc" style="width:100%;height:2px;background:#2E3A5C;top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:#2E3A5C;">SBE<span class="dot" style="background:#A8C4A2"></span></div>
+            <div class="s-stamp" style="color:#2E3A5C;background:#FAF6F0;border-color:#2E3A5C;">3 déclencheurs</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#2E3A5C;">Identifie le tien</div>
+              <div class="s-h" style="color:#2E3A5C;">Quand le cerveau fuit</div>
+              <div class="s-div" style="background:#2E3A5C;"></div>
+              <div class="s-list">
+          <div class="s-li" style="color:#2E3A5C;"><span class="s-num" style="color:#2E3A5C;">1</span><span><strong>Tâche floue</strong> — tu ne sais pas par où commencer</span></div>
+          <div class="s-li" style="color:#2E3A5C;"><span class="s-num" style="color:#2E3A5C;">2</span><span><strong>Tâche trop grande</strong> — tu vois l'ensemble et tu te sens dépassé(e)</span></div>
+          <div class="s-li" style="color:#2E3A5C;"><span class="s-num" style="color:#E4BBB1;">3</span><span><strong>Tâche à fort enjeu</strong> — tu as peur de mal faire</span></div>
+        </div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#2E3A5C;">@sbe · mental</div><div class="s-pg" style="color:#2E3A5C;">03/06</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">04 · Solution <button class="btn btn-ghost btn-sm" onclick="dl('mentals4','mental_04')">⬇</button></div>
+        <div class="slide bg-rosef" id="mentals4" onclick="dl('mentals4','mental_04')"><div class="dc" style="width:6px;height:60%;background:linear-gradient(180deg,#E4BBB1,transparent);left:0;top:20%;"></div>
+          <div class="si" style="padding-left:11%">
+            <div class="s-logo" style="color:#2E3A5C;">SBE<span class="dot" style="background:#E4BBB1"></span></div>
+            <div class="s-stamp" style="color:#2E3A5C;background:#FBEFEB;border-color:#E4BBB1;">La solution concrète</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#2E3A5C;">Désamorcer la peur</div>
+              <div class="s-h" style="color:#2E3A5C;">Rends-la <em>petite</em>. Rends-la <em>concrète</em>.</div>
+              <div class="s-div" style="background:#E4BBB1;"></div>
+              <div class="s-body" style="color:#2E3A5C;">Pas <em>"réviser la macro"</em> mais <strong>"ouvrir mon cours et lire la première page"</strong>. Pas <em>"rédiger ma dissert"</em> mais <strong>"écrire une phrase d'introduction"</strong>. Le démarrage est le seul vrai problème.</div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#2E3A5C;">@sbe · mental</div><div class="s-pg" style="color:#2E3A5C;">04/06</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">05 · Conseil <button class="btn btn-ghost btn-sm" onclick="dl('mentals5','mental_05')">⬇</button></div>
+        <div class="slide bg-grad-sage" id="mentals5" onclick="dl('mentals5','mental_05')"><div class="dc" style="width:100%;height:2px;background:#2E3A5C;top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:#2E3A5C;">SBE<span class="dot" style="background:#2E3A5C"></span></div>
+            <div class="s-stamp" style="color:#2E3A5C;border-color:#2E3A5C;">La règle des 5 minutes</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#2E3A5C;">L'astuce qui marche</div>
+              <div class="s-h" style="color:#2E3A5C;">Dis-toi : <em>juste 5 minutes</em>.</div>
+              <div class="s-div" style="background:#2E3A5C;"></div>
+              <div class="s-box" style="background:rgba(250,246,240,0.7);border-left:3px solid #2E3A5C;"><p class="s-cite" style="color:#2E3A5C;">5 minutes réelles, non négociables. Dans 80% des cas, tu continues. Parce que commencer était le seul vrai obstacle.</p></div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#2E3A5C;">@sbe · mental</div><div class="s-pg" style="color:#2E3A5C;">05/06</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">06 · CTA <button class="btn btn-ghost btn-sm" onclick="dl('mentals6','mental_06')">⬇</button></div>
+        <div class="slide bg-indigo" id="mentals6" onclick="dl('mentals6','mental_06')"><div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(250,246,240,0.3),#A8C4A2,rgba(250,246,240,0.3));top:0;left:0;"></div><div class="dc" style="width:90%;height:55%;background:radial-gradient(ellipse,rgba(168,196,162,0.12),transparent 70%);top:-15%;left:-10%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:#FAF6F0;">SBE<span class="dot" style="background:#A8C4A2"></span></div>
+            
+            <div class="s-content">
+              
+              
+              
+              <div style="text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+          <div class="cta-icon">🧠</div>
+          <div class="cta-h" style="color:#FAF6F0;">Sur quelle tâche tu procrastines <em>là</em> ?</div>
+          <div class="s-div" style="background:#A8C4A2;margin:0 auto 5%;"></div>
+          <div class="s-body" style="color:rgba(250,246,240,0.85);text-align:center;">Dis-le en commentaire 👇</div>
+          <div class="cta-pill" style="color:#A8C4A2;border-color:#A8C4A2;">💾 Sauvegarde</div>
+        </div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:#FAF6F0;">@sbe · mental</div><div class="s-pg" style="color:#FAF6F0;">06/06</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 MENTAL — Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyEl('d_mental')">Copier</button></div>
+        <div class="desc-text" id="d_mental">La procrastination n'est pas de la paresse.
+
+C'est une réponse émotionnelle que ton cerveau crée pour te protéger d'une menace qu'il a mal identifiée.
+
+Comprendre ça change tout. 🧠
+
+Voici les 3 déclencheurs + la règle des 5 minutes pour les désamorcer.</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_mental')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_mental">#procrastination #etudiant #methodedetravail #psychologie #reussitefac #neurosciences #santementale #sbe</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function copyEl(id){const el=document.getElementById(id);if(!el)return;const txt=el.textContent;navigator.clipboard.writeText(txt).then(()=>{showToast('✓ Copié !');const b=event.target;if(b){b.classList.add('copied');setTimeout(()=>b.classList.remove('copied'),1500);}}).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('✓ Copié !');}catch(_){}document.body.removeChild(ta);});}
+async function captureSlide(id,filename){const orig=document.getElementById(id);if(!orig)return false;const wrap=document.createElement('div');wrap.style.cssText='position:fixed;top:0;left:-99999px;width:1080px;height:1350px;pointer-events:none;z-index:-1;background:transparent;';const clone=orig.cloneNode(true);clone.style.width='1080px';clone.style.height='1350px';clone.style.maxWidth='none';clone.style.aspectRatio='auto';clone.style.boxShadow='none';clone.style.transform='none';wrap.appendChild(clone);document.body.appendChild(wrap);await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));if(document.fonts&&document.fonts.ready){try{await document.fonts.ready;}catch(_){}}try{const c=await html2canvas(clone,{scale:1,width:1080,height:1350,windowWidth:1080,windowHeight:1350,useCORS:true,allowTaint:true,backgroundColor:null,logging:false});const a=document.createElement('a');a.download='SBE_'+filename+'.png';a.href=c.toDataURL('image/png');a.click();return true;}catch(e){console.error(e);return false;}finally{document.body.removeChild(wrap);}}
+async function dl(id,name){showToast('⏳ Génération…');const ok=await captureSlide(id,name);showToast(ok?'✓ '+name+'.png':'❌ Erreur');}
+async function dlAll(){const slides=document.querySelectorAll('.slide[id]');showToast('⏳ Téléchargement ('+slides.length+')…');for(const el of slides){const id=el.id;const m=id.match(/^mentals(\d+)$/);const name=m?'mental_'+String(m[1]).padStart(2,'0'):id;await captureSlide(id,name);await new Promise(r=>setTimeout(r,200));}showToast('✓ Tout téléchargé !');}
+</script>
+</body>
+</html>

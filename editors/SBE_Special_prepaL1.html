@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBE TikTok — PRÉPA L1 · 5 choses à savoir avant d'entrer en L1 Éco-Gestion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+/* ─────────────────────────────────────────────────────────
+   SBE — ÉDITION SPÉCIALE · PRÉPA L1
+   Concept : "guide d'entrée" — calme, méthodique, premium
+   Palette : Teal profond + Crème + Graphite + Or
+   Distinct des autres Specials (CV/Flash/Élite/Mental/Nuit/Voix/Fondatrice)
+─────────────────────────────────────────────────────────── */
+:root {
+  --paper:  #FBF7F0;
+  --cream:  #F2EBDC;
+  --cream2: #E8DFC9;
+  --ivory:  #FAF6EE;
+  --ink:    #1F1F1F;
+  --ink2:   #0F0F0F;
+  --graphite: #3A3A3A;
+  --teal:   #2D6A6A;
+  --teal2:  #1A4848;
+  --tealf:  #E0EBEB;
+  --tealf2: #C5D8D8;
+  --gold:   #C9A84C;
+  --ash:    #8A8474;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#15252A;font-family:'DM Sans',sans-serif;color:var(--cream);}
+
+.topbar{background:var(--ink);border-bottom:1px solid var(--teal);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,0.3);}
+.tb-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;color:var(--paper);letter-spacing:-0.5px;}
+.tb-logo span.dot{color:var(--teal);}
+.tb-badge{background:var(--teal);color:var(--paper);font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:4px 10px;margin-left:12px;border-radius:3px;}
+.tb-info{font-size:11px;color:var(--ash);margin-left:8px;letter-spacing:0.5px;}
+.btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 18px;border-radius:4px;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.btn-primary{background:var(--teal);color:var(--paper);}
+.btn-primary:hover{background:var(--teal2);}
+.btn-ghost{background:rgba(255,255,255,0.07);color:var(--paper);border:1px solid rgba(255,255,255,0.15);}
+.btn-ghost:hover{background:rgba(255,255,255,0.12);}
+.btn-sm{padding:5px 12px;font-size:10px;}
+
+.page{padding:32px;max-width:1600px;margin:0 auto;}
+.ep-section{margin-bottom:60px;}
+.ep-header{display:flex;align-items:center;gap:18px;margin-bottom:24px;padding:20px 26px;background:var(--ink);border:1px solid rgba(45,106,106,0.4);border-left:4px solid var(--teal);border-radius:6px;}
+.ep-tag{font-family:'Playfair Display',serif;font-weight:900;font-size:34px;color:var(--teal);opacity:0.7;line-height:1;flex-shrink:0;letter-spacing:-1px;}
+.ep-info{flex:1;}
+.ep-serie{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.ep-title-txt{font-family:'Playfair Display',serif;font-size:clamp(14px,1.9vw,19px);font-weight:700;color:var(--paper);letter-spacing:-0.2px;}
+.ep-actions{display:flex;gap:8px;}
+
+.slides-and-desc{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;}
+.slides-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+
+.desc-panel{background:var(--ink);border:1px solid rgba(255,255,255,0.08);border-radius:6px;overflow:hidden;position:sticky;top:80px;}
+.desc-panel-head{background:var(--teal);padding:12px 16px;}
+.desc-panel-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--paper);}
+.desc-section{padding:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.desc-section:last-child{border-bottom:none;}
+.desc-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.desc-text{font-size:12px;line-height:1.65;color:var(--paper);white-space:pre-wrap;cursor:text;user-select:all;}
+.hashtag-wrap{font-size:11px;color:var(--gold);line-height:1.8;cursor:text;user-select:all;font-weight:500;}
+.copy-btn{background:rgba(45,106,106,0.2);color:var(--paper);border:1px solid var(--teal);font-size:9px;font-weight:700;letter-spacing:0.6px;padding:3px 8px;border-radius:3px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.copy-btn:hover{background:var(--teal);}
+
+.sw{display:flex;flex-direction:column;gap:8px;}
+.sw-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ash);display:flex;justify-content:space-between;align-items:center;}
+
+.slide{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;container-type:inline-size;container-name:slide;border-radius:6px;box-shadow:0 12px 36px rgba(0,0,0,0.4),0 0 0 1px rgba(0,0,0,0.15);cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.slide:hover{transform:translateY(-3px);box-shadow:0 18px 48px rgba(0,0,0,0.5),0 0 0 2px var(--teal);}
+
+.bg-paper{background:var(--paper);}
+.bg-cream{background:var(--cream);}
+.bg-cream2{background:var(--cream2);}
+.bg-ivory{background:var(--ivory);}
+.bg-ink{background:var(--ink);}
+.bg-ink2{background:var(--ink2);}
+.bg-teal{background:var(--teal);}
+.bg-tealf{background:var(--tealf);}
+.bg-grad-ink{background:linear-gradient(160deg,#1F1F1F 0%,#0F0F0F 100%);}
+.bg-grad-teal{background:linear-gradient(160deg,#2D6A6A 0%,#1A4848 100%);}
+.bg-grad-cream{background:linear-gradient(160deg,#FBF7F0 0%,#E8DFC9 100%);}
+
+.si{width:100%;height:100%;padding:7% 8%;display:flex;flex-direction:column;position:relative;z-index:2;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
+.slide *{word-wrap:break-word;overflow-wrap:anywhere;}
+.dc{position:absolute;pointer-events:none;}
+
+.s-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(9px,2.5cqw,30px);letter-spacing:3px;text-transform:uppercase;margin-bottom:auto;}
+.s-logo .dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin:0 4px;vertical-align:middle;position:relative;top:-2px;}
+.s-stamp{display:inline-flex;align-items:center;gap:6px;font-size:clamp(7px,1.5cqw,20px);font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:4px 11px;margin-bottom:5%;width:fit-content;border-radius:3px;border:1.5px solid currentColor;background:transparent;}
+.s-eye{font-size:clamp(8px,1.7cqw,22px);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:3%;opacity:0.7;}
+.s-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(13px,5cqw,66px);line-height:1.12;letter-spacing:-0.3px;margin-bottom:4%;}
+.s-h.smaller{font-size:clamp(13px,4.4cqw,58px);}
+.s-h em{font-style:italic;font-weight:700;color:var(--teal);}
+.s-h .teal{color:var(--teal);}
+.s-div{width:42px;height:3px;margin-bottom:4%;border-radius:2px;}
+.s-body{font-size:clamp(8.5px,1.8cqw,25px);line-height:1.6;font-weight:400;opacity:0.9;}
+.s-body strong{font-weight:600;opacity:1;}
+.s-body em{font-style:italic;color:var(--teal);font-weight:500;}
+.s-list{display:flex;flex-direction:column;gap:2.5%;}
+.s-li{display:flex;align-items:flex-start;gap:8px;font-size:clamp(8.5px,1.8cqw,24px);line-height:1.4;}
+.s-arr{font-size:clamp(10px,2.2cqw,28px);font-weight:700;flex-shrink:0;line-height:1;margin-top:1px;color:var(--teal);}
+.s-num{display:inline-flex;align-items:center;justify-content:center;width:clamp(18px,3.2cqw,42px);height:clamp(18px,3.2cqw,42px);border:1.5px solid currentColor;border-radius:50%;font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(9px,1.8cqw,24px);flex-shrink:0;line-height:1;color:var(--teal);}
+.s-quote{padding:4% 5%;margin:3% 0;border-left:3px solid var(--teal);background:rgba(45,106,106,0.08);border-radius:0 4px 4px 0;}
+.s-quote p{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:clamp(9px,2cqw,26px);line-height:1.5;}
+.s-cite{font-family:'Playfair Display',serif;font-style:italic;}
+.s-nbg{position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(60px,22cqw,320px);line-height:0.85;opacity:0.06;pointer-events:none;letter-spacing:-4px;}
+
+.s-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:4%;}
+.s-foot.b-light{border-top:1px solid rgba(31,31,31,0.12);}
+.s-foot.b-dark{border-top:1px solid rgba(242,235,220,0.15);}
+.s-wm{font-size:clamp(7px,1.3cqw,18px);font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:0.4;}
+.s-pg{font-size:clamp(7px,1.3cqw,18px);font-weight:700;letter-spacing:1.5px;opacity:0.5;font-family:'Playfair Display',serif;}
+.s-content{flex:1;display:flex;flex-direction:column;justify-content:center;}
+
+.cta-icon{font-size:clamp(22px,7cqw,90px);margin-bottom:4%;text-align:center;line-height:1;}
+.cta-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(16px,5.8cqw,80px);line-height:1.05;letter-spacing:-0.3px;margin-bottom:5%;text-align:center;}
+.cta-pill{display:inline-block;border-radius:3px;padding:3% 8%;font-size:clamp(8px,1.7cqw,22px);font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-top:5%;border:2px solid currentColor;background:transparent;}
+
+.toast{position:fixed;bottom:20px;right:20px;background:var(--ink);border:1.5px solid var(--teal);color:var(--paper);padding:10px 18px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:0.5px;opacity:0;transform:translateY(8px);transition:all .3s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:1100px){.slides-and-desc{grid-template-columns:1fr;}.desc-panel{position:static;}}
+@media(max-width:600px){.page{padding:16px;}.topbar{padding:12px 16px;}.slides-row{grid-template-columns:repeat(3,1fr);gap:10px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:6px;">
+    <div class="tb-logo">SBE<span class="dot">.</span><span class="tb-badge">PRÉPA L1</span></div>
+    <div class="tb-info">Édition spéciale · Avant la rentrée éco-gestion</div>
+  </div>
+  <button class="btn btn-primary" onclick="dlAll()">⬇ Tout télécharger</button>
+</div>
+
+<div class="page">
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-tag">L1</div>
+    <div class="ep-info">
+      <div class="ep-serie">Édition spéciale · Prépa L1 Éco-Gestion</div>
+      <div class="ep-title-txt">1 étudiant sur 2 rate sa L1 — voici les 5 choses qui changent tout avant d'y entrer</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlAll()">⬇ 9 slides</button></div>
+  </div>
+
+  <div class="slides-and-desc">
+    <div class="slides-row">
+
+      <!-- S1 HOOK -->
+      <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s1','prepaL1_01')">⬇</button></div>
+        <div class="slide bg-grad-ink" id="prepaL1s1" onclick="dl('prepaL1s1','prepaL1_01')">
+          <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold),transparent);top:0;left:0;"></div>
+          <div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(45,106,106,0.18),transparent 70%);top:-12%;right:-15%;border-radius:50%;"></div>
+          <div class="s-nbg" style="color:var(--paper);right:4%;bottom:6%;font-size:clamp(120px,42cqw,580px);letter-spacing:-8px;">½</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--paper)">SBE<span class="dot" style="background:var(--teal)"></span></div>
+            <div class="s-stamp" style="color:var(--gold);">⚐ Prépa L1 · Édition spéciale</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--gold)">Avant ta rentrée</div>
+              <div class="s-h" style="color:var(--paper)"><em>1 étudiant sur 2</em><br/>rate sa <span class="teal">L1 éco-gestion.</span></div>
+              <div class="s-div" style="background:var(--teal)"></div>
+              <div class="s-body" style="color:rgba(251,247,240,0.82);">Et la plupart ne comprennent <strong>jamais pourquoi.</strong> Ce n'est pas une question d'intelligence. C'est une question de ce qu'on ne t'a pas dit. 👇</div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:var(--paper)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--paper)">01/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 LE PROBLÈME -->
+      <div class="sw"><div class="sw-label">02 · Le problème <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s2','prepaL1_02')">⬇</button></div>
+        <div class="slide bg-cream" id="prepaL1s2" onclick="dl('prepaL1s2','prepaL1_02')">
+          <div class="dc" style="width:5px;height:65%;background:linear-gradient(180deg,var(--teal),transparent);left:0;top:18%;"></div>
+          <div class="si" style="padding-left:10%">
+            <div class="s-logo" style="color:var(--ink)">SBE<span class="dot" style="background:var(--teal)"></span></div>
+            <div class="s-stamp" style="color:var(--teal);background:var(--tealf);border-color:var(--teal);">02 · La réalité</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--teal)">Ce que personne n'annonce</div>
+              <div class="s-h smaller" style="color:var(--ink)">La L1 <em>n'est pas</em> ce que tu crois.</div>
+              <div class="s-div" style="background:var(--teal)"></div>
+              <div class="s-body" style="color:var(--ink)">De l'extérieur ça paraît accessible — pas de prépa, pas de concours, pas de pression visible.</div>
+              <div class="s-body" style="color:var(--ink);margin-top:3%;">La réalité : <strong>maths · compta · droit · micro · macro · stats.</strong> Des matières sans rapport entre elles, des profs qui n'attendent pas, et une liberté qui ressemble à un cadeau <em>mais qui est le premier piège.</em></div>
+              <div class="s-quote"><p style="color:var(--ink)">Ceux qui ratent ne manquaient pas de capacités. Ils manquaient de méthode.</p></div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:var(--ink)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--ink)">02/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 CONSEIL 1 — RIGUEUR -->
+      <div class="sw"><div class="sw-label">03 · Conseil 1 — Rigueur <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s3','prepaL1_03')">⬇</button></div>
+        <div class="slide bg-paper" id="prepaL1s3" onclick="dl('prepaL1s3','prepaL1_03')">
+          <div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,var(--teal),var(--gold),transparent);top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--teal);right:4%;top:8%;font-size:clamp(90px,34cqw,480px);">01</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--ink)">SBE<span class="dot" style="background:var(--teal)"></span></div>
+            <div class="s-stamp" style="color:var(--teal);background:var(--tealf);border-color:var(--teal);">Conseil 01 / 05</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--teal)">La rigueur</div>
+              <div class="s-h smaller" style="color:var(--ink)">Personne ne le fera <em>à ta place.</em></div>
+              <div class="s-div" style="background:var(--teal)"></div>
+              <div class="s-body" style="color:var(--ink)">À la fac, tu es libre. Libre de venir, libre de pas venir, libre de tout remettre à demain. <strong>C'est exactement pour ça que tant d'étudiants décrochent.</strong></div>
+              <div class="s-body" style="color:var(--ink);margin-top:3%;">Pas de sonnerie, pas de parent, pas de prof qui te relance. Juste toi.</div>
+              <div class="s-list" style="margin-top:4%;">
+                <div class="s-li" style="color:var(--ink)"><span class="s-arr">›</span><span><strong>Présent(e) à chaque cours</strong> sans exception</span></div>
+                <div class="s-li" style="color:var(--ink)"><span class="s-arr">›</span><span><strong>Prépare chaque TD</strong> même si tu penses pas en avoir besoin</span></div>
+                <div class="s-li" style="color:var(--ink)"><span class="s-arr" style="color:var(--gold);">›</span><span><strong>Travaille le soir du cours</strong>, pas la veille de l'exam</span></div>
+              </div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:var(--ink)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--ink)">03/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 CONSEIL 2 — ORGANISATION -->
+      <div class="sw"><div class="sw-label">04 · Conseil 2 — Organisation <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s4','prepaL1_04')">⬇</button></div>
+        <div class="slide bg-tealf" id="prepaL1s4" onclick="dl('prepaL1s4','prepaL1_04')">
+          <div class="dc" style="width:100%;height:2px;background:var(--teal);top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--teal);right:4%;top:8%;font-size:clamp(90px,34cqw,480px);">02</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--ink)">SBE<span class="dot" style="background:var(--teal)"></span></div>
+            <div class="s-stamp" style="color:var(--teal);background:rgba(255,255,255,0.5);border-color:var(--teal);">Conseil 02 / 05</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--teal)">L'organisation</div>
+              <div class="s-h smaller" style="color:var(--ink)">Ton cerveau ne peut pas <em>tout porter seul.</em></div>
+              <div class="s-div" style="background:var(--teal)"></div>
+              <div class="s-body" style="color:var(--ink)">Un étudiant désorganisé passe <strong>plus de temps à se demander quoi faire qu'à le faire.</strong> Énergie mentale gaspillée chaque jour. Ça épuise avant même d'avoir ouvert un cours.</div>
+              <div class="s-body" style="color:var(--ink);margin-top:3%;">Notion, agenda numérique — peu importe l'outil. <strong>Externalise tout :</strong> cours à rendre, chapitres à revoir, dates de partiels, créneaux de révision.</div>
+              <div class="s-quote"><p style="color:var(--ink)">Un cerveau libéré de la logistique apprend mieux, retient mieux, performe mieux.</p></div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:var(--ink)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--ink)">04/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 CONSEIL 3 — TRAVAIL INTELLIGENT -->
+      <div class="sw"><div class="sw-label">05 · Conseil 3 — Travail intelligent <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s5','prepaL1_05')">⬇</button></div>
+        <div class="slide bg-ink" id="prepaL1s5" onclick="dl('prepaL1s5','prepaL1_05')">
+          <div class="dc" style="width:100%;height:2px;background:var(--gold);top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--gold);right:4%;top:8%;font-size:clamp(90px,34cqw,480px);opacity:0.08;">03</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--paper)">SBE<span class="dot" style="background:var(--gold)"></span></div>
+            <div class="s-stamp" style="color:var(--gold);border-color:var(--gold);">Conseil 03 / 05</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--gold)">Travailler intelligemment</div>
+              <div class="s-h smaller" style="color:var(--paper)">Pas <em>longtemps.</em></div>
+              <div class="s-div" style="background:var(--gold)"></div>
+              <div class="s-body" style="color:rgba(251,247,240,0.88)">10 heures sur un cours la veille d'un exam = <strong>panique</strong>. La panique ne crée pas de la mémoire.</div>
+              <div class="s-body" style="color:rgba(251,247,240,0.88);margin-top:3%;">Le cerveau retient ce qu'il a eu le temps d'ancrer sur plusieurs semaines. Pas ce qu'on lui a forcé en une nuit.</div>
+              <div class="s-quote" style="border-left-color:var(--gold);background:rgba(201,168,76,0.08);"><p style="color:var(--paper)">Méthodique et régulier tout le semestre = <strong>1 heure de révision la veille suffit</strong> pour consolider. Pas pour tout apprendre.</p></div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:var(--paper)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--paper)">05/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 CONSEIL 4 — ÉQUILIBRE -->
+      <div class="sw"><div class="sw-label">06 · Conseil 4 — Équilibre <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s6','prepaL1_06')">⬇</button></div>
+        <div class="slide bg-cream2" id="prepaL1s6" onclick="dl('prepaL1s6','prepaL1_06')">
+          <div class="dc" style="width:5px;height:60%;background:linear-gradient(180deg,var(--teal),transparent);left:0;top:20%;"></div>
+          <div class="s-nbg" style="color:var(--teal);right:4%;top:8%;font-size:clamp(90px,34cqw,480px);">04</div>
+          <div class="si" style="padding-left:10%">
+            <div class="s-logo" style="color:var(--ink)">SBE<span class="dot" style="background:var(--teal)"></span></div>
+            <div class="s-stamp" style="color:var(--teal);background:var(--paper);border-color:var(--teal);">Conseil 04 / 05</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--teal)">L'équilibre</div>
+              <div class="s-h smaller" style="color:var(--ink)">L'épuisement <em>ne mène à rien.</em></div>
+              <div class="s-div" style="background:var(--teal)"></div>
+              <div class="s-body" style="color:var(--ink)">Sacrifier ta vie sociale et ton repos pour "mieux bosser" ne fonctionne pas. <strong>Un cerveau épuisé n'apprend pas — il subit.</strong></div>
+              <div class="s-body" style="color:var(--ink);margin-top:3%;">Ceux qui performent sur une année entière = un système stable. Sport, déconnexion, sommeil régulier, activités hors fac.</div>
+              <div class="s-quote"><p style="color:var(--ink)">L'équilibre n'est pas une récompense après la réussite. <strong>C'est une condition</strong> de la réussite.</p></div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:var(--ink)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--ink)">06/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S7 CONSEIL 5 — ANTICIPATION -->
+      <div class="sw"><div class="sw-label">07 · Conseil 5 — Anticipation <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s7','prepaL1_07')">⬇</button></div>
+        <div class="slide bg-grad-teal" id="prepaL1s7" onclick="dl('prepaL1s7','prepaL1_07')">
+          <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--gold),var(--paper),transparent);top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--paper);right:4%;top:8%;font-size:clamp(90px,34cqw,480px);opacity:0.1;">05</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--paper)">SBE<span class="dot" style="background:var(--gold)"></span></div>
+            <div class="s-stamp" style="color:var(--gold);border-color:var(--gold);">Conseil 05 / 05</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--gold)">Commence maintenant</div>
+              <div class="s-h smaller" style="color:var(--paper)"><em>Avant</em> la rentrée.</div>
+              <div class="s-div" style="background:var(--gold)"></div>
+              <div class="s-body" style="color:rgba(251,247,240,0.9)">La plus grande erreur des futurs L1 : <strong>attendre septembre</strong> pour découvrir les matières.</div>
+              <div class="s-body" style="color:rgba(251,247,240,0.9);margin-top:3%;">Chaque heure investie <em>avant</em> vaut triple. La 1ère semaine de fac est une avalanche — les profs ne reprennent pas depuis zéro.</div>
+              <div class="s-list" style="margin-top:4%;">
+                <div class="s-li" style="color:var(--paper)"><span class="s-arr" style="color:var(--gold)">›</span><span>Revois les <strong>fondamentaux de maths</strong></span></div>
+                <div class="s-li" style="color:var(--paper)"><span class="s-arr" style="color:var(--gold)">›</span><span>Initie-toi aux <strong>bases de la compta</strong></span></div>
+                <div class="s-li" style="color:var(--paper)"><span class="s-arr" style="color:var(--gold)">›</span><span>Lis quelques <strong>notions clés d'éco</strong></span></div>
+              </div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:var(--paper)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--paper)">07/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S8 CTA PRINCIPAL -->
+      <div class="sw"><div class="sw-label">08 · CTA principal <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s8','prepaL1_08')">⬇</button></div>
+        <div class="slide bg-grad-ink" id="prepaL1s8" onclick="dl('prepaL1s8','prepaL1_08')">
+          <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal));top:0;left:0;"></div>
+          <div class="dc" style="width:90%;height:55%;background:radial-gradient(ellipse,rgba(201,168,76,0.12),transparent 70%);top:-15%;left:-10%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--paper)">SBE<span class="dot" style="background:var(--gold)"></span></div>
+            <div class="s-content" style="text-align:center;align-items:center;">
+              <div class="cta-icon">🎓</div>
+              <div class="cta-h" style="color:var(--paper)">Tu peux faire partie<br/>des <em style="color:var(--gold);">50%</em> qui réussissent.</div>
+              <div class="s-div" style="background:var(--gold);margin:0 auto 5%;"></div>
+              <div class="s-body" style="color:rgba(251,247,240,0.88);text-align:center;">Ça ne demande pas d'être le plus intelligent(e) de la salle. <strong style="color:var(--gold);">Ça demande d'être le plus méthodique.</strong></div>
+              <div class="s-body" style="color:rgba(251,247,240,0.85);text-align:center;margin-top:4%;">Sauvegarde avant ta rentrée. Tu commences ta L1 cette année ? 👇</div>
+              <div class="cta-pill" style="color:var(--gold);border-color:var(--gold);">💾 Sauvegarde</div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:var(--paper)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--paper)">08/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S9 OFFRE / LIEN BIO -->
+      <div class="sw"><div class="sw-label">09 · Offre <button class="btn btn-ghost btn-sm" onclick="dl('prepaL1s9','prepaL1_09')">⬇</button></div>
+        <div class="slide bg-teal" id="prepaL1s9" onclick="dl('prepaL1s9','prepaL1_09')">
+          <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--gold),var(--paper),var(--gold));top:0;left:0;"></div>
+          <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--gold),var(--paper),var(--gold));bottom:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--paper);right:4%;bottom:6%;font-size:clamp(80px,30cqw,440px);opacity:0.07;">L1</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--paper)">SBE<span class="dot" style="background:var(--gold)"></span></div>
+            <div class="s-stamp" style="color:var(--paper);border-color:var(--paper);background:rgba(255,255,255,0.05);">📚 Bonus · Programme</div>
+            <div class="s-content" style="text-align:center;align-items:center;">
+              <div class="cta-h" style="color:var(--paper);font-size:clamp(15px,5cqw,68px);">Mon programme<br/>de <em style="color:var(--gold);">mise à niveau L1.</em></div>
+              <div class="s-div" style="background:var(--gold);margin:0 auto 5%;"></div>
+              <div class="s-body" style="color:rgba(251,247,240,0.92);text-align:center;">Pensé pour ceux qui veulent <strong>prendre de l'avance</strong> et ne pas subir leur première année.</div>
+              <div class="s-quote" style="background:rgba(255,255,255,0.06);border-left-color:var(--gold);margin-top:5%;"><p style="color:var(--paper);text-align:center;">Lien en bio 🎓</p></div>
+              <div class="cta-pill" style="color:var(--gold);border-color:var(--gold);">@sbe · lien en bio</div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:var(--paper)">@sbe · prépa l1</div><div class="s-pg" style="color:var(--paper)">09/09</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 PRÉPA L1 · Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description TikTok / Insta <button class="copy-btn" onclick="copyEl('d_prepaL1')">Copier</button></div>
+        <div class="desc-text" id="d_prepaL1">1 étudiant sur 2 rate sa L1 éco-gestion.
+
+Et ce n'est presque jamais une question d'intelligence.
+
+Voici les 5 choses que j'aurais aimé savoir avant d'entrer — et qui changent tout.
+
+💾 Sauvegarde avant ta rentrée. 🎓</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># 5 Hashtags <button class="copy-btn" onclick="copyEl('h_prepaL1')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_prepaL1">#l1ecogestion #licenceeco #rentreefac #etudiant #reussitefac</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function copyEl(id){const el=document.getElementById(id);if(!el)return;const txt=el.textContent;navigator.clipboard.writeText(txt).then(()=>{showToast('✓ Copié !');const b=event.target;if(b){b.classList.add('copied');setTimeout(()=>b.classList.remove('copied'),1500);}}).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('✓ Copié !');}catch(_){}document.body.removeChild(ta);});}
+async function captureSlide(id,filename){const orig=document.getElementById(id);if(!orig)return false;const wrap=document.createElement('div');wrap.style.cssText='position:fixed;top:0;left:-99999px;width:1080px;height:1350px;pointer-events:none;z-index:-1;background:transparent;';const clone=orig.cloneNode(true);clone.style.width='1080px';clone.style.height='1350px';clone.style.maxWidth='none';clone.style.aspectRatio='auto';clone.style.boxShadow='none';clone.style.transform='none';wrap.appendChild(clone);document.body.appendChild(wrap);await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));if(document.fonts&&document.fonts.ready){try{await document.fonts.ready;}catch(_){}}try{const c=await html2canvas(clone,{scale:1,width:1080,height:1350,windowWidth:1080,windowHeight:1350,useCORS:true,allowTaint:true,backgroundColor:null,logging:false});const a=document.createElement('a');a.download='SBE_'+filename+'.png';a.href=c.toDataURL('image/png');a.click();return true;}catch(e){console.error(e);return false;}finally{document.body.removeChild(wrap);}}
+async function dl(id,name){showToast('⏳ Génération…');const ok=await captureSlide(id,name);showToast(ok?'✓ '+name+'.png':'❌ Erreur');}
+async function dlAll(){const slides=document.querySelectorAll('.slide[id]');showToast('⏳ '+slides.length+' slides…');for(const el of slides){const id=el.id;const m=id.match(/^prepaL1s(\d+)$/);const name=m?'prepaL1_'+String(m[1]).padStart(2,'0'):id;await captureSlide(id,name);await new Promise(r=>setTimeout(r,250));}showToast('✓ Tout téléchargé');}
+</script>
+</body>
+</html>

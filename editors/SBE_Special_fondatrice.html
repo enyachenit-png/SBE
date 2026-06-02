@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBE TikTok — FONDATRICE · Mon parcours — pourquoi SBE est né</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --paper: #F5EBDC;
+  --ink: #1B2A4A;
+  --ink2: #0A1428;
+  --accent: #5B8DEF;
+  --accentText: #FFFFFF;
+  --navy: #1B2A4A;
+  --navy2: #0A1428;
+  --sky: #BDD3F5;
+  --sky2: #5B8DEF;
+  --skyf: #EEF4FF;
+  --ecru: #F5EBDC;
+  --ecru2: #EDE3CF;
+  --ecruf: #FBF6EE;
+  --white: #FFFFFF;
+  --gold: #C9A84C;
+  --ash: #8A92AB;
+  --gold: #C9A84C;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0A1428;font-family:'DM Sans',sans-serif;color:#F5EBDC;}
+
+.topbar{background:#1B2A4A;color:#F5EBDC;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,0.3);border-bottom:1px solid rgba(255,255,255,0.08);}
+.tb-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;color:#F5EBDC;letter-spacing:-0.5px;}
+.tb-logo span.dot{color:#5B8DEF;}
+.tb-badge{background:#5B8DEF;color:#FFFFFF;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:4px 10px;margin-left:12px;border-radius:6px;}
+.tb-info{font-size:11px;color:#8A92AB;margin-left:8px;letter-spacing:0.5px;}
+.btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;padding:8px 18px;border-radius:6px;border:none;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.btn-primary{background:#5B8DEF;color:#FFFFFF;}
+.btn-primary:hover{filter:brightness(1.1);}
+.btn-ghost{background:rgba(255,255,255,0.07);color:#F5EBDC;border:1px solid rgba(255,255,255,0.15);}
+.btn-ghost:hover{background:rgba(255,255,255,0.12);}
+.btn-sm{padding:5px 12px;font-size:10px;}
+
+.page{padding:32px;max-width:1600px;margin:0 auto;}
+.ep-section{margin-bottom:60px;}
+.ep-header{display:flex;align-items:center;gap:18px;margin-bottom:24px;padding:20px 26px;background:#1B2A4A;border:1px solid rgba(255,255,255,0.08);border-left:4px solid #5B8DEF;border-radius:6px;}
+.ep-tag{font-family:'Playfair Display',serif;font-weight:900;font-size:32px;color:#5B8DEF;opacity:0.55;line-height:1;flex-shrink:0;letter-spacing:-1px;}
+.ep-info{flex:1;}
+.ep-serie{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin-bottom:6px;}
+.ep-title-txt{font-family:'Playfair Display',serif;font-size:clamp(14px,1.9vw,19px);font-weight:700;color:#F5EBDC;letter-spacing:-0.2px;}
+.ep-actions{display:flex;gap:8px;}
+
+.slides-and-desc{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;}
+.slides-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+
+.desc-panel{background:#1B2A4A;border:1px solid rgba(255,255,255,0.08);border-radius:6px;overflow:hidden;position:sticky;top:80px;}
+.desc-panel-head{background:#5B8DEF;padding:12px 16px;}
+.desc-panel-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#FFFFFF;}
+.desc-section{padding:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.desc-section:last-child{border-bottom:none;}
+.desc-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8A92AB;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.desc-text{font-size:12px;line-height:1.65;color:#F5EBDC;white-space:pre-wrap;cursor:text;user-select:all;}
+.hashtag-wrap{font-size:11px;color:#C9A84C;line-height:1.8;cursor:text;user-select:all;}
+.copy-btn{background:rgba(255,255,255,0.07);color:#F5EBDC;border:1px solid rgba(255,255,255,0.15);font-size:9px;font-weight:700;letter-spacing:0.6px;padding:3px 8px;border-radius:3px;cursor:pointer;text-transform:uppercase;}
+.copy-btn:hover{background:#5B8DEF;color:#FFFFFF;border-color:#5B8DEF;}
+.copy-btn.copied{background:rgba(13,148,136,0.2);color:#4ade80;border-color:#0D9488;}
+
+.sw{display:flex;flex-direction:column;gap:8px;}
+.sw-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8A92AB;display:flex;justify-content:space-between;align-items:center;}
+
+.slide{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;container-type:inline-size;container-name:slide;border-radius:6px;box-shadow:0 12px 36px rgba(0,0,0,0.4),0 0 0 1px rgba(0,0,0,0.15);cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.slide:hover{transform:translateY(-3px);box-shadow:0 18px 48px rgba(0,0,0,0.5),0 0 0 2px #5B8DEF;}
+
+
+.bg-paper{background:#F5EBDC;}
+.bg-ecru{background:#F5EBDC;}
+.bg-ecruf{background:#FBF6EE;}
+.bg-ecru2{background:#EDE3CF;}
+.bg-white{background:#FFFFFF;}
+.bg-navy{background:#1B2A4A;}
+.bg-navy2{background:#0A1428;}
+.bg-sky{background:#BDD3F5;}
+.bg-skyf{background:#EEF4FF;}
+.bg-grad-navy{background:linear-gradient(160deg,#1B2A4A 0%,#0A1428 100%);}
+.bg-grad-sky{background:linear-gradient(160deg,#EEF4FF 0%,#BDD3F5 100%);}
+.bg-grad-ecru{background:linear-gradient(160deg,#FBF6EE 0%,#F5EBDC 100%);}
+
+
+.si{width:100%;height:100%;padding:7% 8%;display:flex;flex-direction:column;position:relative;z-index:2;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
+.slide *{word-wrap:break-word;overflow-wrap:anywhere;}
+.dc{position:absolute;pointer-events:none;}
+
+.s-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(9px,2.5cqw,30px);letter-spacing:3px;text-transform:uppercase;margin-bottom:auto;}
+.s-logo .dot{display:inline-block;width:5px;height:5px;border-radius:50%;margin:0 4px;vertical-align:middle;position:relative;top:-2px;}
+.s-stamp{display:inline-flex;align-items:center;gap:6px;font-size:clamp(7px,1.5cqw,20px);font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:4px 11px;margin-bottom:5%;width:fit-content;border-radius:3px;border:1.5px solid currentColor;background:transparent;}
+.s-badge{display:inline-flex;align-items:center;font-size:clamp(7px,1.5cqw,20px);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;}
+.s-eye{font-size:clamp(8px,1.7cqw,22px);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:3%;opacity:.7;}
+.s-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(13px,5cqw,66px);line-height:1.12;letter-spacing:-0.3px;margin-bottom:4%;}
+.s-h em{font-style:italic;font-weight:700;}
+.s-div{width:38px;height:2.5px;margin-bottom:4%;border-radius:2px;}
+.s-body{font-size:clamp(9px,2cqw,28px);line-height:1.6;font-weight:300;opacity:0.88;}
+.s-body strong{font-weight:600;opacity:1;}
+.s-list{display:flex;flex-direction:column;gap:3%;}
+.s-li{display:flex;align-items:flex-start;gap:8px;font-size:clamp(9px,1.9cqw,26px);line-height:1.4;}
+.s-num{display:inline-flex;align-items:center;justify-content:center;width:clamp(18px,3.2cqw,42px);height:clamp(18px,3.2cqw,42px);border:1.5px solid currentColor;border-radius:50%;font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(9px,1.8cqw,24px);flex-shrink:0;line-height:1;}
+.s-arr{font-size:clamp(11px,2.4cqw,30px);font-weight:700;flex-shrink:0;line-height:1;margin-top:1px;}
+.s-box{border-radius:6px;padding:4% 5%;margin:3% 0;position:relative;}
+.s-box p{font-size:clamp(9px,2cqw,26px);line-height:1.5;}
+.s-cite{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;}
+.s-nbg{position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(60px,22cqw,300px);line-height:0.85;opacity:0.06;pointer-events:none;letter-spacing:-4px;}
+
+.s-card{padding:3.5% 4.5%;border-radius:6px;border-left:3px solid #5B8DEF;background:rgba(0,0,0,0.04);}
+.s-card-head{font-size:clamp(9px,2cqw,26px);font-weight:600;margin-bottom:0.5%;display:flex;align-items:center;gap:8px;}
+.s-card-num{font-family:'Playfair Display',serif;font-weight:900;color:#5B8DEF;font-size:clamp(11px,2.4cqw,30px);}
+.s-card-sub{font-size:clamp(8px,1.6cqw,22px);opacity:0.65;font-style:italic;line-height:1.4;}
+
+.s-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:4%;}
+.s-foot.b-light{border-top:1px dashed rgba(0,0,0,0.15);}
+.s-foot.b-dark{border-top:1px dashed rgba(255,255,255,0.18);}
+.s-wm{font-size:clamp(7px,1.3cqw,18px);font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:0.35;}
+.s-pg{font-size:clamp(7px,1.3cqw,18px);font-weight:700;letter-spacing:1.5px;opacity:0.4;}
+.s-content{flex:1;display:flex;flex-direction:column;justify-content:center;}
+
+.s-fold{position:absolute;top:0;right:0;width:clamp(24px,5cqw,70px);height:clamp(24px,5cqw,70px);background:linear-gradient(225deg,transparent 50%,rgba(0,0,0,0.08) 50%,rgba(0,0,0,0.12));pointer-events:none;z-index:3;}
+
+.cta-icon{font-size:clamp(22px,7cqw,90px);margin-bottom:4%;text-align:center;line-height:1;}
+.cta-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(16px,6cqw,80px);line-height:1.05;letter-spacing:-0.3px;margin-bottom:5%;text-align:center;}
+.cta-pill{display:inline-block;border-radius:100px;padding:3% 7%;font-size:clamp(8px,1.8cqw,24px);font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-top:5%;border:1.5px solid currentColor;background:transparent;}
+
+.toast{position:fixed;bottom:20px;right:20px;background:#1B2A4A;border:1.5px solid #5B8DEF;color:#F5EBDC;padding:10px 18px;border-radius:4px;font-size:12px;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:1100px){.slides-and-desc{grid-template-columns:1fr;}.desc-panel{position:static;}}
+@media(max-width:600px){.page{padding:16px;}.topbar{padding:12px 16px;}.slides-row{grid-template-columns:repeat(3,1fr);gap:10px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:6px;">
+    <div class="tb-logo">SBE<span class="dot">.</span><span class="tb-badge">Fondatrice · Story</span></div>
+    <div class="tb-info">Carrousel unique · Le parcours derrière SBE</div>
+  </div>
+  <button class="btn btn-primary" onclick="dlAll()">⬇ Tout télécharger</button>
+</div>
+
+<div class="page">
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-tag">Story</div>
+    <div class="ep-info">
+      <div class="ep-serie">Carrousel unique · FONDATRICE</div>
+      <div class="ep-title-txt">Mon parcours — pourquoi SBE est né</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlAll()">⬇ 9 slides</button></div>
+  </div>
+
+  <div class="slides-and-desc">
+    <div class="slides-row">
+      <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices1','fondatrice_01')">⬇</button></div>
+        <div class="slide bg-grad-navy" id="fondatrices1" onclick="dl('fondatrices1','fondatrice_01')"><div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,#C9A84C,#5B8DEF,transparent);top:0;left:0;"></div><div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(91,141,239,0.18),transparent 70%);top:-12%;right:-15%;border-radius:50%;"></div><div class="dc" style="position:absolute;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:clamp(80px,28cqw,400px);color:#F5EBDC;opacity:0.05;line-height:0.85;right:5%;bottom:6%;">"</div>
+          <div class="si">
+            <div class="s-logo" style="color:#F5EBDC;">SBE<span class="dot" style="background:#C9A84C"></span></div>
+            <div class="s-stamp" style="color:#C9A84C;">Fondatrice · Story</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#5B8DEF;">Le parcours derrière SBE</div>
+              <div class="s-h" style="color:#F5EBDC;">Première de classe. <em>Mais pas pour les raisons qu'on imagine.</em></div>
+              <div class="s-div" style="background:#C9A84C;"></div>
+              <div class="s-body" style="color:rgba(245,235,220,0.82);">Depuis l'enfance, j'ai compris une chose : <strong style="color:#5B8DEF;">la façon dont on travaille</strong> compte infiniment plus que le temps qu'on y passe. 👇</div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:#F5EBDC;">@sbe · fondatrice</div><div class="s-pg" style="color:#F5EBDC;">01/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">02 · Origines <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices2','fondatrice_02')">⬇</button></div>
+        <div class="slide bg-ecruf" id="fondatrices2" onclick="dl('fondatrices2','fondatrice_02')"><div class="dc" style="width:6px;height:60%;background:linear-gradient(180deg,#1B2A4A,transparent);left:0;top:20%;"></div>
+          <div class="si" style="padding-left:11%">
+            <div class="s-logo" style="color:#1B2A4A;">SBE<span class="dot" style="background:#5B8DEF"></span></div>
+            <div class="s-stamp" style="color:#1B2A4A;background:#EEF4FF;border-color:#5B8DEF;">Chapitre 01 — Le système</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#1B2A4A;">Construit dès l'enfance</div>
+              <div class="s-h" style="color:#1B2A4A;">J'avais <em>trop d'activités à côté</em> pour me permettre de perdre du temps.</div>
+              <div class="s-div" style="background:#5B8DEF;"></div>
+              <div class="s-body" style="color:#1B2A4A;">J'ai expérimenté. Testé. Ajusté. Et sans le formaliser encore, j'ai construit un <strong>système personnel</strong> qui me permettait de produire plus en travaillant moins longtemps.</div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#1B2A4A;">@sbe · fondatrice</div><div class="s-pg" style="color:#1B2A4A;">02/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">03 · 19 au bac <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices3','fondatrice_03')">⬇</button></div>
+        <div class="slide bg-white" id="fondatrices3" onclick="dl('fondatrices3','fondatrice_03')"><div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,#5B8DEF,#C9A84C,transparent);top:0;left:0;"></div><div class="dc" style="position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(120px,40cqw,560px);color:#1B2A4A;opacity:0.05;line-height:0.85;letter-spacing:-6px;right:-3%;bottom:-8%;">19</div>
+          <div class="si">
+            <div class="s-logo" style="color:#1B2A4A;">SBE<span class="dot" style="background:#5B8DEF"></span></div>
+            <div class="s-stamp" style="color:#1B2A4A;background:#EEF4FF;border-color:#5B8DEF;">Chapitre 02 — Juin 2024</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#5B8DEF;">La suite parfaite</div>
+              <div class="s-h" style="color:#1B2A4A;"><em>19 de moyenne</em> au bac. Prépa PCSI dans la foulée.</div>
+              <div class="s-div" style="background:#C9A84C;"></div>
+              <div class="s-body" style="color:#1B2A4A;">Sur le papier, la suite logique. Mes profs m'y encourageaient. Ma famille y voyait la <strong>confirmation de tout</strong> ce qu'on avait construit. Alors j'y suis allée.</div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#1B2A4A;">@sbe · fondatrice</div><div class="s-pg" style="color:#1B2A4A;">03/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">04 · Le pivot <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices4','fondatrice_04')">⬇</button></div>
+        <div class="slide bg-grad-navy" id="fondatrices4" onclick="dl('fondatrices4','fondatrice_04')"><div class="dc" style="width:100%;height:2px;background:#5B8DEF;top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:#F5EBDC;">SBE<span class="dot" style="background:#C9A84C"></span></div>
+            <div class="s-stamp" style="color:#5B8DEF;border-color:#5B8DEF;">Chapitre 03 — Six mois plus tard</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#C9A84C;">La décision la plus difficile</div>
+              <div class="s-h" style="color:#F5EBDC;">Je <em>pars</em>.</div>
+              <div class="s-div" style="background:#C9A84C;"></div>
+              <div class="s-body" style="color:rgba(245,235,220,0.85);">Pas parce que je ne pouvais pas suivre — <strong>parce que ce n'était pas ma voie.</strong></div><div class="s-box" style="background:rgba(91,141,239,0.08);border-left:3px solid #5B8DEF;margin-top:5%;"><p class="s-cite" style="color:#F5EBDC;">Ma famille vit ça comme un échec. Pas de soutien. Juste le silence. Je porte la décision seule.</p></div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:#F5EBDC;">@sbe · fondatrice</div><div class="s-pg" style="color:#F5EBDC;">04/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">05 · L'épreuve <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices5','fondatrice_05')">⬇</button></div>
+        <div class="slide bg-ecru" id="fondatrices5" onclick="dl('fondatrices5','fondatrice_05')"><div class="dc" style="width:6px;height:65%;background:linear-gradient(180deg,#C9A84C,#5B8DEF,transparent);left:0;top:18%;"></div>
+          <div class="si" style="padding-left:11%">
+            <div class="s-logo" style="color:#1B2A4A;">SBE<span class="dot" style="background:#5B8DEF"></span></div>
+            <div class="s-stamp" style="color:#1B2A4A;background:#FBF6EE;border-color:#1B2A4A;">Chapitre 04 — Janvier 2025</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#1B2A4A;">Sans bases. Sans réseau. Sans soutien.</div>
+              <div class="s-h" style="color:#1B2A4A;">L1 Éco-Gestion. <em>Inscrite au S2 direct.</em></div>
+              <div class="s-div" style="background:#5B8DEF;"></div>
+              <div class="s-body" style="color:#1B2A4A;">Rattraper seule tout un S1 que je n'ai jamais eu. Valider le S2 en cours. Préparer des rattrapages en parallèle. <strong>Sans famille pour m'encourager.</strong></div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#1B2A4A;">@sbe · fondatrice</div><div class="s-pg" style="color:#1B2A4A;">05/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">06 · Les doutes <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices6','fondatrice_06')">⬇</button></div>
+        <div class="slide bg-navy2" id="fondatrices6" onclick="dl('fondatrices6','fondatrice_06')"><div class="dc" style="width:100%;height:2px;background:#C9A84C;top:0;left:0;"></div><div class="dc" style="position:absolute;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:clamp(80px,30cqw,420px);color:#F5EBDC;opacity:0.04;line-height:0.85;left:5%;top:-5%;">?</div>
+          <div class="si">
+            <div class="s-logo" style="color:#F5EBDC;">SBE<span class="dot" style="background:#5B8DEF"></span></div>
+            <div class="s-stamp" style="color:#C9A84C;border-color:#C9A84C;">Chapitre 05 — La période la plus dure</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#5B8DEF;">Ce que personne ne voyait</div>
+              <div class="s-h" style="color:#F5EBDC;">Il y a eu des soirs où j'ai <em>voulu tout arrêter</em>.</div>
+              <div class="s-div" style="background:#C9A84C;"></div>
+              <div class="s-body" style="color:rgba(245,235,220,0.85);">L'ampleur me semblait insurmontable. La prépa m'avait ébranlée dans ma confiance. Mais quelque chose en moi savait : <strong style="color:#5B8DEF;">je devais me prouver que j'étais debout.</strong></div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:#F5EBDC;">@sbe · fondatrice</div><div class="s-pg" style="color:#F5EBDC;">06/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">07 · 1ère sur 500 <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices7','fondatrice_07')">⬇</button></div>
+        <div class="slide bg-grad-sky" id="fondatrices7" onclick="dl('fondatrices7','fondatrice_07')"><div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#1B2A4A,#C9A84C,transparent);top:0;left:0;"></div><div class="dc" style="position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(140px,46cqw,640px);color:#1B2A4A;opacity:0.07;line-height:0.85;letter-spacing:-8px;right:-4%;bottom:-12%;">500</div>
+          <div class="si">
+            <div class="s-logo" style="color:#1B2A4A;">SBE<span class="dot" style="background:#1B2A4A"></span></div>
+            <div class="s-stamp" style="color:#1B2A4A;background:rgba(255,255,255,0.6);border-color:#1B2A4A;">Chapitre 06 — Fin d'année L1</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#1B2A4A;">Le résultat est tombé</div>
+              <div class="s-h" style="color:#1B2A4A;"><em>Première</em> de promo. <em>Sur 500.</em></div>
+              <div class="s-div" style="background:#1B2A4A;"></div>
+              <div class="s-body" style="color:#1B2A4A;">J'ai tout reconstruit. Mes méthodes. Mon organisation. Ma façon d'aborder une matière inconnue. <strong>Tout repensé depuis zéro</strong> — pour performer dans un contexte que je n'avais jamais expérimenté.</div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#1B2A4A;">@sbe · fondatrice</div><div class="s-pg" style="color:#1B2A4A;">07/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">08 · Le déclic <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices8','fondatrice_08')">⬇</button></div>
+        <div class="slide bg-white" id="fondatrices8" onclick="dl('fondatrices8','fondatrice_08')"><div class="dc" style="width:6px;height:60%;background:linear-gradient(180deg,#5B8DEF,#C9A84C,transparent);left:0;top:20%;"></div>
+          <div class="si" style="padding-left:11%">
+            <div class="s-logo" style="color:#1B2A4A;">SBE<span class="dot" style="background:#C9A84C"></span></div>
+            <div class="s-stamp" style="color:#1B2A4A;background:#EEF4FF;border-color:#5B8DEF;">Chapitre 07 — Les semaines suivantes</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#5B8DEF;">Ce que je n'avais pas prévu</div>
+              <div class="s-h" style="color:#1B2A4A;">Mes fiches changent <em>la trajectoire</em> d'autres étudiants.</div>
+              <div class="s-div" style="background:#5B8DEF;"></div>
+              <div class="s-body" style="color:#1B2A4A;">Quand j'ai commencé à partager, les retours m'ont bouleversée. Certains m'ont remerciée d'avoir <strong>validé leur année grâce à ma méthode</strong>. J'ai compris que ce que j'avais construit ne m'appartenait pas seulement.</div>
+            </div>
+            <div class="s-foot b-light"><div class="s-wm" style="color:#1B2A4A;">@sbe · fondatrice</div><div class="s-pg" style="color:#1B2A4A;">08/09</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sw"><div class="sw-label">09 · SBE naît <button class="btn btn-ghost btn-sm" onclick="dl('fondatrices9','fondatrice_09')">⬇</button></div>
+        <div class="slide bg-grad-navy" id="fondatrices9" onclick="dl('fondatrices9','fondatrice_09')"><div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#5B8DEF,#C9A84C,#5B8DEF);top:0;left:0;"></div><div class="dc" style="width:90%;height:55%;background:radial-gradient(ellipse,rgba(201,168,76,0.12),transparent 70%);top:-15%;left:-10%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:#F5EBDC;">SBE<span class="dot" style="background:#C9A84C"></span></div>
+            
+            <div class="s-content">
+              
+              
+              
+              <div style="text-align:center;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+          <div class="s-eye" style="color:#5B8DEF;text-align:center;">Septembre 2025 — j'ai 19 ans</div>
+          <div class="cta-h" style="color:#F5EBDC;font-style:italic;">SBE est <em>né.</em></div>
+          <div class="s-div" style="background:#C9A84C;margin:0 auto 5%;"></div>
+          <div class="s-body" style="color:rgba(245,235,220,0.85);text-align:center;margin-bottom:5%;">Je construis ce que j'aurais aimé trouver quand j'en avais le plus besoin.</div>
+          <div class="s-box" style="background:rgba(91,141,239,0.1);border-left:3px solid #C9A84C;border-right:3px solid #C9A84C;margin-top:3%;">
+            <p class="s-cite" style="color:#F5EBDC;text-align:center;font-size:clamp(11px,2.6cqw,34px);">La réussite n'est pas une question de talent. C'est une question de méthode.</p>
+          </div>
+          <div class="cta-pill" style="color:#C9A84C;border-color:#C9A84C;margin-top:6%;">💾 Suis SBE</div>
+        </div>
+            </div>
+            <div class="s-foot b-dark"><div class="s-wm" style="color:#F5EBDC;">@sbe · fondatrice</div><div class="s-pg" style="color:#F5EBDC;">09/09</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 FONDATRICE — Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyEl('d_fondatrice')">Copier</button></div>
+        <div class="desc-text" id="d_fondatrice">Mon parcours derrière SBE.
+
+Première de classe depuis toujours. 19/20 au bac. Prépa PCSI à 18 ans.
+
+Puis je pars. 6 mois après. Sans soutien familial.
+
+L1 Éco-Gestion, intégrée au S2 sans aucune base. À la fin de l'année — 1ère sur 500.
+
+Pas parce que j'ai un don. Parce que j'ai compris quelque chose que peu d'étudiants voient.
+
+SBE est né de là.
+
+La réussite n'est pas une question de talent — c'est une question de méthode. 💛</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_fondatrice')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_fondatrice">#sbe #parcoursetudiant #fondatrice #ecogestion #methodedetravail #reussitefac #entrepreneur #etudiante #premiereannee #storytellingreussite #bac2024 #l1ecogestion</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function copyEl(id){const el=document.getElementById(id);if(!el)return;const txt=el.textContent;navigator.clipboard.writeText(txt).then(()=>{showToast('✓ Copié !');const b=event.target;if(b){b.classList.add('copied');setTimeout(()=>b.classList.remove('copied'),1500);}}).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('✓ Copié !');}catch(_){}document.body.removeChild(ta);});}
+async function captureSlide(id,filename){const orig=document.getElementById(id);if(!orig)return false;const wrap=document.createElement('div');wrap.style.cssText='position:fixed;top:0;left:-99999px;width:1080px;height:1350px;pointer-events:none;z-index:-1;background:transparent;';const clone=orig.cloneNode(true);clone.style.width='1080px';clone.style.height='1350px';clone.style.maxWidth='none';clone.style.aspectRatio='auto';clone.style.boxShadow='none';clone.style.transform='none';wrap.appendChild(clone);document.body.appendChild(wrap);await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));if(document.fonts&&document.fonts.ready){try{await document.fonts.ready;}catch(_){}}try{const c=await html2canvas(clone,{scale:1,width:1080,height:1350,windowWidth:1080,windowHeight:1350,useCORS:true,allowTaint:true,backgroundColor:null,logging:false});const a=document.createElement('a');a.download='SBE_'+filename+'.png';a.href=c.toDataURL('image/png');a.click();return true;}catch(e){console.error(e);return false;}finally{document.body.removeChild(wrap);}}
+async function dl(id,name){showToast('⏳ Génération…');const ok=await captureSlide(id,name);showToast(ok?'✓ '+name+'.png':'❌ Erreur');}
+async function dlAll(){const slides=document.querySelectorAll('.slide[id]');showToast('⏳ Téléchargement ('+slides.length+')…');for(const el of slides){const id=el.id;const m=id.match(/^fondatrices(\d+)$/);const name=m?'fondatrice_'+String(m[1]).padStart(2,'0'):id;await captureSlide(id,name);await new Promise(r=>setTimeout(r,200));}showToast('✓ Tout téléchargé !');}
+</script>
+</body>
+</html>
