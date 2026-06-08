@@ -44,6 +44,45 @@ const SOURCES = [
   { file: 'SBE_Special_ruptureL2.html', series: 'Special', pngPrefix: /^SBE_ruptureL2_(\d+)(?:\s*\(\d+\))?\.png$/i, isSpecial: true, specialSlug: 'Rupture_L2' },
 ];
 
+// ─── QUESTIONNAIRES — diagnostics SBE interactifs (HTML autonomes) ─
+// Section dédiée du dashboard, séparée des carrousels TikTok et des ebooks.
+const QUESTIONNAIRES = [
+  {
+    slug: 'questionnaire_n1',
+    type: 'questionnaire',
+    typeLabel: 'Mini · 2 min',
+    title: 'Diagnostic flash',
+    subtitle: 'Niveau 1 — Mini questionnaire d\'accueil',
+    description: '6 questions pour faire découvrir au visiteur son profil d\'apprentissage et le convertir vers ARCHE. Génère 1 des 8 profils types selon ses réponses.',
+    author: 'SBE Hub · page d\'accueil',
+    duration: '2 min',
+    questions: 6,
+    htmlFile: 'SBE_Questionnaire_N1_Mini.html',
+    initials: 'N1',
+    accent: '#B8954A',
+    accentSoft: '#D4B574',
+    bg: 'linear-gradient(160deg,#0E1B3A 0%,#1B2952 60%,#0A1530 100%)',
+    tags: ['conversion', 'accueil', '8 profils', 'flash'],
+  },
+  {
+    slug: 'questionnaire_n2',
+    type: 'questionnaire',
+    typeLabel: 'Complet · ~12 min',
+    title: 'Diagnostic complet',
+    subtitle: 'Niveau 2 — Questionnaire complet adaptatif',
+    description: 'Environ 48 questions sur 10 modules avec adaptativité. Construit le profil étudiant complet (Gardner + canal mémoriel + maturité + émotionnel) et la prescription ARCHE personnalisée.',
+    author: 'SBE Hub · post-inscription',
+    duration: '~12 min',
+    questions: 48,
+    htmlFile: 'SBE_Questionnaire_N2_Complet.html',
+    initials: 'N2',
+    accent: '#B8954A',
+    accentSoft: '#D4B574',
+    bg: 'linear-gradient(160deg,#1B2952 0%,#0E1B3A 55%,#1B2952 100%)',
+    tags: ['adaptatif', 'post-inscription', 'profil complet', '10 modules'],
+  },
+];
+
 // ─── RESOURCES — contenus longs SBE qui ne sont PAS du TikTok ─────
 // (ebooks, PDFs, guides, white papers, lettres, méthodes, etc.)
 // Chaque ressource est une carte à part dans une section dédiée du dashboard.
@@ -220,6 +259,34 @@ const escapeHtml = (s) => String(s || '').replace(/[&<>"']/g, c => ({
 }[c]));
 
 // ─── Resource card (ebooks / PDF / ressources longues SBE) ──────
+function questionnaireCard(q) {
+  const dlExists = (file) => file && fs.existsSync(path.join(HOME, 'storage/shared/Download', file));
+  const hasHtml = dlExists(q.htmlFile);
+  const tagsHtml = (q.tags || []).map(t => `<span class="r-tag">${escapeHtml(t)}</span>`).join('');
+  return `
+  <article class="card r-card q-card" data-series="Questionnaire" data-resource-type="${escapeHtml(q.type)}" data-has-pngs="true" data-search="${escapeHtml((q.title + ' ' + (q.subtitle||'') + ' ' + q.description + ' ' + (q.tags||[]).join(' ')).toLowerCase())}">
+    <div class="r-thumb" style="background:${q.bg || '#1B2A4A'}">
+      <div class="r-initials" style="color:${q.accentSoft || '#D4B574'};font-family:'Cormorant Garamond',serif;font-style:italic;">${escapeHtml(q.initials || q.title.slice(0,2))}</div>
+      <div class="r-decor" style="background:radial-gradient(ellipse at top right,${q.accent}33 0%,transparent 60%)"></div>
+      <div class="card-badge" style="background:${q.accent || '#B8954A'};color:#0E1B3A">${escapeHtml((q.typeLabel || q.type).toUpperCase())}</div>
+      ${q.questions ? `<div class="r-pages">${q.questions} questions</div>` : ''}
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span>${escapeHtml(q.subtitle || '')}</span>
+        ${q.author ? `<span style="text-transform:none;letter-spacing:0;font-style:italic;color:#8A7A6B">${escapeHtml(q.author)}</span>` : ''}
+      </div>
+      <h2 class="card-title" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px">${escapeHtml(q.title)}</h2>
+      <p style="font-size:13.5px;line-height:1.55;color:#4B4F60;margin-bottom:14px">${escapeHtml(q.description)}</p>
+      ${tagsHtml ? `<div class="r-tags">${tagsHtml}</div>` : ''}
+      <div class="card-actions">
+        ${hasHtml ? `<a class="btn btn-primary" href="/${encodeURIComponent(q.htmlFile)}" target="_blank">🎯 Lancer le diagnostic</a>` : ''}
+        ${!hasHtml ? `<span class="btn btn-ghost" style="cursor:default;opacity:.5">Fichier introuvable</span>` : ''}
+      </div>
+    </div>
+  </article>`;
+}
+
 function resourceCard(r) {
   const dlExists = (file) => file && fs.existsSync(path.join(HOME, 'storage/shared/Download', file));
   const hasHtml = dlExists(r.htmlFile);
@@ -395,7 +462,7 @@ header .sub{font-size:12px;opacity:0.7;margin-top:4px;letter-spacing:1px;text-tr
 
 <header>
   <h1>SBE<span> TikTok</span></h1>
-  <div class="sub">${allEps.length} épisodes · ${Object.keys(grouped).length} séries${RESOURCES.length ? ` · ${RESOURCES.length} ebook${RESOURCES.length>1?'s':''}` : ''} · Tableau de bord</div>
+  <div class="sub">${allEps.length} épisodes · ${Object.keys(grouped).length} séries${RESOURCES.length ? ` · ${RESOURCES.length} ebook${RESOURCES.length>1?'s':''}` : ''}${QUESTIONNAIRES.length ? ` · ${QUESTIONNAIRES.length} questionnaire${QUESTIONNAIRES.length>1?'s':''}` : ''} · Tableau de bord</div>
 </header>
 
 <div class="controls">
@@ -404,6 +471,7 @@ header .sub{font-size:12px;opacity:0.7;margin-top:4px;letter-spacing:1px;text-tr
   ${Object.entries(seriesMeta).filter(([k]) => grouped[k]).map(([k, m]) =>
     `<button class="filter" data-series="${k}">${m.name}</button>`
   ).join('')}
+  ${QUESTIONNAIRES.length ? `<button class="filter" data-series="Questionnaire">🎯 Questionnaires</button>` : ''}
   ${RESOURCES.length ? `<button class="filter" data-series="Resource">📚 Ebooks &amp; Ressources</button>` : ''}
   <button class="filter" data-status="missing" id="filter-missing">⚠ À télécharger</button>
 </div>
@@ -419,6 +487,18 @@ ${Object.entries(grouped).map(([series, eps]) => `
   </div>
 </div>
 `).join('')}
+
+${QUESTIONNAIRES.length ? `
+<div class="section section-resources section-questionnaires" data-series-section="Questionnaire">
+  <div class="section-heading">
+    <h2>Questionnaires &amp; Diagnostics <span class="r-count">(${QUESTIONNAIRES.length})</span></h2>
+    <p>Diagnostics interactifs pour profil étudiant SBE. <em>Page d'accueil + post-inscription.</em></p>
+  </div>
+  <div class="grid">
+    ${QUESTIONNAIRES.map(questionnaireCard).join('')}
+  </div>
+</div>
+` : ''}
 
 ${RESOURCES.length ? `
 <div class="section section-resources" data-series-section="Resource">
