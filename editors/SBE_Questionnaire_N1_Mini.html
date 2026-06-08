@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBE — Diagnostic flash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B3A;
+  --ink-soft:#1B2952;
+  --gold:#B8954A;
+  --gold-soft:#D4B574;
+  --cream:#FAF6EC;
+  --paper:#FFFFFF;
+  --text:#1F2330;
+  --muted:#6B6F7A;
+  --rule:#E5DFCF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--cream);font-family:'Inter',sans-serif;color:var(--text);min-height:100vh;}
+body{display:flex;flex-direction:column;align-items:center;padding:0;overflow-x:hidden;}
+
+/* Top bar */
+.topbar{position:sticky;top:0;width:100%;background:rgba(250,246,236,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:14px 20px;display:flex;align-items:center;gap:14px;z-index:100;}
+.brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-0.3px;}
+.brand span{color:var(--gold);}
+.progress-wrap{flex:1;height:4px;background:var(--rule);border-radius:100px;overflow:hidden;max-width:280px;}
+.progress-bar{height:100%;background:var(--gold);width:0%;transition:width .4s cubic-bezier(.4,0,.2,1);border-radius:100px;}
+.step-count{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:0.5px;min-width:48px;text-align:right;}
+
+/* Container */
+.container{width:100%;max-width:680px;padding:32px 22px 80px;display:flex;flex-direction:column;min-height:calc(100vh - 60px);}
+
+/* Intro screen */
+.intro{text-align:center;padding:40px 0 20px;}
+.intro .kicker{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;}
+.intro h1{font-family:'Cormorant Garamond',serif;font-size:42px;line-height:1.05;font-weight:700;color:var(--ink);letter-spacing:-1px;margin-bottom:16px;}
+.intro h1 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-weight:500;}
+.intro .lead{font-size:16px;line-height:1.6;color:var(--muted);max-width:480px;margin:0 auto 36px;}
+.intro .meta{display:flex;justify-content:center;gap:24px;margin-bottom:40px;font-size:13px;color:var(--ink-soft);}
+.intro .meta span{display:flex;align-items:center;gap:6px;}
+
+/* Question screen */
+.q-screen{animation:fadeIn .5s cubic-bezier(.4,0,.2,1);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.q-num{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.q-title{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.15;font-weight:700;color:var(--ink);letter-spacing:-0.5px;margin-bottom:8px;}
+.q-subtitle{font-size:14px;color:var(--muted);margin-bottom:30px;font-style:italic;}
+.options{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+.option{background:var(--paper);border:1.5px solid var(--rule);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);text-align:left;font-family:inherit;font-size:15px;line-height:1.4;color:var(--text);}
+.option:hover{border-color:var(--gold);transform:translateY(-1px);box-shadow:0 6px 20px rgba(184,149,74,0.12);}
+.option.selected{border-color:var(--gold);background:linear-gradient(135deg, #FFFDF7 0%, var(--paper) 100%);box-shadow:0 6px 24px rgba(184,149,74,0.18);}
+.option-icon{font-size:24px;flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--cream);border-radius:10px;}
+.option.selected .option-icon{background:linear-gradient(135deg, var(--gold) 0%, var(--gold-soft) 100%);}
+.option-text{flex:1;font-weight:500;}
+
+/* Buttons */
+.btn-row{display:flex;gap:10px;align-items:center;justify-content:space-between;}
+.btn{font-family:inherit;border:none;cursor:pointer;font-weight:600;letter-spacing:0.3px;transition:all .2s;font-size:14px;display:flex;align-items:center;gap:8px;}
+.btn-back{background:transparent;color:var(--muted);padding:12px 0;}
+.btn-back:hover{color:var(--ink);}
+.btn-back:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-primary{background:var(--ink);color:var(--paper);padding:14px 28px;border-radius:100px;font-size:14px;letter-spacing:0.5px;text-transform:uppercase;}
+.btn-primary:hover{background:var(--gold);transform:translateY(-1px);box-shadow:0 6px 20px rgba(14,27,58,0.2);}
+.btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+
+/* Result screen */
+.result{animation:fadeIn .6s cubic-bezier(.4,0,.2,1);padding-top:12px;}
+.result-kicker{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;text-align:center;}
+.result-title{font-family:'Cormorant Garamond',serif;font-size:38px;line-height:1.05;font-weight:700;color:var(--ink);letter-spacing:-1px;margin-bottom:6px;text-align:center;}
+.result-title em{font-style:italic;color:var(--gold);font-weight:500;}
+.result-divider{width:60px;height:2px;background:var(--gold);margin:28px auto;}
+
+.block{margin-bottom:32px;}
+.block-label{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;}
+.block-text{font-size:16.5px;line-height:1.65;color:var(--text);font-weight:400;}
+.block-text strong{color:var(--ink);font-weight:600;}
+.block-text em{font-style:italic;color:var(--ink-soft);}
+.block-quote{background:var(--paper);border-left:3px solid var(--gold);padding:18px 22px;border-radius:0 12px 12px 0;font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.5;color:var(--ink);font-style:italic;font-weight:500;}
+
+.cta-block{margin-top:48px;padding:36px 28px;background:linear-gradient(160deg, var(--ink) 0%, var(--ink-soft) 100%);border-radius:18px;color:var(--paper);text-align:center;position:relative;overflow:hidden;}
+.cta-block::before{content:"";position:absolute;top:-50%;right:-30%;width:300px;height:300px;background:radial-gradient(circle, rgba(184,149,74,0.15) 0%, transparent 70%);}
+.cta-kicker{position:relative;font-size:11px;font-weight:600;color:var(--gold-soft);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.cta-title{position:relative;font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.15;font-weight:700;margin-bottom:8px;}
+.cta-sub{position:relative;font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:24px;line-height:1.5;}
+.cta-btn{position:relative;background:var(--gold);color:var(--ink);padding:16px 32px;border-radius:100px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;font-size:13px;border:none;cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:10px;}
+.cta-btn:hover{background:var(--paper);transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,149,74,0.3);}
+
+.restart{margin-top:32px;text-align:center;}
+.restart a{color:var(--muted);text-decoration:none;font-size:13px;border-bottom:1px solid var(--rule);padding-bottom:2px;cursor:pointer;}
+.restart a:hover{color:var(--ink);border-color:var(--ink);}
+
+@media(max-width:480px){
+  .intro h1{font-size:34px;}
+  .q-title{font-size:24px;}
+  .result-title{font-size:30px;}
+  .option{padding:16px 18px;font-size:14px;}
+  .option-icon{width:36px;height:36px;font-size:20px;}
+  .container{padding:24px 18px 80px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">SBE <span>·</span> Diagnostic</div>
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="step-count" id="stepCount"></div>
+</div>
+
+<div class="container" id="app"></div>
+
+<script>
+const QUESTIONS = [
+  {
+    num:1,
+    title:"Quand tu dois apprendre quelque chose de difficile, tu fais quoi naturellement ?",
+    sub:"Réfléchis à ton réflexe le plus naturel — pas à ce que tu “devrais” faire.",
+    var:"CANAL",
+    options:[
+      {icon:"📖", text:"Je relis plusieurs fois jusqu'à ce que ça rentre", value:"visuel"},
+      {icon:"✍️", text:"Je réécris ou je refais des fiches", value:"kinesthésique"},
+      {icon:"🗣️", text:"J'explique à voix haute ou j'en parle à quelqu'un", value:"auditif"},
+      {icon:"👁️", text:"Je fais un schéma ou une carte mentale", value:"visuel-spatial"},
+      {icon:"🎧", text:"J'écoute un cours ou une explication audio", value:"auditif"},
+    ]
+  },
+  {
+    num:2,
+    title:"À quel moment de la journée tu te sens le plus efficace pour travailler ?",
+    sub:"Le moment où ton cerveau tourne tout seul, sans forcer.",
+    var:"CHRONO",
+    options:[
+      {icon:"🌅", text:"Le matin (avant 12h)", value:"matin"},
+      {icon:"☀️", text:"L'après-midi (12h – 18h)", value:"après-midi"},
+      {icon:"🌆", text:"Le soir (18h – 22h)", value:"soir"},
+      {icon:"🌙", text:"La nuit (après 22h)", value:"nuit"},
+      {icon:"🤷", text:"Aucune idée, ça dépend des jours", value:"variable"},
+    ]
+  },
+  {
+    num:3,
+    title:"Soyons honnêtes. Comment tu révises en ce moment ?",
+    sub:"Pas de jugement. La méthode parfaite n'existe pas — la vérité oui.",
+    var:"MATURITE",
+    options:[
+      {icon:"🔥", text:"Je m'y prends tôt et je travaille régulièrement", value:"avancé"},
+      {icon:"📅", text:"Je travaille par à-coups, pas toujours régulier", value:"intermédiaire"},
+      {icon:"⏰", text:"Je révise surtout quand l'exam approche", value:"urgence"},
+      {icon:"😬", text:"Honnêtement, je procrastine beaucoup", value:"procrastinateur"},
+      {icon:"🆕", text:"Je commence tout juste mes études, je cherche une méthode", value:"débutant"},
+    ]
+  },
+  {
+    num:4,
+    title:"Qu'est-ce qui te pose le plus de problèmes quand tu travailles ?",
+    sub:"Le vrai blocage. Celui dont tu parles à tes amis.",
+    var:"DOULEUR",
+    options:[
+      {icon:"🧠", text:"Je n'arrive pas à retenir ce que j'apprends", value:"rétention"},
+      {icon:"⏳", text:"Je manque de temps ou je gère mal mon temps", value:"temps"},
+      {icon:"😵", text:"Je me sens dépassé(e) par la quantité de travail", value:"volume"},
+      {icon:"📱", text:"Je suis tout le temps distrait(e)", value:"distraction"},
+      {icon:"😰", text:"Je stresse et je panique avant les examens", value:"stress"},
+      {icon:"🔄", text:"Je ne sais pas vraiment comment m'y prendre", value:"méthode"},
+    ]
+  },
+  {
+    num:5,
+    title:"Qu'est-ce que tu veux vraiment changer dans ta façon de travailler ?",
+    sub:"Pas la version socialement acceptable. La vraie raison qui t'a amené ici.",
+    var:"OBJECTIF",
+    options:[
+      {icon:"⚡", text:"Travailler moins longtemps pour les mêmes résultats", value:"optimisation"},
+      {icon:"📈", text:"Vraiment progresser et améliorer mes notes", value:"progression"},
+      {icon:"😌", text:"Arrêter de stresser avant les examens", value:"stress"},
+      {icon:"🗂️", text:"Être mieux organisé(e) et structuré(e)", value:"organisation"},
+      {icon:"💡", text:"Trouver une méthode qui fonctionne vraiment pour moi", value:"méthode"},
+    ]
+  },
+  {
+    num:6,
+    title:"Tu es en quelle année ?",
+    sub:"Pour adapter ton diagnostic à ta réalité académique.",
+    var:"NIVEAU",
+    options:[
+      {icon:"🏫", text:"Collège ou lycée", value:"lycée"},
+      {icon:"🎓", text:"Licence 1 ou Licence 2", value:"licence-debut"},
+      {icon:"🎓", text:"Licence 3 ou Master", value:"licence-avancé"},
+      {icon:"🏢", text:"Autre formation (BTS, BUT, prépa, école…)", value:"autre"},
+    ]
+  },
+];
+
+const PROFILES = {
+  1:{
+    name:"L'Étudiant Sous Pression",
+    title:"L'Étudiant <em>Sous Pression</em>",
+    intro:"Tu es capable — vraiment. Mais tu travailles à l'envers de comment fonctionne ton cerveau. Tu accumules, tu remets à plus tard, puis tu te retrouves à tout absorber dans l'urgence. Et tu te demandes pourquoi le stress est aussi violent la veille des examens.",
+    mean:"Ton cerveau n'a jamais eu le temps d'ancrer vraiment ce que tu as appris. Tu as des informations en mémoire à court terme — elles suffisent pour tenir quelques jours, puis elles s'effacent. <strong>Ce n'est pas un problème de capacité. C'est un problème de timing.</strong>",
+    real:"Ton vrai problème n'est pas le manque de travail. C'est que tu travailles en une fois ce qui aurait dû être réparti sur trois semaines. <em>Et aucune quantité d'heures la veille ne peut compenser ce que le temps seul peut construire.</em>",
+    arche:"ARCHE est construite exactement pour transformer ce schéma. L'étape <strong>C — Consolider</strong> t'apprend à répartir ton apprentissage en petites sessions quotidiennes de 30 minutes qui valent infiniment plus que 5 heures d'un coup. L'étape <strong>H — Habituer</strong> te donne un planning réaliste adapté à tes vraies contraintes, pas un planning idéal que tu ne suivras jamais. Et la dimension psychologique d'ARCHE s'attaque directement au stress de la veille — parce que quand tu as construit quelque chose de solide semaine après semaine, tu n'as plus besoin de paniquer.",
+    quote:"Valider ton année, retrouver de la sérénité avant les examens — et travailler moins longtemps."
+  },
+  2:{
+    name:"Le Travailleur Inefficace",
+    title:"Le Travailleur <em>Inefficace</em>",
+    intro:"Tu travailles. Vraiment. Tu passes du temps sur tes cours, tu t'y mets sérieusement — et pourtant les résultats ne sont pas à la hauteur de l'effort fourni. C'est l'une des situations les plus frustrantes qui soit : sentir qu'on fait ce qu'il faut sans que ça paie.",
+    mean:"Tu travailles beaucoup mais pas de la bonne façon. La relecture, le surlignage, la recopie — ce sont des méthodes qui donnent l'illusion d'apprendre. Ton cerveau <strong>reconnaît</strong> l'information quand il la revoit — mais il est incapable de la <strong>restituer</strong> seul face à une feuille blanche. Ce n'est pas la même chose.",
+    real:"Ton vrai problème c'est la méthode — pas la quantité. <em>Tu pourrais travailler deux fois moins longtemps et obtenir de bien meilleurs résultats si tu changeais simplement ta façon d'apprendre.</em>",
+    arche:"ARCHE commence par l'étape <strong>A — Analyser</strong> qui te permet de cartographier un cours avant même de commencer à l'apprendre. Puis l'étape <strong>R — Restructurer</strong> t'apprend à t'approprier le cours selon ton propre système intellectuel au lieu de le subir. Et l'étape <strong>E — Évaluer</strong> remplace la relecture passive par la restitution active : la technique de mémorisation la plus efficace documentée par la psychologie cognitive. Tu vas apprendre moins longtemps — et retenir beaucoup mieux.",
+    quote:"Travailler moins. Retenir mieux. Optimiser chaque heure investie."
+  },
+  3:{
+    name:"Le Distrait Chronique",
+    title:"Le <em>Distrait</em> Chronique",
+    intro:"Tu t'installes pour travailler. Cinq minutes plus tard tu regardes ton téléphone. Tu reviens. Tu décroches à nouveau. Une heure passe — et tu as à peine avancé. Tu te couches en te disant que tu rattraperas demain. Et demain c'est pareil.",
+    mean:"Ton cerveau est câblé pour la stimulation immédiate — et le travail scolaire ne peut pas rivaliser avec les réseaux sociaux en termes de dopamine. <strong>Ce n'est pas une question de volonté. C'est de la biologie.</strong> Mais ça se gère — avec les bons outils.",
+    real:"Ton vrai problème c'est la structure de tes sessions de travail. Sans cadre précis, sans durée définie, sans objectif clair pour chaque session — ton cerveau va naturellement vers ce qui est plus stimulant. <em>Il a besoin d'un cadre pour rester sur la tâche.</em>",
+    arche:"L'étape <strong>H</strong> d'ARCHE te donne exactement ce cadre — des créneaux courts, précis, non négociables, avec une seule tâche définie à l'avance. Pas “réviser la macro” mais “apprendre les 3 points de la partie I.A en 30 minutes”. La précision de la tâche élimine la décision — et c'est la décision qui laisse entrer la distraction. Le planning SBE généré pour ton profil intègre des sessions courtes avec des objectifs ultra-précis pour chaque créneau.",
+    quote:"Reprendre le contrôle de ton attention. Une session à la fois."
+  },
+  4:{
+    name:"Le Débutant en Construction",
+    title:"Le <em>Débutant</em> en Construction",
+    intro:"Tu arrives dans une nouvelle étape de ta scolarité — ou tu réalises simplement que ce qui fonctionnait avant ne fonctionne plus. Tu n'as pas encore de méthode vraiment définie, et tu cherches quelque chose qui tienne sur la durée.",
+    mean:"<strong>C'est exactement le bon moment.</strong> Construire une méthode de travail efficace au début, c'est infiniment plus facile que de déconstruire de mauvaises habitudes après des années. Tu as une longueur d'avance sur tous ceux qui attendront d'être en difficulté pour chercher une solution.",
+    real:"Ton vrai avantage : tu n'as pas de mauvaises habitudes à défaire. <em>Tu pars d'une feuille blanche</em> — et ARCHE peut s'installer naturellement sans avoir à combattre des réflexes déjà ancrés.",
+    arche:"ARCHE est précisément ce qu'il te faut — un système complet, pas une technique isolée. De la façon d'aborder un cours <strong>(étape A)</strong> à la façon de t'évaluer au fur et à mesure <strong>(étape E)</strong>, en passant par la construction d'un rythme de travail hebdomadaire qui s'adapte à ta vie <strong>(étape H)</strong>. Le parcours SBE pour ton profil commence par une initiation progressive à chaque étape — sans te noyer dans trop d'informations d'un coup.",
+    quote:"Partir d'une base solide. Construire pour durer."
+  },
+  5:{
+    name:"L'Étudiant Qui Sait Mais Qui Doute",
+    title:"L'Étudiant <em>Qui Sait Mais Qui Doute</em>",
+    intro:"Tu travailles. Tu révises. Et pourtant, dès que l'examen approche, quelque chose se dérègle. Le stress monte, le doute s'installe, tu as l'impression d'avoir tout oublié. Tu te remets à tout réviser en urgence alors que tu savais déjà — et tu rentres dans l'exam épuisé(e) avant même d'avoir commencé.",
+    mean:"Ton problème n'est pas le niveau. C'est la confiance en ce que tu as construit. Le stress de l'examen crée une <strong>illusion d'oubli</strong> — il rend l'accès à tes connaissances plus difficile, pas parce qu'elles ont disparu, mais parce que l'anxiété perturbe les mécanismes de récupération de la mémoire.",
+    real:"Ton vrai problème c'est que tu n'as jamais appris à faire confiance à ton travail. <em>Et réviser intensément la veille, loin d'aider, aggrave la situation</em> — ça épuise le cerveau au moment précis où il a besoin d'être au maximum.",
+    arche:"ARCHE intègre une dimension psychologique que les autres méthodes ignorent complètement. Elle te montre comment construire une <strong>certitude tranquille</strong> semaine après semaine — à travers des preuves concrètes de ta maîtrise, pas des promesses. L'étape <strong>E — Évaluer</strong> te permet de savoir à chaque instant ce que tu maîtrises vraiment. Arriver à un examen en sachant que tu sais — pas en espérant — c'est ce qu'ARCHE construit pour ton profil.",
+    quote:"Savoir que tu sais. Pas espérer que tu sais."
+  },
+  6:{
+    name:"L'Étudiant Performant",
+    title:"L'Étudiant <em>Performant</em>",
+    intro:"Tu as déjà une méthode. Tu es organisé(e), tu travailles régulièrement, tes résultats sont corrects voire bons. Mais tu sens qu'il y a un palier à franchir — que tu pourrais faire mieux avec les mêmes efforts, ou les mêmes résultats avec moins d'efforts.",
+    mean:"Tu as les bases — ce qui te manque c'est <strong>l'optimisation fine</strong>. La façon dont tu t'appropries les cours, la façon dont tu t'évalues, la précision de ton planning. Des ajustements relativement mineurs qui peuvent avoir un impact significatif sur tes résultats.",
+    real:"Ton vrai potentiel n'est pas encore exploité. <em>Pas parce que tu ne travailles pas assez</em> — mais parce que certaines parties de ta méthode sont probablement encore approximatives.",
+    arche:"Pour ton profil, ARCHE n'est pas une initiation — c'est un <strong>outil de précision</strong>. L'étape <strong>R — Restructurer</strong> va transformer ta façon de t'approprier un cours. L'étape <strong>E — Évaluer</strong> va remplacer tes révisions approximatives par une évaluation notion par notion ultra-précise. Et le système de planification SBE va optimiser ton planning existant pour maximiser l'efficacité de chaque heure investie.",
+    quote:"Du correct à l'excellent. Passer le palier."
+  },
+  7:{
+    name:"Le Penseur Visuel",
+    title:"Le Penseur <em>Visuel</em>",
+    intro:"Tu retiens mieux ce que tu vois que ce que tu lis. Les schémas, les tableaux, les cartes mentales — voilà comment ton cerveau absorbe naturellement l'information. Mais ton système éducatif t'a probablement appris à travailler avec du texte linéaire — et tu te bats contre ta propre façon de fonctionner sans le savoir.",
+    mean:"Tes outils de révision ne correspondent pas à ton canal mémoriel dominant. Tu relis des pages de cours alors que ton cerveau a besoin de <strong>voir la structure, les relations entre les concepts, l'architecture globale</strong> de l'information.",
+    real:"Ton vrai problème c'est <em>l'inadéquation entre ta façon d'apprendre et les outils que tu utilises</em>. Pas un manque de capacité.",
+    arche:"L'étape <strong>A — Analyser</strong> est construite pour toi. Le système des traits transforme n'importe quel cours en carte visuelle en quelques minutes. L'étape <strong>R — Restructurer</strong> crée une architecture visuelle qui correspond à ta façon de penser. Les fiches générées par SBE pour ton profil sont spécifiquement conçues pour les profils visuels — schémas, tableaux, mise en page structurée. Tu vas enfin travailler avec ton cerveau, pas contre lui.",
+    quote:"Travailler avec ton cerveau. Pas contre lui."
+  },
+  8:{
+    name:"Le Penseur Auditif",
+    title:"Le Penseur <em>Auditif</em>",
+    intro:"Tu retiens infiniment mieux ce que tu entends que ce que tu lis. Quand quelqu'un t'explique quelque chose à voix haute, ça rentre. Quand tu lis seul(e) en silence, ça glisse. Tu as probablement toujours mieux suivi en cours magistral qu'en révision solitaire — et tu n'as peut-être jamais compris pourquoi.",
+    mean:"Ton canal mémoriel dominant est <strong>l'audition</strong>. Mais quasiment tous tes outils de révision actuels sont visuels ou écrits — cours, fiches, manuels. Tu travailles avec le mauvais format depuis le début.",
+    real:"Ton vrai problème c'est <em>le format de tes ressources</em>. Pas ta capacité à retenir.",
+    arche:"L'étape <strong>E — Évaluer</strong> te demande de restituer à voix haute — c'est exactement ton mode de fonctionnement naturel. Et la plateforme SBE génère des <strong>podcasts personnalisés directement à partir de tes cours</strong> — pour que tu puisses apprendre en écoutant, dans les transports, en marchant, n'importe où. Pour ton profil, SBE est un outil qui transforme complètement ton expérience de révision.",
+    quote:"Apprendre dans les transports. Réviser en marchant. Partout."
+  },
+};
+
+function determineProfile(s){
+  if(['avancé','intermédiaire'].includes(s.MATURITE) && s.DOULEUR==='rétention' && s.OBJECTIF==='optimisation') return 2;
+  if(s.MATURITE==='avancé' && ['optimisation','progression'].includes(s.OBJECTIF)) return 6;
+  if(['urgence','procrastinateur'].includes(s.MATURITE) && ['stress','volume'].includes(s.DOULEUR)) return 1;
+  if(s.DOULEUR==='distraction' && (s.CANAL==='auditif' || s.CHRONO==='variable')) return 3;
+  if(s.CANAL==='visuel-spatial' && s.DOULEUR==='rétention') return 7;
+  if(s.MATURITE==='débutant' && s.OBJECTIF==='méthode') return 4;
+  if(s.DOULEUR==='stress' || s.OBJECTIF==='stress') return 5;
+  if(s.CANAL==='auditif') return 8;
+  return 4;
+}
+
+let state = {};
+let currentQ = -1; // -1 = intro
+let answers = {};
+
+const app = document.getElementById('app');
+const progressBar = document.getElementById('progressBar');
+const stepCount = document.getElementById('stepCount');
+
+function updateProgress(){
+  if(currentQ === -1){
+    progressBar.style.width = '0%';
+    stepCount.textContent = '';
+  } else if(currentQ >= QUESTIONS.length){
+    progressBar.style.width = '100%';
+    stepCount.textContent = '✓ terminé';
+  } else {
+    const pct = ((currentQ) / QUESTIONS.length) * 100;
+    progressBar.style.width = pct + '%';
+    stepCount.textContent = `${currentQ + 1} / ${QUESTIONS.length}`;
+  }
+}
+
+function renderIntro(){
+  app.innerHTML = `
+    <div class="intro">
+      <div class="kicker">Diagnostic SBE</div>
+      <h1>Découvre <em>ton profil</em><br>d'apprentissage</h1>
+      <p class="lead">6 questions. 2 minutes. Un diagnostic personnalisé construit à partir de la méthode ARCHE — pour comprendre <em>pourquoi</em> ta façon de travailler ne te donne pas les résultats que tu mérites.</p>
+      <div class="meta">
+        <span>⏱ 2 min</span>
+        <span>•</span>
+        <span>📋 6 questions</span>
+        <span>•</span>
+        <span>🎯 8 profils</span>
+      </div>
+      <button class="btn btn-primary" onclick="start()">Commencer mon diagnostic →</button>
+    </div>
+  `;
+  updateProgress();
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[currentQ];
+  const selected = answers[q.num];
+  const opts = q.options.map((o,i)=>`
+    <button class="option ${selected===i?'selected':''}" onclick="select(${i})">
+      <span class="option-icon">${o.icon}</span>
+      <span class="option-text">${o.text}</span>
+    </button>
+  `).join('');
+  app.innerHTML = `
+    <div class="q-screen">
+      <div class="q-num">Question ${q.num} / ${QUESTIONS.length}</div>
+      <h2 class="q-title">${q.title}</h2>
+      <p class="q-subtitle">${q.sub}</p>
+      <div class="options">${opts}</div>
+      <div class="btn-row">
+        <button class="btn btn-back" onclick="back()" ${currentQ===0?'disabled':''}>← Précédent</button>
+        <button class="btn btn-primary" onclick="next()" ${selected===undefined?'disabled':''}>${currentQ===QUESTIONS.length-1?'Voir mon profil ✨':'Suivant →'}</button>
+      </div>
+    </div>
+  `;
+  updateProgress();
+}
+
+function renderResult(){
+  const profileId = determineProfile(state);
+  const p = PROFILES[profileId];
+  app.innerHTML = `
+    <div class="result">
+      <div class="result-kicker">Ton profil d'apprentissage</div>
+      <h1 class="result-title">${p.title}</h1>
+      <div class="result-divider"></div>
+
+      <div class="block">
+        <p class="block-text">${p.intro}</p>
+      </div>
+
+      <div class="block">
+        <div class="block-label">Ce que ça veut dire concrètement</div>
+        <p class="block-text">${p.mean}</p>
+      </div>
+
+      <div class="block">
+        <div class="block-label">Ton vrai problème</div>
+        <p class="block-text">${p.real}</p>
+      </div>
+
+      <div class="block">
+        <div class="block-label">Comment la méthode ARCHE y répond</div>
+        <p class="block-text">${p.arche}</p>
+      </div>
+
+      <div class="block">
+        <div class="block-quote">"${p.quote}"</div>
+      </div>
+
+      <div class="cta-block">
+        <div class="cta-kicker">L'étape suivante</div>
+        <h3 class="cta-title">Ton plan de travail<br>personnalisé t'attend</h3>
+        <p class="cta-sub">Crée ton compte SBE pour accéder à ton parcours ARCHE adapté à ton profil — planning sur mesure, ressources prioritaires, accompagnement personnalisé.</p>
+        <button class="cta-btn" onclick="alert('→ Redirection vers création de compte SBE Hub')">Découvrir mon plan complet →</button>
+      </div>
+
+      <div class="restart">
+        <a onclick="restart()">↺ Recommencer le diagnostic</a>
+      </div>
+    </div>
+  `;
+  updateProgress();
+}
+
+function start(){ currentQ = 0; renderQuestion(); window.scrollTo({top:0,behavior:'smooth'}); }
+function select(i){
+  const q = QUESTIONS[currentQ];
+  answers[q.num] = i;
+  state[q.var] = q.options[i].value;
+  renderQuestion();
+}
+function next(){
+  if(answers[QUESTIONS[currentQ].num] === undefined) return;
+  if(currentQ < QUESTIONS.length - 1){
+    currentQ++;
+    renderQuestion();
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    currentQ = QUESTIONS.length;
+    renderResult();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+function back(){
+  if(currentQ === 0) return;
+  if(currentQ === QUESTIONS.length){ currentQ = QUESTIONS.length - 1; }
+  else { currentQ--; }
+  renderQuestion();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function restart(){
+  state = {}; answers = {}; currentQ = -1;
+  renderIntro();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderIntro();
+</script>
+</body>
+</html>

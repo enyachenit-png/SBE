@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBE — Diagnostic complet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1B3A; --ink-soft:#1B2952;
+  --gold:#B8954A; --gold-soft:#D4B574;
+  --cream:#FAF6EC; --paper:#FFFFFF;
+  --text:#1F2330; --muted:#6B6F7A; --rule:#E5DFCF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--cream);font-family:'Inter',sans-serif;color:var(--text);min-height:100vh;}
+body{display:flex;flex-direction:column;align-items:center;overflow-x:hidden;}
+
+.topbar{position:sticky;top:0;width:100%;background:rgba(250,246,236,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:14px 20px;display:flex;align-items:center;gap:14px;z-index:100;}
+.brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-0.3px;white-space:nowrap;}
+.brand span{color:var(--gold);}
+.progress-wrap{flex:1;height:4px;background:var(--rule);border-radius:100px;overflow:hidden;max-width:280px;}
+.progress-bar{height:100%;background:var(--gold);width:0%;transition:width .4s cubic-bezier(.4,0,.2,1);border-radius:100px;}
+.step-count{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:0.5px;min-width:60px;text-align:right;white-space:nowrap;}
+
+.container{width:100%;max-width:720px;padding:32px 22px 80px;display:flex;flex-direction:column;min-height:calc(100vh - 60px);}
+
+/* Intro */
+.intro{text-align:center;padding:40px 0 20px;}
+.intro .kicker{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;}
+.intro h1{font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1.05;font-weight:700;color:var(--ink);letter-spacing:-1px;margin-bottom:16px;}
+.intro h1 em{font-style:italic;color:var(--gold);font-weight:500;}
+.intro .lead{font-size:16px;line-height:1.6;color:var(--muted);max-width:520px;margin:0 auto 32px;}
+.intro-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:480px;margin:0 auto 36px;}
+.intro-meta div{background:var(--paper);padding:18px 12px;border-radius:12px;border:1px solid var(--rule);}
+.intro-meta .big{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;}
+.intro-meta .lbl{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:1px;text-transform:uppercase;font-weight:500;}
+
+/* Module badge */
+.module-badge{display:inline-block;font-size:10px;font-weight:600;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;background:rgba(184,149,74,0.1);padding:6px 12px;border-radius:100px;margin-bottom:18px;}
+
+/* Question */
+.q-screen{animation:fadeIn .4s cubic-bezier(.4,0,.2,1);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.q-title{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.18;font-weight:700;color:var(--ink);letter-spacing:-0.4px;margin-bottom:8px;}
+.q-subtitle{font-size:14px;color:var(--muted);margin-bottom:26px;font-style:italic;line-height:1.5;}
+.q-hint{font-size:12px;color:var(--gold);margin-bottom:20px;font-weight:500;letter-spacing:0.3px;}
+
+.options{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.option{background:var(--paper);border:1.5px solid var(--rule);border-radius:13px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .15s;text-align:left;font-family:inherit;font-size:14.5px;line-height:1.4;color:var(--text);}
+.option:hover{border-color:var(--gold);transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,149,74,0.1);}
+.option.selected{border-color:var(--gold);background:linear-gradient(135deg, #FFFDF7 0%, var(--paper) 100%);box-shadow:0 4px 18px rgba(184,149,74,0.15);}
+.option-bullet{width:22px;height:22px;border-radius:50%;border:2px solid var(--rule);flex-shrink:0;position:relative;}
+.option.selected .option-bullet{border-color:var(--gold);background:var(--gold);}
+.option.selected .option-bullet::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:var(--paper);border-radius:50%;}
+.option-text{flex:1;font-weight:500;}
+
+/* Multi-select */
+.option.multi .option-bullet{border-radius:5px;}
+.option.multi.selected .option-bullet::after{background:transparent;border:solid var(--paper);border-width:0 2px 2px 0;transform:translate(-50%,-65%) rotate(45deg);width:6px;height:11px;border-radius:0;}
+
+/* Text input */
+.text-input{width:100%;padding:14px 18px;border:1.5px solid var(--rule);border-radius:12px;font-family:inherit;font-size:15px;background:var(--paper);color:var(--text);transition:border .15s;}
+.text-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,149,74,0.12);}
+textarea.text-input{min-height:120px;resize:vertical;font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.5;}
+
+/* Buttons */
+.btn-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:10px;}
+.btn{font-family:inherit;border:none;cursor:pointer;font-weight:600;letter-spacing:0.3px;transition:all .15s;font-size:14px;}
+.btn-back{background:transparent;color:var(--muted);padding:12px 0;}
+.btn-back:hover{color:var(--ink);}
+.btn-back:disabled{opacity:0.3;cursor:not-allowed;}
+.btn-primary{background:var(--ink);color:var(--paper);padding:14px 28px;border-radius:100px;font-size:13.5px;letter-spacing:0.5px;text-transform:uppercase;}
+.btn-primary:hover{background:var(--gold);transform:translateY(-1px);box-shadow:0 6px 18px rgba(14,27,58,0.18);}
+.btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+.btn-skip{background:transparent;color:var(--muted);padding:12px 18px;border:1px solid var(--rule);border-radius:100px;font-size:12.5px;}
+.btn-skip:hover{color:var(--ink);border-color:var(--ink);}
+
+/* Profile sheet (résultat final) */
+.sheet{animation:fadeIn .6s cubic-bezier(.4,0,.2,1);}
+.sheet-kicker{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;text-align:center;}
+.sheet-title{font-family:'Cormorant Garamond',serif;font-size:42px;line-height:1.05;font-weight:700;color:var(--ink);letter-spacing:-1px;text-align:center;margin-bottom:8px;}
+.sheet-title em{font-style:italic;color:var(--gold);font-weight:500;}
+.sheet-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:28px;}
+.sheet-divider{width:60px;height:2px;background:var(--gold);margin:24px auto 36px;}
+
+.profile-card{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:32px 28px;margin-bottom:24px;box-shadow:0 4px 20px rgba(14,27,58,0.04);}
+.section-label{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;border-bottom:1px solid var(--rule);padding-bottom:8px;}
+.field{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--rule);font-size:14.5px;align-items:baseline;gap:14px;}
+.field:last-child{border-bottom:none;}
+.field-label{color:var(--muted);font-weight:500;flex-shrink:0;}
+.field-value{color:var(--ink);font-weight:600;text-align:right;font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;}
+.field-value.gold{color:var(--gold);}
+
+.prescription{background:linear-gradient(160deg, var(--ink) 0%, var(--ink-soft) 100%);color:var(--paper);border-radius:18px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden;}
+.prescription::before{content:"";position:absolute;top:-40%;right:-30%;width:280px;height:280px;background:radial-gradient(circle, rgba(184,149,74,0.12) 0%, transparent 70%);}
+.prescription .section-label{color:var(--gold-soft);border-color:rgba(212,181,116,0.2);}
+.prescription .field{border-color:rgba(255,255,255,0.08);}
+.prescription .field-label{color:rgba(255,255,255,0.6);}
+.prescription .field-value{color:var(--paper);}
+.prescription .field-value.gold{color:var(--gold-soft);}
+
+.cta-block{padding:32px 26px;background:var(--paper);border:1.5px solid var(--gold);border-radius:18px;text-align:center;margin-top:32px;}
+.cta-block .ck{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+.cta-block h3{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.15;font-weight:700;color:var(--ink);margin-bottom:10px;}
+.cta-block h3 em{font-style:italic;color:var(--gold);}
+.cta-block p{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.55;}
+.cta-btn{background:var(--ink);color:var(--paper);padding:16px 34px;border-radius:100px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;font-size:13px;border:none;cursor:pointer;font-family:inherit;transition:all .15s;}
+.cta-btn:hover{background:var(--gold);transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,149,74,0.25);}
+
+.restart{margin-top:30px;text-align:center;}
+.restart a{color:var(--muted);text-decoration:none;font-size:13px;border-bottom:1px solid var(--rule);padding-bottom:2px;cursor:pointer;}
+.restart a:hover{color:var(--ink);border-color:var(--ink);}
+
+@media(max-width:520px){
+  .intro h1{font-size:34px;}
+  .sheet-title{font-size:32px;}
+  .q-title{font-size:23px;}
+  .container{padding:24px 16px 80px;}
+  .intro-meta{grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .intro-meta div{padding:14px 8px;}
+  .intro-meta .big{font-size:22px;}
+  .profile-card,.prescription{padding:24px 20px;}
+  .field{font-size:13.5px;}
+  .field-value{font-size:15px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">SBE <span>·</span> Profil</div>
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="step-count" id="stepCount"></div>
+</div>
+
+<div class="container" id="app"></div>
+
+<script>
+// ============================================================================
+// QUESTIONS — Niveau 2 complet, ~48 questions avec adaptativité
+// ============================================================================
+
+const FILIERES = {
+  "lycée":["2nde générale","1ère générale","Terminale générale","Filière technologique","Filière professionnelle","Autre"],
+  "licence-debut":["Économie-Gestion","Droit","AES","Psycho","STAPS","Lettres","Histoire","LEA","Sciences","Médecine/PASS","Autre"],
+  "licence-avancé":["Économie","Gestion","Finance","Droit","Marketing","Management","RH","Communication","Autre"],
+  "autre":["BTS","BUT","Prépa scientifique","Prépa éco","Prépa littéraire","École d'ingé","École de commerce","Autre"],
+};
+
+const QUESTIONS = [
+  // -----------------------------------------------------------------
+  // MODULE 0 — IDENTITÉ ACADÉMIQUE
+  // -----------------------------------------------------------------
+  {num:1, mod:0, modName:"Identité académique", type:"options", var:"NIVEAU",
+    title:"Tu es actuellement en :",
+    sub:"Réponse qui détermine tout le reste de ton parcours.",
+    options:[
+      {text:"Collège (6e à 3e)", value:"lycée"},
+      {text:"Lycée général (2nde, 1ère, Terminale)", value:"lycée"},
+      {text:"Lycée technologique ou professionnel", value:"lycée"},
+      {text:"BTS / BUT / IUT", value:"autre"},
+      {text:"Classe préparatoire", value:"autre"},
+      {text:"Licence 1", value:"licence-debut"},
+      {text:"Licence 2", value:"licence-debut"},
+      {text:"Licence 3", value:"licence-avancé"},
+      {text:"Master 1", value:"licence-avancé"},
+      {text:"Master 2", value:"licence-avancé"},
+      {text:"École de commerce / ingénieur", value:"licence-avancé"},
+      {text:"Autre formation", value:"autre"},
+    ]},
+  {num:2, mod:0, modName:"Identité académique", type:"select", var:"FILIERE",
+    title:"Quelle est ta filière ou spécialité ?",
+    sub:"Choisis ce qui correspond le mieux — ou tape ta filière en bas.",
+    optionsFromNiveau:true},
+  {num:3, mod:0, modName:"Identité académique", type:"options", var:"OBJECTIF",
+    title:"Quel est ton objectif pour cette année ?",
+    sub:"L'objectif réel, pas celui que tu “devrais” avoir.",
+    options:[
+      {text:"Simplement valider mon année", value:"valider"},
+      {text:"Avoir une mention (assez bien ou mieux)", value:"mention"},
+      {text:"Être dans les meilleurs de ma promo", value:"major"},
+      {text:"Préparer une candidature sélective (master, école, concours)", value:"candidature"},
+      {text:"Rattraper un retard ou une situation difficile", value:"rattrapage"},
+    ]},
+  {num:4, mod:0, modName:"Identité académique", type:"options", var:"DELAI",
+    title:"Tu as des évaluations importantes dans combien de temps ?",
+    sub:"Pour adapter la densité de ton planning.",
+    options:[
+      {text:"Moins d'un mois", value:"urgent"},
+      {text:"Entre 1 et 3 mois", value:"moyen"},
+      {text:"Plus de 3 mois", value:"long"},
+      {text:"Je ne sais pas encore", value:"inconnu"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 1 — INTELLIGENCES DE GARDNER
+  // -----------------------------------------------------------------
+  {num:5, mod:1, modName:"Types d'intelligence", type:"options", var:"_GARD_Q5",
+    title:"Parmi ces situations, laquelle te décrit le mieux naturellement ?",
+    sub:"Ton fonctionnement spontané, depuis toujours.",
+    options:[
+      {text:"J'adore lire, écrire, jouer avec les mots et les langues", value:"linguistique"},
+      {text:"Je résous facilement des problèmes logiques, des calculs, des puzzles", value:"logico"},
+      {text:"Je pense souvent en images, je me repère facilement dans l'espace", value:"spatiale"},
+      {text:"J'apprends bien en bougeant, en faisant, en manipulant physiquement", value:"kinesthésique"},
+      {text:"La musique, les rythmes et les sons me parlent naturellement", value:"musicale"},
+      {text:"Je comprends facilement les gens, je suis à l'aise en groupe", value:"interpersonnelle"},
+      {text:"Je me comprends moi-même, je réfléchis beaucoup en solitaire", value:"intrapersonnelle"},
+      {text:"J'observe la nature, les systèmes, les patterns du monde", value:"naturaliste"},
+      {text:"Je me pose des grandes questions sur le sens des choses", value:"existentielle"},
+    ]},
+  {num:6, mod:1, modName:"Types d'intelligence", type:"options", var:"_GARD_Q6",
+    title:"Dans quel contexte est-ce que tu performes le mieux ?",
+    sub:"Le contexte où tu sens que tu donnes le meilleur de toi.",
+    options:[
+      {text:"Quand je dois lire et analyser un texte en profondeur", value:"linguistique"},
+      {text:"Quand je dois résoudre un problème avec une logique claire", value:"logico"},
+      {text:"Quand je peux visualiser ou dessiner ce que j'apprends", value:"spatiale"},
+      {text:"Quand je peux bouger, écrire, faire des choses concrètes", value:"kinesthésique"},
+      {text:"Quand j'explique à quelqu'un d'autre", value:"interpersonnelle"},
+      {text:"Quand je réfléchis seul(e) longuement sans interruption", value:"intrapersonnelle"},
+    ]},
+  {num:7, mod:1, modName:"Types d'intelligence", type:"options", var:"_GARD_Q7",
+    title:"Quel type de cours tu comprends et retiens le mieux ?",
+    sub:"Le format de cours où tu te sens vraiment dans ton élément.",
+    options:[
+      {text:"Les cours théoriques bien structurés avec des concepts clairs", value:"logico"},
+      {text:"Les cours avec des exemples concrets et des applications pratiques", value:"kinesthésique"},
+      {text:"Les cours visuels — schémas, tableaux, graphiques", value:"spatiale"},
+      {text:"Les cours où le prof raconte, explique avec des histoires et des exemples vivants", value:"linguistique"},
+      {text:"Les cours où tu peux interagir, poser des questions, débattre", value:"interpersonnelle"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 2 — TYPE DE MÉMOIRE
+  // -----------------------------------------------------------------
+  {num:8, mod:2, modName:"Type de mémoire", type:"options", var:"_CAN_Q8",
+    title:"Quand tu apprends quelque chose de nouveau, qu'est-ce qui t'aide le plus à t'en souvenir ?",
+    sub:"Première indication de ton canal mémoriel dominant.",
+    options:[
+      {text:"Voir le mot écrit ou un schéma", value:"visuel"},
+      {text:"L'entendre expliquer à voix haute", value:"auditif"},
+      {text:"L'écrire ou le réécrire de ma main", value:"kinesthésique"},
+      {text:"L'associer à une histoire ou un contexte précis", value:"contextuel"},
+      {text:"Le comprendre logiquement et le relier à ce que je sais déjà", value:"logique"},
+    ]},
+  {num:9, mod:2, modName:"Type de mémoire", type:"options", var:"_CAN_Q9",
+    title:"Le lendemain matin, tu te souviens d'une notion comment ?",
+    sub:"Le réflexe de récupération mémorielle révèle ton canal réel.",
+    options:[
+      {text:"Je revois mentalement ce qui était écrit au tableau ou sur mes notes", value:"visuel"},
+      {text:"J'entends encore la voix du prof dans ma tête", value:"auditif"},
+      {text:"Je me rappelle l'avoir écrit — le geste m'a aidé", value:"kinesthésique"},
+      {text:"Je me rappelle le contexte — où j'étais, comment je me sentais", value:"contextuel"},
+      {text:"Je me rappelle la logique du raisonnement qui m'a amené à comprendre", value:"logique"},
+    ]},
+  {num:10, mod:2, modName:"Type de mémoire", type:"options", var:"_CAN_Q10",
+    title:"Quand tu dois retenir une liste d'informations, tu fais quoi instinctivement ?",
+    sub:"Cette réponse confirme définitivement ton canal mémoriel.",
+    options:[
+      {text:"Je visualise les éléments écrits dans ma tête", value:"visuel"},
+      {text:"Je les répète à voix haute plusieurs fois", value:"auditif"},
+      {text:"Je les écris sur un bout de papier", value:"kinesthésique"},
+      {text:"Je les associe à quelque chose de mémorable ou d'imagé", value:"visuel"},
+      {text:"Je les organise logiquement dans un ordre qui a du sens pour moi", value:"logique"},
+    ]},
+  {num:11, mod:2, modName:"Type de mémoire", type:"options", var:"AUDITIF_NUANCE",
+    title:"Tu arrives à retenir des informations en écoutant un podcast ou une vidéo sans prendre de notes ?",
+    sub:"Pour distinguer un auditif pur d'un auditif mixte.",
+    shows:s=>s._CAN_Q8==='auditif' || s._CAN_Q9==='auditif',
+    options:[
+      {text:"Oui, j'absorbe très bien à l'oral", value:"auditif-fort"},
+      {text:"Oui mais j'ai besoin de réécouter plusieurs fois", value:"auditif-fort"},
+      {text:"Partiellement — j'ai besoin de compléter avec des notes", value:"auditif-mixte"},
+      {text:"Non, j'ai besoin d'écrire pour vraiment retenir", value:"auditif-mixte"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 3 — CHRONOTYPE & RYTHME
+  // -----------------------------------------------------------------
+  {num:12, mod:3, modName:"Chronotype & rythme", type:"options", var:"_CHR_Q12",
+    title:"Globalement, tu es plutôt :",
+    sub:"Ton rythme naturel — pas celui qu'on te demande d'avoir.",
+    options:[
+      {text:"Lève-tôt naturellement — je suis en forme le matin sans effort", value:"matin"},
+      {text:"Lève-tôt forcé(e) — le matin ça va mais je préfère l'après-midi", value:"après-midi"},
+      {text:"Ni l'un ni l'autre — je suis régulier(ère) dans la journée", value:"variable"},
+      {text:"Du soir — je prends vie après 18h", value:"soir"},
+      {text:"De la nuit — je suis vraiment efficace après 22h", value:"nuit"},
+    ]},
+  {num:13, mod:3, modName:"Chronotype & rythme", type:"options", var:"CHRONO",
+    title:"À quel moment tu te concentres le mieux pour apprendre quelque chose de difficile ?",
+    sub:"La plage où tu peux attaquer les sujets les plus durs.",
+    options:[
+      {text:"Le matin entre 7h et 12h", value:"matin"},
+      {text:"L'après-midi entre 12h et 17h", value:"après-midi"},
+      {text:"Le soir entre 17h et 21h", value:"soir"},
+      {text:"La nuit après 21h", value:"nuit"},
+      {text:"Ça dépend vraiment des jours", value:"variable"},
+    ]},
+  {num:14, mod:3, modName:"Chronotype & rythme", type:"options", var:"CONCENTRATION",
+    title:"Combien de temps peux-tu travailler de façon vraiment concentrée avant de décrocher ?",
+    sub:"Sans rien faire d'autre, sans toucher au téléphone, sans rêvasser.",
+    options:[
+      {text:"Moins de 20 minutes", value:"courte"},
+      {text:"Entre 20 et 40 minutes", value:"moyenne"},
+      {text:"Entre 40 minutes et 1 heure", value:"longue"},
+      {text:"Plus d'une heure", value:"très-longue"},
+      {text:"Ça dépend de la matière et de mon niveau d'intérêt", value:"variable"},
+    ]},
+  {num:15, mod:3, modName:"Chronotype & rythme", type:"options", var:"DISTRACTEUR",
+    title:"Qu'est-ce qui te déconcentre le plus quand tu travailles ?",
+    sub:"Le coupable principal — un seul choix.",
+    options:[
+      {text:"Mon téléphone et les notifications", value:"phone"},
+      {text:"Le bruit ambiant", value:"bruit"},
+      {text:"Mes propres pensées qui partent ailleurs", value:"mental"},
+      {text:"La fatigue physique", value:"fatigue"},
+      {text:"L'ennui ou le manque d'intérêt pour ce que je fais", value:"ennui"},
+    ]},
+  {num:16, mod:3, modName:"Chronotype & rythme", type:"options", var:"ENVIRONNEMENT",
+    title:"Dans quel environnement tu travailles le mieux ?",
+    sub:"Ton setup idéal pour entrer dans le flow.",
+    options:[
+      {text:"Seul(e) dans le silence total", value:"silence"},
+      {text:"Seul(e) avec de la musique ou du bruit de fond", value:"musique"},
+      {text:"Dans un lieu public (bibliothèque, café)", value:"public"},
+      {text:"En présence d'autres personnes qui travaillent aussi", value:"groupe"},
+      {text:"Peu importe, je m'adapte à tout", value:"flexible"},
+    ]},
+  {num:17, mod:3, modName:"Chronotype & rythme", type:"options", var:"TEMPS_DISPO",
+    title:"Combien d'heures par semaine tu peux consacrer au travail personnel (hors cours) ?",
+    sub:"Sois réaliste — pas le chiffre idéal, le chiffre vrai.",
+    options:[
+      {text:"Moins de 5h", value:"<5h"},
+      {text:"Entre 5h et 10h", value:"5-10h"},
+      {text:"Entre 10h et 15h", value:"10-15h"},
+      {text:"Entre 15h et 20h", value:"15-20h"},
+      {text:"Plus de 20h", value:">20h"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 4 — MATURITÉ MÉTHODOLOGIQUE
+  // -----------------------------------------------------------------
+  {num:18, mod:4, modName:"Maturité méthodologique", type:"options", var:"MATURITE",
+    title:"Tu as déjà une méthode de travail définie que tu appliques régulièrement ?",
+    sub:"Une vraie méthode — pas une habitude vague.",
+    options:[
+      {text:"Oui, j'ai un système qui fonctionne bien pour moi", value:"avancé"},
+      {text:"J'ai quelques habitudes mais ce n'est pas vraiment structuré", value:"intermédiaire"},
+      {text:"Je fais un peu tout selon les jours", value:"intermédiaire"},
+      {text:"Non, je n'ai pas vraiment de méthode", value:"débutant"},
+    ]},
+  {num:18.5, mod:4, modName:"Maturité méthodologique", type:"multi", var:"METHODE_ACTUELLE",
+    title:"Ta méthode actuelle inclut quoi ?",
+    sub:"Plusieurs réponses possibles.",
+    shows:s=>s.MATURITE==='avancé',
+    options:[
+      {text:"Un planning hebdomadaire fixe", value:"planning"},
+      {text:"Des fiches de révision", value:"fiches"},
+      {text:"Des flashcards", value:"flashcards"},
+      {text:"La relecture du cours", value:"relecture"},
+      {text:"Des exercices et annales", value:"exos"},
+    ]},
+  {num:19, mod:4, modName:"Maturité méthodologique", type:"options", var:"PLANNING_USAGE",
+    title:"Comment tu gères généralement ton planning de révisions ?",
+    sub:"La vérité, pas l'intention.",
+    options:[
+      {text:"Je planifie à l'avance et je respecte mon planning", value:"strict"},
+      {text:"Je planifie mais je ne le respecte pas toujours", value:"flexible"},
+      {text:"Je travaille quand j'en ai envie ou quand la pression monte", value:"sporadique"},
+      {text:"Je n'ai pas de planning", value:"aucun"},
+    ]},
+  {num:20, mod:4, modName:"Maturité méthodologique", type:"options", var:"DEBUT_REVISION",
+    title:"Quand tu commences à réviser pour un examen ?",
+    sub:"Le timing typique — pas l'exception.",
+    options:[
+      {text:"Plusieurs semaines à l'avance, régulièrement", value:"anticipé"},
+      {text:"1 à 2 semaines avant", value:"normal"},
+      {text:"Dans la semaine qui précède", value:"tardif"},
+      {text:"Les 2-3 jours avant", value:"urgence"},
+      {text:"La veille ou le jour même", value:"urgence"},
+    ]},
+  {num:21, mod:4, modName:"Maturité méthodologique", type:"options", var:"FICHES",
+    title:"Tu fais des fiches de révision ?",
+    sub:"Tout le monde en parle. Toi tu fais quoi vraiment ?",
+    options:[
+      {text:"Oui, systématiquement — c'est ma méthode principale", value:"systématique"},
+      {text:"Oui parfois mais pas toujours", value:"parfois"},
+      {text:"J'essaie mais je ne sais pas vraiment comment les faire bien", value:"mal-fait"},
+      {text:"Non, je préfère relire directement mon cours", value:"non-relit"},
+      {text:"Non, je n'ai pas le temps", value:"non-temps"},
+    ]},
+  {num:22, mod:4, modName:"Maturité méthodologique", type:"options", var:"ANNALES",
+    title:"Tu utilises les annales (sujets d'examens des années précédentes) ?",
+    sub:"L'outil le plus sous-utilisé par les étudiants.",
+    options:[
+      {text:"Oui, dès le début du semestre pour savoir ce qui est attendu", value:"intensif"},
+      {text:"Oui, quelques semaines avant les examens", value:"avant-exam"},
+      {text:"Rarement, seulement en cas de besoin", value:"rare"},
+      {text:"Non, je ne pense pas à les utiliser", value:"oublié"},
+      {text:"Je ne savais pas que c'était utile", value:"inconnu"},
+    ]},
+  {num:23, mod:4, modName:"Maturité méthodologique", type:"options", var:"AUTO_EVAL",
+    title:"Comment tu sais si tu as vraiment maîtrisé une notion ?",
+    sub:"La question la plus importante du questionnaire.",
+    options:[
+      {text:"Je peux l'expliquer à quelqu'un d'autre sans regarder mes notes", value:"restitution"},
+      {text:"Je refais des exercices dessus et je les réussis", value:"exos"},
+      {text:"J'ai l'impression de comprendre quand je relis", value:"illusion"},
+      {text:"Je ne sais pas vraiment — je fais confiance à mon ressenti", value:"illusion"},
+    ]},
+  {num:24, mod:4, modName:"Maturité méthodologique", type:"options", var:"PROCRASTINATION",
+    title:"Tu procrastines souvent ?",
+    sub:"Pas de jugement. Juste un état des lieux.",
+    options:[
+      {text:"Rarement — je suis assez discipliné(e)", value:"jamais"},
+      {text:"Parfois — surtout pour les matières qui m'ennuient", value:"parfois"},
+      {text:"Souvent — j'ai du mal à me mettre au travail", value:"souvent"},
+      {text:"Presque tout le temps — c'est mon plus grand problème", value:"systématique"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 5 — PROFIL ÉMOTIONNEL & CONFIANCE
+  // -----------------------------------------------------------------
+  {num:25, mod:5, modName:"Profil émotionnel & confiance", type:"options", var:"STRESS",
+    title:"Comment tu te sens généralement avant un examen important ?",
+    sub:"L'état émotionnel typique de la veille.",
+    options:[
+      {text:"Calme et confiant(e) — j'ai confiance en mon travail", value:"faible"},
+      {text:"Un peu stressé(e) mais ça me booste", value:"moyen"},
+      {text:"Assez anxieux/anxieuse — ça perturbe mes révisions", value:"élevé"},
+      {text:"Très stressé(e) — j'ai souvent des blocages", value:"élevé"},
+      {text:"La panique totale — c'est systématique", value:"très-élevé"},
+    ]},
+  {num:26, mod:5, modName:"Profil émotionnel & confiance", type:"options", var:"REBOND",
+    title:"Quand tu rates un exam ou que tu as une mauvaise note, tu réagis comment ?",
+    sub:"Ton mode de récupération après échec.",
+    options:[
+      {text:"J'analyse ce qui n'a pas fonctionné et je m'adapte", value:"analytique"},
+      {text:"Je suis déçu(e) mais je rebondis assez vite", value:"résilient"},
+      {text:"Je me remets en question pendant un bon moment", value:"ruminant"},
+      {text:"Ça m'affecte longtemps et j'ai du mal à reprendre", value:"affecté"},
+      {text:"J'évite d'y penser", value:"évitant"},
+    ]},
+  {num:27, mod:5, modName:"Profil émotionnel & confiance", type:"options", var:"AUTO_DIAG",
+    title:"Quelle phrase te correspond le mieux ?",
+    sub:"Comment tu te décrirais à un coach.",
+    options:[
+      {text:"Je suis capable de très bien travailler mais je manque de méthode", value:"capable-sans-méthode"},
+      {text:"Je travaille beaucoup mais les résultats ne suivent pas", value:"inefficace"},
+      {text:"Je ne travaille pas assez et je le sais", value:"sous-travail"},
+      {text:"Je travaille bien mais je pourrais optimiser encore", value:"optimisable"},
+      {text:"Je n'ai pas encore trouvé ce qui fonctionne pour moi", value:"recherche"},
+    ]},
+  {num:28, mod:5, modName:"Profil émotionnel & confiance", type:"options", var:"CONFIANCE",
+    title:"Tu as confiance en tes capacités intellectuelles ?",
+    sub:"La vraie question — sans détour.",
+    options:[
+      {text:"Oui, complètement — je sais que j'en suis capable", value:"forte"},
+      {text:"Plutôt oui — avec la bonne méthode je peux y arriver", value:"moyenne"},
+      {text:"Pas vraiment — je doute souvent de moi", value:"faible"},
+      {text:"Non — je pense parfois que je ne suis pas fait(e) pour les études", value:"très-faible"},
+    ]},
+  {num:29, mod:5, modName:"Profil émotionnel & confiance", type:"options", var:"MOTIVATION",
+    title:"Qu'est-ce qui te motive le plus dans tes études ?",
+    sub:"Le vrai moteur. Un seul choix.",
+    options:[
+      {text:"La passion pour ce que j'apprends", value:"passion"},
+      {text:"L'ambition d'avoir un bon travail ou une belle carrière", value:"ambition"},
+      {text:"Faire plaisir à ma famille ou me prouver quelque chose", value:"famille"},
+      {text:"La compétition — être bon(ne) par rapport aux autres", value:"compétition"},
+      {text:"La peur de rater ou de décevoir", value:"peur"},
+      {text:"Je cherche encore ce qui me motive vraiment", value:"recherche"},
+    ]},
+  {num:30, mod:5, modName:"Profil émotionnel & confiance", type:"options", var:"AUTONOMIE",
+    title:"Quand tu travailles seul(e), tu as tendance à :",
+    sub:"Ton rapport au travail en solitaire.",
+    options:[
+      {text:"Rester concentré(e) facilement — je suis autonome", value:"autonome"},
+      {text:"Me concentrer correctement si l'environnement s'y prête", value:"conditionnel"},
+      {text:"Avoir du mal à me motiver sans pression extérieure", value:"besoin-pression"},
+      {text:"Décrocher rapidement — j'ai besoin de stimulation externe", value:"besoin-stimulation"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 6 — CONTRAINTES DE VIE RÉELLES
+  // -----------------------------------------------------------------
+  {num:31, mod:6, modName:"Contraintes de vie", type:"options", var:"JOB",
+    title:"Tu travailles à côté de tes études ?",
+    sub:"Job étudiant, alternance, freelance — tout compte.",
+    options:[
+      {text:"Non", value:"aucun"},
+      {text:"Oui, moins de 10h par semaine", value:"<10h"},
+      {text:"Oui, entre 10h et 20h par semaine", value:"10-20h"},
+      {text:"Oui, plus de 20h par semaine", value:">20h"},
+    ]},
+  {num:32, mod:6, modName:"Contraintes de vie", type:"options", var:"EXTRA",
+    title:"Tu as des activités sportives ou extrascolaires régulières ?",
+    sub:"Sport, musique, asso — tout ce qui prend du temps fixe.",
+    options:[
+      {text:"Non", value:"aucun"},
+      {text:"Oui, moins de 5h par semaine", value:"<5h"},
+      {text:"Oui, entre 5h et 10h par semaine", value:"5-10h"},
+      {text:"Oui, plus de 10h par semaine", value:">10h"},
+    ]},
+  {num:33, mod:6, modName:"Contraintes de vie", type:"options", var:"LIEU",
+    title:"Ton environnement de travail habituel, c'est :",
+    sub:"Où tu travailles concrètement la plupart du temps.",
+    options:[
+      {text:"Ma chambre seul(e)", value:"chambre"},
+      {text:"Un espace partagé à la maison", value:"partagé"},
+      {text:"Une bibliothèque ou salle de travail", value:"BU"},
+      {text:"Un café ou espace public", value:"café"},
+      {text:"Ça change souvent", value:"variable"},
+    ]},
+  {num:34, mod:6, modName:"Contraintes de vie", type:"options", var:"APPAREIL",
+    title:"Tu as accès à un ordinateur pour travailler ?",
+    sub:"L'appareil principal détermine le format des ressources.",
+    options:[
+      {text:"Oui, j'ai mon propre ordinateur", value:"ordi"},
+      {text:"Oui mais je le partage", value:"ordi-partagé"},
+      {text:"Principalement mon téléphone", value:"téléphone"},
+      {text:"Principalement ma tablette", value:"tablette"},
+    ]},
+  {num:35, mod:6, modName:"Contraintes de vie", type:"options", var:"WEEKEND",
+    title:"Les week-ends, tu travailles généralement ?",
+    sub:"Ton rapport au repos compte autant que ton rapport au travail.",
+    options:[
+      {text:"Oui, intensément — c'est là que je fais le plus", value:"intensif"},
+      {text:"Oui, un peu — mais c'est aussi ma période de récupération", value:"modéré"},
+      {text:"Rarement — je déconnecte le week-end", value:"rare"},
+      {text:"Non jamais — le week-end c'est off", value:"jamais"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 7 — PROFIL ACADÉMIQUE DÉTAILLÉ (variante selon NIVEAU)
+  // -----------------------------------------------------------------
+  {num:36, mod:7, modName:"Profil académique", type:"multi", var:"DIFFICULTES",
+    titleFn:s=>s.NIVEAU==='lycée'
+      ? "Quelles matières te posent le plus de difficultés ?"
+      : s.NIVEAU==='licence-avancé'
+        ? "Quel est ton principal défi académique en ce moment ?"
+        : "Dans ta filière, quels types de matières te posent le plus de difficultés ?",
+    sub:"Plusieurs réponses possibles.",
+    optionsFn:s=>{
+      if(s.NIVEAU==='lycée') return [
+        {text:"Mathématiques", value:"maths"},
+        {text:"Français / Littérature", value:"français"},
+        {text:"Histoire-Géographie", value:"histoire"},
+        {text:"Sciences (SVT, Physique-Chimie)", value:"sciences"},
+        {text:"Langues vivantes", value:"langues"},
+        {text:"Philosophie", value:"philo"},
+        {text:"Mes spécialités", value:"spé"},
+      ];
+      if(s.NIVEAU==='licence-avancé') return [
+        {text:"La quantité de travail à abattre", value:"volume"},
+        {text:"Le niveau d'abstraction et de complexité", value:"abstraction"},
+        {text:"La production écrite (mémoires, rapports, cas pratiques)", value:"écrit"},
+        {text:"La recherche et la synthèse d'informations", value:"recherche"},
+        {text:"La gestion du temps entre cours et stages/projets", value:"temps"},
+      ];
+      return [
+        {text:"Les matières théoriques et abstraites", value:"théorique"},
+        {text:"Les matières quantitatives (maths, stats, économétrie)", value:"quanti"},
+        {text:"Les matières de gestion (compta, finance, management)", value:"gestion"},
+        {text:"Les langues", value:"langues"},
+        {text:"Les matières à mémorisation importante", value:"mémo"},
+        {text:"Toutes de façon équivalente", value:"toutes"},
+      ];
+    }},
+  {num:37, mod:7, modName:"Profil académique", type:"options", var:"NIVEAU_PERCU",
+    title:"Comment tu évaluerais ton niveau général dans ta filière ?",
+    sub:"Ton ressenti par rapport à la promo.",
+    options:[
+      {text:"En difficulté — j'ai du mal à suivre", value:"difficile"},
+      {text:"Dans la moyenne — je m'en sors mais sans briller", value:"moyenne"},
+      {text:"Au-dessus de la moyenne — je performe bien", value:"bon"},
+      {text:"Parmi les meilleurs — j'excelle", value:"excellent"},
+    ]},
+  {num:38, mod:7, modName:"Profil académique", type:"options", var:"MATIERES_DEFAVORITES",
+    title:"Ton rapport aux matières que tu n'aimes pas :",
+    sub:"L'attitude face à ce qui t'ennuie.",
+    options:[
+      {text:"Je les traite avec la même rigueur que celles que j'aime", value:"rigoureux"},
+      {text:"Je les travaille mais avec moins d'enthousiasme", value:"baissé"},
+      {text:"Je les néglige souvent", value:"négligé"},
+      {text:"Je les évite au maximum", value:"évité"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 8 — COMPRÉHENSION & TRAITEMENT
+  // -----------------------------------------------------------------
+  {num:39, mod:8, modName:"Compréhension & traitement", type:"options", var:"LECTURE",
+    title:"Quand tu lis un cours dense et complexe, tu :",
+    sub:"Ton mode d'absorption d'un texte difficile.",
+    options:[
+      {text:"Comprends globalement dès la première lecture", value:"rapide"},
+      {text:"Dois relire plusieurs fois pour vraiment comprendre", value:"relecture"},
+      {text:"Comprends mieux en faisant des liens avec ce que tu sais déjà", value:"liens"},
+      {text:"Dois transformer l'information (fiche, schéma) pour comprendre", value:"transformer"},
+      {text:"Comprendrais mieux si quelqu'un te l'expliquait à voix haute", value:"oral"},
+    ]},
+  {num:40, mod:8, modName:"Compréhension & traitement", type:"options", var:"BLOCAGE",
+    title:"Face à un exercice difficile, ton réflexe c'est :",
+    sub:"Ton mode de résolution face à l'obstacle.",
+    options:[
+      {text:"Chercher seul(e) méthodiquement jusqu'à trouver", value:"méthodique"},
+      {text:"Essayer un moment puis demander de l'aide", value:"équilibré"},
+      {text:"Chercher la solution directement (corrigé, internet)", value:"raccourci"},
+      {text:"Passer à autre chose et y revenir plus tard", value:"évitement"},
+      {text:"Bloquer et abandonner", value:"abandon"},
+    ]},
+  {num:41, mod:8, modName:"Compréhension & traitement", type:"options", var:"LIENS",
+    title:"Tu arrives à faire des liens entre les différentes matières ou chapitres ?",
+    sub:"La capacité à voir l'architecture globale du savoir.",
+    options:[
+      {text:"Oui, naturellement — j'adore voir les connexions", value:"naturel"},
+      {text:"Parfois — quand quelqu'un me le montre", value:"guidé"},
+      {text:"Rarement — je travaille chaque chapitre de façon isolée", value:"isolé"},
+      {text:"Non — je ne pense pas à le faire", value:"jamais"},
+    ]},
+  {num:42, mod:8, modName:"Compréhension & traitement", type:"options", var:"MEMORISATION",
+    title:"Pour mémoriser une grande quantité d'informations, ta stratégie c'est :",
+    sub:"Ta technique de mémorisation préférée.",
+    options:[
+      {text:"Répéter jusqu'à ce que ça rentre", value:"répétition"},
+      {text:"Faire des fiches ou résumés", value:"synthèse"},
+      {text:"Créer des associations, des images mentales", value:"associations"},
+      {text:"Faire des exercices pratiques sur la notion", value:"pratique"},
+      {text:"Je n'ai pas vraiment de stratégie", value:"aucune"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 9 — QUESTIONS SITUATIONNELLES ADAPTATIVES
+  // -----------------------------------------------------------------
+  {num:43, mod:9, modName:"Question ciblée", type:"options", var:"PROCRASTI_CAUSE",
+    title:"Quand tu procrastines, c'est plutôt parce que :",
+    sub:"Comprendre la cause de la procrastination pour la désamorcer.",
+    shows:s=>['souvent','systématique'].includes(s.PROCRASTINATION),
+    options:[
+      {text:"Je ne sais pas par où commencer", value:"surcharge"},
+      {text:"La tâche me semble trop grande ou trop difficile", value:"taille"},
+      {text:"Je préfère faire des choses plus agréables", value:"plaisir"},
+      {text:"J'ai peur de ne pas y arriver", value:"peur"},
+      {text:"Je manque d'énergie ou de motivation à ce moment-là", value:"énergie"},
+    ]},
+  {num:44, mod:9, modName:"Question ciblée", type:"options", var:"STRESS_CAUSE",
+    title:"Le jour d'un examen, ce qui te perturbe le plus c'est :",
+    sub:"Le déclencheur précis du stress en situation.",
+    shows:s=>['élevé','très-élevé'].includes(s.STRESS),
+    options:[
+      {text:"La peur d'avoir oublié ce que j'avais appris", value:"oubli"},
+      {text:"La pression du temps — peur de ne pas finir", value:"temps"},
+      {text:"Le regard des autres ou la comparaison", value:"comparaison"},
+      {text:"Le fait de ne pas savoir si j'ai assez travaillé", value:"doute"},
+      {text:"Une question sur quelque chose que je n'attendais pas", value:"surprise"},
+    ]},
+  {num:45, mod:9, modName:"Question ciblée", type:"options", var:"AUDIO_USAGE",
+    title:"Tu utilises déjà des ressources audio pour apprendre ?",
+    sub:"Tu confirmes un canal auditif fort — autant savoir si tu l'exploites.",
+    shows:s=>(s._CAN_Q8==='auditif' && s._CAN_Q9==='auditif') || s.AUDITIF_NUANCE==='auditif-fort',
+    options:[
+      {text:"Oui, régulièrement", value:"oui-régulier"},
+      {text:"Parfois", value:"parfois"},
+      {text:"Non mais ça m'intéresserait vraiment", value:"intérêt"},
+      {text:"Non, je n'y avais pas pensé", value:"jamais-pensé"},
+    ]},
+  {num:46, mod:9, modName:"Question ciblée", type:"options", var:"DEBUTANT_BLOCAGE",
+    title:"Qu'est-ce qui t'a empêché jusqu'ici d'avoir une vraie méthode de travail ?",
+    sub:"Pour identifier ce qu'il faut débloquer en priorité.",
+    shows:s=>s.MATURITE==='débutant',
+    options:[
+      {text:"Je ne savais pas comment m'y prendre", value:"ignorance"},
+      {text:"J'ai essayé mais rien ne fonctionnait pour moi", value:"échecs"},
+      {text:"Je manquais de temps pour la mettre en place", value:"temps"},
+      {text:"Je pensais que je n'en avais pas besoin", value:"déni"},
+      {text:"Je remettais toujours ça à plus tard", value:"procrastination"},
+    ]},
+  {num:47, mod:9, modName:"Question ciblée", type:"options", var:"CANDIDATURE_BESOIN",
+    title:"Pour atteindre cet objectif sélectif, qu'est-ce qui te manque le plus ?",
+    sub:"Pour calibrer un accompagnement à hauteur de l'enjeu.",
+    shows:s=>s.OBJECTIF==='candidature',
+    options:[
+      {text:"Une méthode de travail vraiment efficace", value:"méthode"},
+      {text:"Plus de temps ou une meilleure organisation", value:"organisation"},
+      {text:"Des ressources de qualité adaptées à ma filière", value:"ressources"},
+      {text:"La confiance en moi et la gestion du stress", value:"confiance"},
+      {text:"Un suivi personnalisé", value:"suivi"},
+    ]},
+  // -----------------------------------------------------------------
+  // MODULE 10 — QUESTION LIBRE
+  // -----------------------------------------------------------------
+  {num:48, mod:10, modName:"Pour finir", type:"text", var:"LIBRE",
+    title:"Y a-t-il quelque chose d'important sur ta façon de travailler que tu voudrais nous dire ?",
+    sub:"Champ libre — tu peux passer cette question.",
+    placeholder:"Ce que les questions précédentes n'ont pas couvert et qui compte pour toi…",
+    skippable:true},
+];
+
+// ============================================================================
+// ÉTAT & RENDU
+// ============================================================================
+let state = {};
+let answers = {};
+let multiAnswers = {};
+let currentIdx = -1;
+
+const app = document.getElementById('app');
+const progressBar = document.getElementById('progressBar');
+const stepCount = document.getElementById('stepCount');
+
+function visibleQuestions(){ return QUESTIONS.filter(q=>!q.shows || q.shows(state)); }
+function currentQuestion(){ return currentIdx>=0 ? QUESTIONS[currentIdx] : null; }
+
+function nextVisibleIdx(from){
+  for(let i = from+1; i < QUESTIONS.length; i++){
+    const q = QUESTIONS[i];
+    if(!q.shows || q.shows(state)) return i;
+  }
+  return -1;
+}
+function prevVisibleIdx(from){
+  for(let i = from-1; i >= 0; i--){
+    const q = QUESTIONS[i];
+    if(!q.shows || q.shows(state)) return i;
+  }
+  return -1;
+}
+
+function updateProgress(){
+  if(currentIdx === -1){
+    progressBar.style.width='0%'; stepCount.textContent=''; return;
+  }
+  if(currentIdx === QUESTIONS.length){
+    progressBar.style.width='100%'; stepCount.textContent='✓ fini'; return;
+  }
+  const vis = visibleQuestions();
+  const cur = QUESTIONS[currentIdx];
+  const pos = vis.indexOf(cur) + 1;
+  progressBar.style.width = ((pos-1)/vis.length*100) + '%';
+  stepCount.textContent = `${pos} / ${vis.length}`;
+}
+
+function renderIntro(){
+  app.innerHTML = `
+    <div class="intro">
+      <div class="kicker">Diagnostic SBE — Profil complet</div>
+      <h1>Construis <em>ton profil</em><br>d'apprentissage complet</h1>
+      <p class="lead">Le questionnaire complet — adaptatif, basé sur la psychologie cognitive et les 9 intelligences de Gardner — qui génère ton <em>profil étudiant unique</em> et ton parcours ARCHE personnalisé.</p>
+      <div class="intro-meta">
+        <div><div class="big">~12'</div><div class="lbl">Durée</div></div>
+        <div><div class="big">10</div><div class="lbl">Modules</div></div>
+        <div><div class="big">~45</div><div class="lbl">Questions</div></div>
+      </div>
+      <button class="btn btn-primary" onclick="start()">Commencer →</button>
+    </div>
+  `;
+  updateProgress();
+}
+
+function renderQuestion(){
+  const q = currentQuestion();
+  if(!q) return;
+  const title = q.titleFn ? q.titleFn(state) : q.title;
+  let body = '';
+
+  if(q.type === 'text'){
+    const val = answers[q.num] || '';
+    body = `<textarea class="text-input" id="textInput" placeholder="${q.placeholder||''}">${val}</textarea>`;
+  } else if(q.type === 'select'){
+    const list = q.optionsFromNiveau ? (FILIERES[state.NIVEAU]||FILIERES["licence-debut"]) : [];
+    const val = answers[q.num] || '';
+    const opts = list.map(f=>`<option value="${f}" ${val===f?'selected':''}>${f}</option>`).join('');
+    body = `
+      <select class="text-input" id="selectInput" style="appearance:auto;">
+        <option value="">— Choisis ta filière —</option>
+        ${opts}
+      </select>
+      <input type="text" class="text-input" id="textCustom" placeholder="Ou tape ta filière exacte ici…" style="margin-top:10px;" value="${state.FILIERE_TEXT||''}">
+    `;
+  } else if(q.type === 'multi'){
+    const list = q.optionsFn ? q.optionsFn(state) : q.options;
+    const sel = multiAnswers[q.num] || [];
+    body = '<div class="options">' + list.map((o,i)=>`
+      <button class="option multi ${sel.includes(i)?'selected':''}" onclick="toggleMulti(${i})">
+        <span class="option-bullet"></span>
+        <span class="option-text">${o.text}</span>
+      </button>
+    `).join('') + '</div>';
+  } else {
+    const sel = answers[q.num];
+    body = '<div class="options">' + q.options.map((o,i)=>`
+      <button class="option ${sel===i?'selected':''}" onclick="selectOption(${i})">
+        <span class="option-bullet"></span>
+        <span class="option-text">${o.text}</span>
+      </button>
+    `).join('') + '</div>';
+  }
+
+  const vis = visibleQuestions();
+  const isLast = vis.indexOf(q) === vis.length - 1;
+  const canBack = prevVisibleIdx(currentIdx) !== -1;
+  const canNext = isAnswered(q);
+
+  app.innerHTML = `
+    <div class="q-screen">
+      <span class="module-badge">Module ${q.mod} · ${q.modName}</span>
+      <h2 class="q-title">${title}</h2>
+      <p class="q-subtitle">${q.sub}</p>
+      ${body}
+      <div class="btn-row">
+        <button class="btn btn-back" onclick="back()" ${canBack?'':'disabled'}>← Précédent</button>
+        <div style="display:flex;gap:10px;align-items:center;">
+          ${q.skippable ? `<button class="btn btn-skip" onclick="skip()">Passer</button>` : ''}
+          <button class="btn btn-primary" onclick="next()" ${canNext?'':'disabled'}>${isLast?'Générer mon profil ✨':'Suivant →'}</button>
+        </div>
+      </div>
+    </div>
+  `;
+  updateProgress();
+
+  if(q.type === 'text'){
+    const ta = document.getElementById('textInput');
+    ta.addEventListener('input', e=>{ answers[q.num]=e.target.value; state[q.var]=e.target.value; });
+  }
+  if(q.type === 'select'){
+    const sel = document.getElementById('selectInput');
+    const cus = document.getElementById('textCustom');
+    sel.addEventListener('change', e=>{ answers[q.num]=e.target.value; state[q.var]=e.target.value; renderQuestion(); });
+    cus.addEventListener('input', e=>{
+      state.FILIERE_TEXT = e.target.value;
+      if(e.target.value){ answers[q.num]=e.target.value; state[q.var]=e.target.value; }
+    });
+  }
+}
+
+function isAnswered(q){
+  if(q.type === 'text') return q.skippable || (answers[q.num] && answers[q.num].trim().length > 0);
+  if(q.type === 'select') return !!(answers[q.num] && answers[q.num].length);
+  if(q.type === 'multi') return (multiAnswers[q.num]||[]).length > 0;
+  return answers[q.num] !== undefined;
+}
+
+function selectOption(i){
+  const q = currentQuestion();
+  answers[q.num] = i;
+  state[q.var] = q.options[i].value;
+  renderQuestion();
+}
+function toggleMulti(i){
+  const q = currentQuestion();
+  if(!multiAnswers[q.num]) multiAnswers[q.num] = [];
+  const arr = multiAnswers[q.num];
+  const list = q.optionsFn ? q.optionsFn(state) : q.options;
+  const idx = arr.indexOf(i);
+  if(idx >= 0) arr.splice(idx,1); else arr.push(i);
+  state[q.var] = arr.map(j=>list[j].value);
+  renderQuestion();
+}
+function next(){
+  const q = currentQuestion();
+  if(!isAnswered(q)) return;
+  const nxt = nextVisibleIdx(currentIdx);
+  if(nxt === -1){ currentIdx = QUESTIONS.length; renderResult(); window.scrollTo({top:0}); }
+  else { currentIdx = nxt; renderQuestion(); window.scrollTo({top:0}); }
+}
+function back(){
+  const prv = prevVisibleIdx(currentIdx);
+  if(prv === -1) return;
+  currentIdx = prv;
+  renderQuestion(); window.scrollTo({top:0});
+}
+function skip(){ const q = currentQuestion(); if(q.skippable){ answers[q.num]='[passé]'; next(); } }
+
+function start(){
+  const first = nextVisibleIdx(-1);
+  currentIdx = first;
+  renderQuestion();
+  window.scrollTo({top:0});
+}
+function restart(){
+  state={}; answers={}; multiAnswers={}; currentIdx=-1;
+  renderIntro();
+  window.scrollTo({top:0});
+}
+
+// ============================================================================
+// DÉRIVATIONS POUR LE PROFIL FINAL
+// ============================================================================
+function computeIntelligence(){
+  const votes = {};
+  [state._GARD_Q5, state._GARD_Q6, state._GARD_Q7].filter(Boolean).forEach(v=>{
+    votes[v] = (votes[v]||0) + 1;
+  });
+  const sorted = Object.entries(votes).sort((a,b)=>b[1]-a[1]);
+  const dominants = sorted.slice(0,2).map(x=>x[0]);
+  return dominants.length ? dominants : ['à affiner'];
+}
+function computeCanal(){
+  const votes = {};
+  [state._CAN_Q8, state._CAN_Q9, state._CAN_Q10].filter(Boolean).forEach(v=>{
+    votes[v] = (votes[v]||0) + 1;
+  });
+  const sorted = Object.entries(votes).sort((a,b)=>b[1]-a[1]);
+  if(!sorted.length) return ['à affiner', null];
+  const primary = sorted[0][0];
+  const secondary = sorted[1] && sorted[1][1] >= 1 ? sorted[1][0] : null;
+  return [primary, secondary];
+}
+function computeFormat(canal){
+  if(canal === 'auditif') return 'podcast audio';
+  if(canal === 'visuel') return 'fiche visuelle';
+  if(canal === 'kinesthésique') return 'flashcards interactives';
+  if(canal === 'contextuel') return 'cas pratiques narratifs';
+  if(canal === 'logique') return 'fiche structurée + exercices';
+  return 'mix podcast + fiche';
+}
+function computeDuree(){
+  if(['souvent','systématique'].includes(state.PROCRASTINATION)) return '15-20 min';
+  if(state.CONCENTRATION === 'courte') return '15-20 min';
+  if(state.CONCENTRATION === 'moyenne') return '25-30 min';
+  if(state.CONCENTRATION === 'longue') return '40-45 min';
+  if(state.CONCENTRATION === 'très-longue') return '50-60 min';
+  return '30 min';
+}
+function computePsy(){
+  return (['élevé','très-élevé'].includes(state.STRESS) || ['faible','très-faible'].includes(state.CONFIANCE)) ? 'activée' : 'désactivée';
+}
+function computeMode(){
+  if(state.MATURITE === 'débutant') return 'guidé pas à pas';
+  if(state.MATURITE === 'avancé') return 'optimisation autonome';
+  return 'progressif accompagné';
+}
+function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : '—'; }
+function fmtList(arr){ return arr.length ? arr.map(cap).join(' + ') : '—'; }
+
+function renderResult(){
+  const [canalPrincipal, canalSecondaire] = computeCanal();
+  const intelligences = computeIntelligence();
+  const format = computeFormat(canalPrincipal);
+  const duree = computeDuree();
+  const psy = computePsy();
+  const mode = computeMode();
+  const niveauLabel = {lycée:'Lycée', 'licence-debut':'Licence 1/2', 'licence-avancé':'Licence 3 / Master', autre:'Filière supérieure'}[state.NIVEAU] || '—';
+
+  app.innerHTML = `
+    <div class="sheet">
+      <div class="sheet-kicker">Ton profil d'apprentissage</div>
+      <h1 class="sheet-title">Profil <em>étudiant</em> généré</h1>
+      <p class="sheet-sub">Basé sur tes 45+ réponses · construit selon la méthode ARCHE</p>
+      <div class="sheet-divider"></div>
+
+      <div class="profile-card">
+        <div class="section-label">Identité académique</div>
+        <div class="field"><span class="field-label">Niveau</span><span class="field-value">${niveauLabel}</span></div>
+        <div class="field"><span class="field-label">Filière</span><span class="field-value">${state.FILIERE_TEXT || state.FILIERE || '—'}</span></div>
+        <div class="field"><span class="field-label">Objectif</span><span class="field-value gold">${cap(state.OBJECTIF)}</span></div>
+        <div class="field"><span class="field-label">Échéance</span><span class="field-value">${cap(state.DELAI)}</span></div>
+      </div>
+
+      <div class="profile-card">
+        <div class="section-label">Profil cognitif</div>
+        <div class="field"><span class="field-label">Intelligences dominantes</span><span class="field-value gold">${fmtList(intelligences)}</span></div>
+        <div class="field"><span class="field-label">Canal mémoriel principal</span><span class="field-value gold">${cap(canalPrincipal)}</span></div>
+        ${canalSecondaire ? `<div class="field"><span class="field-label">Canal secondaire</span><span class="field-value">${cap(canalSecondaire)}</span></div>`:''}
+        <div class="field"><span class="field-label">Chronotype</span><span class="field-value">${cap(state.CHRONO)}</span></div>
+        <div class="field"><span class="field-label">Concentration</span><span class="field-value">${cap(state.CONCENTRATION)}</span></div>
+      </div>
+
+      <div class="profile-card">
+        <div class="section-label">Profil méthodologique & émotionnel</div>
+        <div class="field"><span class="field-label">Maturité</span><span class="field-value">${cap(state.MATURITE)}</span></div>
+        <div class="field"><span class="field-label">Stress</span><span class="field-value">${cap(state.STRESS)}</span></div>
+        <div class="field"><span class="field-label">Confiance</span><span class="field-value">${cap(state.CONFIANCE)}</span></div>
+        <div class="field"><span class="field-label">Procrastination</span><span class="field-value">${cap(state.PROCRASTINATION)}</span></div>
+        <div class="field"><span class="field-label">Temps dispo / semaine</span><span class="field-value">${state.TEMPS_DISPO || '—'}</span></div>
+        <div class="field"><span class="field-label">Motivation principale</span><span class="field-value">${cap(state.MOTIVATION)}</span></div>
+      </div>
+
+      <div class="prescription">
+        <div class="section-label">Prescription SBE — Parcours ARCHE personnalisé</div>
+        <div class="field"><span class="field-label">Format ressources prioritaire</span><span class="field-value gold">${format}</span></div>
+        <div class="field"><span class="field-label">Durée sessions recommandée</span><span class="field-value gold">${duree}</span></div>
+        <div class="field"><span class="field-label">Créneau optimal planning</span><span class="field-value gold">${cap(state.CHRONO)}</span></div>
+        <div class="field"><span class="field-label">Dimension psychologique ARCHE</span><span class="field-value gold">${psy}</span></div>
+        <div class="field"><span class="field-label">Mode d'accompagnement</span><span class="field-value gold">${mode}</span></div>
+      </div>
+
+      <div class="cta-block">
+        <div class="ck">Ton parcours ARCHE est prêt</div>
+        <h3>Démarre ton <em>plan personnalisé</em></h3>
+        <p>Ton planning, tes ressources prioritaires, ton accompagnement — adaptés à ton profil unique. Accès complet à la méthode ARCHE.</p>
+        <button class="cta-btn" onclick="alert('→ Redirection vers l\\'espace SBE Hub')">Accéder à mon parcours →</button>
+      </div>
+
+      <div class="restart">
+        <a onclick="restart()">↺ Recommencer le questionnaire</a>
+      </div>
+    </div>
+  `;
+  updateProgress();
+}
+
+renderIntro();
+</script>
+</body>
+</html>
