@@ -27,7 +27,6 @@ body{display:flex;flex-direction:column;align-items:center;overflow-x:hidden;}
 
 .container{width:100%;max-width:720px;padding:32px 22px 80px;display:flex;flex-direction:column;min-height:calc(100vh - 60px);}
 
-/* Intro */
 .intro{text-align:center;padding:40px 0 20px;}
 .intro .kicker{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;}
 .intro h1{font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1.05;font-weight:700;color:var(--ink);letter-spacing:-1px;margin-bottom:16px;}
@@ -38,35 +37,32 @@ body{display:flex;flex-direction:column;align-items:center;overflow-x:hidden;}
 .intro-meta .big{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;}
 .intro-meta .lbl{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:1px;text-transform:uppercase;font-weight:500;}
 
-/* Module badge */
 .module-badge{display:inline-block;font-size:10px;font-weight:600;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;background:rgba(184,149,74,0.1);padding:6px 12px;border-radius:100px;margin-bottom:18px;}
 
-/* Question */
 .q-screen{animation:fadeIn .4s cubic-bezier(.4,0,.2,1);}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .q-title{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.18;font-weight:700;color:var(--ink);letter-spacing:-0.4px;margin-bottom:8px;}
-.q-subtitle{font-size:14px;color:var(--muted);margin-bottom:26px;font-style:italic;line-height:1.5;}
-.q-hint{font-size:12px;color:var(--gold);margin-bottom:20px;font-weight:500;letter-spacing:0.3px;}
+.q-subtitle{font-size:14px;color:var(--muted);margin-bottom:14px;font-style:italic;line-height:1.5;}
+.q-hint{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:0.3px;margin-bottom:20px;display:flex;align-items:center;gap:6px;background:rgba(184,149,74,0.08);padding:8px 14px;border-radius:8px;width:fit-content;}
 
 .options{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
 .option{background:var(--paper);border:1.5px solid var(--rule);border-radius:13px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .15s;text-align:left;font-family:inherit;font-size:14.5px;line-height:1.4;color:var(--text);}
 .option:hover{border-color:var(--gold);transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,149,74,0.1);}
 .option.selected{border-color:var(--gold);background:linear-gradient(135deg, #FFFDF7 0%, var(--paper) 100%);box-shadow:0 4px 18px rgba(184,149,74,0.15);}
-.option-bullet{width:22px;height:22px;border-radius:50%;border:2px solid var(--rule);flex-shrink:0;position:relative;}
+.option-bullet{width:22px;height:22px;border-radius:50%;border:2px solid var(--rule);flex-shrink:0;position:relative;transition:all .15s;}
 .option.selected .option-bullet{border-color:var(--gold);background:var(--gold);}
 .option.selected .option-bullet::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:var(--paper);border-radius:50%;}
 .option-text{flex:1;font-weight:500;}
 
-/* Multi-select */
+/* Multi-select style : carré avec coche */
 .option.multi .option-bullet{border-radius:5px;}
 .option.multi.selected .option-bullet::after{background:transparent;border:solid var(--paper);border-width:0 2px 2px 0;transform:translate(-50%,-65%) rotate(45deg);width:6px;height:11px;border-radius:0;}
 
-/* Text input */
+/* Text & select inputs */
 .text-input{width:100%;padding:14px 18px;border:1.5px solid var(--rule);border-radius:12px;font-family:inherit;font-size:15px;background:var(--paper);color:var(--text);transition:border .15s;}
 .text-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,149,74,0.12);}
 textarea.text-input{min-height:120px;resize:vertical;font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.5;}
 
-/* Buttons */
 .btn-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:10px;}
 .btn{font-family:inherit;border:none;cursor:pointer;font-weight:600;letter-spacing:0.3px;transition:all .15s;font-size:14px;}
 .btn-back{background:transparent;color:var(--muted);padding:12px 0;}
@@ -78,7 +74,7 @@ textarea.text-input{min-height:120px;resize:vertical;font-family:'Cormorant Gara
 .btn-skip{background:transparent;color:var(--muted);padding:12px 18px;border:1px solid var(--rule);border-radius:100px;font-size:12.5px;}
 .btn-skip:hover{color:var(--ink);border-color:var(--ink);}
 
-/* Profile sheet (résultat final) */
+/* Résultat */
 .sheet{animation:fadeIn .6s cubic-bezier(.4,0,.2,1);}
 .sheet-kicker{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;text-align:center;}
 .sheet-title{font-family:'Cormorant Garamond',serif;font-size:42px;line-height:1.05;font-weight:700;color:var(--ink);letter-spacing:-1px;text-align:center;margin-bottom:8px;}
@@ -102,7 +98,7 @@ textarea.text-input{min-height:120px;resize:vertical;font-family:'Cormorant Gara
 .prescription .field-value{color:var(--paper);}
 .prescription .field-value.gold{color:var(--gold-soft);}
 
-.cta-block{padding:32px 26px;background:var(--paper);border:1.5px solid var(--gold);border-radius:18px;text-align:center;margin-top:32px;}
+.cta-block{padding:36px 28px;background:var(--paper);border:1.5px solid var(--gold);border-radius:18px;text-align:center;margin-top:32px;}
 .cta-block .ck{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
 .cta-block h3{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.15;font-weight:700;color:var(--ink);margin-bottom:10px;}
 .cta-block h3 em{font-style:italic;color:var(--gold);}
@@ -139,10 +135,6 @@ textarea.text-input{min-height:120px;resize:vertical;font-family:'Cormorant Gara
 <div class="container" id="app"></div>
 
 <script>
-// ============================================================================
-// QUESTIONS — Niveau 2 complet, ~48 questions avec adaptativité
-// ============================================================================
-
 const FILIERES = {
   "lycée":["2nde générale","1ère générale","Terminale générale","Filière technologique","Filière professionnelle","Autre"],
   "licence-debut":["Économie-Gestion","Droit","AES","Psycho","STAPS","Lettres","Histoire","LEA","Sciences","Médecine/PASS","Autre"],
@@ -177,7 +169,7 @@ const QUESTIONS = [
     optionsFromNiveau:true},
   {num:3, mod:0, modName:"Identité académique", type:"options", var:"OBJECTIF",
     title:"Quel est ton objectif pour cette année ?",
-    sub:"L'objectif réel, pas celui que tu “devrais” avoir.",
+    sub:"L'objectif réel, pas celui que tu 'devrais' avoir.",
     options:[
       {text:"Simplement valider mon année", value:"valider"},
       {text:"Avoir une mention (assez bien ou mieux)", value:"mention"},
@@ -308,15 +300,16 @@ const QUESTIONS = [
       {text:"Plus d'une heure", value:"très-longue"},
       {text:"Ça dépend de la matière et de mon niveau d'intérêt", value:"variable"},
     ]},
-  {num:15, mod:3, modName:"Chronotype & rythme", type:"options", var:"DISTRACTEUR",
-    title:"Qu'est-ce qui te déconcentre le plus quand tu travailles ?",
-    sub:"Le coupable principal — un seul choix.",
+  {num:15, mod:3, modName:"Chronotype & rythme", type:"multi", var:"DISTRACTEUR",
+    title:"Qu'est-ce qui te déconcentre quand tu travailles ?",
+    sub:"Tous tes coupables — plusieurs réponses possibles.",
     options:[
       {text:"Mon téléphone et les notifications", value:"phone"},
       {text:"Le bruit ambiant", value:"bruit"},
       {text:"Mes propres pensées qui partent ailleurs", value:"mental"},
       {text:"La fatigue physique", value:"fatigue"},
       {text:"L'ennui ou le manque d'intérêt pour ce que je fais", value:"ennui"},
+      {text:"Des interruptions extérieures (famille, colocataires…)", value:"interruptions"},
     ]},
   {num:16, mod:3, modName:"Chronotype & rythme", type:"options", var:"ENVIRONNEMENT",
     title:"Dans quel environnement tu travailles le mieux ?",
@@ -460,9 +453,9 @@ const QUESTIONS = [
       {text:"Pas vraiment — je doute souvent de moi", value:"faible"},
       {text:"Non — je pense parfois que je ne suis pas fait(e) pour les études", value:"très-faible"},
     ]},
-  {num:29, mod:5, modName:"Profil émotionnel & confiance", type:"options", var:"MOTIVATION",
-    title:"Qu'est-ce qui te motive le plus dans tes études ?",
-    sub:"Le vrai moteur. Un seul choix.",
+  {num:29, mod:5, modName:"Profil émotionnel & confiance", type:"multi", var:"MOTIVATION",
+    title:"Qu'est-ce qui te motive dans tes études ?",
+    sub:"Tout ce qui te pousse vraiment — plusieurs réponses possibles.",
     options:[
       {text:"La passion pour ce que j'apprends", value:"passion"},
       {text:"L'ambition d'avoir un bon travail ou une belle carrière", value:"ambition"},
@@ -615,14 +608,15 @@ const QUESTIONS = [
       {text:"Rarement — je travaille chaque chapitre de façon isolée", value:"isolé"},
       {text:"Non — je ne pense pas à le faire", value:"jamais"},
     ]},
-  {num:42, mod:8, modName:"Compréhension & traitement", type:"options", var:"MEMORISATION",
-    title:"Pour mémoriser une grande quantité d'informations, ta stratégie c'est :",
-    sub:"Ta technique de mémorisation préférée.",
+  {num:42, mod:8, modName:"Compréhension & traitement", type:"multi", var:"MEMORISATION",
+    title:"Pour mémoriser une grande quantité d'informations, quelles stratégies tu utilises ?",
+    sub:"Tout ce que tu fais vraiment — plusieurs réponses possibles.",
     options:[
       {text:"Répéter jusqu'à ce que ça rentre", value:"répétition"},
       {text:"Faire des fiches ou résumés", value:"synthèse"},
       {text:"Créer des associations, des images mentales", value:"associations"},
       {text:"Faire des exercices pratiques sur la notion", value:"pratique"},
+      {text:"Expliquer à voix haute ou à quelqu'un d'autre", value:"oral"},
       {text:"Je n'ai pas vraiment de stratégie", value:"aucune"},
     ]},
   // -----------------------------------------------------------------
@@ -681,6 +675,40 @@ const QUESTIONS = [
       {text:"Des ressources de qualité adaptées à ma filière", value:"ressources"},
       {text:"La confiance en moi et la gestion du stress", value:"confiance"},
       {text:"Un suivi personnalisé", value:"suivi"},
+    ]},
+  // Nouvelles questions adaptatives
+  {num:49, mod:9, modName:"Question ciblée", type:"options", var:"CONF_ORIGINE",
+    title:"Ce manque de confiance en tes capacités, il vient d'où selon toi ?",
+    sub:"Identifier la source pour s'y attaquer différemment.",
+    shows:s=>['très-faible','faible'].includes(s.CONFIANCE),
+    options:[
+      {text:"Des mauvaises notes ou des échecs passés qui m'ont marqué(e)", value:"echecs"},
+      {text:"La comparaison avec des camarades qui semblent meilleurs", value:"comparaison"},
+      {text:"On m'a dit ou montré à un moment que j'étais moins capable", value:"externe"},
+      {text:"Les cours semblent objectivement au-dessus de mon niveau actuel", value:"difficulté"},
+      {text:"C'est un ressenti diffus, sans cause précise que je puisse nommer", value:"diffus"},
+    ]},
+  {num:50, mod:9, modName:"Question ciblée", type:"options", var:"JOB_GESTION",
+    title:"Comment tu gères les semaines où le boulot empiète sur les cours ?",
+    sub:"Ton mode de priorisation quand les deux entrent en conflit.",
+    shows:s=>s.JOB !== 'aucun',
+    options:[
+      {text:"J'anticipe — je réorganise mon planning à l'avance", value:"anticipé"},
+      {text:"Je compresse — je fais les deux en réduisant le temps de chaque", value:"compresse"},
+      {text:"Le boulot passe en premier, les études attendent", value:"boulot-passe"},
+      {text:"Je ne sais pas gérer ça — c'est souvent le chaos", value:"chaos"},
+      {text:"Je n'ai jamais trouvé une façon satisfaisante de jongler", value:"non-géré"},
+    ]},
+  {num:51, mod:9, modName:"Question ciblée", type:"options", var:"PERF_BLOCAGE",
+    title:"Pour passer de très bon à excellent, qu'est-ce qui te freine encore ?",
+    sub:"Le dernier verrou à identifier précisément.",
+    shows:s=>['excellent','bon'].includes(s.NIVEAU_PERCU) && s.OBJECTIF==='major',
+    options:[
+      {text:"La régularité — j'ai des hauts et des bas selon les périodes", value:"régularité"},
+      {text:"Certaines matières où je plafonne malgré le travail", value:"matières"},
+      {text:"Le stress en exam — je sous-performe sous pression", value:"stress-exam"},
+      {text:"Mon organisation — je travaille bien mais pas stratégiquement", value:"stratégie"},
+      {text:"Je ne sais pas vraiment ce qui me bloque", value:"inconnu"},
     ]},
   // -----------------------------------------------------------------
   // MODULE 10 — QUESTION LIBRE
@@ -741,7 +769,7 @@ function renderIntro(){
     <div class="intro">
       <div class="kicker">Diagnostic SBE — Profil complet</div>
       <h1>Construis <em>ton profil</em><br>d'apprentissage complet</h1>
-      <p class="lead">Le questionnaire complet — adaptatif, basé sur la psychologie cognitive et les 9 intelligences de Gardner — qui génère ton <em>profil étudiant unique</em> et ton parcours ARCHE personnalisé.</p>
+      <p class="lead">Le questionnaire adaptatif — construit selon la psychologie cognitive et les intelligences multiples de Gardner — qui génère ton <em>profil étudiant unique</em>. Le questionnaire évolue selon tes réponses : chaque étudiant vit un parcours différent.</p>
       <div class="intro-meta">
         <div><div class="big">~12'</div><div class="lbl">Durée</div></div>
         <div><div class="big">10</div><div class="lbl">Modules</div></div>
@@ -796,12 +824,15 @@ function renderQuestion(){
   const isLast = vis.indexOf(q) === vis.length - 1;
   const canBack = prevVisibleIdx(currentIdx) !== -1;
   const canNext = isAnswered(q);
+  const isMulti = q.type === 'multi';
+  const hint = isMulti ? `<div class="q-hint">✦ Plusieurs réponses possibles</div>` : '';
 
   app.innerHTML = `
     <div class="q-screen">
       <span class="module-badge">Module ${q.mod} · ${q.modName}</span>
       <h2 class="q-title">${title}</h2>
       <p class="q-subtitle">${q.sub}</p>
+      ${hint}
       ${body}
       <div class="btn-row">
         <button class="btn btn-back" onclick="back()" ${canBack?'':'disabled'}>← Précédent</button>
@@ -902,15 +933,17 @@ function computeCanal(){
   const secondary = sorted[1] && sorted[1][1] >= 1 ? sorted[1][0] : null;
   return [primary, secondary];
 }
-function computeFormat(canal){
-  if(canal === 'auditif') return 'podcast audio';
-  if(canal === 'visuel') return 'fiche visuelle';
-  if(canal === 'kinesthésique') return 'flashcards interactives';
-  if(canal === 'contextuel') return 'cas pratiques narratifs';
-  if(canal === 'logique') return 'fiche structurée + exercices';
-  return 'mix podcast + fiche';
+function computeFormat(canal, memorisation){
+  const mem = Array.isArray(memorisation) ? memorisation : (memorisation ? [memorisation] : []);
+  if(canal === 'auditif' || mem.includes('oral')) return 'podcast audio + récitation à voix haute';
+  if(canal === 'visuel' || mem.includes('associations')) return 'fiche visuelle + cartes mentales';
+  if(canal === 'kinesthésique' || mem.includes('pratique')) return 'flashcards interactives + exercices';
+  if(canal === 'logique' || mem.includes('synthèse')) return 'fiche structurée + exercices progressifs';
+  if(canal === 'contextuel') return 'cas pratiques narratifs contextualisés';
+  return 'mix podcast + fiche structurée';
 }
 function computeDuree(){
+  if(state.JOB_GESTION === 'chaos' || state.JOB_GESTION === 'non-géré') return '15-20 min (sessions courtes adaptées job)';
   if(['souvent','systématique'].includes(state.PROCRASTINATION)) return '15-20 min';
   if(state.CONCENTRATION === 'courte') return '15-20 min';
   if(state.CONCENTRATION === 'moyenne') return '25-30 min';
@@ -923,26 +956,49 @@ function computePsy(){
 }
 function computeMode(){
   if(state.MATURITE === 'débutant') return 'guidé pas à pas';
+  if(state.MATURITE === 'avancé' && state.PERF_BLOCAGE) return 'optimisation de précision';
   if(state.MATURITE === 'avancé') return 'optimisation autonome';
   return 'progressif accompagné';
 }
 function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : '—'; }
-function fmtList(arr){ return arr.length ? arr.map(cap).join(' + ') : '—'; }
+function fmtList(arr){ return arr && arr.length ? arr.map(cap).join(' + ') : '—'; }
+function fmtMotivation(m){
+  if(!m) return '—';
+  const arr = Array.isArray(m) ? m : [m];
+  const labels = {passion:'Passion',ambition:'Ambition',famille:'Famille / Preuve',compétition:'Compétition',peur:"Peur d'échouer",recherche:'En exploration'};
+  return arr.map(v=>labels[v]||cap(v)).join(' + ');
+}
+function fmtDistracteurs(d){
+  if(!d) return '—';
+  const arr = Array.isArray(d) ? d : [d];
+  const labels = {phone:'Téléphone',bruit:'Bruit',mental:'Pensées',fatigue:'Fatigue',ennui:'Ennui',interruptions:'Interruptions'};
+  return arr.map(v=>labels[v]||cap(v)).join(' · ');
+}
 
 function renderResult(){
   const [canalPrincipal, canalSecondaire] = computeCanal();
   const intelligences = computeIntelligence();
-  const format = computeFormat(canalPrincipal);
+  const format = computeFormat(canalPrincipal, state.MEMORISATION);
   const duree = computeDuree();
   const psy = computePsy();
   const mode = computeMode();
   const niveauLabel = {lycée:'Lycée', 'licence-debut':'Licence 1/2', 'licence-avancé':'Licence 3 / Master', autre:'Filière supérieure'}[state.NIVEAU] || '—';
 
+  const confOrigineField = state.CONF_ORIGINE ? `
+    <div class="field"><span class="field-label">Origine du doute</span><span class="field-value">${cap(state.CONF_ORIGINE)}</span></div>
+  ` : '';
+  const jobGestionField = state.JOB_GESTION ? `
+    <div class="field"><span class="field-label">Gestion job + études</span><span class="field-value">${cap(state.JOB_GESTION)}</span></div>
+  ` : '';
+  const perfBlocageField = state.PERF_BLOCAGE ? `
+    <div class="field"><span class="field-label">Verrou performance</span><span class="field-value gold">${cap(state.PERF_BLOCAGE)}</span></div>
+  ` : '';
+
   app.innerHTML = `
     <div class="sheet">
       <div class="sheet-kicker">Ton profil d'apprentissage</div>
       <h1 class="sheet-title">Profil <em>étudiant</em> généré</h1>
-      <p class="sheet-sub">Basé sur tes 45+ réponses · construit selon la méthode ARCHE</p>
+      <p class="sheet-sub">Basé sur tes réponses · construit selon la méthode ARCHE</p>
       <div class="sheet-divider"></div>
 
       <div class="profile-card">
@@ -960,6 +1016,7 @@ function renderResult(){
         ${canalSecondaire ? `<div class="field"><span class="field-label">Canal secondaire</span><span class="field-value">${cap(canalSecondaire)}</span></div>`:''}
         <div class="field"><span class="field-label">Chronotype</span><span class="field-value">${cap(state.CHRONO)}</span></div>
         <div class="field"><span class="field-label">Concentration</span><span class="field-value">${cap(state.CONCENTRATION)}</span></div>
+        <div class="field"><span class="field-label">Distracteurs</span><span class="field-value">${fmtDistracteurs(state.DISTRACTEUR)}</span></div>
       </div>
 
       <div class="profile-card">
@@ -967,9 +1024,11 @@ function renderResult(){
         <div class="field"><span class="field-label">Maturité</span><span class="field-value">${cap(state.MATURITE)}</span></div>
         <div class="field"><span class="field-label">Stress</span><span class="field-value">${cap(state.STRESS)}</span></div>
         <div class="field"><span class="field-label">Confiance</span><span class="field-value">${cap(state.CONFIANCE)}</span></div>
+        ${confOrigineField}
         <div class="field"><span class="field-label">Procrastination</span><span class="field-value">${cap(state.PROCRASTINATION)}</span></div>
+        <div class="field"><span class="field-label">Motivation</span><span class="field-value gold">${fmtMotivation(state.MOTIVATION)}</span></div>
         <div class="field"><span class="field-label">Temps dispo / semaine</span><span class="field-value">${state.TEMPS_DISPO || '—'}</span></div>
-        <div class="field"><span class="field-label">Motivation principale</span><span class="field-value">${cap(state.MOTIVATION)}</span></div>
+        ${jobGestionField}
       </div>
 
       <div class="prescription">
@@ -979,13 +1038,14 @@ function renderResult(){
         <div class="field"><span class="field-label">Créneau optimal planning</span><span class="field-value gold">${cap(state.CHRONO)}</span></div>
         <div class="field"><span class="field-label">Dimension psychologique ARCHE</span><span class="field-value gold">${psy}</span></div>
         <div class="field"><span class="field-label">Mode d'accompagnement</span><span class="field-value gold">${mode}</span></div>
+        ${perfBlocageField}
       </div>
 
       <div class="cta-block">
-        <div class="ck">Ton parcours ARCHE est prêt</div>
+        <div class="ck">La méthode ARCHE — conçue pour ton profil exact</div>
         <h3>Démarre ton <em>plan personnalisé</em></h3>
-        <p>Ton planning, tes ressources prioritaires, ton accompagnement — adaptés à ton profil unique. Accès complet à la méthode ARCHE.</p>
-        <button class="cta-btn" onclick="alert('→ Redirection vers l\\'espace SBE Hub')">Accéder à mon parcours →</button>
+        <p>ARCHE n'est pas une méthode générique. Elle s'adapte à ton canal mémoriel, ton chronotype, tes blocages identifiés. Ce profil est le point de départ — ton parcours complet t'attend.</p>
+        <button class="cta-btn" onclick="alert('→ Redirection vers l\\'espace SBE Hub')">Accéder à mon parcours ARCHE →</button>
       </div>
 
       <div class="restart">
