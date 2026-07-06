@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>SBE TikTok — Mes carrousels</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#FAF6F1;font-family:'DM Sans',sans-serif;color:#1B2A4A;}
+header{background:#1B2A4A;color:#fff;padding:24px 20px;position:sticky;top:0;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,0.1);}
+header h1{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;letter-spacing:-0.5px;}
+header h1 span{color:#C9A84C;}
+header .sub{font-size:12px;opacity:0.7;margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
+.controls{padding:16px 20px;background:#fff;border-bottom:1px solid #E8DFD3;position:sticky;top:80px;z-index:99;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.search{flex:1;min-width:200px;padding:10px 14px;border:1px solid #E8DFD3;border-radius:8px;font-family:inherit;font-size:14px;}
+.filter{padding:8px 14px;border:1px solid #E8DFD3;background:#fff;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;color:#1B2A4A;}
+.filter:hover{background:#1B2A4A;color:#fff;}
+.filter.active{background:#1B2A4A;color:#fff;}
+.filter[data-series="L1"].active{background:#2D5BE3;border-color:#2D5BE3;}
+.filter[data-series="L2"].active{background:#C9A84C;border-color:#C9A84C;color:#1B2A4A;}
+.filter[data-series="WakeUp"].active{background:#C0392B;border-color:#C0392B;}
+.filter[data-series="Special"].active{background:#5C6B2C;border-color:#5C6B2C;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;padding:18px;max-width:1400px;margin:0 auto;}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(27,42,74,0.08);transition:transform .2s,box-shadow .2s;}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,42,74,0.12);}
+.card-thumb{aspect-ratio:4/5;position:relative;overflow:hidden;}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:60px;color:rgba(0,0,0,0.15);}
+.card-badge{position:absolute;top:10px;right:10px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 9px;border-radius:100px;color:#fff;}
+.card-body{padding:16px;}
+.card-meta{display:flex;justify-content:space-between;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#8A7A6B;margin-bottom:8px;}
+.card-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;line-height:1.25;letter-spacing:-0.2px;margin-bottom:12px;color:#1B2A4A;}
+.card-details{margin-bottom:12px;border-top:1px solid #F0E8DD;padding-top:10px;}
+.card-details summary{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8A7A6B;cursor:pointer;padding:4px 0;}
+.card-details[open] summary{color:#1B2A4A;margin-bottom:8px;}
+.detail-block{margin-bottom:10px;}
+.detail-label{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8A7A6B;margin-bottom:4px;}
+.detail-text{font-size:12px;line-height:1.5;color:#1B2A4A;white-space:pre-wrap;font-family:inherit;background:#FAF6F1;padding:8px 10px;border-radius:6px;border:1px solid #F0E8DD;}
+.detail-text.hashtags{color:#2D5BE3;font-size:11px;}
+.cpy{background:#fff;border:1px solid #E8DFD3;border-radius:5px;padding:3px 7px;cursor:pointer;font-size:12px;}
+.cpy:hover{background:#1B2A4A;color:#fff;border-color:#1B2A4A;}
+.cpy.copied{background:#0D9488;color:#fff;border-color:#0D9488;}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.btn{flex:1;min-width:120px;display:inline-block;text-align:center;text-decoration:none;font-size:11px;font-weight:600;letter-spacing:0.5px;padding:9px 12px;border-radius:7px;transition:all .15s;text-transform:uppercase;}
+.btn-primary{background:#1B2A4A;color:#fff;}
+.btn-primary:hover{background:#2D5BE3;}
+.btn-ghost{background:#FAF6F1;color:#1B2A4A;border:1px solid #E8DFD3;}
+.btn-ghost:hover{background:#E8DFD3;}
+.btn-warning{background:#C9A84C;color:#1B2A4A;}
+.btn-warning:hover{background:#B89638;}
+.status-badge{position:absolute;bottom:10px;left:10px;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;border-radius:100px;}
+.status-badge.ready{background:rgba(13,148,136,0.9);color:#fff;}
+.status-badge.missing{background:rgba(201,168,76,0.95);color:#1B2A4A;}
+.card.incomplete{outline:2px solid #C9A84C;outline-offset:-2px;}
+.filter[data-series="Resource"].active{background:#B8954A;border-color:#B8954A;color:#0E1B3A;}
+.r-card{border:1px solid #E5DFCF;}
+.r-card .card-title{color:#0E1B3A;}
+.r-thumb{aspect-ratio:4/5;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.r-thumb .r-initials{font-family:'Playfair Display',serif;font-weight:900;font-size:160px;line-height:1;letter-spacing:-.04em;z-index:1;}
+.r-thumb .r-decor{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.r-thumb .r-pages{position:absolute;bottom:10px;right:10px;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#D4B574;background:rgba(14,27,58,0.4);padding:4px 10px;border-radius:100px;backdrop-filter:blur(6px);}
+.r-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.r-tag{font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;background:#FAF6EC;border:1px solid #E5DFCF;border-radius:100px;color:#8A7A6B;font-weight:600;}
+.section-resources{background:linear-gradient(180deg,transparent 0%,rgba(184,149,74,0.04) 100%);padding-bottom:30px;border-top:1px solid #E5DFCF;margin-top:20px;}
+.section-resources .section-heading h2{font-family:'Playfair Display',serif;font-style:italic;}
+.section-resources .section-heading h2 .r-count{font-size:13px;color:#B8954A;letter-spacing:1px;font-style:normal;}
+.section-resources .section-heading::before{content:'';display:block;width:40px;height:1px;background:#B8954A;margin-bottom:12px;}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:#1B2A4A;color:#fff;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:600;opacity:0;transition:all .3s;z-index:200;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.section-heading{padding:24px 20px 4px;max-width:1400px;margin:0 auto;}
+.section-heading h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#1B2A4A;}
+.section-heading p{font-size:13px;color:#8A7A6B;margin-top:4px;}
+.empty{text-align:center;padding:60px 20px;color:#8A7A6B;font-size:14px;}
+@media(max-width:600px){.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:12px;}.card-title{font-size:13px;}.card-body{padding:12px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SBE<span> TikTok</span></h1>
+  <div class="sub">40 épisodes · 4 séries · 1 ebook · 2 questionnaires · Tableau de bord</div>
+</header>
+
+<div class="controls">
+  <input type="search" class="search" id="search" placeholder="🔍 Chercher un sujet, un mot-clé…">
+  <button class="filter active" data-series="ALL">Tous</button>
+  <button class="filter" data-series="L1">Série L1</button><button class="filter" data-series="L2">Série L2</button><button class="filter" data-series="WakeUp">Série Wake Up</button><button class="filter" data-series="Special">Éditions spéciales</button>
+  <button class="filter" data-series="Questionnaire">🎯 Questionnaires</button>
+  <button class="filter" data-series="Resource">📚 Ebooks &amp; Ressources</button>
+  <button class="filter" data-status="missing" id="filter-missing">⚠ À télécharger</button>
+</div>
+
+
+<div class="section" data-series-section="L1">
+  <div class="section-heading">
+    <h2>Série L1 <span style="font-size:13px;color:#2D5BE3;letter-spacing:1px;">(36)</span></h2>
+    <p>Étudiants L1 Éco-Gestion · découverte, première année</p>
+  </div>
+  <div class="grid">
+    
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="la comptabilité en l1 — pourquoi ça coule autant d&#39;étudiants (et comment l&#39;éviter) la comptabilité est la matière qui surprend le plus en l1 éco-gestion — et celle qui fait le plus de dégâts. voici pourquoi et comment l&#39;aborder intelligemment dès le début 📒
+
+sauvegarde avant la rentrée 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">65</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 65</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">La comptabilité en L1 — pourquoi ça coule autant d&#39;étudiants (et comment l&#39;éviter)</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_65">📋</button></div>
+          <pre class="detail-text" id="d_L1_65">La comptabilité est la matière qui surprend le plus en L1 Éco-Gestion — et celle qui fait le plus de dégâts. Voici pourquoi et comment l&#39;aborder intelligemment dès le début 📒
+
+Sauvegarde avant la rentrée 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_65">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_65">#comptabilite #l1ecogestion #licenceeco #etudiant #fac #courscomptabilite #sbe #methodedetravail #orientation #rentreefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les maths en l1 éco-gestion — le niveau réel (sans te mentir) beaucoup choisissent la l1 éco-gestion en pensant échapper aux maths. spoiler : il y en a. voici le niveau réel et comment s&#39;y préparer intelligemment 📐
+
+sauvegarde avant la rentrée 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">66</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 66</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Les maths en L1 Éco-Gestion — le niveau réel (sans te mentir)</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_66">📋</button></div>
+          <pre class="detail-text" id="d_L1_66">Beaucoup choisissent la L1 Éco-Gestion en pensant échapper aux maths. Spoiler : il y en a. Voici le niveau réel et comment s&#39;y préparer intelligemment 📐
+
+Sauvegarde avant la rentrée 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_66">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_66">#mathseco #l1ecogestion #licenceeco #statistiques #etudiant #fac #sbe #orientation #coursmath #parcoursup</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="le droit en l1 éco-gestion — une matière surprenante que personne n&#39;anticipe le droit en l1 éco-gestion surprend beaucoup d&#39;étudiants. voici à quoi t&#39;attendre et comment l&#39;aborder pour ne pas être dépassé(e) dès le début ⚖️
+
+sauvegarde pour ta l1 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">67</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 67</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Le droit en L1 Éco-Gestion — une matière surprenante que personne n&#39;anticipe</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_67">📋</button></div>
+          <pre class="detail-text" id="d_L1_67">Le droit en L1 Éco-Gestion surprend beaucoup d&#39;étudiants. Voici à quoi t&#39;attendre et comment l&#39;aborder pour ne pas être dépassé(e) dès le début ⚖️
+
+Sauvegarde pour ta L1 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_67">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_67">#droitdesentreprises #l1ecogestion #licenceeco #etudiant #fac #sbe #coursdedroit #orientation #parcoursup #rentreefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="réussir ses partiels en l1 — la méthode complète semaine par semaine réussir ses partiels en l1 éco-gestion ne se joue pas la semaine avant — ça se construit sur tout le semestre. voici le planning et la méthode complète pour y arriver 📅
+
+sauvegarde avant tes partiels 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">68</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 68</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Réussir ses partiels en L1 — la méthode complète semaine par semaine</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_68">📋</button></div>
+          <pre class="detail-text" id="d_L1_68">Réussir ses partiels en L1 Éco-Gestion ne se joue pas la semaine avant — ça se construit sur tout le semestre. Voici le planning et la méthode complète pour y arriver 📅
+
+Sauvegarde avant tes partiels 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_68">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_68">#partiels #l1ecogestion #licenceeco #revisions #methodedetravail #sbe #etudiant #fac #reussite #examens</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="que peut-on faire après une l1 éco-gestion ? tous les débouchés beaucoup hésitent à choisir éco-gestion par peur de ne pas savoir quoi faire après. voici tous les débouchés possibles — il y en a bien plus que tu ne le crois 🎯
+
+sauvegarde pour ton orientation 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">69</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 69</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Que peut-on faire après une L1 Éco-Gestion ? Tous les débouchés</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_69">📋</button></div>
+          <pre class="detail-text" id="d_L1_69">Beaucoup hésitent à choisir éco-gestion par peur de ne pas savoir quoi faire après. Voici tous les débouchés possibles — il y en a bien plus que tu ne le crois 🎯
+
+Sauvegarde pour ton orientation 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_69">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_69">#debouches #licenceeco #l1ecogestion #orientation #parcoursup #etudiant #master #ecoledecommerce #sbe #fac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="budget étudiant en l1 — combien ça coûte vraiment et comment le gérer gérer son budget quand on arrive à la fac, c&#39;est souvent une découverte brutale. voici les vrais chiffres et les aides auxquelles tu as droit en tant qu&#39;étudiant(e) 💰
+
+sauvegarde avant la rentrée 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">70</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 70</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Budget étudiant en L1 — combien ça coûte vraiment et comment le gérer</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_70">📋</button></div>
+          <pre class="detail-text" id="d_L1_70">Gérer son budget quand on arrive à la fac, c&#39;est souvent une découverte brutale. Voici les vrais chiffres et les aides auxquelles tu as droit en tant qu&#39;étudiant(e) 💰
+
+Sauvegarde avant la rentrée 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_70">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_70">#budgetetudiant #vieetudiante #crous #apl #bourse #l1ecogestion #etudiant #fac #sbe #rentree</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="éco pure ou gestion — comment choisir selon ton projet professionnel économie ou gestion — beaucoup ne savent pas quelle différence ça fait vraiment. voici comment choisir en fonction de ton projet professionnel 🎯
+
+sauvegarde pour ton choix d&#39;orientation 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">71</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 71</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Éco pure ou Gestion — comment choisir selon ton projet professionnel</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_71">📋</button></div>
+          <pre class="detail-text" id="d_L1_71">Économie ou Gestion — beaucoup ne savent pas quelle différence ça fait vraiment. Voici comment choisir en fonction de ton projet professionnel 🎯
+
+Sauvegarde pour ton choix d&#39;orientation 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_71">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_71">#orientation #licenceeco #licencegestion #l1ecogestion #parcoursup #etudiant #choixdetudes #sbe #fac #futurmetier</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="peut-on redoubler sa l1 — et surtout comment l&#39;éviter 50% des l1 ne valident pas leur année du premier coup. ce n&#39;est pas une fatalité — voici les vraies raisons et comment s&#39;en sortir même si tu es déjà en retard 💪
+
+sauvegarde &amp; partage à un(e) ami(e) qui en a besoin 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">72</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 72</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Peut-on redoubler sa L1 — et surtout comment l&#39;éviter</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_72">📋</button></div>
+          <pre class="detail-text" id="d_L1_72">50% des L1 ne valident pas leur année du premier coup. Ce n&#39;est pas une fatalité — voici les vraies raisons et comment s&#39;en sortir même si tu es déjà en retard 💪
+
+Sauvegarde &amp; partage à un(e) ami(e) qui en a besoin 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_72">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_72">#l1ecogestion #reussitefac #licenceeco #etudiant #partiels #sbe #methodedetravail #fac #echec #motivation</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="prendre des notes en amphi — la méthode qui change tout prendre de bonnes notes en amphi, ça s&#39;apprend — et ça change radicalement ton efficacité en révisions. voici la méthode concrète 📝
+
+sauvegarde avant ton prochain amphi 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">73</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 73</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Prendre des notes en amphi — la méthode qui change tout</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_73">📋</button></div>
+          <pre class="detail-text" id="d_L1_73">Prendre de bonnes notes en amphi, ça s&#39;apprend — et ça change radicalement ton efficacité en révisions. Voici la méthode concrète 📝
+
+Sauvegarde avant ton prochain amphi 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_73">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_73">#prisesdenotes #amphi #l1ecogestion #licenceeco #etudiant #fac #methodedetravail #sbe #organisation #reussitefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="travailler à côté de sa l1 — ce que personne ne te dit vraiment job étudiant pendant la l1 — oui ou non ? voici la réponse honnête avec les chiffres, les avantages et la méthode pour que ça ne plombe pas tes études 💼
+
+sauvegarde si tu envisages un job étudiant 💾">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">74</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 74</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Travailler à côté de sa L1 — ce que personne ne te dit vraiment</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_74">📋</button></div>
+          <pre class="detail-text" id="d_L1_74">Job étudiant pendant la L1 — oui ou non ? Voici la réponse honnête avec les chiffres, les avantages et la méthode pour que ça ne plombe pas tes études 💼
+
+Sauvegarde si tu envisages un job étudiant 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_74">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_74">#jobetudiant #vieetudiante #l1ecogestion #licenceeco #etudiant #fac #sbe #organisation #travailetudes #equilibre</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les ressources gratuites indispensables pour cartonner en l1 éco-gestion pas besoin de dépenser une fortune pour réussir ta l1 éco-gestion. ces ressources gratuites couvrent l&#39;économie, la compta, les maths et l&#39;organisation — sauvegarde cette liste 📚✨
+
+la série continue — suis @sbe pour ne rien rater 🔔">
+    <div class="card-thumb" style="background:#EEF4FF">
+      <div class="thumb-placeholder">75</div>
+      <div class="card-badge" style="background:#2D5BE3">L1</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 75</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Les ressources gratuites indispensables pour cartonner en L1 Éco-Gestion</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L1_75">📋</button></div>
+          <pre class="detail-text" id="d_L1_75">Pas besoin de dépenser une fortune pour réussir ta L1 Éco-Gestion. Ces ressources gratuites couvrent l&#39;économie, la compta, les maths et l&#39;organisation — sauvegarde cette liste 📚✨
+
+La série continue — suis @SBE pour ne rien rater 🔔</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_75">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L1_75">#ressourcesetudiantes #l1ecogestion #licenceeco #etudiant #gratuit #sbe #methodedetravail #fac #reussitefac #khanacademy</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep65_75.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep65_75.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les amphis en l1 — survivre à 400 étudiants dans une salle 400 étudiants dans la même salle. le prof ne sait pas ton nom. personne ne vérifie si tu es là. voici comment ne pas te perdre en amphi.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">76</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 76</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Les amphis en L1 — survivre à 400 étudiants dans une salle</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_76">📋</button></div><pre class="detail-text" id="d_L1_76">L'amphi de L1 c'est un choc culturel total. 400 personnes, un prof qui n'attend pas, et toi qui essaies de suivre. Voici comment survivre et en tirer le max 📒</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_76">📋</button></div><pre class="detail-text hashtags" id="h_L1_76">#amphi #l1ecogestion #etudiant #fac #sbe #coursenfac #rentreefac #methodetravail #licenceeco</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="td vs cm en l1 — la différence que personne n'explique cm ou td ? si tu penses que c'est juste cours vs exercices, tu vas avoir une mauvaise surprise.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">77</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 77</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">TD vs CM en L1 — la différence que personne n'explique</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_77">📋</button></div><pre class="detail-text" id="d_L1_77">TD vs CM — deux formats totalement différents qui demandent deux approches différentes. Maîtriser ça dès le S1, c'est prendre une longueur d'avance sur 90% de ta promo 📚</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_77">📋</button></div><pre class="detail-text hashtags" id="h_L1_77">#tdcours #l1ecogestion #licenceeco #sbe #fac #etudiant #methodedetravail #rentreefac</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les coefficients en l1 — quelles matières vraiment prioriser certains cours valent 6 points dans ta moyenne. d'autres 1 seul. voici comment jouer intelligemment avec les coefficients.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">78</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 78</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Les coefficients en L1 — quelles matières vraiment prioriser</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_78">📋</button></div><pre class="detail-text" id="d_L1_78">Tous les cours ne se valent pas dans ta moyenne. Comprendre les coefficients dès septembre peut faire la différence entre valider et rater ta L1 💡</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_78">📋</button></div><pre class="detail-text hashtags" id="h_L1_78">#coefficients #ects #l1ecogestion #licenceeco #sbe #strategie #fac #etudiant</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="la microéco en l1 — comprendre sans se noyer la microéco a éliminé 30% de ma promo. pas parce que c'est impossible — mais parce que personne ne leur a dit comment l'aborder.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">79</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 79</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">La microéco en L1 — comprendre sans se noyer</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_79">📋</button></div><pre class="detail-text" id="d_L1_79">La microéco c'est la matière qui surprend le plus en L1. Les graphiques, les fonctions, la logique marginale — voici comment l'apprivoiser sans se noyer 📈</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_79">📋</button></div><pre class="detail-text hashtags" id="h_L1_79">#microeconomie #l1ecogestion #licenceeco #sbe #economie #fac #etudiant #courseco</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="la macroéco en l1 — comprendre pib inflation et chômage pib, inflation, politique monétaire... tu crois que tu comprends parce que tu lis l'actu. mais la macroéco de fac c'est différent.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">80</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 80</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">La macroéco en L1 — comprendre PIB, inflation et chômage</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_80">📋</button></div><pre class="detail-text" id="d_L1_80">La macroéco c'est passionnant... jusqu'au partiel. Voici comment passer de "je comprends l'actu" à "je comprends vraiment la macroéco de L1" 🌍</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_80">📋</button></div><pre class="detail-text hashtags" id="h_L1_80">#macroeconomie #pib #l1ecogestion #licenceeco #sbe #economie #etudiant #fac</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les 5 erreurs que font tous les l1 au premier semestre j'aurais tellement voulu que quelqu'un me dise ça avant mon premier semestre. ces 5 erreurs, presque tout le monde les fait.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">81</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 81</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Les 5 erreurs que font tous les L1 au premier semestre</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_81">📋</button></div><pre class="detail-text" id="d_L1_81">5 erreurs que font presque tous les étudiants au premier semestre de L1. Les éviter dès septembre, c'est se donner une vraie longueur d'avance 🎯</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_81">📋</button></div><pre class="detail-text hashtags" id="h_L1_81">#erreursetudiant #l1ecogestion #licenceeco #sbe #fac #conseilsetudes #rentreefac #reussirsal1</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="comprendre le système de validation en l1 tu peux avoir 7/20 dans une matière et valider quand même ta l1. mais tu dois connaître les règles exactement.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">82</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 82</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Comprendre le système de validation en L1</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_82">📋</button></div><pre class="detail-text" id="d_L1_82">Le système de compensation en L1, les UE, les crédits ECTS — voici les règles que tout étudiant doit connaître avant le premier partiel 📋</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_82">📋</button></div><pre class="detail-text hashtags" id="h_L1_82">#validation #ects #l1ecogestion #licenceeco #sbe #fac #partiels #reussirsal1</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="rater un partiel en l1 — ce qui se passe vraiment tu as raté un partiel. la note est tombée. voici exactement ce que tu dois faire dans les 48h qui suivent.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">83</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 83</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Rater un partiel en L1 — ce qui se passe vraiment</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_83">📋</button></div><pre class="detail-text" id="d_L1_83">Rater un partiel c'est stressant mais c'est pas la fin. Voici le protocole exact pour rebondir vite et intelligent après une mauvaise note 💪</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_83">📋</button></div><pre class="detail-text hashtags" id="h_L1_83">#partiels #raterexamen #session2 #l1ecogestion #licenceeco #sbe #fac #rebondir</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les stages en l1 éco-gestion — la vérité stage en l1 — tout le monde en parle mais personne ne te dit si c'est vraiment utile ou juste une case à cocher.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">84</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 84</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Les stages en L1 éco-gestion — la vérité</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_84">📋</button></div><pre class="detail-text" id="d_L1_84">Stage en L1 — pas obligatoire mais potentiellement stratégique. Voici quand, où et comment trouver un premier stage qui vaut vraiment quelque chose 💼</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_84">📋</button></div><pre class="detail-text hashtags" id="h_L1_84">#stageetudiant #l1ecogestion #licenceeco #sbe #fac #stage #etudiant #premieremploi</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="se loger pendant sa l1 — le guide honnête le logement étudiant en 2025, c'est la galère. voici comment s'y prendre pour ne pas se retrouver sans toit à la rentrée.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">85</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 85</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Se loger pendant sa L1 — le guide honnête</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_85">📋</button></div><pre class="detail-text" id="d_L1_85">Trouver un logement pour sa L1, ça se prépare des mois à l'avance. CROUS, APL, colocation — voici le guide complet pour ne pas se rater 🏠</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_85">📋</button></div><pre class="detail-text hashtags" id="h_L1_85">#logementetudiant #crous #apl #l1ecogestion #licenceeco #sbe #rentreefac #etudiant</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les associations étudiantes en l1 — stratégique ou pas les étudiants qui réussissent le mieux ne font pas que travailler. voici leur secret.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">86</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 86</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Les associations étudiantes en L1 — stratégique ou pas ?</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_86">📋</button></div><pre class="detail-text" id="d_L1_86">Les associations étudiantes c'est bien plus qu'une ligne de CV. En L1 c'est même un accélérateur si tu sais bien choisir et doser 🎯</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_86">📋</button></div><pre class="detail-text hashtags" id="h_L1_86">#assoetudiant #bde #l1ecogestion #licenceeco #sbe #vieetudiante #fac #etudiant</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="organiser sa semaine en l1 — la méthode à la fac, personne ne te dit quand travailler. et c'est exactement là que la plupart des l1 se plantent.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">87</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 87</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Organiser sa semaine en L1 — la méthode</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_87">📋</button></div><pre class="detail-text" id="d_L1_87">Organiser sa semaine à la fac, ça s'apprend. Et ceux qui le font dès septembre partent avec un avantage massif sur toute la promo 📅</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_87">📋</button></div><pre class="detail-text hashtags" id="h_L1_87">#organisation #planning #l1ecogestion #licenceeco #sbe #methodetravail #etudiant #productivite</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="la session 2 en l1 — la vraie méthode la session 2 c'est pas une deuxième chance de faire pareil. c'est une stratégie complètement différente.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">88</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 88</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">La session 2 en L1 — la vraie méthode</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_88">📋</button></div><pre class="detail-text" id="d_L1_88">La session 2 en L1, ça se prépare différemment. Voici comment transformer un rattrapage en vraie performance — avec la bonne méthode 💪</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_88">📋</button></div><pre class="detail-text hashtags" id="h_L1_88">#session2 #rattrapage #l1ecogestion #licenceeco #sbe #partiels #fac #reussirsal1</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="préparer ses td pour vraiment progresser 90% des étudiants arrivent en td sans avoir rien préparé. les 10% restants trustent les meilleures notes.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">89</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 89</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Préparer ses TD pour vraiment progresser</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_89">📋</button></div><pre class="detail-text" id="d_L1_89">Les TD bien préparés, c'est des points faciles à aller chercher. Et c'est aussi là que tu progresses le plus vite. Voici comment faire 📚</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_89">📋</button></div><pre class="detail-text hashtags" id="h_L1_89">#td #l1ecogestion #licenceeco #sbe #methodetravail #fac #etudiant #reussirsal1</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les crédits ects — comment ça fonctionne vraiment 240 crédits pour une licence. mais 90% des étudiants ne comprennent pas vraiment comment les crédits s'accumulent.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">90</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 90</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Les crédits ECTS — comment ça fonctionne vraiment</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_90">📋</button></div><pre class="detail-text" id="d_L1_90">Les ECTS c'est le système monétaire de ta licence. Comprendre comment ils fonctionnent vraiment, c'est éviter des mauvaises surprises le jour des résultats 🎓</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_90">📋</button></div><pre class="detail-text hashtags" id="h_L1_90">#ects #credits #l1ecogestion #licenceeco #sbe #validation #fac #etudiant</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="parler à un prof de fac — les règles non écrites le premier email que j'ai envoyé à un prof de fac était tellement mal écrit que je n'ai jamais eu de réponse.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">91</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 91</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Parler à un prof de fac — les règles non écrites</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_91">📋</button></div><pre class="detail-text" id="d_L1_91">Savoir communiquer avec ses profs en L1, c'est une compétence qui fait toute la différence. Voici les règles non écrites que personne ne t'apprend 📧</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_91">📋</button></div><pre class="detail-text hashtags" id="h_L1_91">#profdefac #email #l1ecogestion #licenceeco #sbe #fac #etudiant #conseils</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="bu ou maison — où réviser vraiment mieux chez toi ou à la bu ? ce n'est pas une question de goût. c'est une question de résultats.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">92</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 92</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">BU ou maison — où réviser vraiment mieux</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_92">📋</button></div><pre class="detail-text" id="d_L1_92">BU vs maison — le vrai débat n'est pas "où" mais "avec quel objectif". Voici comment choisir ton lieu de travail en fonction de la tâche 📖</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_92">📋</button></div><pre class="detail-text hashtags" id="h_L1_92">#bu #bibliotheque #l1ecogestion #licenceeco #sbe #revision #etudiant #productivite</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="le premier semestre de l1 — semaine par semaine voici à quoi ressemble vraiment le premier semestre de l1 éco-gestion, semaine par semaine. spoiler : c'est pas ce que tu imagines.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">93</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 93</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Le premier semestre de L1 — semaine par semaine</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_93">📋</button></div><pre class="detail-text" id="d_L1_93">Semaine après semaine, voici comment se déroule vraiment le premier semestre de L1 — pour anticiper et ne jamais être pris par surprise 📆</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_93">📋</button></div><pre class="detail-text hashtags" id="h_L1_93">#semestre1 #l1ecogestion #licenceeco #sbe #fac #etudiant #rentreefac #calendrier</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="après la l1 — toutes les portes qui s'ouvrent l1 l2 l3 master. c'est le chemin classique. mais il y en a d'autres dont personne ne parle assez.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">94</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 94</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Après la L1 — toutes les portes qui s'ouvrent</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_94">📋</button></div><pre class="detail-text" id="d_L1_94">Après ta L1 éco-gestion, il y a plus d'options que tu ne le crois. Voici le panorama complet pour ne pas te fermer de portes par méconnaissance 🚪</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_94">📋</button></div><pre class="detail-text hashtags" id="h_L1_94">#orientation #apreslaL1 #l1ecogestion #licenceeco #sbe #etudes #fac #master</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="la l2 après la l1 — ce qui change vraiment tu as validé ta l1. félicitations. la l2 c'est pas pareil. voici ce que personne ne t'a dit.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">95</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 95</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">La L2 après la L1 — ce qui change vraiment</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_95">📋</button></div><pre class="detail-text" id="d_L1_95">La L2 après la L1, c'est une montée en difficulté progressive. Voici comment préparer la transition pour ne pas se retrouver dépassé dès septembre 📈</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_95">📋</button></div><pre class="detail-text hashtags" id="h_L1_95">#l2ecogestion #apreslaL1 #licenceeco #sbe #fac #etudiant #reussirsal2 #progression</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="faire de vraies fiches de révision en l1 j'ai mis tout un semestre à comprendre que mes fiches ne servaient à rien. voici ce que j'aurais dû faire depuis le début.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">96</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 96</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Faire de vraies fiches de révision en L1</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_96">📋</button></div><pre class="detail-text" id="d_L1_96">Des fiches qui servent vraiment à quelque chose, ça ne s'improvise pas. Voici la méthode exacte — de la création à la révision — pour que chaque fiche compte 📝</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_96">📋</button></div><pre class="detail-text hashtags" id="h_L1_96">#fiches #revision #l1ecogestion #licenceeco #sbe #methodetravail #etudiant #fac</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="les outils numériques pour cartonner en l1 ces 5 outils numériques changent complètement la façon de travailler en l1. et ils sont tous gratuits.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">97</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 97</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Les outils numériques pour cartonner en L1</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_97">📋</button></div><pre class="detail-text" id="d_L1_97">Anki, Notion, les bons outils PDF — voici les 5 outils que les meilleurs étudiants de L1 utilisent pour travailler plus vite et mieux 💻</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_97">📋</button></div><pre class="detail-text hashtags" id="h_L1_97">#outilsnumeriques #anki #notion #l1ecogestion #licenceeco #sbe #etudiant #productivite</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="bourses et aides étudiantes — ce que tu peux demander il existe des aides que 80% des étudiants éligibles ne demandent jamais. combien es-tu en train de laisser sur la table ?">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">98</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 98</span><span class="card-slides">5 slides</span></div>
+      <h2 class="card-title">Bourses et aides étudiantes — ce que tu peux demander</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_98">📋</button></div><pre class="detail-text" id="d_L1_98">Bourse CROUS, APL, aides régionales — voici la liste complète des aides que tout étudiant de L1 devrait connaître et demander 💰</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_98">📋</button></div><pre class="detail-text hashtags" id="h_L1_98">#bourse #crous #apl #aidesetudiant #l1ecogestion #licenceeco #sbe #fac #etudiant</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="bilan de l1 — ce que j'aurais fait différemment si je pouvais refaire ma l1, voici les 5 choses que je changerais dès le premier jour.">
+    <div class="card-thumb" style="background:#EEF4FF"><div class="thumb-placeholder">99</div><div class="card-badge" style="background:#2D5BE3">L1</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num">Ép. 99</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">Bilan de L1 — ce que j'aurais fait différemment</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_99">📋</button></div><pre class="detail-text" id="d_L1_99">Un bilan honnête de L1 — les regrets, les erreurs, ce qu'on referait différemment. Pour que toi, tu ne les répètes pas 🎓</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_99">📋</button></div><pre class="detail-text hashtags" id="h_L1_99">#bilanL1 #retourdexperience #l1ecogestion #licenceeco #sbe #etudiant #conseilsetudes</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  <article class="card incomplete" data-series="L1" data-has-pngs="false" data-search="l1 éco-gestion — tout ce que tu dois savoir épisode 100 tu entres en l1 éco-gestion ? voici tout ce que tu dois savoir — résumé en slides à sauvegarder maintenant.">
+    <div class="card-thumb" style="background:linear-gradient(135deg,#EEF4FF,#D6E4FF)"><div class="thumb-placeholder" style="color:#2D5BE3;font-size:28px;">100</div><div class="card-badge" style="background:#C9A84C;color:#1B2A4A;">L1 · ✦</div><div class="status-badge missing">⚠ À télécharger</div></div>
+    <div class="card-body">
+      <div class="card-meta"><span class="card-num" style="color:#C9A84C;font-weight:700;">Ép. 100 🎉</span><span class="card-slides">6 slides</span></div>
+      <h2 class="card-title">L1 Éco-Gestion — tout ce que tu dois savoir (Épisode spécial 100)</h2>
+      <details class="card-details"><summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block"><div class="detail-label">Description <button class="cpy" data-copy="d_L1_100">📋</button></div><pre class="detail-text" id="d_L1_100">Épisode 100 🎉 Ce carrousel résume tout ce que tu dois savoir sur la L1 Éco-Gestion avant de commencer. Sauvegarde, partage, et réussis ta L1 💪</pre></div>
+        <div class="detail-block"><div class="detail-label">Hashtags <button class="cpy" data-copy="h_L1_100">📋</button></div><pre class="detail-text hashtags" id="h_L1_100">#episode100 #l1ecogestion #licenceeco #sbe #etudiant #fac #reussirsal1 #rentreefac #merci</pre></div>
+      </details>
+      <div class="card-actions"><a class="btn btn-warning" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">⬇ Générer + télécharger</a><a class="btn btn-ghost" href="/editor/SBE_Carousels_L1_Ep76_100.html" target="_blank">🎨 Éditer</a></div>
+    </div>
+  </article>
+
+  </div>
+</div>
+
+<div class="section" data-series-section="L2">
+  <div class="section-heading">
+    <h2>Série L2 <span style="font-size:13px;color:#C9A84C;letter-spacing:1px;">(14)</span></h2>
+    <p>Étudiants L2 Éco-Gestion · approfondissement, nuit studieuse</p>
+  </div>
+  <div class="grid">
+    
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="les matières de l2 — ce qui change vraiment par rapport à la l1 ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">02</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 02</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Les matières de L2 — ce qui change vraiment par rapport à la L1</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_02">📋</button></div>
+          <pre class="detail-text" id="d_L2_02"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_02">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_02"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep02_08-1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep02_08-1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="l&#39;économétrie en l2 — démystifier la matière que tout le monde redoute ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">03</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 03</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">L&#39;économétrie en L2 — démystifier la matière que tout le monde redoute</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_03">📋</button></div>
+          <pre class="detail-text" id="d_L2_03"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_03">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_03"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep02_08-1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep02_08-1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="la finance d&#39;entreprise en l2 — la matière qui ouvre le plus de portes ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">04</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 04</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">La finance d&#39;entreprise en L2 — la matière qui ouvre le plus de portes</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_04">📋</button></div>
+          <pre class="detail-text" id="d_L2_04"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_04">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_04"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep02_08-1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep02_08-1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="adapter sa méthode de travail entre la l1 et la l2 — ce qui doit absolument changer ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">05</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 05</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Adapter sa méthode de travail entre la L1 et la L2 — ce qui doit absolument changer</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_05">📋</button></div>
+          <pre class="detail-text" id="d_L2_05"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_05">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_05"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep02_08-1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep02_08-1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="les 5 pièges de la l2 que personne ne t&#39;annonce — et comment les éviter ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">06</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 06</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Les 5 pièges de la L2 que personne ne t&#39;annonce — et comment les éviter</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_06">📋</button></div>
+          <pre class="detail-text" id="d_L2_06"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_06">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_06"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep02_08-1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep02_08-1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="choisir sa spécialisation de l3 depuis la l2 — comment ne pas se tromper ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">07</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 07</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Choisir sa spécialisation de L3 depuis la L2 — comment ne pas se tromper</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_07">📋</button></div>
+          <pre class="detail-text" id="d_L2_07"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_07">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_07"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep02_08-1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep02_08-1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="préparer les partiels de l2 — la stratégie complète semaine par semaine ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">08</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 08</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Préparer les partiels de L2 — la stratégie complète semaine par semaine</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_08">📋</button></div>
+          <pre class="detail-text" id="d_L2_08"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_08">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_08"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep02_08-1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep02_08-1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="gérer le stress de la l2 — ce qui marche vraiment ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">09</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 09</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Gérer le stress de la L2 — ce qui marche vraiment</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_09">📋</button></div>
+          <pre class="detail-text" id="d_L2_09"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_09">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_09"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep09_15.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep09_15.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="job étudiant en l2 — possible ou suicidaire ? la vraie réponse ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">10</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 10</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Job étudiant en L2 — possible ou suicidaire ? La vraie réponse</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_10">📋</button></div>
+          <pre class="detail-text" id="d_L2_10"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_10">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_10"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep09_15.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep09_15.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="que faire après une l2 éco-gestion — toutes les portes qui s&#39;ouvrent ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">11</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 11</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Que faire après une L2 Éco-Gestion — toutes les portes qui s&#39;ouvrent</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_11">📋</button></div>
+          <pre class="detail-text" id="d_L2_11"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_11">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_11"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep09_15.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep09_15.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="s3 vs s4 en l2 — ce qui change entre les deux semestres ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">12</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 12</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">S3 vs S4 en L2 — ce qui change entre les deux semestres</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_12">📋</button></div>
+          <pre class="detail-text" id="d_L2_12"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_12">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_12"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep09_15.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep09_15.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="les étudiants qui cartonnent en l2 ont ces points communs ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">13</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 13</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Les étudiants qui cartonnent en L2 ont ces points communs</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_13">📋</button></div>
+          <pre class="detail-text" id="d_L2_13"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_13">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_13"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep09_15.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep09_15.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="l&#39;anglais en l2 — le levier que presque personne n&#39;exploite ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">14</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 14</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">L&#39;anglais en L2 — le levier que presque personne n&#39;exploite</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_14">📋</button></div>
+          <pre class="detail-text" id="d_L2_14"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_14">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_14"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep09_15.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep09_15.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="L2" data-has-pngs="false" data-search="le message que j&#39;aurais aimé recevoir avant ma l2 — pour toi qui doutes ">
+    <div class="card-thumb" style="background:#1B2A4A">
+      <div class="thumb-placeholder">15</div>
+      <div class="card-badge" style="background:#C9A84C">L2</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 15</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Le message que j&#39;aurais aimé recevoir avant ma L2 — pour toi qui doutes</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_L2_15">📋</button></div>
+          <pre class="detail-text" id="d_L2_15"></pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_L2_15">📋</button></div>
+          <pre class="detail-text hashtags" id="h_L2_15"></pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Carousels_L2_Ep09_15.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Carousels_L2_Ep09_15.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  </div>
+</div>
+
+<div class="section" data-series-section="WakeUp">
+  <div class="section-heading">
+    <h2>Série Wake Up <span style="font-size:13px;color:#C0392B;letter-spacing:1px;">(6)</span></h2>
+    <p>Erreurs qui ruinent ta réussite · viral, coup de poing</p>
+  </div>
+  <div class="grid">
+    
+  <article class="card" data-series="WakeUp" data-has-pngs="true" data-search="tu travailles beaucoup mais tu retiens presque rien — voici pourquoi tu passes des heures à étudier — et le lendemain tu as tout oublié.
+
+ce n&#39;est pas un problème de mémoire. c&#39;est un problème de méthode.
+
+la relecture et le surlignage donnent une illusion d&#39;apprentissage. voici ce qui fonctionne vraiment. 👇
+
+💾 sauvegarde avant ton prochain partiel.">
+    <div class="card-thumb" style="background:#FAF8F4">
+      <img src="WakeUp_Ep01_tu_travailles_beaucoup_mais_tu_retiens/slide_01.png?v=1268471326" loading="lazy" alt="">
+      <div class="card-badge" style="background:#C0392B">WakeUp</div>
+      <div class="status-badge ready">✓ 6 PNG</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 01</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Tu travailles beaucoup mais tu retiens presque rien — voici pourquoi</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_WakeUp_01">📋</button></div>
+          <pre class="detail-text" id="d_WakeUp_01">Tu passes des heures à étudier — et le lendemain tu as tout oublié.
+
+Ce n&#39;est pas un problème de mémoire. C&#39;est un problème de méthode.
+
+La relecture et le surlignage donnent une illusion d&#39;apprentissage. Voici ce qui fonctionne vraiment. 👇
+
+💾 Sauvegarde avant ton prochain partiel.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_WakeUp_01">📋</button></div>
+          <pre class="detail-text hashtags" id="h_WakeUp_01">#methodedetravail #revisions #etudiant #licenceeco #fac #apprendremieux #memoire #sbe #reussitefac #partiels</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/dashboard/WakeUp_Ep01_tu_travailles_beaucoup_mais_tu_retiens/zip" download="SBE_WakeUp_Ep01_tu_travailles_beaucoup_mais_tu_retiens.zip">⬇ Télécharger ZIP (6 images)</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Serie_WakeUp_Ep01_06.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-series="WakeUp" data-has-pngs="true" data-search="tu &quot;comprends&quot; en cours mais tu sèches à l&#39;exam — voici l&#39;erreur en cours tu hoches la tête. à l&#39;exam tu bloques dès la première question.
+
+ce n&#39;est pas un manque de travail — c&#39;est une confusion entre comprendre et maîtriser. la différence, et comment la combler. 👇
+
+💾 sauvegarde — teste-toi ce soir.">
+    <div class="card-thumb" style="background:#FAF8F4">
+      <img src="WakeUp_Ep02_tu_comprends_en_cours_mais_tu/slide_01.png?v=1268473670" loading="lazy" alt="">
+      <div class="card-badge" style="background:#C0392B">WakeUp</div>
+      <div class="status-badge ready">✓ 6 PNG</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 02</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Tu &quot;comprends&quot; en cours mais tu sèches à l&#39;exam — voici l&#39;erreur</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_WakeUp_02">📋</button></div>
+          <pre class="detail-text" id="d_WakeUp_02">En cours tu hoches la tête. À l&#39;exam tu bloques dès la première question.
+
+Ce n&#39;est pas un manque de travail — c&#39;est une confusion entre comprendre et maîtriser. La différence, et comment la combler. 👇
+
+💾 Sauvegarde — teste-toi ce soir.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_WakeUp_02">📋</button></div>
+          <pre class="detail-text hashtags" id="h_WakeUp_02">#feynman #methodedetravail #reussirlesexamens #etudiant #fac #sbe #apprendremieux #partiels #licenceeco #reussitefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/dashboard/WakeUp_Ep02_tu_comprends_en_cours_mais_tu/zip" download="SBE_WakeUp_Ep02_tu_comprends_en_cours_mais_tu.zip">⬇ Télécharger ZIP (6 images)</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Serie_WakeUp_Ep01_06.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-series="WakeUp" data-has-pngs="true" data-search="ton planning de révision est fait pour échouer — voici pourquoi tu fais un planning. tu ne le suis jamais. et tu culpabilises à chaque fois.
+
+le problème n&#39;est pas ta discipline — c&#39;est la façon dont tu construis ce planning. voici les 3 erreurs classiques et le système qui tient vraiment. 👇
+
+💾 sauvegarde — refais ton planning ce soir.">
+    <div class="card-thumb" style="background:#FAF8F4">
+      <img src="WakeUp_Ep03_ton_planning_de_revision_est_fait/slide_01.png?v=1268475850" loading="lazy" alt="">
+      <div class="card-badge" style="background:#C0392B">WakeUp</div>
+      <div class="status-badge ready">✓ 6 PNG</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 03</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Ton planning de révision est fait pour échouer — voici pourquoi</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_WakeUp_03">📋</button></div>
+          <pre class="detail-text" id="d_WakeUp_03">Tu fais un planning. Tu ne le suis jamais. Et tu culpabilises à chaque fois.
+
+Le problème n&#39;est pas ta discipline — c&#39;est la façon dont tu construis ce planning. Voici les 3 erreurs classiques et le système qui tient vraiment. 👇
+
+💾 Sauvegarde — refais ton planning ce soir.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_WakeUp_03">📋</button></div>
+          <pre class="detail-text hashtags" id="h_WakeUp_03">#planningrevision #organisation #etudiant #fac #methodedetravail #sbe #reussitefac #licenceeco #revisions #productivite</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/dashboard/WakeUp_Ep03_ton_planning_de_revision_est_fait/zip" download="SBE_WakeUp_Ep03_ton_planning_de_revision_est_fait.zip">⬇ Télécharger ZIP (6 images)</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Serie_WakeUp_Ep01_06.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-series="WakeUp" data-has-pngs="true" data-search="tu surlignages tout — et c&#39;est pour ça que tu retiens rien ton cours ressemble à un arc-en-ciel. et pourtant tu retiens presque rien.
+
+le surligneur donne une illusion de travail. voici ce qui fonctionne vraiment à la place. 👇
+
+💾 sauvegarde — et teste l&#39;alternative ce soir.">
+    <div class="card-thumb" style="background:#FAF8F4">
+      <img src="WakeUp_Ep04_tu_surlignages_tout_et_c_est/slide_01.png?v=1268478090" loading="lazy" alt="">
+      <div class="card-badge" style="background:#C0392B">WakeUp</div>
+      <div class="status-badge ready">✓ 5 PNG</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 04</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Tu surlignages tout — et c&#39;est pour ça que tu retiens rien</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_WakeUp_04">📋</button></div>
+          <pre class="detail-text" id="d_WakeUp_04">Ton cours ressemble à un arc-en-ciel. Et pourtant tu retiens presque rien.
+
+Le surligneur donne une illusion de travail. Voici ce qui fonctionne vraiment à la place. 👇
+
+💾 Sauvegarde — et teste l&#39;alternative ce soir.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_WakeUp_04">📋</button></div>
+          <pre class="detail-text hashtags" id="h_WakeUp_04">#surligneur #methodedetravail #revisions #etudiant #fac #sbe #apprendremieux #partiels #conseilsetudes #reussitefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/dashboard/WakeUp_Ep04_tu_surlignages_tout_et_c_est/zip" download="SBE_WakeUp_Ep04_tu_surlignages_tout_et_c_est.zip">⬇ Télécharger ZIP (5 images)</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Serie_WakeUp_Ep01_06.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-series="WakeUp" data-has-pngs="true" data-search="réviser la veille au soir — pourquoi c&#39;est le pire moment qui soit minuit la veille de l&#39;exam. 47 pages à voir. et tu te demandes pourquoi tu stresses.
+
+le sommeil consolide la mémoire. bourrer des infos à minuit sans dormir après — le cerveau ne peut pas faire son travail. voici ce qu&#39;il faut faire à la place. 👇
+
+💾 à relire la veille de ton prochain exam.">
+    <div class="card-thumb" style="background:#FAF8F4">
+      <img src="WakeUp_Ep05_reviser_la_veille_au_soir_pourquoi/slide_01.png?v=1268479938" loading="lazy" alt="">
+      <div class="card-badge" style="background:#C0392B">WakeUp</div>
+      <div class="status-badge ready">✓ 5 PNG</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 05</span>
+        <span class="card-slides">5 slides</span>
+      </div>
+      <h2 class="card-title">Réviser la veille au soir — pourquoi c&#39;est le pire moment qui soit</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_WakeUp_05">📋</button></div>
+          <pre class="detail-text" id="d_WakeUp_05">Minuit la veille de l&#39;exam. 47 pages à voir. Et tu te demandes pourquoi tu stresses.
+
+Le sommeil consolide la mémoire. Bourrer des infos à minuit sans dormir après — le cerveau ne peut pas faire son travail. Voici ce qu&#39;il faut faire à la place. 👇
+
+💾 À relire la veille de ton prochain exam.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_WakeUp_05">📋</button></div>
+          <pre class="detail-text hashtags" id="h_WakeUp_05">#veillexam #sommeil #revisions #etudiant #fac #sbe #methodedetravail #partiels #stressetudes #reussitefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/dashboard/WakeUp_Ep05_reviser_la_veille_au_soir_pourquoi/zip" download="SBE_WakeUp_Ep05_reviser_la_veille_au_soir_pourquoi.zip">⬇ Télécharger ZIP (5 images)</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Serie_WakeUp_Ep01_06.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card" data-series="WakeUp" data-has-pngs="true" data-search="les réseaux pendant les révisions — le voleur de 2h par jour que tu ne vois pas &quot;juste 5 minutes.&quot; 2 heures plus tard tu n&#39;as toujours pas ouvert ton cours.
+
+les réseaux ne volent pas 5 minutes — ils volent ta capacité à te concentrer. et le calcul est brutal. voici la solution concrète. 👇
+
+💾 sauvegarde — et mets ton téléphone ailleurs maintenant.">
+    <div class="card-thumb" style="background:#FAF8F4">
+      <img src="WakeUp_Ep06_les_reseaux_pendant_les_revisions_le/slide_01.png?v=1268481766" loading="lazy" alt="">
+      <div class="card-badge" style="background:#C0392B">WakeUp</div>
+      <div class="status-badge ready">✓ 6 PNG</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Ép. 06</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Les réseaux pendant les révisions — le voleur de 2h par jour que tu ne vois pas</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_WakeUp_06">📋</button></div>
+          <pre class="detail-text" id="d_WakeUp_06">&quot;Juste 5 minutes.&quot; 2 heures plus tard tu n&#39;as toujours pas ouvert ton cours.
+
+Les réseaux ne volent pas 5 minutes — ils volent ta capacité à te concentrer. Et le calcul est brutal. Voici la solution concrète. 👇
+
+💾 Sauvegarde — et mets ton téléphone ailleurs maintenant.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_WakeUp_06">📋</button></div>
+          <pre class="detail-text hashtags" id="h_WakeUp_06">#concentration #reseauxsociaux #methodedetravail #etudiant #fac #sbe #productivite #revisions #focusmode #reussitefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/dashboard/WakeUp_Ep06_les_reseaux_pendant_les_revisions_le/zip" download="SBE_WakeUp_Ep06_les_reseaux_pendant_les_revisions_le.zip">⬇ Télécharger ZIP (6 images)</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Serie_WakeUp_Ep01_06.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  </div>
+</div>
+
+<div class="section" data-series-section="Special">
+  <div class="section-heading">
+    <h2>Éditions spéciales <span style="font-size:13px;color:#5C6B2C;letter-spacing:1px;">(9)</span></h2>
+    <p>Carrousels uniques · branding propre par sujet</p>
+  </div>
+  <div class="grid">
+    
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="le cv à 18-19 ans — anatomie d&#39;une candidature qui ouvre les portes à 18-19 ans, ton cv est sous-estimé. pourtant c&#39;est lui qui décide si un recruteur d&#39;alternance ou un jury parcoursup va te lire — ou pas.
+
+6 secondes. c&#39;est tout.
+
+voici les erreurs qui te font finir dans la pile, et l&#39;anatomie sbe qui ouvre les portes 📄
+
+💾 sauvegarde avant ta prochaine candidature.">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Le CV à 18-19 ans — anatomie d&#39;une candidature qui ouvre les portes</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_CV">📋</button></div>
+          <pre class="detail-text" id="d_Special_CV">À 18-19 ans, ton CV est sous-estimé. Pourtant c&#39;est lui qui décide si un recruteur d&#39;alternance ou un jury Parcoursup va te lire — ou pas.
+
+6 secondes. C&#39;est tout.
+
+Voici les erreurs qui te font finir dans la pile, et l&#39;anatomie SBE qui ouvre les portes 📄
+
+💾 Sauvegarde avant ta prochaine candidature.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_CV">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_CV">#cv #parcoursup #alternance #candidature #etudiant #sbe #methodecv #lyceen #recherchealternance #orientation #premiereannee #fac #postuler #cvetudiant #dossiercandidature</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_CV_Parcoursup_Alternance.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_CV_Parcoursup_Alternance.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="pourquoi tu procrastines (et ce n&#39;est pas de la paresse) la procrastination n&#39;est pas de la paresse.
+
+c&#39;est une réponse émotionnelle que ton cerveau crée pour te protéger d&#39;une menace qu&#39;il a mal identifiée.
+
+comprendre ça change tout. 🧠
+
+voici les 3 déclencheurs + la règle des 5 minutes pour les désamorcer.">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Pourquoi tu procrastines (et ce n&#39;est pas de la paresse)</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_Ψ">📋</button></div>
+          <pre class="detail-text" id="d_Special_Ψ">La procrastination n&#39;est pas de la paresse.
+
+C&#39;est une réponse émotionnelle que ton cerveau crée pour te protéger d&#39;une menace qu&#39;il a mal identifiée.
+
+Comprendre ça change tout. 🧠
+
+Voici les 3 déclencheurs + la règle des 5 minutes pour les désamorcer.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_Ψ">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_Ψ">#procrastination #etudiant #methodedetravail #psychologie #reussitefac #neurosciences #santementale #sbe</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_mental.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_mental.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="le vrai coût d&#39;une mauvaise nuit avant un partiel tu sacrifies ton sommeil pour réviser plus.
+
+voici pourquoi c&#39;est exactement l&#39;inverse de ce que tu devrais faire — et ce que disent les neurosciences là-dessus. 😴
+
+-40% de mémoire de travail. -30% de raisonnement. ÷2 l&#39;attention.
+
+le sommeil est ta dernière session de révision.">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Le vrai coût d&#39;une mauvaise nuit avant un partiel</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_☾">📋</button></div>
+          <pre class="detail-text" id="d_Special_☾">Tu sacrifies ton sommeil pour réviser plus.
+
+Voici pourquoi c&#39;est exactement l&#39;inverse de ce que tu devrais faire — et ce que disent les neurosciences là-dessus. 😴
+
+-40% de mémoire de travail. -30% de raisonnement. ÷2 l&#39;attention.
+
+Le sommeil est ta dernière session de révision.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_☾">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_☾">#sommeil #partiels #neurosciences #etudiant #reussitefac #methodedetravail #santeetudiante #sbe</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_nuit.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_nuit.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="ce que personne ne t&#39;apprend sur la prise de parole en amphi ne jamais oser poser de question en cours — c&#39;est une habitude qui coûte cher.
+
+chaque question = une notion ancrée 3× plus vite. chaque question évitée = un trou de compréhension qui reste.
+
+voici pourquoi tu te tais et comment briser ce réflexe dès cette semaine. 🎤
+
+une seule question. c&#39;est tout.">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Ce que personne ne t&#39;apprend sur la prise de parole en amphi</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_🎤">📋</button></div>
+          <pre class="detail-text" id="d_Special_🎤">Ne jamais oser poser de question en cours — c&#39;est une habitude qui coûte cher.
+
+Chaque question = une notion ancrée 3× plus vite. Chaque question évitée = un trou de compréhension qui reste.
+
+Voici pourquoi tu te tais et comment briser ce réflexe dès cette semaine. 🎤
+
+Une seule question. C&#39;est tout.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_🎤">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_🎤">#amphi #etudiant #prendrelaparole #licenceeco #reussitefac #confiance #methodedetravail #sbe</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_voix.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_voix.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="mon parcours — pourquoi sbe est né mon parcours derrière sbe.
+
+première de classe depuis toujours. 19/20 au bac. prépa pcsi à 18 ans.
+
+puis je pars. 6 mois après. sans soutien familial.
+
+l1 éco-gestion, intégrée au s2 sans aucune base. à la fin de l&#39;année — 1ère sur 500.
+
+pas parce que j&#39;ai un don. parce que j&#39;ai compris quelque chose que peu d&#39;étudiants voient.
+
+sbe est né de là.
+
+la réussite n&#39;est pas une question de talent — c&#39;est une question de méthode. 💛">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">9 slides</span>
+      </div>
+      <h2 class="card-title">Mon parcours — pourquoi SBE est né</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_Story">📋</button></div>
+          <pre class="detail-text" id="d_Special_Story">Mon parcours derrière SBE.
+
+Première de classe depuis toujours. 19/20 au bac. Prépa PCSI à 18 ans.
+
+Puis je pars. 6 mois après. Sans soutien familial.
+
+L1 Éco-Gestion, intégrée au S2 sans aucune base. À la fin de l&#39;année — 1ère sur 500.
+
+Pas parce que j&#39;ai un don. Parce que j&#39;ai compris quelque chose que peu d&#39;étudiants voient.
+
+SBE est né de là.
+
+La réussite n&#39;est pas une question de talent — c&#39;est une question de méthode. 💛</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_Story">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_Story">#sbe #parcoursetudiant #fondatrice #ecogestion #methodedetravail #reussitefac #entrepreneur #etudiante #premiereannee #storytellingreussite #bac2024 #l1ecogestion</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_fondatrice.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_fondatrice.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="1 étudiant sur 2 rate sa l1 — voici les 5 choses qui changent tout avant d&#39;y entrer 1 étudiant sur 2 rate sa l1 éco-gestion.
+
+et ce n&#39;est presque jamais une question d&#39;intelligence.
+
+voici les 5 choses que j&#39;aurais aimé savoir avant d&#39;entrer — et qui changent tout.
+
+💾 sauvegarde avant ta rentrée. 🎓">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">9 slides</span>
+      </div>
+      <h2 class="card-title">1 étudiant sur 2 rate sa L1 — voici les 5 choses qui changent tout avant d&#39;y entrer</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_L1">📋</button></div>
+          <pre class="detail-text" id="d_Special_L1">1 étudiant sur 2 rate sa L1 éco-gestion.
+
+Et ce n&#39;est presque jamais une question d&#39;intelligence.
+
+Voici les 5 choses que j&#39;aurais aimé savoir avant d&#39;entrer — et qui changent tout.
+
+💾 Sauvegarde avant ta rentrée. 🎓</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_L1">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_L1">#l1ecogestion #licenceeco #rentreefac #etudiant #reussitefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_prepaL1.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_prepaL1.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="la l2 détruit des étudiants qui avaient cartonné en l1 — voici les 5 choses à comprendre avant d&#39;entrer la l2 éco-gestion détruit des étudiants qui avaient cartonné en l1.
+
+et ce n&#39;est presque jamais une question de niveau — c&#39;est une question de méthode.
+
+voici les 5 choses à comprendre avant d&#39;entrer.
+
+💾 sauvegarde avant ta rentrée. 🎯">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">8 slides</span>
+      </div>
+      <h2 class="card-title">La L2 détruit des étudiants qui avaient cartonné en L1 — voici les 5 choses à comprendre avant d&#39;entrer</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_L2">📋</button></div>
+          <pre class="detail-text" id="d_Special_L2">La L2 éco-gestion détruit des étudiants qui avaient cartonné en L1.
+
+Et ce n&#39;est presque jamais une question de niveau — c&#39;est une question de méthode.
+
+Voici les 5 choses à comprendre avant d&#39;entrer.
+
+💾 Sauvegarde avant ta rentrée. 🎯</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_L2">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_L2">#l2ecogestion #licenceeco #rentreefac #etudiant #reussitefac</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_ruptureL2.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_ruptureL2.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="la règle des 2 minutes — la micro-règle qui change ta gestion du temps tu notes tout pour &quot;plus tard&quot; et tu finis la journée épuisé(e) sans avoir vraiment avancé.
+
+cette règle simple change la donne — et tu peux l&#39;appliquer dans les 10 prochaines minutes. 💡
+
+⚡ une tâche de moins de 2 minutes ? maintenant. sans la noter. sans la reporter.
+
+💾 sauvegarde et applique dès aujourd&#39;hui.">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">La règle des 2 minutes — la micro-règle qui change ta gestion du temps</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_2′">📋</button></div>
+          <pre class="detail-text" id="d_Special_2′">Tu notes tout pour &quot;plus tard&quot; et tu finis la journée épuisé(e) sans avoir vraiment avancé.
+
+Cette règle simple change la donne — et tu peux l&#39;appliquer dans les 10 prochaines minutes. 💡
+
+⚡ Une tâche de moins de 2 minutes ? Maintenant. Sans la noter. Sans la reporter.
+
+💾 Sauvegarde et applique dès aujourd&#39;hui.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_2′">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_2′">#methodedetravail #productivite #etudiant #organisation #reussitefac #regledes2minutes #gestiondutemps #sbe</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_2min.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_2min.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  <article class="card incomplete" data-series="Special" data-has-pngs="false" data-search="ce que les étudiants à 15+ de moyenne font différemment ils n&#39;ont pas un qi différent. ils n&#39;ont pas plus de temps.
+
+voici les 4 habitudes concrètes des étudiants à 15+ de moyenne — et que tu peux copier dès maintenant. 🎯
+
+annales en semaine 1. questions moches assumées. petits blocs quotidiens. reformulation systématique.
+
+une seule de ces habitudes change déjà la donne.">
+    <div class="card-thumb" style="background:#F4EEDE">
+      <div class="thumb-placeholder">CV</div>
+      <div class="card-badge" style="background:#5C6B2C">SPÉCIAL</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="card-num">Édition spéciale</span>
+        <span class="card-slides">6 slides</span>
+      </div>
+      <h2 class="card-title">Ce que les étudiants à 15+ de moyenne font différemment</h2>
+      <details class="card-details">
+        <summary>📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_Special_15+">📋</button></div>
+          <pre class="detail-text" id="d_Special_15+">Ils n&#39;ont pas un QI différent. Ils n&#39;ont pas plus de temps.
+
+Voici les 4 habitudes concrètes des étudiants à 15+ de moyenne — et que tu peux copier dès maintenant. 🎯
+
+Annales en semaine 1. Questions moches assumées. Petits blocs quotidiens. Reformulation systématique.
+
+Une seule de ces habitudes change déjà la donne.</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_Special_15+">📋</button></div>
+          <pre class="detail-text hashtags" id="h_Special_15+">#reussitefac #habitudesetudiant #methodedetravail #partiels #licenceeco #excellence #sbe #moyenneuniversitaire</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/SBE_Special_elite.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/SBE_Special_elite.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  </div>
+</div>
+
+
+
+<div class="section section-resources section-questionnaires" data-series-section="Questionnaire">
+  <div class="section-heading">
+    <h2>Questionnaires &amp; Diagnostics <span class="r-count">(2)</span></h2>
+    <p>Diagnostics interactifs pour profil étudiant SBE. <em>Page d'accueil + post-inscription.</em></p>
+  </div>
+  <div class="grid">
+    
+  <article class="card r-card q-card" data-series="Questionnaire" data-resource-type="questionnaire" data-has-pngs="true" data-search="diagnostic flash niveau 1 — mini questionnaire d&#39;accueil 6 questions pour faire découvrir au visiteur son profil d&#39;apprentissage et le convertir vers arche. génère 1 des 8 profils types selon ses réponses. conversion accueil 8 profils flash">
+    <div class="r-thumb" style="background:linear-gradient(160deg,#0E1B3A 0%,#1B2952 60%,#0A1530 100%)">
+      <div class="r-initials" style="color:#D4B574;font-family:'Cormorant Garamond',serif;font-style:italic;">N1</div>
+      <div class="r-decor" style="background:radial-gradient(ellipse at top right,#B8954A33 0%,transparent 60%)"></div>
+      <div class="card-badge" style="background:#B8954A;color:#0E1B3A">MINI · 2 MIN</div>
+      <div class="r-pages">6 questions</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span>Niveau 1 — Mini questionnaire d&#39;accueil</span>
+        <span style="text-transform:none;letter-spacing:0;font-style:italic;color:#8A7A6B">SBE Hub · page d&#39;accueil</span>
+      </div>
+      <h2 class="card-title" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px">Diagnostic flash</h2>
+      <p style="font-size:13.5px;line-height:1.55;color:#4B4F60;margin-bottom:14px">6 questions pour faire découvrir au visiteur son profil d&#39;apprentissage et le convertir vers ARCHE. Génère 1 des 8 profils types selon ses réponses.</p>
+      <div class="r-tags"><span class="r-tag">conversion</span><span class="r-tag">accueil</span><span class="r-tag">8 profils</span><span class="r-tag">flash</span></div>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/SBE_Questionnaire_N1_Mini.html" target="_blank">🎯 Lancer le diagnostic</a>
+        
+      </div>
+    </div>
+  </article>
+  <article class="card r-card q-card" data-series="Questionnaire" data-resource-type="questionnaire" data-has-pngs="true" data-search="diagnostic complet niveau 2 — questionnaire complet adaptatif environ 48 questions sur 10 modules avec adaptativité. construit le profil étudiant complet (gardner + canal mémoriel + maturité + émotionnel) et la prescription arche personnalisée. adaptatif post-inscription profil complet 10 modules">
+    <div class="r-thumb" style="background:linear-gradient(160deg,#1B2952 0%,#0E1B3A 55%,#1B2952 100%)">
+      <div class="r-initials" style="color:#D4B574;font-family:'Cormorant Garamond',serif;font-style:italic;">N2</div>
+      <div class="r-decor" style="background:radial-gradient(ellipse at top right,#B8954A33 0%,transparent 60%)"></div>
+      <div class="card-badge" style="background:#B8954A;color:#0E1B3A">COMPLET · ~12 MIN</div>
+      <div class="r-pages">48 questions</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span>Niveau 2 — Questionnaire complet adaptatif</span>
+        <span style="text-transform:none;letter-spacing:0;font-style:italic;color:#8A7A6B">SBE Hub · post-inscription</span>
+      </div>
+      <h2 class="card-title" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px">Diagnostic complet</h2>
+      <p style="font-size:13.5px;line-height:1.55;color:#4B4F60;margin-bottom:14px">Environ 48 questions sur 10 modules avec adaptativité. Construit le profil étudiant complet (Gardner + canal mémoriel + maturité + émotionnel) et la prescription ARCHE personnalisée.</p>
+      <div class="r-tags"><span class="r-tag">adaptatif</span><span class="r-tag">post-inscription</span><span class="r-tag">profil complet</span><span class="r-tag">10 modules</span></div>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/SBE_Questionnaire_N2_Complet.html" target="_blank">🎯 Lancer le diagnostic</a>
+        
+      </div>
+    </div>
+  </article>
+  </div>
+</div>
+
+
+
+<div class="section section-resources" data-series-section="Resource">
+  <div class="section-heading">
+    <h2>Ebooks &amp; Ressources <span class="r-count">(1)</span></h2>
+    <p>Contenus longs SBE — éditoriaux, guides, méthodes. <em>Pas du contenu TikTok.</em></p>
+  </div>
+  <div class="grid">
+    
+  <article class="card r-card" data-series="Resource" data-resource-type="ebook" data-has-pngs="true" data-search="méthode arche édition fondatrice le système intégral pour apprendre vite, retenir longtemps, et reprendre confiance en sa propre intelligence. 26 pages — analyser · restructurer · consolider · habituer · évaluer. méthode mindset arche fondatrice">
+    <div class="r-thumb" style="background:linear-gradient(165deg,#0E1B3A 0%,#1B2952 55%,#0A1530 100%)">
+      <div class="r-initials" style="color:#D4B574">A</div>
+      <div class="r-decor" style="background:radial-gradient(ellipse at top right,#B8954A33 0%,transparent 60%)"></div>
+      <div class="card-badge" style="background:#B8954A;color:#0E1B3A">EBOOK</div>
+      <div class="r-pages">26 pages</div>
+    </div>
+    <div class="card-body">
+      <div class="card-meta">
+        <span>Édition fondatrice</span>
+        <span style="text-transform:none;letter-spacing:0;font-style:italic;color:#8A7A6B">Enya, fondatrice SBE</span>
+      </div>
+      <h2 class="card-title" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px">Méthode ARCHE</h2>
+      <p style="font-size:13.5px;line-height:1.55;color:#4B4F60;margin-bottom:14px">Le système intégral pour apprendre vite, retenir longtemps, et reprendre confiance en sa propre intelligence. 26 pages — Analyser · Restructurer · Consolider · Habituer · Évaluer.</p>
+      <div class="r-tags"><span class="r-tag">méthode</span><span class="r-tag">mindset</span><span class="r-tag">ARCHE</span><span class="r-tag">fondatrice</span></div>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="/SBE_Methode_ARCHE_Ebook.html" target="_blank">📖 Lire en ligne</a>
+        <a class="btn btn-warning" href="/SBE_Methode_ARCHE_Ebook.pdf" download>⬇ PDF (1.8 MB)</a>
+        
+      </div>
+    </div>
+  </article>
+  </div>
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+<script>
+const search = document.getElementById('search');
+const filters = document.querySelectorAll('.filter');
+const cards = document.querySelectorAll('.card');
+let activeFilter = 'ALL';
+let activeSearch = '';
+let activeStatus = null;
+
+function apply() {
+  cards.forEach(c => {
+    const matchSeries = activeFilter === 'ALL' || c.dataset.series === activeFilter;
+    const matchSearch = !activeSearch || c.dataset.search.includes(activeSearch);
+    const matchStatus = !activeStatus || (activeStatus === 'missing' && c.dataset.hasPngs === 'false');
+    c.style.display = matchSeries && matchSearch && matchStatus ? '' : 'none';
+  });
+  document.querySelectorAll('[data-series-section]').forEach(sec => {
+    const visible = sec.querySelectorAll('.card:not([style*="display: none"])').length;
+    sec.style.display = visible > 0 ? '' : 'none';
+  });
+}
+
+search.addEventListener('input', e => { activeSearch = e.target.value.toLowerCase().trim(); apply(); });
+filters.forEach(f => f.addEventListener('click', () => {
+  filters.forEach(x => x.classList.remove('active'));
+  f.classList.add('active');
+  if (f.dataset.status) {
+    activeStatus = f.dataset.status;
+    activeFilter = 'ALL';
+  } else {
+    activeStatus = null;
+    activeFilter = f.dataset.series;
+  }
+  apply();
+}));
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window.__tt);
+  window.__tt = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// ─── COPY (multi-méthode : clipboard / share / modal sélectionnable) ──
+function copyText(txt, btn){
+  const success = () => {
+    showToast('✓ Copié !');
+    if(btn){ btn.classList.add('copied'); setTimeout(()=>btn.classList.remove('copied'),1500); }
+  };
+
+  // Méthode 1 : Clipboard API (HTTPS / localhost)
+  if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+    navigator.clipboard.writeText(txt).then(success).catch(() => openCopyModal(txt, btn));
+    return;
+  }
+  // Méthode 2 : Web Share API (HTTP mobile compatible)
+  if (navigator.share) {
+    navigator.share({ text: txt }).then(success).catch(() => openCopyModal(txt, btn));
+    return;
+  }
+  // Méthode 3 : modal sélectionnable
+  openCopyModal(txt, btn);
+}
+
+function openCopyModal(txt, btn){
+  // Crée un overlay modal avec le texte dans un textarea pré-sélectionné
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(27,42,74,0.85);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.innerHTML = '<div style="background:#fff;border-radius:14px;max-width:520px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,0.4);"><div style="font-family:Georgia,serif;font-weight:700;margin-bottom:8px;color:#1B2A4A;">Sélectionne le texte ci-dessous</div><div style="font-size:12px;color:#8A7A6B;margin-bottom:14px;">Long-presse → Tout sélectionner → Copier</div><textarea id="__copytxt" readonly style="width:100%;min-height:200px;border:1px solid #E8DFD3;border-radius:8px;padding:12px;font:14px/1.5 system-ui;color:#1B2A4A;background:#FAF6F1;resize:vertical;-webkit-user-select:text;user-select:text;"></textarea><div style="display:flex;gap:8px;margin-top:14px;"><button id="__copyfermer" style="flex:1;padding:12px;border:none;border-radius:8px;background:#1B2A4A;color:#fff;font-weight:600;cursor:pointer;">Fermer</button></div></div>';
+  document.body.appendChild(overlay);
+  const ta = overlay.querySelector('#__copytxt');
+  ta.value = txt;
+  ta.focus();
+  ta.select();
+  ta.setSelectionRange(0, txt.length);
+  overlay.querySelector('#__copyfermer').onclick = () => overlay.remove();
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  // Tente quand même execCommand au passage
+  try { if (document.execCommand('copy')) { showToast('✓ Copié !'); if(btn){btn.classList.add('copied');setTimeout(()=>btn.classList.remove('copied'),1500);}} } catch(_){}
+}
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.cpy');
+  if (!btn) return;
+  e.preventDefault();
+  const id = btn.dataset.copy;
+  const el = document.getElementById(id);
+  if (!el) return;
+  copyText(el.textContent.trim(), btn);
+});
+
+// Téléchargement via ZIP : géré par les <a href="/dashboard/.../zip" download>
+// (un seul fichier ZIP → fonctionne sur mobile sans demande d'autorisation multiple)
+
+// ─── Force toutes les URLs relatives sur l'origin actuel (host:port d'où la page est chargée)
+// Évite les redirections parasites vers Lunéa (service worker) ou ailleurs.
+(function fixLinks(){
+  const here = window.location.origin; // ex. http://192.168.100.121:8088
+  document.querySelectorAll('a[href^="/"], img[src*=".png"]').forEach(el => {
+    if (el.tagName === 'A') {
+      const h = el.getAttribute('href');
+      if (h && h.startsWith('/')) el.href = here + h;
+      el.setAttribute('rel', 'noopener');
+      el.setAttribute('target', '_blank');
+    }
+    if (el.tagName === 'IMG') {
+      const s = el.getAttribute('src');
+      if (s && !/^https?:/i.test(s)) {
+        // Ajoute un timestamp unique à chaque chargement pour bypasser le cache disque agressif
+        const sep = s.includes('?') ? '&' : '?';
+        el.src = here + '/dashboard/' + s + sep + '_t=' + Date.now();
+      }
+    }
+  });
+  // Désinscrit tout service worker parasite (Lunéa) sur cette origin si jamais
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(r => r.unregister());
+    }).catch(()=>{});
+  }
+})();
+</script>
+</body>
+</html>
