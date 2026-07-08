@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBE — Carrousels L2 · Épisodes 16–30</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--navy:#1B2A4A;--blue:#2D5BE3;--sky:#5B8DEF;--cream:#F5F0E8;--white:#FFFFFF;--gold:#C9A84C;--light:#EEF3FD;--muted:#8A9CC4;--dark:#0E1B35;--slate:#243352;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a1628;font-family:'DM Sans',sans-serif;color:var(--white);}
+.topbar{background:rgba(10,22,40,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;}
+.tb-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:18px;color:var(--white);}
+.tb-logo span{color:var(--gold);}
+.tb-info{font-size:11px;color:var(--muted);margin-top:2px;}
+.btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.5px;padding:7px 16px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.btn-ghost{background:rgba(255,255,255,0.07);color:var(--cream);border:1px solid rgba(255,255,255,0.12);}
+.btn-ghost:hover{background:rgba(255,255,255,0.12);}
+.btn-sm{padding:5px 12px;font-size:10px;}
+.btn-gold{background:var(--gold);color:var(--dark);}
+.page{padding:32px;max-width:1600px;margin:0 auto;}
+.ep-section{margin-bottom:56px;}
+.ep-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:18px 24px;background:rgba(27,42,74,0.4);border:1px solid rgba(45,91,227,0.2);border-radius:14px;}
+.ep-num-big{font-family:'Playfair Display',serif;font-weight:900;font-size:42px;color:var(--blue);opacity:0.5;line-height:1;flex-shrink:0;}
+.ep-info{flex:1;}
+.ep-serie{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.ep-title{font-family:'Playfair Display',serif;font-size:clamp(15px,2vw,20px);font-weight:700;color:var(--white);}
+.ep-actions{display:flex;gap:8px;}
+.slides-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
+.sw{display:flex;flex-direction:column;gap:8px;}
+.sw-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
+.slide{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;container-type:inline-size;container-name:slide;border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.05);cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.slide:hover{transform:translateY(-3px);box-shadow:0 24px 64px rgba(0,0,0,0.6),0 0 0 1px rgba(45,91,227,0.4);}
+.bg-navy{background:var(--navy);}.bg-dark{background:var(--dark);}.bg-cream{background:var(--cream);}.bg-blue{background:var(--blue);}.bg-light{background:var(--light);}.bg-slate{background:var(--slate);}.bg-grad-navy{background:linear-gradient(155deg,#1B2A4A 0%,#0E1B35 100%);}.bg-grad-blue{background:linear-gradient(155deg,#2D5BE3 0%,#1B2A4A 100%);}
+.si{width:100%;height:100%;padding:7% 8%;display:flex;flex-direction:column;position:relative;z-index:2;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
+.slide *{word-wrap:break-word;overflow-wrap:anywhere;}
+.dc{position:absolute;pointer-events:none;}
+.s-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(9px,2.6cqw,32px);letter-spacing:3px;text-transform:uppercase;margin-bottom:auto;}
+.s-badge{display:inline-flex;align-items:center;font-size:clamp(8px,1.6cqw,22px);font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:5%;width:fit-content;}
+.s-eye{font-size:clamp(8px,1.8cqw,24px);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:3%;opacity:0.7;}
+.s-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5.5cqw,70px);line-height:1.15;letter-spacing:-0.3px;margin-bottom:4%;}
+.s-div{width:36px;height:2px;border-radius:2px;margin-bottom:4%;}
+.s-body{font-size:clamp(9px,2cqw,28px);line-height:1.6;font-weight:300;opacity:0.85;}
+.s-body strong{font-weight:600;opacity:1;}
+.s-list{display:flex;flex-direction:column;gap:3%;}
+.s-li{display:flex;align-items:flex-start;gap:6px;font-size:clamp(9px,2cqw,28px);line-height:1.4;}
+.s-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.s-arr{font-size:clamp(11px,2.4cqw,32px);font-weight:700;flex-shrink:0;line-height:1;margin-top:1px;}
+.s-box{border-radius:8px;padding:4% 5%;margin:3% 0;}
+.s-num-bg{position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(50px,18cqw,260px);line-height:0.85;opacity:0.07;right:5%;top:12%;pointer-events:none;letter-spacing:-3px;}
+.s-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:4%;border-top:1px solid rgba(255,255,255,0.1);}
+.s-foot.dk{border-top-color:rgba(0,0,0,0.1);}
+.s-wm{font-size:clamp(7px,1.4cqw,18px);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:0.3;}
+.s-pg{font-size:clamp(7px,1.4cqw,18px);font-weight:600;letter-spacing:1px;opacity:0.35;}
+.s-content{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.cta-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(16px,6cqw,80px);line-height:1.1;text-align:center;margin-bottom:5%;}
+.cta-pill{margin-top:5%;display:inline-block;border-radius:100px;padding:3% 7%;font-size:clamp(8px,1.8cqw,24px);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
+.dot-sbe{display:inline-block;width:4px;height:4px;border-radius:50%;margin:0 4px;vertical-align:middle;position:relative;top:-1px;}
+.desc-panel{background:rgba(27,42,74,0.3);border:1px solid rgba(45,91,227,0.15);border-radius:12px;padding:20px;margin-top:20px;}
+.desc-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+.desc-text{font-size:13px;line-height:1.65;color:var(--cream);white-space:pre-wrap;margin-bottom:16px;}
+.hashtags{color:var(--sky);font-size:12px;line-height:1.8;}
+.copy-btn{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2);font-size:9px;font-weight:600;padding:3px 8px;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.5px;}
+.copy-btn:hover{background:rgba(201,168,76,0.2);}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--navy);border:1px solid var(--blue);color:var(--cream);padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;opacity:0;transform:translateY(8px);transition:all .3s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+@media(max-width:600px){.page{padding:16px;}.topbar{padding:12px 16px;}.slides-row{grid-template-columns:repeat(3,1fr);gap:10px;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div><div class="tb-logo">SBE<span>.</span></div><div class="tb-info">Série L2 Éco-Gestion · Épisodes 16 → 30 · Carrousels brandés</div></div>
+  <button class="btn btn-gold" onclick="dlAll()">⬇ Tout télécharger</button>
+</div>
+<div class="page">
+
+<!-- ══════ EP16 — Dissertations ══════ -->
+<div class="ep-section" id="ep16">
+  <div class="ep-header">
+    <div class="ep-num-big">16</div>
+    <div class="ep-info"><div class="ep-serie">Série L2 · Épisode 16</div><div class="ep-title">Les dissertations en L2 — comment les réussir vraiment</div></div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp('ep16',5)">⬇ 5 slides</button></div>
+  </div>
+  <div class="slides-row">
+    <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('e16s1','ep16_01')">⬇</button></div>
+      <div class="slide bg-grad-navy" id="e16s1" onclick="dl('e16s1','ep16_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue),transparent);top:0;left:0;"></div>
+        <div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 65%);top:-15%;right:-10%;border-radius:50%;"></div>
+        <div class="s-num-bg" style="color:var(--white)">16</div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2);">Ép.16 · Méthode</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--gold)">Série L2 Éco-Gestion</div>
+            <div class="s-h" style="color:var(--white)">Une dissert en L2, c'est pas une dissert de lycée. Ceux qui font la confusion perdent des points à chaque copie. 👇</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-body" style="color:var(--cream)">Voici la méthode exacte.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">02 · Ce qui change <button class="btn btn-ghost btn-sm" onclick="dl('e16s2','ep16_02')">⬇</button></div>
+      <div class="slide bg-cream" id="e16s2" onclick="dl('e16s2','ep16_02')">
+        <div class="dc" style="width:4px;height:55%;background:linear-gradient(180deg,var(--gold),transparent);left:0;top:22%;"></div>
+        <div class="si" style="padding-left:10%">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(201,168,76,0.1);color:#7a5c00;border:1px solid rgba(201,168,76,0.2);">Fac ≠ Lycée</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Ce qui change vraiment</div>
+            <div class="s-h" style="color:var(--navy)">La dissert de fac a ses propres règles</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:var(--blue)">›</span><span style="color:var(--navy)"><strong>Problématique construite</strong> — pas juste une question</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--blue)">›</span><span style="color:var(--navy)"><strong>Plan argumenté</strong> — chaque partie prouve quelque chose</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--gold)">›</span><span style="color:var(--navy)"><strong>Sources académiques</strong> — auteurs, théories, données</span></div>
+            </div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">03 · Structure <button class="btn btn-ghost btn-sm" onclick="dl('e16s3','ep16_03')">⬇</button></div>
+      <div class="slide bg-dark" id="e16s3" onclick="dl('e16s3','ep16_03')">
+        <div class="dc" style="width:65%;height:65%;background:radial-gradient(circle,rgba(201,168,76,0.06),transparent 65%);bottom:-20%;right:-15%;border-radius:50%;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2);">Structure</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--gold)">Les 3 actes</div>
+            <div class="s-h" style="color:var(--white)">Le plan qui convainc</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-list" style="gap:4%">
+              <div style="background:rgba(201,168,76,0.08);border-left:3px solid var(--gold);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--gold);font-size:clamp(8px,1.7cqw,22px);font-weight:700;text-transform:uppercase;margin-bottom:1%;">Intro</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Accroche → problématique → annonce plan</div>
+              </div>
+              <div style="background:rgba(45,91,227,0.1);border-left:3px solid var(--blue);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--sky);font-size:clamp(8px,1.7cqw,22px);font-weight:700;text-transform:uppercase;margin-bottom:1%;">Développement</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">2-3 parties avec transitions argumentées</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04);border-left:3px solid var(--muted);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--muted);font-size:clamp(8px,1.7cqw,22px);font-weight:700;text-transform:uppercase;margin-bottom:1%;">Conclusion</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Bilan + ouverture sur une nouvelle question</div>
+              </div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">04 · 3 erreurs <button class="btn btn-ghost btn-sm" onclick="dl('e16s4','ep16_04')">⬇</button></div>
+      <div class="slide bg-light" id="e16s4" onclick="dl('e16s4','ep16_04')">
+        <div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(232,93,74,0.1);color:#c0392b;border:1px solid rgba(232,93,74,0.2);">À éviter</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Les 3 erreurs classiques</div>
+            <div class="s-h" style="color:var(--navy)">Ce qui plombe les copies</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:#c0392b">①</span><span style="color:var(--navy)"><strong>Réciter le cours</strong> sans argumenter</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#c0392b">②</span><span style="color:var(--navy)"><strong>Plan déséquilibré</strong> — une partie trop courte</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#c0392b">③</span><span style="color:var(--navy)"><strong>Intro trop longue</strong> — le plan doit rester bref</span></div>
+            </div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">05 · CTA <button class="btn btn-ghost btn-sm" onclick="dl('e16s5','ep16_05')">⬇</button></div>
+      <div class="slide bg-grad-blue" id="e16s5" onclick="dl('e16s5','ep16_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">💾</div>
+            <div class="cta-h" style="color:var(--white)">Sauvegarde avant ton prochain exam</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);">Ép.17 → Compta analytique</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d16')">Copier</button></div>
+    <div class="desc-text" id="d16">La dissertation en L2 éco-gestion, c'est un exercice à part entière — et ceux qui arrivent avec leurs réflexes du lycée le paient cash sur leurs notes. Méthode, plan, argumentation : voici comment en faire un vrai atout ✍️
+
+Sauvegarde avant ton prochain partiel 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h16')">Copier</button></div>
+    <div class="hashtags" id="h16">#dissertation #l2ecogestion #licenceeco #sbe #methodetravail #fac #etudiant #reussirsal2 #partiels #dissertation</div>
+  </div>
+</div>
+
+<!-- ══════ EP17 — Compta analytique ══════ -->
+<div class="ep-section" id="ep17">
+  <div class="ep-header">
+    <div class="ep-num-big">17</div>
+    <div class="ep-info"><div class="ep-serie">Série L2 · Épisode 17</div><div class="ep-title">La comptabilité analytique en L2 — enfin démystifiée</div></div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp('ep17',5)">⬇ 5 slides</button></div>
+  </div>
+  <div class="slides-row">
+    <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('e17s1','ep17_01')">⬇</button></div>
+      <div class="slide bg-grad-navy" id="e17s1" onclick="dl('e17s1','ep17_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--sky),var(--blue),transparent);top:0;left:0;"></div>
+        <div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(91,141,239,0.1),transparent 65%);top:-15%;right:-10%;border-radius:50%;"></div>
+        <div class="s-num-bg" style="color:var(--white)">17</div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(91,141,239,0.15);color:var(--sky);border:1px solid rgba(91,141,239,0.25);">Ép.17 · Compta</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--sky)">Série L2 Éco-Gestion</div>
+            <div class="s-h" style="color:var(--white)">La compta analytique — LA matière qui fait peur en L2. Pourtant c'est l'une des plus logiques. Voici pourquoi. 👇</div>
+            <div class="s-div" style="background:var(--sky)"></div>
+            <div class="s-body" style="color:var(--cream)">Coûts, marges, seuil de rentabilité : on démystifie tout.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">02 · C'est quoi <button class="btn btn-ghost btn-sm" onclick="dl('e17s2','ep17_02')">⬇</button></div>
+      <div class="slide bg-cream" id="e17s2" onclick="dl('e17s2','ep17_02')">
+        <div class="dc" style="width:4px;height:55%;background:linear-gradient(180deg,var(--sky),transparent);left:0;top:22%;"></div>
+        <div class="si" style="padding-left:10%">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(91,141,239,0.1);color:#1a4fa8;border:1px solid rgba(91,141,239,0.2);">La base</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">C'est quoi la compta analytique ?</div>
+            <div class="s-h" style="color:var(--navy)">Calculer les coûts internes</div>
+            <div class="s-div" style="background:var(--sky)"></div>
+            <div class="s-body" style="color:var(--navy)">Contrairement à la compta générale (résultat global), la compta analytique calcule <strong>le coût de chaque produit, service ou activité.</strong> C'est l'outil de pilotage interne des entreprises.</div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">03 · Notions clés <button class="btn btn-ghost btn-sm" onclick="dl('e17s3','ep17_03')">⬇</button></div>
+      <div class="slide bg-dark" id="e17s3" onclick="dl('e17s3','ep17_03')">
+        <div class="dc" style="width:65%;height:65%;background:radial-gradient(circle,rgba(91,141,239,0.07),transparent 65%);bottom:-20%;right:-15%;border-radius:50%;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(91,141,239,0.1);color:var(--sky);border:1px solid rgba(91,141,239,0.2);">Les 3 notions</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--sky)">À maîtriser absolument</div>
+            <div class="s-h" style="color:var(--white)">Coûts, charges, seuil</div>
+            <div class="s-div" style="background:var(--sky)"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:var(--sky)">›</span><span style="color:var(--cream)"><strong style="color:var(--white)">Coûts directs/indirects</strong> — attribuables ou non à un produit</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--sky)">›</span><span style="color:var(--cream)"><strong style="color:var(--white)">Coût de revient</strong> — total des charges pour produire une unité</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--gold)">›</span><span style="color:var(--cream)"><strong style="color:var(--white)">Seuil de rentabilité</strong> — le CA à partir duquel on est bénéficiaire</span></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">04 · Méthode <button class="btn btn-ghost btn-sm" onclick="dl('e17s4','ep17_04')">⬇</button></div>
+      <div class="slide bg-light" id="e17s4" onclick="dl('e17s4','ep17_04')">
+        <div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,var(--sky),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(91,141,239,0.1);color:#1a4fa8;border:1px solid rgba(91,141,239,0.2);">Conseil SBE</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">La règle d'or</div>
+            <div class="s-h" style="color:var(--navy)">Ça se comprend en faisant</div>
+            <div class="s-div" style="background:var(--sky)"></div>
+            <div class="s-box" style="background:var(--white);border-left:3px solid var(--sky);">
+              <p style="color:var(--navy);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.2cqw,28px);line-height:1.4;">"Fais des exercices numériques dès la semaine 1. La compta analytique ne se lit pas — elle se pratique."</p>
+            </div>
+            <div class="s-body" style="color:var(--muted);margin-top:4%;">Annales + exercices du prof = combo gagnant.</div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">05 · CTA <button class="btn btn-ghost btn-sm" onclick="dl('e17s5','ep17_05')">⬇</button></div>
+      <div class="slide bg-grad-blue" id="e17s5" onclick="dl('e17s5','ep17_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">📊</div>
+            <div class="cta-h" style="color:var(--white)">Sauvegarde ce guide</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);">Ép.18 → Stage en L2, utile ?</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d17')">Copier</button></div>
+    <div class="desc-text" id="d17">Coûts directs, coût de revient, seuil de rentabilité — la compta analytique en L2 déroute beaucoup d'étudiants au début. Pourtant c'est l'une des matières les plus logiques quand on comprend sa structure 📊
+
+Sauvegarde et partage à un L2 qui galère 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h17')">Copier</button></div>
+    <div class="hashtags" id="h17">#comptaanalytique #l2ecogestion #licenceeco #sbe #comptabilite #fac #etudiant #reussirsal2 #coutderevient #controldegestion</div>
+  </div>
+</div>
+
+<!-- ══════ EP18 — Stage L2 ══════ -->
+<div class="ep-section" id="ep18">
+  <div class="ep-header">
+    <div class="ep-num-big">18</div>
+    <div class="ep-info"><div class="ep-serie">Série L2 · Épisode 18</div><div class="ep-title">Stage en L2 — utile, obligatoire ou trop tôt ?</div></div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp('ep18',5)">⬇ 5 slides</button></div>
+  </div>
+  <div class="slides-row">
+    <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('e18s1','ep18_01')">⬇</button></div>
+      <div class="slide bg-grad-navy" id="e18s1" onclick="dl('e18s1','ep18_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#22c55e,var(--blue),transparent);top:0;left:0;"></div>
+        <div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(34,197,94,0.08),transparent 65%);top:-15%;right:-10%;border-radius:50%;"></div>
+        <div class="s-num-bg" style="color:var(--white)">18</div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.2);">Ép.18 · Stage</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:#4ade80">Série L2 Éco-Gestion</div>
+            <div class="s-h" style="color:var(--white)">Stage en L2 — tout le monde t'en parle. Mais est-ce vraiment le bon moment ? La réponse honnête. 👇</div>
+            <div class="s-div" style="background:#22c55e"></div>
+            <div class="s-body" style="color:var(--cream)">Utile, obligatoire, ou piège à éviter ?</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">02 · Obligatoire ? <button class="btn btn-ghost btn-sm" onclick="dl('e18s2','ep18_02')">⬇</button></div>
+      <div class="slide bg-cream" id="e18s2" onclick="dl('e18s2','ep18_02')">
+        <div class="dc" style="width:4px;height:55%;background:linear-gradient(180deg,#22c55e,transparent);left:0;top:22%;"></div>
+        <div class="si" style="padding-left:10%">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(34,197,94,0.1);color:#15803d;border:1px solid rgba(34,197,94,0.2);">Obligatoire ?</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">La réalité</div>
+            <div class="s-h" style="color:var(--navy)">Rarement obligatoire en L2</div>
+            <div class="s-div" style="background:#22c55e"></div>
+            <div class="s-body" style="color:var(--navy)">La plupart des L2 éco-gestion n'imposent pas de stage. Mais certains parcours spécialisés ou certaines facs en font une option. <strong>Vérifier le règlement de ton université</strong> reste indispensable.</div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">03 · Utile ? <button class="btn btn-ghost btn-sm" onclick="dl('e18s3','ep18_03')">⬇</button></div>
+      <div class="slide bg-dark" id="e18s3" onclick="dl('e18s3','ep18_03')">
+        <div class="dc" style="width:65%;height:65%;background:radial-gradient(circle,rgba(34,197,94,0.06),transparent 65%);bottom:-20%;right:-15%;border-radius:50%;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.2);">Utile ?</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:#4ade80">La vraie réponse</div>
+            <div class="s-h" style="color:var(--white)">Oui si ciblé. Non si "juste pour avoir quelque chose"</div>
+            <div class="s-div" style="background:#22c55e"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:#4ade80">✓</span><span style="color:var(--cream)">Banque, audit, contrôle de gestion, conseil</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#4ade80">✓</span><span style="color:var(--cream)">En lien avec ton projet de L3 / master</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#f87171">✗</span><span style="color:var(--cream)">Un stage sans lien = ligne vide sur un CV</span></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">04 · Quand chercher <button class="btn btn-ghost btn-sm" onclick="dl('e18s4','ep18_04')">⬇</button></div>
+      <div class="slide bg-light" id="e18s4" onclick="dl('e18s4','ep18_04')">
+        <div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,#22c55e,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(34,197,94,0.1);color:#15803d;border:1px solid rgba(34,197,94,0.2);">Timing</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Le calendrier idéal</div>
+            <div class="s-h" style="color:var(--navy)">Commencer dès janvier</div>
+            <div class="s-div" style="background:#22c55e"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:var(--blue)">›</span><span style="color:var(--navy)"><strong>Janvier–février</strong> — CV + lettre + candidatures spontanées</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--blue)">›</span><span style="color:var(--navy)"><strong>Mars–avril</strong> — relances, entretiens</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--gold)">›</span><span style="color:var(--navy)"><strong>Juin–août</strong> — période idéale pour le stage</span></div>
+            </div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">05 · CTA <button class="btn btn-ghost btn-sm" onclick="dl('e18s5','ep18_05')">⬇</button></div>
+      <div class="slide bg-grad-blue" id="e18s5" onclick="dl('e18s5','ep18_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">💼</div>
+            <div class="cta-h" style="color:var(--white)">Sauvegarde ce guide</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);">Ép.19 → Candidature L3</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d18')">Copier</button></div>
+    <div class="desc-text" id="d18">Stage en L2 éco-gestion — pas toujours obligatoire, mais potentiellement décisif si tu le choisis bien. Voici quand postuler, où chercher et comment en tirer le maximum pour ta future candidature en L3 ou master 💼
+
+Sauvegarde avant de chercher ton stage 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h18')">Copier</button></div>
+    <div class="hashtags" id="h18">#stagel2 #l2ecogestion #licenceeco #sbe #stage #etudiant #fac #premieremploi #stageete #reussirsal2</div>
+  </div>
+</div>
+
+<!-- ══════ EP19 — Candidature L3 ══════ -->
+<div class="ep-section" id="ep19">
+  <div class="ep-header">
+    <div class="ep-num-big">19</div>
+    <div class="ep-info"><div class="ep-serie">Série L2 · Épisode 19</div><div class="ep-title">Préparer sa candidature en L3 depuis la L2 — ne pas s'y prendre trop tard</div></div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp('ep19',5)">⬇ 5 slides</button></div>
+  </div>
+  <div class="slides-row">
+    <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('e19s1','ep19_01')">⬇</button></div>
+      <div class="slide bg-grad-navy" id="e19s1" onclick="dl('e19s1','ep19_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#a78bfa,var(--blue),transparent);top:0;left:0;"></div>
+        <div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(167,139,250,0.08),transparent 65%);top:-15%;right:-10%;border-radius:50%;"></div>
+        <div class="s-num-bg" style="color:var(--white)">19</div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(167,139,250,0.12);color:#a78bfa;border:1px solid rgba(167,139,250,0.2);">Ép.19 · Orientation</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:#a78bfa">Série L2 Éco-Gestion</div>
+            <div class="s-h" style="color:var(--white)">Ta L3 se prépare dès le S3. La majorité des étudiants s'y prennent trop tard — et ça se voit dans leurs dossiers. 👇</div>
+            <div class="s-div" style="background:#a78bfa"></div>
+            <div class="s-body" style="color:var(--cream)">Voici le calendrier et la méthode.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">02 · Ce qui compte <button class="btn btn-ghost btn-sm" onclick="dl('e19s2','ep19_02')">⬇</button></div>
+      <div class="slide bg-cream" id="e19s2" onclick="dl('e19s2','ep19_02')">
+        <div class="dc" style="width:4px;height:55%;background:linear-gradient(180deg,#a78bfa,transparent);left:0;top:22%;"></div>
+        <div class="si" style="padding-left:10%">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(167,139,250,0.1);color:#6d28d9;border:1px solid rgba(167,139,250,0.2);">Le dossier</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Ce que les L3 regardent</div>
+            <div class="s-h" style="color:var(--navy)">3 éléments décisifs</div>
+            <div class="s-div" style="background:#a78bfa"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:#a78bfa">①</span><span style="color:var(--navy)"><strong>Tes notes de L2</strong> — surtout le S3 (premier à être disponible)</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#a78bfa">②</span><span style="color:var(--navy)"><strong>La lettre de motivation</strong> — cohérence + projet concret</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--gold)">③</span><span style="color:var(--navy)"><strong>Parfois un entretien</strong> — pour les L3 sélectives</span></div>
+            </div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">03 · Calendrier <button class="btn btn-ghost btn-sm" onclick="dl('e19s3','ep19_03')">⬇</button></div>
+      <div class="slide bg-dark" id="e19s3" onclick="dl('e19s3','ep19_03')">
+        <div class="dc" style="width:65%;height:65%;background:radial-gradient(circle,rgba(167,139,250,0.07),transparent 65%);bottom:-20%;right:-15%;border-radius:50%;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2);">Calendrier</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:#a78bfa">Ne pas louper les dates</div>
+            <div class="s-h" style="color:var(--white)">Le bon timing</div>
+            <div class="s-div" style="background:#a78bfa"></div>
+            <div class="s-list" style="gap:4%">
+              <div style="background:rgba(167,139,250,0.08);border-left:3px solid #a78bfa;padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:#a78bfa;font-size:clamp(8px,1.7cqw,22px);font-weight:700;margin-bottom:1%;">Oct–Déc</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Identifier les L3 visées, contacter les secrétariats</div>
+              </div>
+              <div style="background:rgba(45,91,227,0.1);border-left:3px solid var(--blue);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--sky);font-size:clamp(8px,1.7cqw,22px);font-weight:700;margin-bottom:1%;">Fév–Mars</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Dépôt des dossiers (MonMaster, candidatures directes)</div>
+              </div>
+              <div style="background:rgba(201,168,76,0.08);border-left:3px solid var(--gold);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--gold);font-size:clamp(8px,1.7cqw,22px);font-weight:700;margin-bottom:1%;">Avril–Mai</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Résultats, entretiens éventuels, confirmation</div>
+              </div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">04 · La lettre <button class="btn btn-ghost btn-sm" onclick="dl('e19s4','ep19_04')">⬇</button></div>
+      <div class="slide bg-light" id="e19s4" onclick="dl('e19s4','ep19_04')">
+        <div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,#a78bfa,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(167,139,250,0.1);color:#6d28d9;border:1px solid rgba(167,139,250,0.2);">La lettre de motiv</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Ce qui fait la différence</div>
+            <div class="s-h" style="color:var(--navy)">Être concret, pas générique</div>
+            <div class="s-div" style="background:#a78bfa"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:#a78bfa">›</span><span style="color:var(--navy)"><strong>Pourquoi cette L3</strong> précisément — pas une L3 générique</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#a78bfa">›</span><span style="color:var(--navy)"><strong>Ce que tu apportes</strong> — compétences acquises en L2</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--gold)">›</span><span style="color:var(--navy)"><strong>Projet clair après</strong> — master visé, secteur, ambition</span></div>
+            </div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">05 · CTA <button class="btn btn-ghost btn-sm" onclick="dl('e19s5','ep19_05')">⬇</button></div>
+      <div class="slide bg-grad-blue" id="e19s5" onclick="dl('e19s5','ep19_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">🎯</div>
+            <div class="cta-h" style="color:var(--white)">Ne s'y prends pas trop tard</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);">Ép.20 → Stat inférentielle</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d19')">Copier</button></div>
+    <div class="desc-text" id="d19">Ta L3 ne s'improvise pas depuis la L2. Notes, lettre de motivation, calendrier des candidatures — voici comment construire un dossier solide et postuler aux bonnes formations sans te retrouver pris de court 🎯
+
+Sauvegarde ce guide avant le S3 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h19')">Copier</button></div>
+    <div class="hashtags" id="h19">#candidaturel3 #l2ecogestion #licenceeco #sbe #orientation #monmaster #fac #etudiant #reussirsal2 #l3ecogestion</div>
+  </div>
+</div>
+
+<!-- ══════ EP20 — Stat inférentielle ══════ -->
+<div class="ep-section" id="ep20">
+  <div class="ep-header">
+    <div class="ep-num-big">20</div>
+    <div class="ep-info"><div class="ep-serie">Série L2 · Épisode 20</div><div class="ep-title">La statistique inférentielle en L2 — guide de survie</div></div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp('ep20',5)">⬇ 5 slides</button></div>
+  </div>
+  <div class="slides-row">
+    <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('e20s1','ep20_01')">⬇</button></div>
+      <div class="slide bg-grad-navy" id="e20s1" onclick="dl('e20s1','ep20_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#f87171,var(--blue),transparent);top:0;left:0;"></div>
+        <div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(248,113,113,0.08),transparent 65%);top:-15%;right:-10%;border-radius:50%;"></div>
+        <div class="s-num-bg" style="color:var(--white)">20</div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2);">Ép.20 · Stats</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:#f87171">Série L2 Éco-Gestion</div>
+            <div class="s-h" style="color:var(--white)">La stat inférentielle a fait rater leur L2 à beaucoup d'étudiants. Pas parce que c'est impossible — personne ne l'a expliqué correctement. 👇</div>
+            <div class="s-div" style="background:#f87171"></div>
+            <div class="s-body" style="color:var(--cream)">Voici la logique, enfin claire.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">02 · C'est quoi <button class="btn btn-ghost btn-sm" onclick="dl('e20s2','ep20_02')">⬇</button></div>
+      <div class="slide bg-cream" id="e20s2" onclick="dl('e20s2','ep20_02')">
+        <div class="dc" style="width:4px;height:55%;background:linear-gradient(180deg,#f87171,transparent);left:0;top:22%;"></div>
+        <div class="si" style="padding-left:10%">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(248,113,113,0.1);color:#b91c1c;border:1px solid rgba(248,113,113,0.2);">La base</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Le principe fondamental</div>
+            <div class="s-h" style="color:var(--navy)">Tirer des conclusions sur une population</div>
+            <div class="s-div" style="background:#f87171"></div>
+            <div class="s-body" style="color:var(--navy)">À partir d'un <strong>échantillon</strong>, on infère des propriétés sur la <strong>population entière</strong>. On ne peut jamais être certain — on raisonne avec des <strong>probabilités d'erreur.</strong></div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">03 · Notions clés <button class="btn btn-ghost btn-sm" onclick="dl('e20s3','ep20_03')">⬇</button></div>
+      <div class="slide bg-dark" id="e20s3" onclick="dl('e20s3','ep20_03')">
+        <div class="dc" style="width:65%;height:65%;background:radial-gradient(circle,rgba(248,113,113,0.06),transparent 65%);bottom:-20%;right:-15%;border-radius:50%;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2);">4 notions</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:#f87171">À maîtriser absolument</div>
+            <div class="s-h" style="color:var(--white)">Le vocabulaire qui fait tout</div>
+            <div class="s-div" style="background:#f87171"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:#f87171">›</span><span style="color:var(--cream)"><strong style="color:var(--white)">H0 / H1</strong> — hypothèse nulle vs hypothèse alternative</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#f87171">›</span><span style="color:var(--cream)"><strong style="color:var(--white)">p-value</strong> — probabilité d'obtenir ce résultat si H0 est vraie</span></div>
+              <div class="s-li"><span class="s-arr" style="color:#f87171">›</span><span style="color:var(--cream)"><strong style="color:var(--white)">Risque α</strong> — seuil de rejet (souvent 5%)</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--gold)">›</span><span style="color:var(--cream)"><strong style="color:var(--white)">Intervalle de confiance</strong> — zone où le paramètre est probable</span></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">04 · La méthode <button class="btn btn-ghost btn-sm" onclick="dl('e20s4','ep20_04')">⬇</button></div>
+      <div class="slide bg-light" id="e20s4" onclick="dl('e20s4','ep20_04')">
+        <div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,#f87171,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(248,113,113,0.1);color:#b91c1c;border:1px solid rgba(248,113,113,0.2);">Conseil SBE</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Ce qui fait la différence</div>
+            <div class="s-h" style="color:var(--navy)">Comprendre avant de calculer</div>
+            <div class="s-div" style="background:#f87171"></div>
+            <div class="s-box" style="background:var(--white);border-left:3px solid #f87171;">
+              <p style="color:var(--navy);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.2cqw,28px);line-height:1.4;">"Avant de chercher la formule, pose-toi la question : qu'est-ce qu'on cherche à conclure ?"</p>
+            </div>
+            <div class="s-body" style="color:var(--muted);margin-top:4%;">Exercices avec vrais tableaux de loi = indispensable.</div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">05 · CTA <button class="btn btn-ghost btn-sm" onclick="dl('e20s5','ep20_05')">⬇</button></div>
+      <div class="slide bg-grad-blue" id="e20s5" onclick="dl('e20s5','ep20_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">📉</div>
+            <div class="cta-h" style="color:var(--white)">Sauvegarde ce guide</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);">Ép.21 → Partiels sans se cramer</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d20')">Copier</button></div>
+    <div class="desc-text" id="d20">Tests d'hypothèse, p-value, intervalles de confiance — la stat inférentielle en L2 c'est abordable quand on comprend la logique avant de chercher les formules. Voici le guide honnête pour arrêter de bachoter sans comprendre 📉
+
+Sauvegarde avant tes partiels de stats 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h20')">Copier</button></div>
+    <div class="hashtags" id="h20">#statistiques #l2ecogestion #licenceeco #sbe #stats #econometrie #fac #etudiant #reussirsal2 #statinferentielle</div>
+  </div>
+</div>
+
+<!-- ══════ EP21 — Partiels sans se cramer ══════ -->
+<div class="ep-section" id="ep21">
+  <div class="ep-header">
+    <div class="ep-num-big">21</div>
+    <div class="ep-info"><div class="ep-serie">Série L2 · Épisode 21</div><div class="ep-title">Réussir tous ses partiels de L2 sans se cramer — la stratégie</div></div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp('ep21',5)">⬇ 5 slides</button></div>
+  </div>
+  <div class="slides-row">
+    <div class="sw"><div class="sw-label">01 · Hook <button class="btn btn-ghost btn-sm" onclick="dl('e21s1','ep21_01')">⬇</button></div>
+      <div class="slide bg-grad-navy" id="e21s1" onclick="dl('e21s1','ep21_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue),transparent);top:0;left:0;"></div>
+        <div class="dc" style="width:60%;height:60%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 65%);top:-15%;right:-10%;border-radius:50%;"></div>
+        <div class="s-num-bg" style="color:var(--white)">21</div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2);">Ép.21 · Partiels</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--gold)">Série L2 Éco-Gestion</div>
+            <div class="s-h" style="color:var(--white)">6 matières. 3 semaines de partiels. Et toi qui essaies de tout réviser en même temps. Il y a une autre façon de faire. 👇</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-body" style="color:var(--cream)">La stratégie que très peu d'étudiants connaissent.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">02 · L'erreur <button class="btn btn-ghost btn-sm" onclick="dl('e21s2','ep21_02')">⬇</button></div>
+      <div class="slide bg-cream" id="e21s2" onclick="dl('e21s2','ep21_02')">
+        <div class="dc" style="width:4px;height:55%;background:linear-gradient(180deg,var(--gold),transparent);left:0;top:22%;"></div>
+        <div class="si" style="padding-left:10%">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(232,93,74,0.1);color:#b91c1c;border:1px solid rgba(232,93,74,0.2);">L'erreur classique</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Ce que tout le monde fait</div>
+            <div class="s-h" style="color:var(--navy)">Réviser linéairement sans prioriser</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-body" style="color:var(--navy)">Donner le même temps à toutes les matières, peu importe leur coefficient ou leur difficulté réelle. Résultat : tu épuises ton énergie sur des matières qui ne rapportent pas assez de points.</div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">03 · La stratégie <button class="btn btn-ghost btn-sm" onclick="dl('e21s3','ep21_03')">⬇</button></div>
+      <div class="slide bg-dark" id="e21s3" onclick="dl('e21s3','ep21_03')">
+        <div class="dc" style="width:65%;height:65%;background:radial-gradient(circle,rgba(201,168,76,0.06),transparent 65%);bottom:-20%;right:-15%;border-radius:50%;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--white)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-badge" style="background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2);">La stratégie</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--gold)">La matrice gagnante</div>
+            <div class="s-h" style="color:var(--white)">Coeff × Difficulté × Temps</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-list" style="gap:4%">
+              <div style="background:rgba(201,168,76,0.08);border-left:3px solid var(--gold);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--gold);font-size:clamp(8px,1.7cqw,22px);font-weight:700;margin-bottom:1%;">Priorité 1</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Gros coefficient + tu peux progresser vite</div>
+              </div>
+              <div style="background:rgba(45,91,227,0.1);border-left:3px solid var(--blue);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--sky);font-size:clamp(8px,1.7cqw,22px);font-weight:700;margin-bottom:1%;">Priorité 2</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Matière difficile mais coefficient important</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04);border-left:3px solid var(--muted);padding:3% 4%;border-radius:0 6px 6px 0;">
+                <div style="color:var(--muted);font-size:clamp(8px,1.7cqw,22px);font-weight:700;margin-bottom:1%;">En dernier</div>
+                <div style="color:var(--cream);font-size:clamp(9px,2cqw,26px);">Petit coefficient + matière déjà bien maîtrisée</div>
+              </div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:var(--cream)">@sbe</div><div class="s-pg" style="color:var(--cream)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">04 · Sprint J-5 <button class="btn btn-ghost btn-sm" onclick="dl('e21s4','ep21_04')">⬇</button></div>
+      <div class="slide bg-light" id="e21s4" onclick="dl('e21s4','ep21_04')">
+        <div class="dc" style="width:100%;height:2px;background:linear-gradient(90deg,var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:var(--navy)">SBE<span class="dot-sbe" style="background:var(--blue)"></span></div>
+          <div class="s-badge" style="background:rgba(201,168,76,0.1);color:#7a5c00;border:1px solid rgba(201,168,76,0.2);">J - 5 jours</div>
+          <div class="s-content">
+            <div class="s-eye" style="color:var(--blue)">Le sprint final</div>
+            <div class="s-h" style="color:var(--navy)">Le protocole des derniers jours</div>
+            <div class="s-div" style="background:var(--gold)"></div>
+            <div class="s-list">
+              <div class="s-li"><span class="s-arr" style="color:var(--blue)">›</span><span style="color:var(--navy)"><strong>Stop</strong> aux nouvelles notions — consolide ce que tu sais</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--blue)">›</span><span style="color:var(--navy)"><strong>Fiches courtes</strong> — une page par chapitre max</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--blue)">›</span><span style="color:var(--navy)"><strong>Simulation</strong> — refais un sujet en conditions réelles</span></div>
+              <div class="s-li"><span class="s-arr" style="color:var(--gold)">›</span><span style="color:var(--navy)"><strong>Sommeil 7h minimum</strong> — pas négociable</span></div>
+            </div>
+          </div>
+          <div class="s-foot dk"><div class="s-wm" style="color:var(--navy)">@sbe</div><div class="s-pg" style="color:var(--navy)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw"><div class="sw-label">05 · CTA <button class="btn btn-ghost btn-sm" onclick="dl('e21s5','ep21_05')">⬇</button></div>
+      <div class="slide bg-grad-blue" id="e21s5" onclick="dl('e21s5','ep21_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span class="dot-sbe" style="background:var(--gold)"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">⚡</div>
+            <div class="cta-h" style="color:var(--white)">Sauvegarde cette stratégie</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);">Ép.22 → Rapport de stage L2</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d21')">Copier</button></div>
+    <div class="desc-text" id="d21">Réussir ses partiels de L2 sans s'épuiser, ça se prépare 6 semaines avant — pas la semaine d'avant. Priorisation, sprint final, protocole J-5 : voici la méthode exacte pour être performant sans se cramer ⚡
+
+Sauvegarde avant tes prochains partiels 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h21')">Copier</button></div>
+    <div class="hashtags" id="h21">#partiels #l2ecogestion #licenceeco #sbe #revision #methodetravail #reussirsal2 #fac #etudiant #strategieetudes</div>
+  </div>
+</div>
+
+
+<!-- EP22 -->
+<div class="ep-section" id="ep22">
+  <div class="ep-header">
+    <div class="ep-num-big">22</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Rapport de stage en L2 : le guide pour impressionner ton jury</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep22',5)">↓ Ép.22</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e22s1','ep22_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e22s1" onclick="dl('e22s1','ep22_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#2D5BE3,var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(45,91,227,0.2);color:#2D5BE3;border:1px solid rgba(45,91,227,0.4);">📋 Rapport de stage</div>
+            <div class="s-h" style="color:var(--white)">Ton rapport de stage te fait peur ?<br><span style="color:#2D5BE3">Voici ce que ton jury attend vraiment</span></div>
+            <div class="s-div" style="background:#2D5BE3;"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">La structure, le fond, le ton — ce que 90% des L2 ratent sans le savoir.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e22s2','ep22_02')">↓</button></div>
+      <div class="slide bg-dark" id="e22s2" onclick="dl('e22s2','ep22_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,#2D5BE3,transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#2D5BE3;">LA STRUCTURE QUI MARCHE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">Les 5 parties incontournables</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#2D5BE3;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Introduction</strong> — contexte + problématique claire</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#2D5BE3;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Présentation de l'entreprise</strong> — secteur, structure, enjeux</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#2D5BE3;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Missions réalisées</strong> — analyse, pas simple liste</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#2D5BE3;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Apports professionnels</strong> — ce que tu as appris</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#2D5BE3;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Conclusion</strong> — bilan + projection</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e22s3','ep22_03')">↓</button></div>
+      <div class="slide bg-slate" id="e22s3" onclick="dl('e22s3','ep22_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#2D5BE3;">CE QUE LE JURY JUGE VRAIMENT</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">3 critères qui font la différence</div>
+            <div class="s-div" style="background:#2D5BE3;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:#2D5BE3;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>La prise de recul :</strong> tu analyses, pas juste tu décris</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#2D5BE3;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Le lien cours-terrain :</strong> tu appliques tes UE</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#2D5BE3;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Le soin du document :</strong> mise en page, annexes, sources</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e22s4','ep22_04')">↓</button></div>
+      <div class="slide bg-dark" id="e22s4" onclick="dl('e22s4','ep22_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#2D5BE3;">LES ERREURS FATALES</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Évite ces 4 pièges classiques</div>
+            <div class="s-div" style="background:#2D5BE3;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)">Raconter une chronologie sans analyse</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)">Copier-coller le site web de l'entreprise</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)">Oublier la problématique dans la conclusion</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)">Bâcler la mise en page (lisibilité = note)</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e22s5','ep22_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e22s5" onclick="dl('e22s5','ep22_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">📋</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Sauvegarde ce guide</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.23 → Débouchés licence éco-gestion</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d22')">Copier</button></div>
+    <div class="desc-text" id="d22">Ton rapport de stage en L2, c'est plus qu'un devoir — c'est ta première trace pro. Structure, analyse, lien avec tes cours : voici exactement ce que ton jury veut voir (et ce que 9 L2 sur 10 ratent) 📋
+
+Sauvegarde avant ton stage 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h22')">Copier</button></div>
+    <div class="hashtags" id="h22">#rapportdestage #l2ecogestion #licenceeco #sbe #stage #methodetravail #reussirsal2 #fac #etudiant #conseils</div>
+  </div>
+</div>
+
+<!-- EP23 -->
+<div class="ep-section" id="ep23">
+  <div class="ep-header">
+    <div class="ep-num-big">23</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Débouchés de la licence éco-gestion : ce que personne ne te dit</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep23',5)">↓ Ép.23</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e23s1','ep23_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e23s1" onclick="dl('e23s1','ep23_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--gold),#C9A84C,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);">🎯 Débouchés</div>
+            <div class="s-h" style="color:var(--white)">"La licence éco ça mène à rien."<br><span style="color:var(--gold)">Faux — voici la vérité.</span></div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">Les 8 voies que les profs ne t'expliquent jamais en TD.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e23s2','ep23_02')">↓</button></div>
+      <div class="slide bg-dark" id="e23s2" onclick="dl('e23s2','ep23_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,var(--gold),transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">APRÈS LA LICENCE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">4 voies académiques</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>Master éco / gestion</strong> — recherche ou pro</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>École de commerce</strong> — passerelle admissions</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>DSCG / DSCG</strong> — expertise comptable</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>Concours admin</strong> — fonction publique cat. A</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e23s3','ep23_03')">↓</button></div>
+      <div class="slide bg-slate" id="e23s3" onclick="dl('e23s3','ep23_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">INSERTION DIRECTE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">4 métiers accessibles dès la licence</div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Assistant comptable / contrôleur de gestion junior</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Chargé de clientèle banque / assurance</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Assistant RH / office manager</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Auto-entrepreneur / freelance admin & compta</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e23s4','ep23_04')">↓</button></div>
+      <div class="slide bg-dark" id="e23s4" onclick="dl('e23s4','ep23_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">LA CLEF DE TOUT</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Ce n'est pas ton diplôme, c'est ton projet</div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-box" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+              <div class="s-body" style="color:rgba(255,255,255,0.85)">La licence éco-gestion ouvre <strong>toutes</strong> les portes — à condition de savoir où tu veux aller. Un étudiant avec un projet clair et un stage ciblé bat un étudiant sans projet, même avec de meilleures notes.</div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e23s5','ep23_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e23s5" onclick="dl('e23s5','ep23_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">🎯</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Partage à un L2 qui doute</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.24 → Double licence : mode d'emploi</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d23')">Copier</button></div>
+    <div class="desc-text" id="d23">"La licence éco ça mène à rien" — c'est ce que les gens disent. Voici les 8 voies concrètes que personne ne t'explique en TD : masters, écoles de commerce, métiers directs, concours admin… 🎯
+
+Sauvegarde et partage à un L2 qui doute 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h23')">Copier</button></div>
+    <div class="hashtags" id="h23">#debouches #licenceecogestion #l2ecogestion #sbe #orientationpost #master #ecoledecommer #reussirsal2 #fac #etudiant</div>
+  </div>
+</div>
+
+<!-- EP24 -->
+<div class="ep-section" id="ep24">
+  <div class="ep-header">
+    <div class="ep-num-big">24</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Double licence en L2 : est-ce fait pour toi ? Le vrai guide</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep24',5)">↓ Ép.24</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e24s1','ep24_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e24s1" onclick="dl('e24s1','ep24_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#a78bfa,#7c3aed,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(167,139,250,0.15);color:#a78bfa;border:1px solid rgba(167,139,250,0.3);">📚 Double licence</div>
+            <div class="s-h" style="color:var(--white)">Tu envisages une double licence ?<br><span style="color:#a78bfa">Lis ça avant de candidater.</span></div>
+            <div class="s-div" style="background:#a78bfa;"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">Ce que ça apporte, ce que ça coûte, et comment y accéder depuis une L2.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e24s2','ep24_02')">↓</button></div>
+      <div class="slide bg-dark" id="e24s2" onclick="dl('e24s2','ep24_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,#a78bfa,transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#a78bfa;">C'EST QUOI EXACTEMENT ?</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">Double licence = 2 diplômes en 3 ans</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#a78bfa;"></div><div style="color:rgba(255,255,255,0.85)">Tu suis 2 cursus en parallèle (ex. : Éco + Droit)</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#a78bfa;"></div><div style="color:rgba(255,255,255,0.85)">Sélection sur dossier (mention TB souvent requise)</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#a78bfa;"></div><div style="color:rgba(255,255,255,0.85)">~30h de cours/semaine — volume intense</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#a78bfa;"></div><div style="color:rgba(255,255,255,0.85)">Accessible dès la L1 ou L2 selon les facs</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e24s3','ep24_03')">↓</button></div>
+      <div class="slide bg-slate" id="e24s3" onclick="dl('e24s3','ep24_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#a78bfa;">ÇA T'APPORTE QUOI ?</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">3 vrais avantages compétitifs</div>
+            <div class="s-div" style="background:#a78bfa;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:#a78bfa;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Profil rare :</strong> Éco + Droit = chouchou des RH en banque, assurance, audit</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#a78bfa;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Accès Master :</strong> double ouverture (M1 Droit privé ou M1 Finance)</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#a78bfa;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Rigueur renforcée :</strong> les recruteurs savent que tu as pu le faire</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e24s4','ep24_04')">↓</button></div>
+      <div class="slide bg-dark" id="e24s4" onclick="dl('e24s4','ep24_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#a78bfa;">HONNÊTEMENT</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">C'est fait pour toi si…</div>
+            <div class="s-div" style="background:#a78bfa;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)">Tu as une vraie curiosité pour les 2 domaines</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)">Tu es prêt·e à sacrifier les soirées semaine</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)">Tu vises un Master sélectif ou une carrière hybride</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)">Pas si tu le fais "pour le diplôme de plus" sans projet</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e24s5','ep24_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e24s5" onclick="dl('e24s5','ep24_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">📚</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Envoie à un ami hésitant</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.25 → Droit des affaires en L2</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d24')">Copier</button></div>
+    <div class="desc-text" id="d24">Double licence depuis la L2 — est-ce que ça vaut vraiment le coup ? Deux diplômes en 3 ans, un profil ultra-rare, mais aussi 30h de cours par semaine. Le vrai guide avant de postuler 📚
+
+Sauvegarde si tu y penses 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h24')">Copier</button></div>
+    <div class="hashtags" id="h24">#doublelicence #l2ecogestion #licenceeco #sbe #orientationuniversitaire #reussirsal2 #fac #etudiant #droiteco #conseils</div>
+  </div>
+</div>
+
+<!-- EP25 -->
+<div class="ep-section" id="ep25">
+  <div class="ep-header">
+    <div class="ep-num-big">25</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Droit des affaires en L2 : comprendre enfin cette matière redoutée</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep25',5)">↓ Ép.25</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e25s1','ep25_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e25s1" onclick="dl('e25s1','ep25_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#f87171,#ef4444,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(248,113,113,0.15);color:#f87171;border:1px solid rgba(248,113,113,0.3);">⚖️ Droit des affaires</div>
+            <div class="s-h" style="color:var(--white)">Le droit des affaires en L2 :<br><span style="color:#f87171">matière piège ou atout caché ?</span></div>
+            <div class="s-div" style="background:#f87171;"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">La méthode pour retenir les notions clefs et ne plus partir les mains vides en partiel.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e25s2','ep25_02')">↓</button></div>
+      <div class="slide bg-dark" id="e25s2" onclick="dl('e25s2','ep25_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,#f87171,transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#f87171;">CE QUE TU VAS ÉTUDIER</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">Les 4 blocs du programme</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Droit des sociétés</strong> — SA, SARL, SAS, gérance</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Droit des contrats</strong> — formation, clauses, rupture</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Droit de la concurrence</strong> — abus de position, cartels</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#f87171;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Procédures collectives</strong> — liquidation, sauvegarde</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e25s3','ep25_03')">↓</button></div>
+      <div class="slide bg-slate" id="e25s3" onclick="dl('e25s3','ep25_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#f87171;">LA MÉTHODE QUI MARCHE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Retenir le droit en 3 étapes</div>
+            <div class="s-div" style="background:#f87171;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:#f87171;">1.</div><div style="color:rgba(255,255,255,0.85)"><strong>Fiches par notion :</strong> définition légale + exemple concret</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#f87171;">2.</div><div style="color:rgba(255,255,255,0.85)"><strong>Cas pratiques :</strong> t'entraîner avec les annales dès sem. 3</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#f87171;">3.</div><div style="color:rgba(255,255,255,0.85)"><strong>Actualité juridique :</strong> un article/semaine = +2 points en partiel</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e25s4','ep25_04')">↓</button></div>
+      <div class="slide bg-dark" id="e25s4" onclick="dl('e25s4','ep25_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#f87171;">POURQUOI C'EST UTILE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Le droit des affaires = ton super-pouvoir pro</div>
+            <div class="s-div" style="background:#f87171;"></div>
+            <div class="s-box" style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);">
+              <div class="s-body" style="color:rgba(255,255,255,0.85)">Créer une société, signer un bail, négocier un contrat — tu seras l'un des rares dans la pièce à comprendre ce que tu signes. C'est ça, la vraie valeur ajoutée de la licence éco-gestion.</div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e25s5','ep25_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e25s5" onclick="dl('e25s5','ep25_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">⚖️</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Sauvegarde avant ton partiel</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.26 → Méthode Pomodoro pour révisions</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d25')">Copier</button></div>
+    <div class="desc-text" id="d25">Droit des affaires en L2 — la matière que tout le monde redoute. Sociétés, contrats, concurrence, liquidation… voici comment structurer tes révisions et ne plus repartir les mains vides en partiel ⚖️
+
+Sauvegarde avant le semestre 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h25')">Copier</button></div>
+    <div class="hashtags" id="h25">#droitdesaffaires #l2ecogestion #licenceeco #sbe #revision #partiels #reussirsal2 #fac #etudiant #methodetravail</div>
+  </div>
+</div>
+
+<!-- EP26 -->
+<div class="ep-section" id="ep26">
+  <div class="ep-header">
+    <div class="ep-num-big">26</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Méthode Pomodoro adaptée aux révisions de L2 éco-gestion</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep26',5)">↓ Ép.26</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e26s1','ep26_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e26s1" onclick="dl('e26s1','ep26_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#22c55e,#16a34a,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(34,197,94,0.15);color:#22c55e;border:1px solid rgba(34,197,94,0.3);">⏱️ Pomodoro</div>
+            <div class="s-h" style="color:var(--white)">Tu révises 3h mais tu retiens rien ?<br><span style="color:#22c55e">Le problème c'est pas la durée.</span></div>
+            <div class="s-div" style="background:#22c55e;"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">Le système Pomodoro adapté aux matières de L2 qui change tout en période de révisions.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e26s2','ep26_02')">↓</button></div>
+      <div class="slide bg-dark" id="e26s2" onclick="dl('e26s2','ep26_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,#22c55e,transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#22c55e;">LE PRINCIPE DE BASE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">1 Pomodoro = 25 min travail + 5 min pause</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)">Choisis <strong>1 objectif précis</strong> avant chaque bloc</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)">Téléphone en mode avion, notifs coupées</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)">Après 4 blocs → pause longue 20-30 min</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)">Jamais plus de 5 blocs consécutifs</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e26s3','ep26_03')">↓</button></div>
+      <div class="slide bg-slate" id="e26s3" onclick="dl('e26s3','ep26_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#22c55e;">ADAPTÉ À LA L2</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Par type de matière</div>
+            <div class="s-div" style="background:#22c55e;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:#22c55e;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Maths/Stats/Compta :</strong> 1 bloc = 5 exercices corrigés</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#22c55e;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Éco/Droit :</strong> 1 bloc = 1 chapitre fiché + relecture</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#22c55e;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Langues/RH :</strong> 1 bloc = mémorisation active (flash cards)</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e26s4','ep26_04')">↓</button></div>
+      <div class="slide bg-dark" id="e26s4" onclick="dl('e26s4','ep26_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#22c55e;">LE PROGRAMME TYPE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Une journée de révision optimale</div>
+            <div class="s-div" style="background:#22c55e;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)"><strong>9h-11h :</strong> 4 blocs sur matière difficile (maths/compta)</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)"><strong>11h-13h :</strong> 4 blocs sur matière de mémorisation</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)"><strong>14h-16h :</strong> relecture + annales</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#22c55e;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Après 16h :</strong> repos — le cerveau consolide la nuit</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e26s5','ep26_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e26s5" onclick="dl('e26s5','ep26_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">⏱️</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Sauvegarde avant tes révisions</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.27 → Erasmus depuis la L2</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d26')">Copier</button></div>
+    <div class="desc-text" id="d26">Tu révises 3h et tu retiens rien ? Le problème c'est pas la durée, c'est la méthode. Le Pomodoro adapté aux matières de L2 éco-gestion : maths, compta, droit, stats — bloc par bloc ⏱️
+
+Sauvegarde avant tes révisions 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h26')">Copier</button></div>
+    <div class="hashtags" id="h26">#pomodoro #revision #l2ecogestion #licenceeco #sbe #methodetravail #partiels #reussirsal2 #fac #productivite</div>
+  </div>
+</div>
+
+
+<!-- EP27 -->
+<div class="ep-section" id="ep27">
+  <div class="ep-header">
+    <div class="ep-num-big">27</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Erasmus depuis la L2 : comment partir à l'étranger sans tout sacrifier</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep27',5)">↓ Ép.27</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e27s1','ep27_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e27s1" onclick="dl('e27s1','ep27_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#5B8DEF,#3b6fd4,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(91,141,239,0.15);color:#5B8DEF;border:1px solid rgba(91,141,239,0.3);">✈️ Erasmus</div>
+            <div class="s-h" style="color:var(--white)">"Je peux pas partir en Erasmus, j'ai peur de perdre mon niveau."<br><span style="color:#5B8DEF">Faux mythe. Voilà comment faire.</span></div>
+            <div class="s-div" style="background:#5B8DEF;"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">Le calendrier, les démarches et les vraies questions à se poser avant de candidater.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e27s2','ep27_02')">↓</button></div>
+      <div class="slide bg-dark" id="e27s2" onclick="dl('e27s2','ep27_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,#5B8DEF,transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#5B8DEF;">LE CALENDRIER ERASMUS</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">Quand postuler depuis la L2 ?</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Oct–Nov L2 :</strong> renseigne-toi sur les accords de ta fac</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Déc–Jan L2 :</strong> candidature au bureau des RI</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Fév–Avril :</strong> nomination + choix des cours à l'étranger</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)"><strong>Départ :</strong> S5 ou S6 de ta L3 (l'année suivante)</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e27s3','ep27_03')">↓</button></div>
+      <div class="slide bg-slate" id="e27s3" onclick="dl('e27s3','ep27_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#5B8DEF;">COMMENT ÊTRE SÉLECTIONNÉ</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">3 critères qui font la différence</div>
+            <div class="s-div" style="background:#5B8DEF;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:#5B8DEF;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Moyenne :</strong> souvent 12/20 minimum, sans redoublement</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#5B8DEF;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Lettre de motivation :</strong> projet pro lié à la destination</div></div>
+              <div class="s-li"><div class="s-arr" style="color:#5B8DEF;">→</div><div style="color:rgba(255,255,255,0.85)"><strong>Langue :</strong> justificatif B1/B2 pour pays anglophones/hispanophones</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e27s4','ep27_04')">↓</button></div>
+      <div class="slide bg-dark" id="e27s4" onclick="dl('e27s4','ep27_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#5B8DEF;">LA VRAIE VALEUR AJOUTÉE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Ce que l'Erasmus t'apporte vraiment</div>
+            <div class="s-div" style="background:#5B8DEF;"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)">Anglais professionnel en immersion totale</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)">Réseau international dès la licence</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)">Signal fort sur ton CV pour les Masters sélectifs</div></div>
+              <div class="s-li"><div class="s-dot" style="background:#5B8DEF;"></div><div style="color:rgba(255,255,255,0.85)">Bourse Erasmus+ : jusqu'à 500€/mois selon destination</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e27s5','ep27_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e27s5" onclick="dl('e27s5','ep27_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">✈️</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Sauvegarde pour postuler</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.28 → Les 3 profils qui échouent en L2</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d27')">Copier</button></div>
+    <div class="desc-text" id="d27">Erasmus depuis la L2 — c'est possible, et ça peut changer ta trajectoire. Calendrier, critères de sélection, bourse Erasmus+, valeur CV… Tout ce qu'il faut savoir avant de postuler ✈️
+
+Sauvegarde et commence à y penser dès maintenant 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h27')">Copier</button></div>
+    <div class="hashtags" id="h27">#erasmus #l2ecogestion #licenceeco #sbe #etudiantaletranger #mobilite #reussirsal2 #fac #conseils #bourseerasmus</div>
+  </div>
+</div>
+
+<!-- EP28 -->
+<div class="ep-section" id="ep28">
+  <div class="ep-header">
+    <div class="ep-num-big">28</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Les 3 profils qui échouent en L2 éco-gestion (et comment ne pas en faire partie)</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep28',5)">↓ Ép.28</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e28s1','ep28_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e28s1" onclick="dl('e28s1','ep28_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,#f87171,#ef4444,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(248,113,113,0.15);color:#f87171;border:1px solid rgba(248,113,113,0.3);">⚠️ Profils à risque</div>
+            <div class="s-h" style="color:var(--white)">Il y a 3 types d'étudiants qui échouent en L2.<br><span style="color:#f87171">Est-ce que tu en fais partie ?</span></div>
+            <div class="s-div" style="background:#f87171;"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">Les patterns que j'observe chaque année — et comment sortir de ces schémas avant qu'il soit trop tard.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e28s2','ep28_02')">↓</button></div>
+      <div class="slide bg-dark" id="e28s2" onclick="dl('e28s2','ep28_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,#f87171,transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#f87171;">PROFIL 1</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Le fantôme du S3</div>
+            <div class="s-div" style="background:#f87171;"></div>
+            <div class="s-box" style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);">
+              <div class="s-body" style="color:rgba(255,255,255,0.85)">Il assiste aux cours les premières semaines, puis disparaît progressivement. Il pense "rattraper plus tard". La L2 ne pardonne pas le retard cumulé : les matières s'enchaînent, les lacunes s'accumulent. <strong>Solution : un point hebdomadaire de 30 min sur ce qu'il reste à faire.</strong></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e28s3','ep28_03')">↓</button></div>
+      <div class="slide bg-slate" id="e28s3" onclick="dl('e28s3','ep28_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#f87171;">PROFIL 2</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Le bulldozer sans méthode</div>
+            <div class="s-div" style="background:#f87171;"></div>
+            <div class="s-box" style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);">
+              <div class="s-body" style="color:rgba(255,255,255,0.85)">Il travaille 5h par jour mais sans prioriser. Il recopie ses cours à la main 3 fois, révise les mauvaises matières, stresse la nuit avant le partiel. <strong>Solution : identifier les 20% de notions qui représentent 80% des points.</strong></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e28s4','ep28_04')">↓</button></div>
+      <div class="slide bg-dark" id="e28s4" onclick="dl('e28s4','ep28_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:#f87171;">PROFIL 3</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Le paralysé par le doute</div>
+            <div class="s-div" style="background:#f87171;"></div>
+            <div class="s-box" style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);">
+              <div class="s-body" style="color:rgba(255,255,255,0.85)">Il se pose trop de questions sur son avenir : "à quoi ça sert ?", "est-ce la bonne filière ?". L'anxiété l'empêche de se concentrer sur le présent. <strong>Solution : poser 1 objectif à 4 semaines maximum — pas à 3 ans.</strong></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e28s5','ep28_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e28s5" onclick="dl('e28s5','ep28_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">⚠️</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Envoie à un L2 qui en a besoin</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.29 → Construire son réseau dès la L2</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d28')">Copier</button></div>
+    <div class="desc-text" id="d28">Il y a 3 profils qui échouent en L2 éco-gestion. Le fantôme, le bulldozer sans méthode, le paralysé par le doute. Est-ce que tu te reconnais dans l'un d'eux ? ⚠️
+
+Commente avec ton profil et sauvegarde pour ne pas l'oublier 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h28')">Copier</button></div>
+    <div class="hashtags" id="h28">#echecl2 #l2ecogestion #licenceeco #sbe #reussirsal2 #methodetravail #motivation #fac #etudiant #conseils</div>
+  </div>
+</div>
+
+<!-- EP29 -->
+<div class="ep-section" id="ep29">
+  <div class="ep-header">
+    <div class="ep-num-big">29</div>
+    <div class="ep-info">
+      <div class="ep-serie">SBE · L2 ÉCO-GESTION</div>
+      <div class="ep-title">Construire son réseau pro dès la L2 : le guide concret</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-ghost btn-sm" onclick="dlEp('ep29',5)">↓ Ép.29</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e29s1','ep29_01')">↓</button></div>
+      <div class="slide bg-grad-navy" id="e29s1" onclick="dl('e29s1','ep29_01')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,var(--gold),#C9A84C,transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);">🤝 Réseau pro</div>
+            <div class="s-h" style="color:var(--white)">"Je suis en L2, j'ai rien à apporter dans un réseau pro."<br><span style="color:var(--gold)">Tu te trompes — voilà pourquoi.</span></div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">Les actions concrètes pour construire ton réseau sans avoir 10 ans d'expérience.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e29s2','ep29_02')">↓</button></div>
+      <div class="slide bg-dark" id="e29s2" onclick="dl('e29s2','ep29_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,var(--gold),transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">LES 4 PREMIÈRES ACTIONS</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">Fais ça cette semaine</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>LinkedIn pro :</strong> photo, résumé clair, 3 expériences/projets</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>Connecte-toi</strong> à tes profs + intervenants pros</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>Rejoins</strong> une asso étudiante ou un bureau (BDE, BDS...)</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)"><strong>1 forum entreprises</strong> dans l'année — présente-toi</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e29s3','ep29_03')">↓</button></div>
+      <div class="slide bg-slate" id="e29s3" onclick="dl('e29s3','ep29_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">COMMENT APPROCHER UN PRO</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Le message LinkedIn qui fonctionne</div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-box" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+              <div class="s-body" style="color:rgba(255,255,255,0.85)"><em>"Bonjour [Prénom], étudiant·e en L2 éco-gestion à [fac], je m'intéresse à [secteur]. J'ai lu votre post sur [sujet] — j'aurais aimé avoir votre avis sur [question précise]. Seriez-vous disponible pour un court échange ?"</em></div>
+            </div>
+            <div class="s-body" style="color:rgba(255,255,255,0.6);margin-top:4%;font-size:clamp(8px,1.8cqw,22px);">Court, précis, centré sur eux — pas sur toi.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e29s4','ep29_04')">↓</button></div>
+      <div class="slide bg-dark" id="e29s4" onclick="dl('e29s4','ep29_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">LE PRINCIPE CLÉ</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Donner avant de demander</div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Commente les posts de personnes que tu admires</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Partage leurs contenus avec ta valeur ajoutée</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Aide tes camarades : ton réseau commence par ta promo</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">→</div><div style="color:rgba(255,255,255,0.85)">Être utile → être mémorable → être recommandé</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA</span><button class="btn btn-ghost btn-sm" onclick="dl('e29s5','ep29_05')">↓</button></div>
+      <div class="slide bg-grad-blue" id="e29s5" onclick="dl('e29s5','ep29_05')">
+        <div class="dc" style="width:100%;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0.3),var(--gold),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">🤝</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5cqw,64px);line-height:1.2;color:var(--white);margin-bottom:4%;">Sauvegarde et passe à l'action</div>
+            <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">Ép.30 → Bilan L2 spécial : L3 ici ou ailleurs ?</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d29')">Copier</button></div>
+    <div class="desc-text" id="d29">"Je suis en L2, j'ai rien à apporter dans un réseau pro" — faux. LinkedIn, assos, forums, messages LinkedIn qui marchent vraiment : le guide pour construire ton réseau avant même d'avoir ton diplôme 🤝
+
+Sauvegarde et passe à l'action cette semaine 💾</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h29')">Copier</button></div>
+    <div class="hashtags" id="h29">#reseau #networking #l2ecogestion #licenceeco #sbe #linkedin #reussirsal2 #fac #etudiant #projetpro</div>
+  </div>
+</div>
+
+<!-- EP30 — BILAN SPÉCIAL -->
+<div class="ep-section" id="ep30" style="border:2px solid rgba(201,168,76,0.4);border-radius:16px;padding:24px;background:rgba(201,168,76,0.04);">
+  <div class="ep-header" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);">
+    <div class="ep-num-big" style="color:var(--gold);">30</div>
+    <div class="ep-info">
+      <div class="ep-serie" style="color:var(--gold);">SBE · L2 ÉCO-GESTION — BILAN SPÉCIAL</div>
+      <div class="ep-title">L2 → L3 : bilan complet et ta feuille de route pour la suite</div>
+    </div>
+    <div class="ep-actions">
+      <button class="btn btn-gold btn-sm" onclick="dlEp('ep30',5)">↓ Ép.30</button>
+    </div>
+  </div>
+  <div class="slides-row">
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 1 — HOOK</span><button class="btn btn-ghost btn-sm" onclick="dl('e30s1','ep30_01')">↓</button></div>
+      <div class="slide" id="e30s1" style="background:linear-gradient(155deg,#1B2A4A 0%,#0a0f1e 100%);" onclick="dl('e30s1','ep30_01')">
+        <div class="dc" style="width:100%;height:4px;background:linear-gradient(90deg,var(--gold),rgba(201,168,76,0.3),transparent);top:0;left:0;"></div>
+        <div class="dc" style="width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.12),transparent);top:-40px;right:-40px;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.8)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-badge" style="background:rgba(201,168,76,0.2);color:var(--gold);border:1px solid rgba(201,168,76,0.4);">🏆 Épisode 30 · Bilan</div>
+            <div class="s-h" style="color:var(--white)">Tu as survécu à la L2.<br><span style="color:var(--gold)">Maintenant, construis ta L3.</span></div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-body" style="color:rgba(255,255,255,0.7)">Le bilan de la série + ta feuille de route pour l'année qui change tout.</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.4)">1/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 2</span><button class="btn btn-ghost btn-sm" onclick="dl('e30s2','ep30_02')">↓</button></div>
+      <div class="slide" id="e30s2" style="background:linear-gradient(155deg,#0E1B35 0%,#0a0f1e 100%);" onclick="dl('e30s2','ep30_02')">
+        <div class="dc" style="width:2px;height:60%;background:linear-gradient(180deg,var(--gold),transparent);top:20%;left:8%;"></div>
+        <div class="si" style="padding-left:14%;">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">CE QUE TU SAIS MAINTENANT</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4cqw,52px);">30 épisodes, 30 clefs</div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)">Méthode de travail (compta, stats, droit, dissertations)</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)">Stratégie stage + candidature L3</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)">Gestion du stress + Pomodoro + révisions</div></div>
+              <div class="s-li"><div class="s-dot" style="background:var(--gold);"></div><div style="color:rgba(255,255,255,0.85)">Réseau pro + débouchés + double licence + Erasmus</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">2/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 3</span><button class="btn btn-ghost btn-sm" onclick="dl('e30s3','ep30_03')">↓</button></div>
+      <div class="slide" id="e30s3" style="background:linear-gradient(155deg,#243352 0%,#0E1B35 100%);" onclick="dl('e30s3','ep30_03')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">TA FEUILLE DE ROUTE L3</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">4 priorités pour la rentrée</div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-list" style="margin-top:4%;">
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">1.</div><div style="color:rgba(255,255,255,0.85)"><strong>Choisir ta spécialisation</strong> avec un projet clair derrière</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">2.</div><div style="color:rgba(255,255,255,0.85)"><strong>Cibler 3 Masters</strong> et décortiquer leurs prérequis dès S5</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">3.</div><div style="color:rgba(255,255,255,0.85)"><strong>Activer ton réseau</strong> pour le stage de fin d'année</div></div>
+              <div class="s-li"><div class="s-arr" style="color:var(--gold);">4.</div><div style="color:rgba(255,255,255,0.85)"><strong>Postuler Erasmus</strong> si tu l'envisages — les délais arrivent vite</div></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">3/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 4</span><button class="btn btn-ghost btn-sm" onclick="dl('e30s4','ep30_04')">↓</button></div>
+      <div class="slide" id="e30s4" style="background:linear-gradient(155deg,#0E1B35 0%,#0a0f1e 100%);" onclick="dl('e30s4','ep30_04')">
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.6)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div class="s-eye" style="color:var(--gold);">UN MOT POUR LA ROUTE</div>
+            <div class="s-h" style="color:var(--white);font-size:clamp(12px,4.2cqw,54px);">Ce que la L2 t'a vraiment appris</div>
+            <div class="s-div" style="background:var(--gold);"></div>
+            <div class="s-box" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);">
+              <div class="s-body" style="color:rgba(255,255,255,0.9)">La L2, c'est l'année où tu apprends à travailler seul, à prioriser sous pression, à remettre en question ton projet. Ce n'est pas une étape — c'est une formation accélérée à la vie d'adulte. <strong style="color:var(--gold);">Tu en es sorti·e plus solide que tu ne le penses.</strong></div>
+            </div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.3)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.3)">4/5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sw">
+      <div class="sw-label"><span>SLIDE 5 — CTA FINAL</span><button class="btn btn-ghost btn-sm" onclick="dl('e30s5','ep30_05')">↓</button></div>
+      <div class="slide" id="e30s5" style="background:linear-gradient(155deg,#C9A84C 0%,#8B6914 50%,#1B2A4A 100%);" onclick="dl('e30s5','ep30_05')">
+        <div class="dc" style="width:100%;height:4px;background:linear-gradient(90deg,rgba(255,255,255,0.5),rgba(255,255,255,0.1),transparent);top:0;left:0;"></div>
+        <div class="si">
+          <div class="s-logo" style="color:rgba(255,255,255,0.9)">SBE<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.8);margin:0 2px 2px;vertical-align:middle;"></span></div>
+          <div class="s-content" style="text-align:center;align-items:center;flex:1;display:flex;flex-direction:column;justify-content:center;">
+            <div style="font-size:clamp(22px,7cqw,90px);margin-bottom:4%;">🏆</div>
+            <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(14px,5.5cqw,70px);line-height:1.15;color:var(--white);margin-bottom:4%;">La L3 t'attend.<br>Tu es prêt·e.</div>
+            <div style="width:36px;height:2px;border-radius:2px;background:rgba(255,255,255,0.5);margin:0 auto 5%;"></div>
+            <div style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:var(--white);padding:8px 18px;border-radius:100px;font-size:clamp(9px,2.2cqw,28px);font-weight:600;">@sbe · Série L2 complète — Eps. 1–30</div>
+          </div>
+          <div class="s-foot"><div class="s-wm" style="color:rgba(255,255,255,0.6)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.6)">5/5</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-panel" style="border-color:rgba(201,168,76,0.3);">
+    <div class="desc-label">📝 Description TikTok <button class="copy-btn" onclick="copyText('d30')">Copier</button></div>
+    <div class="desc-text" id="d30">Tu arrives au bout de la L2. Ép.30 — le bilan de toute la série : méthode, stage, réseau, débouchés, spécialisation. Et surtout : ta feuille de route pour une L3 qui compte vraiment 🏆
+
+Sauvegarde cette série. Partage à tous les L2 que tu connais 💛</div>
+    <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyText('h30')">Copier</button></div>
+    <div class="hashtags" id="h30">#bilansbe #l2ecogestion #licenceeco #sbe #reussirsal2 #l3 #orientation #fac #etudiant #motivation</div>
+  </div>
+</div>
+
+</div><!-- end page -->
+<div class="toast" id="toast">✓</div>
+<script>
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+async function copyText(id){const el=document.getElementById(id);if(!el)return;try{await navigator.clipboard.writeText(el.innerText||el.textContent);toast('✓ Copié !');}catch(e){toast('❌ Erreur copie');}}
+async function captureSlide(id,filename){
+  const orig=document.getElementById(id);if(!orig)return false;
+  const wrap=document.createElement('div');
+  wrap.style.cssText='position:fixed;top:0;left:-99999px;width:1080px;height:1350px;pointer-events:none;z-index:-1;background:transparent;';
+  const clone=orig.cloneNode(true);
+  clone.style.width='1080px';clone.style.height='1350px';clone.style.maxWidth='none';clone.style.aspectRatio='auto';clone.style.boxShadow='none';clone.style.transform='none';
+  wrap.appendChild(clone);document.body.appendChild(wrap);
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+  if(document.fonts&&document.fonts.ready){try{await document.fonts.ready;}catch(_){}}
+  try{
+    const c=await html2canvas(clone,{scale:1,width:1080,height:1350,windowWidth:1080,windowHeight:1350,useCORS:true,allowTaint:true,backgroundColor:null,logging:false});
+    const a=document.createElement('a');a.download=`SBE_L2_${filename}.png`;a.href=c.toDataURL('image/png');a.click();return true;
+  }catch(e){console.error(e);return false;}finally{document.body.removeChild(wrap);}
+}
+async function dl(id,name){toast('⏳ Génération…');const ok=await captureSlide(id,name);toast(ok?`✓ ${name}.png`:'❌ Erreur');}
+async function dlEp(epId,count){const num=epId.replace('ep','');toast(`⏳ Épisode ${num}…`);for(let i=1;i<=count;i++){await captureSlide(`e${num}s${i}`,`ep${num}_${String(i).padStart(2,'0')}`);await new Promise(r=>setTimeout(r,250));}toast(`✓ Ép.${num} — ${count} slides`);}
+async function dlAll(){const slides=document.querySelectorAll('.slide[id]');toast(`⏳ Téléchargement (${slides.length} slides)…`);for(const el of slides){const id=el.id;const m=id.match(/^e(\d+)s(\d+)$/);const name=m?`ep${m[1]}_${String(m[2]).padStart(2,'0')}`:id;await captureSlide(id,name);await new Promise(r=>setTimeout(r,200));}toast('✓ Tout téléchargé !');}
+</script>
+</body>
+</html>
