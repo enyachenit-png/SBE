@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBE — Wake Up · Épisodes 07 → 11</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --w:    #FAF8F4;
+  --w2:   #F2EFE8;
+  --blk:  #1A1A1A;
+  --blk2: #111111;
+  --red:  #C0392B;
+  --red2: #E74C3C;
+  --redf: #FEF0EE;
+  --amb:  #D4813A;
+  --ambf: #FEF3E8;
+  --gold: #C9A84C;
+  --goldf:#FBF6E9;
+  --grn:  #1A6B4A;
+  --grnf: #EBF7F1;
+  --muted:#888880;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#EDEBE6;font-family:'DM Sans',sans-serif;}
+
+.topbar{background:var(--blk);border-bottom:3px solid var(--red);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;}
+.tb-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:18px;color:var(--w);}
+.tb-logo span{color:var(--gold);}
+.tb-badge{background:var(--red);color:var(--w);font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:0;margin-left:8px;font-family:'DM Sans',sans-serif;}
+.tb-info{font-size:11px;color:#888;}
+.btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.5px;padding:7px 16px;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase;border-radius:0;}
+.btn-primary{background:var(--red);color:var(--w);}
+.btn-primary:hover{background:var(--red2);}
+.btn-ghost{background:rgba(255,255,255,0.07);color:var(--w);border:1px solid rgba(255,255,255,0.15);}
+.btn-ghost:hover{background:rgba(255,255,255,0.14);}
+.btn-sm{padding:5px 12px;font-size:10px;}
+
+.page{padding:32px;max-width:1600px;margin:0 auto;}
+
+.ep-section{margin-bottom:60px;}
+.ep-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding:18px 24px;background:var(--blk);border-left:4px solid var(--red);border-radius:0;box-shadow:4px 4px 0 var(--red);}
+.ep-num-big{font-family:'Playfair Display',serif;font-weight:900;font-size:42px;color:var(--red);opacity:.4;line-height:1;flex-shrink:0;}
+.ep-info{flex:1;}
+.ep-serie{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:4px;}
+.ep-title-txt{font-family:'Playfair Display',serif;font-size:clamp(13px,1.8vw,18px);font-weight:700;color:var(--w);}
+.ep-actions{display:flex;gap:8px;}
+
+.slides-and-desc{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;}
+.slides-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;}
+
+.desc-panel{background:var(--blk);border:1px solid #333;border-radius:0;overflow:hidden;position:sticky;top:80px;box-shadow:4px 4px 0 var(--gold);}
+.desc-panel-head{background:var(--red);padding:12px 16px;}
+.desc-panel-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--w);}
+.desc-section{padding:14px 16px;border-bottom:1px solid #222;}
+.desc-section:last-child{border-bottom:none;}
+.desc-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#666;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+.desc-text{font-size:12px;line-height:1.65;color:#ccc;white-space:pre-wrap;cursor:text;user-select:all;}
+.desc-text:hover{background:#1a1a1a;padding:2px 4px;margin:-2px -4px;}
+.hashtag-wrap{font-size:11px;color:var(--amb);line-height:1.8;cursor:text;user-select:all;}
+.copy-btn{background:#222;color:var(--gold);border:1px solid #333;font-size:9px;font-weight:600;letter-spacing:.5px;padding:3px 8px;cursor:pointer;transition:all .2s;text-transform:uppercase;font-family:'DM Sans',sans-serif;border-radius:0;}
+.copy-btn:hover{background:var(--gold);color:var(--blk);}
+.copy-btn.copied{background:rgba(26,107,74,0.2);color:#4ade80;border-color:#1a6b4a;}
+
+.sw{display:flex;flex-direction:column;gap:7px;}
+.sw-label{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
+
+.slide{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;container-type:inline-size;container-name:slide;border-radius:0;box-shadow:4px 4px 0 rgba(0,0,0,0.3);cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.slide:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--red);}
+
+.bg-w{background:var(--w);}
+.bg-w2{background:var(--w2);}
+.bg-blk{background:var(--blk);}
+.bg-blk2{background:var(--blk2);}
+.bg-red{background:var(--red);}
+.bg-redf{background:var(--redf);}
+.bg-ambf{background:var(--ambf);}
+.bg-goldf{background:var(--goldf);}
+.bg-grnf{background:var(--grnf);}
+.bg-grad-blk{background:linear-gradient(160deg,#1A1A1A 0%,#0a0a0a 100%);}
+
+.si{width:100%;height:100%;padding:7% 8%;display:flex;flex-direction:column;position:relative;z-index:2;overflow-wrap:anywhere;word-break:normal;hyphens:auto;}
+.slide *{word-wrap:break-word;overflow-wrap:anywhere;}
+.dc{position:absolute;pointer-events:none;}
+
+.s-logo{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(9px,2.5cqw,30px);letter-spacing:3px;text-transform:uppercase;margin-bottom:auto;}
+.s-dot{display:inline-block;width:4px;height:4px;border-radius:50%;margin:0 3px;vertical-align:middle;position:relative;top:-1px;}
+.s-badge{display:inline-flex;align-items:center;font-size:clamp(7px,1.5cqw,20px);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;margin-bottom:5%;width:fit-content;border-radius:0;}
+.s-eye{font-size:clamp(8px,1.7cqw,22px);font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:3%;opacity:.6;}
+.s-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(13px,5cqw,66px);line-height:1.1;letter-spacing:-0.3px;margin-bottom:4%;}
+.s-div{width:32px;height:3px;margin-bottom:4%;}
+.s-body{font-size:clamp(9px,2cqw,28px);line-height:1.6;font-weight:300;opacity:.85;}
+.s-body strong{font-weight:600;opacity:1;}
+
+.s-list{display:flex;flex-direction:column;gap:3%;}
+.s-li{display:flex;align-items:flex-start;gap:6px;font-size:clamp(8px,1.8cqw,26px);line-height:1.35;}
+.s-bul{width:5px;height:5px;border-radius:0;flex-shrink:0;margin-top:3px;transform:rotate(45deg);}
+.s-arr{font-size:clamp(11px,2.4cqw,32px);font-weight:700;flex-shrink:0;line-height:1;margin-top:1px;}
+
+.s-block{padding:4% 5%;margin:3% 0;}
+.s-block p{font-size:clamp(9px,2cqw,26px);line-height:1.5;}
+.s-nbg{position:absolute;font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(70px,22cqw,300px);line-height:.85;opacity:.05;right:3%;bottom:8%;pointer-events:none;letter-spacing:-4px;}
+
+.s-score{display:flex;align-items:center;gap:6px;margin:3% 0;}
+.s-score-bar{flex:1;height:4px;background:rgba(0,0,0,0.1);}
+.s-score-fill{height:100%;}
+.s-score-label{font-size:clamp(8px,1.6cqw,22px);font-weight:700;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+
+.s-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:4%;}
+.s-foot.bb{border-top:1px solid rgba(0,0,0,0.08);}
+.s-foot.bw{border-top:1px solid rgba(255,255,255,0.12);}
+.s-wm{font-size:clamp(7px,1.3cqw,18px);font-weight:500;letter-spacing:1.5px;text-transform:uppercase;opacity:.25;}
+.s-pg{font-size:clamp(7px,1.3cqw,18px);font-weight:700;letter-spacing:1px;opacity:.3;}
+
+.s-content{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.cta-icon{font-size:clamp(22px,7cqw,90px);margin-bottom:4%;text-align:center;}
+.cta-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(15px,5.5cqw,70px);line-height:1.05;letter-spacing:-0.3px;margin-bottom:5%;text-align:center;}
+.cta-pill{display:inline-block;padding:3% 7%;font-size:clamp(8px,1.7cqw,22px);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:4%;border-radius:0;}
+
+.s-epnum{position:absolute;top:7%;right:8%;font-size:clamp(7px,1.3cqw,16px);font-weight:700;letter-spacing:1px;opacity:0.4;z-index:3;pointer-events:none;}
+
+.toast{position:fixed;bottom:20px;right:20px;background:var(--blk);border:2px solid var(--red);color:var(--w);padding:10px 18px;font-size:12px;font-weight:500;opacity:0;transform:translateY(8px);transition:all .3s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:1100px){.slides-and-desc{grid-template-columns:1fr;}.desc-panel{position:static;}}
+@media(max-width:600px){.page{padding:16px;}.topbar{padding:12px 16px;}.slides-row{grid-template-columns:repeat(3,1fr);gap:10px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:6px;">
+    <div class="tb-logo">SBE<span>.</span><span class="tb-badge">⚠ WAKE UP</span></div>
+    <div class="tb-info" style="margin-left:8px;">Les erreurs qui ruinent ta réussite · Épisodes 07 → 11 · Slides + Descriptions</div>
+  </div>
+  <button class="btn btn-primary" onclick="dlAll()">⬇ Tout télécharger</button>
+</div>
+
+<div class="page">
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════════════
+     ÉP. 07 — Tu crois manquer de motivation — tu manques de système
+══════════════════════════════════════════════════ -->
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-num-big">07</div>
+    <div class="ep-info">
+      <div class="ep-serie">Série Wake Up · Épisode 07</div>
+      <div class="ep-title-txt">Tu crois que tu manques de motivation — tu manques de système</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp(7,6)">⬇ 6 slides</button></div>
+  </div>
+  <div class="slides-and-desc">
+    <div class="slides-row">
+
+      <!-- S1 HOOK -->
+      <div class="sw"><div class="sw-label">01 Hook <button class="btn btn-ghost btn-sm" onclick="dl('w7s1','w07_01')">⬇</button></div>
+        <div class="slide bg-w" id="w7s1" onclick="dl('w7s1','w07_01')">
+          <div class="dc" style="width:100%;height:5px;background:var(--red);top:0;left:0;"></div>
+          <div class="dc" style="width:5px;height:100%;background:var(--red);right:0;top:0;opacity:.15;"></div>
+          <div class="s-nbg" style="color:var(--blk)">07</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <span class="s-epnum" style="color:var(--blk)">W07</span>
+            <div class="s-badge" style="background:var(--red);color:var(--w);">⚠ Erreur 07</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--red)">La croyance qui te paralyse</div>
+              <div class="s-h" style="color:var(--blk)">Tu attends d'avoir envie de travailler. C'est exactement pour ça que tu n'avances pas.</div>
+              <div class="s-div" style="background:var(--blk)"></div>
+              <div class="s-body" style="color:var(--blk)">La motivation ne précède pas l'action. Elle la <strong>suit.</strong> 👇</div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">1/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 Diagnostic -->
+      <div class="sw"><div class="sw-label">02 Diagnostic <button class="btn btn-ghost btn-sm" onclick="dl('w7s2','w07_02')">⬇</button></div>
+        <div class="slide bg-redf" id="w7s2" onclick="dl('w7s2','w07_02')">
+          <div class="dc" style="width:100%;height:4px;background:var(--red);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(192,57,43,0.1);color:var(--red);border:1px solid rgba(192,57,43,0.2);">Le vrai problème</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Ce que tout le monde confond</div>
+              <div class="s-h" style="color:var(--blk)">La motivation, ça ne se trouve pas. Ça se déclenche.</div>
+              <div class="s-div" style="background:var(--red)"></div>
+              <div class="s-body" style="color:var(--blk)">Attendre "d'avoir envie" avant de commencer, c'est comme attendre d'avoir faim avant d'acheter à manger. Ton cerveau génère de la dopamine <strong>après</strong> l'effort — pas avant.</div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid var(--red);margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">Les gens motivés n'ont pas plus d'envie. Ils ont un meilleur déclencheur.</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">2/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 Science -->
+      <div class="sw"><div class="sw-label">03 Mécanisme <button class="btn btn-ghost btn-sm" onclick="dl('w7s3','w07_03')">⬇</button></div>
+        <div class="slide bg-blk" id="w7s3" onclick="dl('w7s3','w07_03')">
+          <div class="dc" style="width:100%;height:4px;background:var(--gold);top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--w)">07</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--w)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.2);">Comment ça marche vraiment</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--gold)">Le cercle vertueux</div>
+              <div class="s-h" style="color:var(--w)">Action → Résultat → Dopamine → Envie de recommencer</div>
+              <div class="s-div" style="background:var(--gold)"></div>
+              <div class="s-list">
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">✕</span><span style="color:#aaa">Attendre la motivation → <strong style="color:var(--w)">inaction permanente</strong></span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">✕</span><span style="color:#aaa">Dépendre de l'humeur → <strong style="color:var(--w)">travail chaotique</strong></span></div>
+                <div class="s-li" style="margin-top:4%"><span class="s-arr" style="color:var(--gold)">✓</span><span style="color:var(--w)">Un système → <strong>progression constante</strong></span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--gold)">✓</span><span style="color:var(--w)">Rituel de démarrage → <strong>déclencheur fiable</strong></span></div>
+              </div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:var(--w)">@sbe</div><div class="s-pg" style="color:var(--w)">3/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 Solution -->
+      <div class="sw"><div class="sw-label">04 Solution <button class="btn btn-ghost btn-sm" onclick="dl('w7s4','w07_04')">⬇</button></div>
+        <div class="slide bg-w2" id="w7s4" onclick="dl('w7s4','w07_04')">
+          <div class="dc" style="width:100%;height:4px;background:var(--grn);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:var(--grnf);color:var(--grn);border:1px solid rgba(26,107,74,0.2);">✓ La solution</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--grn)">Construis ton déclencheur</div>
+              <div class="s-h" style="color:var(--blk)">3 éléments d'un rituel de démarrage efficace</div>
+              <div class="s-div" style="background:var(--grn)"></div>
+              <div class="s-list" style="gap:4%">
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">① Fixe un signal</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Même heure, même endroit, même musique. Le cerveau associe le contexte au travail.</div>
+                </div>
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">② Démarre petit</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Ouvre juste ton cours. 2 minutes. L'inertie se brise en agissant, pas en attendant.</div>
+                </div>
+                <div style="background:var(--goldf);border-left:3px solid var(--gold);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:#7a5c00;font-weight:700;text-transform:uppercase;margin-bottom:1%;">③ Mesure le résultat</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Note ce que tu as fait. La preuve visible crée la vraie motivation.</div>
+                </div>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">4/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 Test -->
+      <div class="sw"><div class="sw-label">05 Test <button class="btn btn-ghost btn-sm" onclick="dl('w7s5','w07_05')">⬇</button></div>
+        <div class="slide bg-ambf" id="w7s5" onclick="dl('w7s5','w07_05')">
+          <div class="dc" style="width:100%;height:4px;background:var(--amb);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(212,129,58,0.1);color:var(--amb);border:1px solid rgba(212,129,58,0.2);">Test rapide</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Sois honnête avec toi-même</div>
+              <div class="s-h" style="color:var(--blk)">Est-ce que tu as un rituel de démarrage défini — ou tu improvises à chaque fois ?</div>
+              <div class="s-div" style="background:var(--amb)"></div>
+              <div class="s-body" style="color:var(--blk)">Si tu commences à travailler en fonction de comment tu te sens, tu laisses ta progression au hasard. <strong>Le système remplace l'humeur.</strong></div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid var(--amb);margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">"Les pros ne s'entraînent pas quand ils en ont envie. Ils s'entraînent pour en avoir envie."</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">5/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 CTA -->
+      <div class="sw"><div class="sw-label">06 CTA <button class="btn btn-ghost btn-sm" onclick="dl('w7s6','w07_06')">⬇</button></div>
+        <div class="slide bg-red" id="w7s6" onclick="dl('w7s6','w07_06')">
+          <div class="dc" style="width:100%;height:4px;background:var(--gold);top:0;left:0;"></div>
+          <div class="dc" style="width:70%;height:70%;background:radial-gradient(ellipse,rgba(255,255,255,0.06),transparent 70%);top:-15%;right:-15%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:rgba(255,255,255,0.85)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-content" style="text-align:center;align-items:center;">
+              <div class="cta-icon">⚡</div>
+              <div class="cta-h" style="color:var(--w)">Ce soir, tu commences à quelle heure — et où ? Décide maintenant.</div>
+              <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+              <div class="s-body" style="color:rgba(255,255,255,0.75);text-align:center;">Tu attends la motivation ou tu crées le système ? Dis-moi en commentaire 👇</div>
+              <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:var(--w);">Ép.08 → Ton entourage te sabote</div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.35)">6/6</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- slides-row -->
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 Ép.07 — Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description <button class="copy-btn" onclick="copyEl('d_w7')">Copier</button></div>
+        <div class="desc-text" id="d_w7">Tu attends d'avoir envie de travailler. C'est exactement pour ça que tu n'avances pas.
+
+La motivation ne précède pas l'action — elle la suit. Ceux qui réussissent n'ont pas plus de volonté. Ils ont un système.
+
+Voici comment construire le tien en 3 étapes. 👇
+
+⚡ Sauvegarde et définis ton rituel ce soir.</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_w7')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_w7">#motivation #etudiant #methodedetravail #productivite #reussitefac #habitudes #fac #sbe #wakeup #systeme</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ÉP. 08 — Ton entourage te tire vers le bas sans le savoir
+══════════════════════════════════════════════════ -->
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-num-big">08</div>
+    <div class="ep-info">
+      <div class="ep-serie">Série Wake Up · Épisode 08</div>
+      <div class="ep-title-txt">Ton entourage te tire vers le bas — et personne ne le fait exprès</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp(8,6)">⬇ 6 slides</button></div>
+  </div>
+  <div class="slides-and-desc">
+    <div class="slides-row">
+
+      <!-- S1 HOOK -->
+      <div class="sw"><div class="sw-label">01 Hook <button class="btn btn-ghost btn-sm" onclick="dl('w8s1','w08_01')">⬇</button></div>
+        <div class="slide bg-w" id="w8s1" onclick="dl('w8s1','w08_01')">
+          <div class="dc" style="width:100%;height:5px;background:var(--amb);top:0;left:0;"></div>
+          <div class="dc" style="width:5px;height:100%;background:var(--amb);right:0;top:0;opacity:.15;"></div>
+          <div class="s-nbg" style="color:var(--blk)">08</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <span class="s-epnum" style="color:var(--blk)">W08</span>
+            <div class="s-badge" style="background:var(--amb);color:var(--w);">⚠ Angle mort</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--amb)">Ce que personne ne dit</div>
+              <div class="s-h" style="color:var(--blk)">Tes amis ne veulent pas te voir échouer. Mais certains d'eux te rendent l'échec plus facile.</div>
+              <div class="s-div" style="background:var(--blk)"></div>
+              <div class="s-body" style="color:var(--blk)">Ce n'est pas de la malveillance. C'est de la <strong>gravité sociale.</strong> 👇</div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">1/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="sw"><div class="sw-label">02 Mécanisme <button class="btn btn-ghost btn-sm" onclick="dl('w8s2','w08_02')">⬇</button></div>
+        <div class="slide bg-ambf" id="w8s2" onclick="dl('w8s2','w08_02')">
+          <div class="dc" style="width:100%;height:4px;background:var(--amb);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(212,129,58,0.1);color:var(--amb);border:1px solid rgba(212,129,58,0.2);">Comment ça fonctionne</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">La gravité sociale</div>
+              <div class="s-h" style="color:var(--blk)">Tu adoptes inconsciemment le niveau d'ambition moyen de tes proches</div>
+              <div class="s-div" style="background:var(--amb)"></div>
+              <div class="s-body" style="color:var(--blk)">Si tes amis bossent peu, "peu" devient la norme. Si personne autour de toi ne lit, tu lis moins. Ce n'est pas une question de <strong>caractère</strong> — c'est de la <strong>biologie sociale.</strong></div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid var(--amb);margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">Tu es la moyenne des 5 personnes que tu côtoies le plus.</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">2/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="sw"><div class="sw-label">03 Patterns <button class="btn btn-ghost btn-sm" onclick="dl('w8s3','w08_03')">⬇</button></div>
+        <div class="slide bg-blk" id="w8s3" onclick="dl('w8s3','w08_03')">
+          <div class="dc" style="width:100%;height:4px;background:var(--amb);top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--w)">08</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--w)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(212,129,58,0.12);color:var(--amb);border:1px solid rgba(212,129,58,0.2);">Les signaux à reconnaître</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--amb)">Tu te reconnais ?</div>
+              <div class="s-h" style="color:var(--w)">3 patterns toxiques sans drama</div>
+              <div class="s-div" style="background:var(--amb)"></div>
+              <div class="s-list">
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc">"T'inquiète, tout le monde a raté ce partiel" <strong style="color:var(--w)">(normalisation de l'échec)</strong></span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc">"Tu bosses encore ?!" <strong style="color:var(--w)">(pression à la baisse)</strong></span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc">"On sort ce soir, tu rattraperas" <strong style="color:var(--w)">(dilution constante)</strong></span></div>
+              </div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:var(--w)">@sbe</div><div class="s-pg" style="color:var(--w)">3/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="sw"><div class="sw-label">04 Solution <button class="btn btn-ghost btn-sm" onclick="dl('w8s4','w08_04')">⬇</button></div>
+        <div class="slide bg-w2" id="w8s4" onclick="dl('w8s4','w08_04')">
+          <div class="dc" style="width:100%;height:4px;background:var(--grn);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:var(--grnf);color:var(--grn);border:1px solid rgba(26,107,74,0.2);">✓ Comment réagir</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--grn)">Sans couper les ponts</div>
+              <div class="s-h" style="color:var(--blk)">Tu n'as pas à choisir entre tes amis et ta réussite</div>
+              <div class="s-div" style="background:var(--grn)"></div>
+              <div class="s-list" style="gap:4%">
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">① Identifie les heures critiques</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Bloc de travail non-négociable avant toute interaction sociale.</div>
+                </div>
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">② Cherche 1 allié</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Un seul ami ambitieux change tout. Trouve-le ou deviens-le.</div>
+                </div>
+                <div style="background:var(--goldf);border-left:3px solid var(--gold);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:#7a5c00;font-weight:700;text-transform:uppercase;margin-bottom:1%;">③ Expose-toi à d'autres normes</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Communautés en ligne, tutos, podcasts : laisse entrer d'autres références.</div>
+                </div>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">4/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="sw"><div class="sw-label">05 Réflexion <button class="btn btn-ghost btn-sm" onclick="dl('w8s5','w08_05')">⬇</button></div>
+        <div class="slide bg-redf" id="w8s5" onclick="dl('w8s5','w08_05')">
+          <div class="dc" style="width:100%;height:4px;background:var(--red);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(192,57,43,0.1);color:var(--red);border:1px solid rgba(192,57,43,0.2);">Question directe</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Sois honnête</div>
+              <div class="s-h" style="color:var(--blk)">Qui dans ton entourage te pousse vers le haut — et qui t'y retient ?</div>
+              <div class="s-div" style="background:var(--red)"></div>
+              <div class="s-body" style="color:var(--blk)">Ce n'est pas une question de trahison. C'est une question de <strong>conscience.</strong> Savoir qui tire dans quel sens, c'est déjà reprendre le contrôle.</div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid var(--red);margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">Tu peux aimer quelqu'un et choisir de ne pas adopter ses habitudes.</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">5/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 CTA -->
+      <div class="sw"><div class="sw-label">06 CTA <button class="btn btn-ghost btn-sm" onclick="dl('w8s6','w08_06')">⬇</button></div>
+        <div class="slide bg-grad-blk" id="w8s6" onclick="dl('w8s6','w08_06')">
+          <div class="dc" style="width:100%;height:4px;background:var(--amb);top:0;left:0;"></div>
+          <div class="dc" style="width:70%;height:70%;background:radial-gradient(ellipse,rgba(212,129,58,0.08),transparent 70%);top:-15%;right:-15%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:rgba(255,255,255,0.85)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-content" style="text-align:center;align-items:center;">
+              <div class="cta-icon">🧲</div>
+              <div class="cta-h" style="color:var(--w)">Partage ça à l'ami qui mérite de l'entendre</div>
+              <div class="s-div" style="background:var(--amb);margin:0 auto 5%"></div>
+              <div class="s-body" style="color:rgba(255,255,255,0.75);text-align:center;">Est-ce que tu as un allié dans tes études ? Dis-moi en commentaire 👇</div>
+              <div class="cta-pill" style="background:rgba(212,129,58,0.15);border:1px solid rgba(212,129,58,0.3);color:var(--amb);">Ép.09 → La fatigue que tu ressens</div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.35)">6/6</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 Ép.08 — Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description <button class="copy-btn" onclick="copyEl('d_w8')">Copier</button></div>
+        <div class="desc-text" id="d_w8">Tes amis ne veulent pas te voir échouer. Mais certains d'eux te rendent l'échec plus facile — sans le savoir.
+
+C'est ce qu'on appelle la gravité sociale : tu adoptes inconsciemment le niveau d'ambition moyen de tes proches.
+
+Ce n'est pas une question de trahison. C'est une question de conscience.
+
+🧲 Envoie ça à l'ami qui mérite de l'entendre.</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_w8')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_w8">#entourage #reussite #etudiant #fac #ambition #habitudes #sbe #wakeup #motivation #gravitesociale</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ÉP. 09 — La fatigue que tu ressens n'est pas de la paresse
+══════════════════════════════════════════════════ -->
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-num-big">09</div>
+    <div class="ep-info">
+      <div class="ep-serie">Série Wake Up · Épisode 09</div>
+      <div class="ep-title-txt">La fatigue que tu ressens n'est pas de la paresse — c'est de la surcharge cognitive</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp(9,6)">⬇ 6 slides</button></div>
+  </div>
+  <div class="slides-and-desc">
+    <div class="slides-row">
+
+      <!-- S1 HOOK -->
+      <div class="sw"><div class="sw-label">01 Hook <button class="btn btn-ghost btn-sm" onclick="dl('w9s1','w09_01')">⬇</button></div>
+        <div class="slide bg-w" id="w9s1" onclick="dl('w9s1','w09_01')">
+          <div class="dc" style="width:100%;height:5px;background:#2980B9;top:0;left:0;"></div>
+          <div class="dc" style="width:5px;height:100%;background:#2980B9;right:0;top:0;opacity:.15;"></div>
+          <div class="s-nbg" style="color:var(--blk)">09</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <span class="s-epnum" style="color:var(--blk)">W09</span>
+            <div class="s-badge" style="background:#2980B9;color:var(--w);">⚠ Alerte</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#2980B9">Tu n'es pas paresseux</div>
+              <div class="s-h" style="color:var(--blk)">Tu es épuisé — mais pas à cause de ce que tu crois.</div>
+              <div class="s-div" style="background:var(--blk)"></div>
+              <div class="s-body" style="color:var(--blk)">La vraie fatigue étudiante ne vient pas du travail. Elle vient de la <strong>surcharge de décisions invisibles.</strong> 👇</div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">1/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="sw"><div class="sw-label">02 Explication <button class="btn btn-ghost btn-sm" onclick="dl('w9s2','w09_02')">⬇</button></div>
+        <div class="slide" style="background:#EBF4FB" id="w9s2" onclick="dl('w9s2','w09_02')">
+          <div class="dc" style="width:100%;height:4px;background:#2980B9;top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(41,128,185,0.1);color:#2980B9;border:1px solid rgba(41,128,185,0.2);">La charge cognitive</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Ce que ton cerveau porte</div>
+              <div class="s-h" style="color:var(--blk)">Ton cerveau fait des centaines de micro-décisions avant même d'ouvrir un cours</div>
+              <div class="s-div" style="background:#2980B9"></div>
+              <div class="s-body" style="color:var(--blk)">Répondre à un message, décider quoi manger, gérer des notifs, ruminer une conversation — chaque micro-décision consomme du <strong>glucose cérébral.</strong> Il ne reste rien pour apprendre.</div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid #2980B9;margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">Ce n'est pas la quantité de travail qui épuise — c'est le nombre de contextes mentaux actifs.</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">2/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="sw"><div class="sw-label">03 Les voleurs d'énergie <button class="btn btn-ghost btn-sm" onclick="dl('w9s3','w09_03')">⬇</button></div>
+        <div class="slide bg-blk" id="w9s3" onclick="dl('w9s3','w09_03')">
+          <div class="dc" style="width:100%;height:4px;background:#2980B9;top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--w)">09</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--w)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(41,128,185,0.12);color:#5dade2;border:1px solid rgba(41,128,185,0.2);">Les voleurs silencieux</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#5dade2">Ce qui vide ta batterie</div>
+              <div class="s-h" style="color:var(--w)">4 sources de charge cognitive que tu sous-estimes</div>
+              <div class="s-div" style="background:#2980B9"></div>
+              <div class="s-list">
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Le téléphone</strong> — chaque notification = interruption + récupération (23 min)</span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Les tâches en suspens</strong> — ce que tu n'as pas décidé occupe de l'espace mental</span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Le multitâche</strong> — ton cerveau ne le fait pas vraiment, il alterne — à un coût</span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Le flou</strong> — "je vais bosser après" sans heure fixe = boucle ouverte permanente</span></div>
+              </div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:var(--w)">@sbe</div><div class="s-pg" style="color:var(--w)">3/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="sw"><div class="sw-label">04 Solution <button class="btn btn-ghost btn-sm" onclick="dl('w9s4','w09_04')">⬇</button></div>
+        <div class="slide bg-w2" id="w9s4" onclick="dl('w9s4','w09_04')">
+          <div class="dc" style="width:100%;height:4px;background:var(--grn);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:var(--grnf);color:var(--grn);border:1px solid rgba(26,107,74,0.2);">✓ Vider la charge</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--grn)">Récupère ton énergie mentale</div>
+              <div class="s-h" style="color:var(--blk)">3 pratiques pour réduire la charge avant de commencer</div>
+              <div class="s-div" style="background:var(--grn)"></div>
+              <div class="s-list" style="gap:4%">
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">① Brain dump matinal</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">3 minutes à vider tout ce qui "tourne" dans ta tête sur papier. Ferme les boucles ouvertes.</div>
+                </div>
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">② Mode avion au travail</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Pas de demi-mesure. Ton cerveau doit savoir qu'il est en mode focus.</div>
+                </div>
+                <div style="background:var(--goldf);border-left:3px solid var(--gold);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:#7a5c00;font-weight:700;text-transform:uppercase;margin-bottom:1%;">③ Une seule tâche à la fois</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Décide ce que tu fais avant de commencer. L'indécision coûte autant que le travail.</div>
+                </div>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">4/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="sw"><div class="sw-label">05 Diagnostic <button class="btn btn-ghost btn-sm" onclick="dl('w9s5','w09_05')">⬇</button></div>
+        <div class="slide" style="background:#EBF4FB" id="w9s5" onclick="dl('w9s5','w09_05')">
+          <div class="dc" style="width:100%;height:4px;background:#2980B9;top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(41,128,185,0.1);color:#2980B9;border:1px solid rgba(41,128,185,0.2);">Test de charge</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Évalue ton niveau maintenant</div>
+              <div class="s-h" style="color:var(--blk)">Combien de boucles ouvertes as-tu en ce moment ?</div>
+              <div class="s-div" style="background:#2980B9"></div>
+              <div class="s-body" style="color:var(--blk)">Messages en attente de réponse. Tâches décidées mais non commencées. Décisions remises à plus tard. Inquiétudes non résolues.<br><br>Si tu comptes <strong>plus de 5</strong> — tu es en surcharge cognitive avant même d'ouvrir un cours.</div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">5/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 CTA -->
+      <div class="sw"><div class="sw-label">06 CTA <button class="btn btn-ghost btn-sm" onclick="dl('w9s6','w09_06')">⬇</button></div>
+        <div class="slide bg-blk2" id="w9s6" onclick="dl('w9s6','w09_06')">
+          <div class="dc" style="width:100%;height:4px;background:#2980B9;top:0;left:0;"></div>
+          <div class="dc" style="width:70%;height:70%;background:radial-gradient(ellipse,rgba(41,128,185,0.07),transparent 70%);top:-15%;right:-15%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:rgba(255,255,255,0.85)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-content" style="text-align:center;align-items:center;">
+              <div class="cta-icon">🧠</div>
+              <div class="cta-h" style="color:var(--w)">Fais ton brain dump ce soir — juste 3 minutes</div>
+              <div class="s-div" style="background:#2980B9;margin:0 auto 5%"></div>
+              <div class="s-body" style="color:rgba(255,255,255,0.75);text-align:center;">Tu te sens souvent épuisé sans avoir beaucoup travaillé ? Dis-moi en commentaire 👇</div>
+              <div class="cta-pill" style="background:rgba(41,128,185,0.15);border:1px solid rgba(41,128,185,0.3);color:#5dade2;">Ép.10 → Tu rates l'exam 3 semaines avant</div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.35)">6/6</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 Ép.09 — Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description <button class="copy-btn" onclick="copyEl('d_w9')">Copier</button></div>
+        <div class="desc-text" id="d_w9">Tu n'es pas paresseux. Tu es en surcharge cognitive.
+
+La vraie fatigue étudiante ne vient pas du travail — elle vient du nombre de décisions invisibles que ton cerveau porte en permanence.
+
+Messages en attente, tâches flottantes, notifications, multitâche… ton cerveau est à plat avant même d'ouvrir un cours.
+
+🧠 Essaie le brain dump ce soir : 3 minutes pour tout vider sur papier.</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_w9')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_w9">#surcharge #fatiguemental #etudiant #productivite #fac #sbe #wakeup #concentration #bienhetre #braindump</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ÉP. 10 — Tu rates tes examens 3 semaines avant de les passer
+══════════════════════════════════════════════════ -->
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-num-big">10</div>
+    <div class="ep-info">
+      <div class="ep-serie">Série Wake Up · Épisode 10</div>
+      <div class="ep-title-txt">Tu rates tes examens 3 semaines avant de les passer — sans le savoir</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp(10,6)">⬇ 6 slides</button></div>
+  </div>
+  <div class="slides-and-desc">
+    <div class="slides-row">
+
+      <!-- S1 HOOK -->
+      <div class="sw"><div class="sw-label">01 Hook <button class="btn btn-ghost btn-sm" onclick="dl('w10s1','w10_01')">⬇</button></div>
+        <div class="slide bg-w" id="w10s1" onclick="dl('w10s1','w10_01')">
+          <div class="dc" style="width:100%;height:5px;background:var(--grn);top:0;left:0;"></div>
+          <div class="dc" style="width:5px;height:100%;background:var(--grn);right:0;top:0;opacity:.15;"></div>
+          <div class="s-nbg" style="color:var(--blk)">10</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <span class="s-epnum" style="color:var(--blk)">W10</span>
+            <div class="s-badge" style="background:var(--grn);color:var(--w);">⚠ Timing fatal</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--grn)">Le moment exact où tout se joue</div>
+              <div class="s-h" style="color:var(--blk)">L'exam n'est pas dans 3 semaines. Il était hier — et tu ne le savais pas.</div>
+              <div class="s-div" style="background:var(--blk)"></div>
+              <div class="s-body" style="color:var(--blk)">Ce que tu fais 3 semaines avant détermine 80% de ton résultat. Ce que tu fais la veille ne change presque rien. 👇</div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">1/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="sw"><div class="sw-label">02 La courbe de l'oubli <button class="btn btn-ghost btn-sm" onclick="dl('w10s2','w10_02')">⬇</button></div>
+        <div class="slide bg-grnf" id="w10s2" onclick="dl('w10s2','w10_02')">
+          <div class="dc" style="width:100%;height:4px;background:var(--grn);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(26,107,74,0.1);color:var(--grn);border:1px solid rgba(26,107,74,0.2);">La science de l'oubli</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Ebbinghaus avait raison</div>
+              <div class="s-h" style="color:var(--blk)">Sans révision espacée, tu oublies 70% d'un cours en 24 heures</div>
+              <div class="s-div" style="background:var(--grn)"></div>
+              <div class="s-body" style="color:var(--blk)">La courbe de l'oubli est brutale : <strong>50% en 1h, 70% en 24h, 90% en 7 jours.</strong> Réviser la veille de l'exam, c'est essayer de remplir un seau percé.</div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid var(--grn);margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">La mémoire à long terme se construit dans les intervalles, pas dans les sessions.</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">2/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="sw"><div class="sw-label">03 Le bon timing <button class="btn btn-ghost btn-sm" onclick="dl('w10s3','w10_03')">⬇</button></div>
+        <div class="slide bg-blk" id="w10s3" onclick="dl('w10s3','w10_03')">
+          <div class="dc" style="width:100%;height:4px;background:var(--grn);top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--w)">10</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--w)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(26,107,74,0.15);color:#4ade80;border:1px solid rgba(26,107,74,0.25);">La bonne fenêtre</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#4ade80">Quand réviser vraiment</div>
+              <div class="s-h" style="color:var(--w)">La répétition espacée : la seule méthode prouvée</div>
+              <div class="s-div" style="background:var(--grn)"></div>
+              <div class="s-list">
+                <div class="s-li"><span class="s-arr" style="color:#4ade80">J+1</span><span style="color:#ccc">Première révision le lendemain du cours → <strong style="color:var(--w)">ancrage initial</strong></span></div>
+                <div class="s-li"><span class="s-arr" style="color:#4ade80">J+7</span><span style="color:#ccc">Deuxième révision 7 jours plus tard → <strong style="color:var(--w)">consolidation</strong></span></div>
+                <div class="s-li"><span class="s-arr" style="color:#4ade80">J+21</span><span style="color:#ccc">Troisième révision → <strong style="color:var(--w)">mémoire long terme</strong></span></div>
+                <div class="s-li" style="margin-top:4%"><span class="s-arr" style="color:var(--red)">✕</span><span style="color:#888">Tout réviser la veille → <strong style="color:var(--w)">illusion de travail</strong></span></div>
+              </div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:var(--w)">@sbe</div><div class="s-pg" style="color:var(--w)">3/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="sw"><div class="sw-label">04 Plan concret <button class="btn btn-ghost btn-sm" onclick="dl('w10s4','w10_04')">⬇</button></div>
+        <div class="slide bg-w2" id="w10s4" onclick="dl('w10s4','w10_04')">
+          <div class="dc" style="width:100%;height:4px;background:var(--grn);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:var(--grnf);color:var(--grn);border:1px solid rgba(26,107,74,0.2);">✓ Plan d'action</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--grn)">Commence maintenant</div>
+              <div class="s-h" style="color:var(--blk)">Ce que tu peux mettre en place dès cette semaine</div>
+              <div class="s-div" style="background:var(--grn)"></div>
+              <div class="s-list" style="gap:4%">
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">① Flashcards après chaque cours</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">5 questions par chapitre, révisées à J+1, J+7, J+21.</div>
+                </div>
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">② Calendrier inversé</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Part de la date de l'exam, remonte 3 semaines, place tes sessions maintenant.</div>
+                </div>
+                <div style="background:var(--goldf);border-left:3px solid var(--gold);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:#7a5c00;font-weight:700;text-transform:uppercase;margin-bottom:1%;">③ 15 min / jour suffit</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">15 min de rappel actif vaut mieux que 3h de relecture la veille.</div>
+                </div>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">4/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="sw"><div class="sw-label">05 Choc de réalité <button class="btn btn-ghost btn-sm" onclick="dl('w10s5','w10_05')">⬇</button></div>
+        <div class="slide bg-redf" id="w10s5" onclick="dl('w10s5','w10_05')">
+          <div class="dc" style="width:100%;height:4px;background:var(--red);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(192,57,43,0.1);color:var(--red);border:1px solid rgba(192,57,43,0.2);">La réalité</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Compte les jours</div>
+              <div class="s-h" style="color:var(--blk)">Ton prochain partiel — dans combien de semaines exactement ?</div>
+              <div class="s-div" style="background:var(--red)"></div>
+              <div class="s-body" style="color:var(--blk)">Si c'est dans moins de 3 semaines, la fenêtre idéale est <strong>déjà fermée</strong> pour certains chapitres. Mais tu peux encore ouvrir la fenêtre suivante.</div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid var(--red);margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">Le meilleur moment pour commencer, c'était il y a 3 semaines. Le deuxième meilleur moment, c'est maintenant.</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">5/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 CTA -->
+      <div class="sw"><div class="sw-label">06 CTA <button class="btn btn-ghost btn-sm" onclick="dl('w10s6','w10_06')">⬇</button></div>
+        <div class="slide" style="background:linear-gradient(160deg,#0f2d1f,#1A6B4A 60%,#0a1a0f)" id="w10s6" onclick="dl('w10s6','w10_06')">
+          <div class="dc" style="width:100%;height:4px;background:var(--gold);top:0;left:0;"></div>
+          <div class="dc" style="width:70%;height:70%;background:radial-gradient(ellipse,rgba(255,255,255,0.05),transparent 70%);top:-15%;right:-15%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:rgba(255,255,255,0.85)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-content" style="text-align:center;align-items:center;">
+              <div class="cta-icon">📅</div>
+              <div class="cta-h" style="color:var(--w)">Ouvre ton calendrier. Place 3 sessions de révision maintenant.</div>
+              <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+              <div class="s-body" style="color:rgba(255,255,255,0.75);text-align:center;">Tu commences à réviser combien de temps avant tes partiels ? 👇</div>
+              <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:var(--w);">Ép.11 → Ton environnement te sabote</div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.35)">6/6</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 Ép.10 — Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description <button class="copy-btn" onclick="copyEl('d_w10')">Copier</button></div>
+        <div class="desc-text" id="d_w10">Tu rates tes examens 3 semaines avant de les passer — sans le savoir.
+
+Ce que tu fais pendant les semaines qui précèdent détermine 80% de ton résultat. Ce que tu fais la veille ne change presque rien.
+
+La courbe de l'oubli est brutale : 70% d'un cours disparaît en 24h sans révision.
+
+📅 Ouvre ton calendrier maintenant. Place tes premières sessions espacées avant ce soir.</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_w10')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_w10">#revisions #partiels #etudiant #fac #repetitionespacee #methodedetravail #sbe #wakeup #memoire #organisation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     ÉP. 11 — Ton environnement de travail te sabote en silence
+══════════════════════════════════════════════════ -->
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-num-big">11</div>
+    <div class="ep-info">
+      <div class="ep-serie">Série Wake Up · Épisode 11</div>
+      <div class="ep-title-txt">Ton environnement de travail te sabote en silence — et tu ne le vois pas</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlEp(11,6)">⬇ 6 slides</button></div>
+  </div>
+  <div class="slides-and-desc">
+    <div class="slides-row">
+
+      <!-- S1 HOOK -->
+      <div class="sw"><div class="sw-label">01 Hook <button class="btn btn-ghost btn-sm" onclick="dl('w11s1','w11_01')">⬇</button></div>
+        <div class="slide bg-w" id="w11s1" onclick="dl('w11s1','w11_01')">
+          <div class="dc" style="width:100%;height:5px;background:#7B2FBE;top:0;left:0;"></div>
+          <div class="dc" style="width:5px;height:100%;background:#7B2FBE;right:0;top:0;opacity:.15;"></div>
+          <div class="s-nbg" style="color:var(--blk)">11</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <span class="s-epnum" style="color:var(--blk)">W11</span>
+            <div class="s-badge" style="background:#7B2FBE;color:var(--w);">⚠ Alerte</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#7B2FBE">Ce que tu ne vois pas</div>
+              <div class="s-h" style="color:var(--blk)">Tu peux avoir la meilleure méthode du monde. Si ton environnement est mauvais, tu échoues.</div>
+              <div class="s-div" style="background:var(--blk)"></div>
+              <div class="s-body" style="color:var(--blk)">Ton cerveau ne résiste pas à son contexte. Il <strong>obéit</strong> à son contexte. 👇</div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">1/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 -->
+      <div class="sw"><div class="sw-label">02 Design d'env. <button class="btn btn-ghost btn-sm" onclick="dl('w11s2','w11_02')">⬇</button></div>
+        <div class="slide" style="background:#F3EEF9" id="w11s2" onclick="dl('w11s2','w11_02')">
+          <div class="dc" style="width:100%;height:4px;background:#7B2FBE;top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(123,47,190,0.1);color:#7B2FBE;border:1px solid rgba(123,47,190,0.2);">Le design d'environnement</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Ce que la psychologie dit</div>
+              <div class="s-h" style="color:var(--blk)">Tu n'as pas besoin de volonté. Tu as besoin d'un contexte qui rend le travail facile.</div>
+              <div class="s-div" style="background:#7B2FBE"></div>
+              <div class="s-body" style="color:var(--blk)">Les comportements sont déclenchés par des <strong>signaux contextuels.</strong> Un téléphone posé sur le bureau réduit la concentration — même éteint. Ton cerveau alloue des ressources cognitives pour le surveiller.</div>
+              <div class="s-block" style="background:var(--w);border-left:3px solid #7B2FBE;margin-top:5%;">
+                <p style="color:var(--blk);font-style:italic;font-family:'Playfair Display',serif;font-size:clamp(9px,2.5cqw,30px);">Le design des habitudes, c'est rendre le bon comportement plus facile que le mauvais.</p>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">2/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 -->
+      <div class="sw"><div class="sw-label">03 Les coupables <button class="btn btn-ghost btn-sm" onclick="dl('w11s3','w11_03')">⬇</button></div>
+        <div class="slide bg-blk" id="w11s3" onclick="dl('w11s3','w11_03')">
+          <div class="dc" style="width:100%;height:4px;background:#7B2FBE;top:0;left:0;"></div>
+          <div class="s-nbg" style="color:var(--w)">11</div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--w)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(123,47,190,0.15);color:#b57bee;border:1px solid rgba(123,47,190,0.25);">Les saboteurs</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:#b57bee">Ce qui détruit ta concentration</div>
+              <div class="s-h" style="color:var(--w)">5 saboteurs d'environnement que tu ignores</div>
+              <div class="s-div" style="background:#7B2FBE"></div>
+              <div class="s-list">
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Téléphone visible</strong> — réduit les capacités cognitives même silencieux</span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Bureau en désordre</strong> — charge visuelle = charge mentale</span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Onglets ouverts</strong> — rappels constants de tâches non faites</span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Lit ou canapé</strong> — ton cerveau y associe le repos, pas le travail</span></div>
+                <div class="s-li"><span class="s-arr" style="color:var(--red)">→</span><span style="color:#ccc"><strong style="color:var(--w)">Ambiance sonore chaotique</strong> — conversations = interférence linguistique</span></div>
+              </div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:var(--w)">@sbe</div><div class="s-pg" style="color:var(--w)">3/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 -->
+      <div class="sw"><div class="sw-label">04 Reconfigurer <button class="btn btn-ghost btn-sm" onclick="dl('w11s4','w11_04')">⬇</button></div>
+        <div class="slide bg-w2" id="w11s4" onclick="dl('w11s4','w11_04')">
+          <div class="dc" style="width:100%;height:4px;background:var(--grn);top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:var(--grnf);color:var(--grn);border:1px solid rgba(26,107,74,0.2);">✓ Reconfigurer</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--grn)">Ton setup idéal en 10 minutes</div>
+              <div class="s-h" style="color:var(--blk)">Ce que tu fais avant de t'asseoir définit ce que tu feras assis</div>
+              <div class="s-div" style="background:var(--grn)"></div>
+              <div class="s-list" style="gap:4%">
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">① Téléphone hors de vue</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Pas en mode silencieux — dans une autre pièce. Les études montrent +26% de concentration.</div>
+                </div>
+                <div style="background:var(--grnf);border-left:3px solid var(--grn);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:1%;">② Bureau épuré</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Seuls les outils de la tâche actuelle sur le bureau. Rien d'autre.</div>
+                </div>
+                <div style="background:var(--goldf);border-left:3px solid var(--gold);padding:3% 4%;">
+                  <div style="font-size:clamp(8px,1.6cqw,22px);color:#7a5c00;font-weight:700;text-transform:uppercase;margin-bottom:1%;">③ Signal sonore</div>
+                  <div style="font-size:clamp(9px,2cqw,26px);color:var(--blk);">Musique instrumentale ou bruit blanc — toujours la même playlist = signal de focus.</div>
+                </div>
+              </div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">4/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 -->
+      <div class="sw"><div class="sw-label">05 Audit <button class="btn btn-ghost btn-sm" onclick="dl('w11s5','w11_05')">⬇</button></div>
+        <div class="slide" style="background:#F3EEF9" id="w11s5" onclick="dl('w11s5','w11_05')">
+          <div class="dc" style="width:100%;height:4px;background:#7B2FBE;top:0;left:0;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:var(--blk)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-badge" style="background:rgba(123,47,190,0.1);color:#7B2FBE;border:1px solid rgba(123,47,190,0.2);">Audit express</div>
+            <div class="s-content">
+              <div class="s-eye" style="color:var(--blk);opacity:.5">Regarde autour de toi</div>
+              <div class="s-h" style="color:var(--blk)">Là où tu travailles en ce moment — combien de saboteurs comptes-tu ?</div>
+              <div class="s-div" style="background:#7B2FBE"></div>
+              <div class="s-list" style="gap:2%">
+                <div class="s-li"><span class="s-bul" style="background:#7B2FBE"></span><span style="color:var(--blk)">Téléphone visible ?</span></div>
+                <div class="s-li"><span class="s-bul" style="background:#7B2FBE"></span><span style="color:var(--blk)">Bureau encombré ?</span></div>
+                <div class="s-li"><span class="s-bul" style="background:#7B2FBE"></span><span style="color:var(--blk)">Onglets inutiles ouverts ?</span></div>
+                <div class="s-li"><span class="s-bul" style="background:#7B2FBE"></span><span style="color:var(--blk)">Canapé ou lit ?</span></div>
+                <div class="s-li"><span class="s-bul" style="background:#7B2FBE"></span><span style="color:var(--blk)">Conversations en fond ?</span></div>
+              </div>
+              <div style="margin-top:5%;font-size:clamp(9px,2cqw,26px);font-weight:700;color:#7B2FBE;">Chaque ✓ = un frein invisible à retirer.</div>
+            </div>
+            <div class="s-foot bb"><div class="s-wm" style="color:var(--blk)">@sbe</div><div class="s-pg" style="color:var(--blk)">5/6</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 CTA -->
+      <div class="sw"><div class="sw-label">06 CTA <button class="btn btn-ghost btn-sm" onclick="dl('w11s6','w11_06')">⬇</button></div>
+        <div class="slide" style="background:linear-gradient(160deg,#1a0a2e,#7B2FBE 80%,#4a1a8a)" id="w11s6" onclick="dl('w11s6','w11_06')">
+          <div class="dc" style="width:100%;height:4px;background:var(--gold);top:0;left:0;"></div>
+          <div class="dc" style="width:70%;height:70%;background:radial-gradient(ellipse,rgba(255,255,255,0.07),transparent 70%);top:-15%;right:-15%;"></div>
+          <div class="si">
+            <div class="s-logo" style="color:rgba(255,255,255,0.85)">SBE<span class="s-dot" style="background:var(--gold)"></span></div>
+            <div class="s-content" style="text-align:center;align-items:center;">
+              <div class="cta-icon">🎯</div>
+              <div class="cta-h" style="color:var(--w)">Avant ta prochaine session — retire 1 saboteur. Juste 1.</div>
+              <div class="s-div" style="background:var(--gold);margin:0 auto 5%"></div>
+              <div class="s-body" style="color:rgba(255,255,255,0.75);text-align:center;">Quel est ton plus grand saboteur d'environnement ? Dis-moi en commentaire 👇</div>
+              <div class="cta-pill" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:var(--w);">Retrouve tous les épisodes Wake Up ↗</div>
+            </div>
+            <div class="s-foot bw"><div class="s-wm" style="color:rgba(255,255,255,0.4)">@sbe</div><div class="s-pg" style="color:rgba(255,255,255,0.35)">6/6</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 Ép.11 — Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description <button class="copy-btn" onclick="copyEl('d_w11')">Copier</button></div>
+        <div class="desc-text" id="d_w11">Tu peux avoir la meilleure méthode de révision du monde. Si ton environnement est mauvais, tu échoues.
+
+Téléphone sur le bureau (même éteint), canapé, désordre, onglets ouverts — chaque élément vole une partie de ta concentration sans que tu t'en rendes compte.
+
+Ton cerveau n'obéit pas à ta volonté. Il obéit à son contexte.
+
+🎯 Avant ta prochaine session, retire un seul saboteur. Juste un.</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_w11')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_w11">#concentration #environnement #etudiant #productivite #fac #sbe #wakeup #focus #habitudes #organisation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- .page -->
+
+<script>
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function copyEl(id){
+  const el = document.getElementById(id);
+  const txt = el.innerText;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = el.previousElementSibling?.querySelector('.copy-btn') || document.querySelector(`[onclick="copyEl('${id}')"]`);
+    if(btn){ btn.textContent = '✓ Copié'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 1800); }
+  });
+}
+
+async function captureSlide(id, filename){
+  const orig = document.getElementById(id);
+  if(!orig) return false;
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:fixed;top:0;left:-99999px;width:1080px;height:1350px;pointer-events:none;z-index:-1;background:transparent;';
+  const clone = orig.cloneNode(true);
+  clone.style.width = '1080px';
+  clone.style.height = '1350px';
+  clone.style.maxWidth = 'none';
+  clone.style.aspectRatio = 'auto';
+  clone.style.boxShadow = 'none';
+  clone.style.transform = 'none';
+  wrap.appendChild(clone);
+  document.body.appendChild(wrap);
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  if(document.fonts && document.fonts.ready){ try{ await document.fonts.ready; }catch(_){} }
+  try{
+    const c = await html2canvas(clone, {
+      scale: 1, width: 1080, height: 1350,
+      windowWidth: 1080, windowHeight: 1350,
+      useCORS: true, allowTaint: true,
+      backgroundColor: null, logging: false
+    });
+    const a = document.createElement('a');
+    a.download = `SBE_WU_${filename}.png`;
+    a.href = c.toDataURL('image/png');
+    a.click();
+    return true;
+  }catch(e){ console.error(e); return false; }
+  finally{ document.body.removeChild(wrap); }
+}
+
+async function dl(id, name){
+  showToast('⏳ Génération…');
+  const ok = await captureSlide(id, name);
+  showToast(ok ? `✓ ${name}.png` : '❌ Erreur');
+}
+
+async function dlEp(num, count){
+  showToast(`⏳ Épisode ${num}…`);
+  for(let i=1; i<=count; i++){
+    await captureSlide(`w${num}s${i}`, `w${String(num).padStart(2,'0')}_0${i}`);
+    await new Promise(r => setTimeout(r, 250));
+  }
+  showToast(`✓ Ép.${num} terminé`);
+}
+
+async function dlAll(){
+  const eps = [
+    {n:7,c:6},{n:8,c:6},{n:9,c:6},{n:10,c:6},{n:11,c:6}
+  ];
+  showToast('⏳ Téléchargement complet…');
+  for(const ep of eps){
+    for(let i=1; i<=ep.c; i++){
+      await captureSlide(`w${ep.n}s${i}`, `w${String(ep.n).padStart(2,'0')}_0${i}`);
+      await new Promise(r => setTimeout(r, 200));
+    }
+  }
+  showToast('✓ Tout téléchargé !');
+}
+</script>
+</body>
+</html>
