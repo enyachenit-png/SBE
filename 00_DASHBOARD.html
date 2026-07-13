@@ -24,6 +24,7 @@ header .sub{font-size:12px;opacity:0.7;margin-top:4px;letter-spacing:1px;text-tr
 .filter[data-series="L2"].active{background:#C9A84C;border-color:#C9A84C;color:#1B2A4A;}
 .filter[data-series="WakeUp"].active{background:#C0392B;border-color:#C0392B;}
 .filter[data-series="Special"].active{background:#5C6B2C;border-color:#5C6B2C;}
+.filter[data-series="EnyaWellness"].active{background:#D43838;border-color:#D43838;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;padding:18px;max-width:1400px;margin:0 auto;}
 .card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(27,42,74,0.08);transition:transform .2s,box-shadow .2s;}
 .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,42,74,0.12);}
@@ -89,6 +90,7 @@ header .sub{font-size:12px;opacity:0.7;margin-top:4px;letter-spacing:1px;text-tr
   <input type="search" class="search" id="search" placeholder="🔍 Chercher un sujet, un mot-clé…">
   <button class="filter active" data-series="ALL">Tous</button>
   <button class="filter" data-series="L1">Série L1</button><button class="filter" data-series="L2">Série L2</button><button class="filter" data-series="WakeUp">Série Wake Up</button><button class="filter" data-series="Special">Éditions spéciales</button>
+  <button class="filter" data-series="EnyaWellness">💪 EnyaWellness</button>
   <button class="filter" data-series="Questionnaire">🎯 Questionnaires</button>
   <button class="filter" data-series="Resource">📚 Ebooks &amp; Ressources</button>
   <button class="filter" data-status="missing" id="filter-missing">⚠ À télécharger</button>
@@ -2406,6 +2408,53 @@ Une seule de ces habitudes change déjà la donne.</pre>
   </div>
 </div>
 
+
+<div class="section" data-series-section="EnyaWellness" style="background:#050505;padding-bottom:40px;">
+  <div class="section-heading" style="border-bottom:2px solid #D43838;margin-bottom:0;padding-bottom:16px;">
+    <h2 style="font-family:'DM Sans',sans-serif;font-weight:700;color:#F5F5F0;letter-spacing:2px;text-transform:uppercase;font-size:16px;">ENYA<span style="color:#D43838;">·</span>WELLNESS <span style="font-size:13px;color:#D43838;letter-spacing:1px;font-weight:400;">(1)</span></h2>
+    <p style="color:#6B6B6B;">Séances · Nutrition · Transformation physique</p>
+  </div>
+  <div class="grid" style="padding:20px;max-width:1400px;margin:0 auto;">
+  <article class="card incomplete" data-series="EnyaWellness" data-has-pngs="false" data-search="séance fessiers rdl step up hip thrust abduction glute hyperextension protocole musculation femme fessiers résultats">
+    <div class="card-thumb" style="background:#0A0A0A;border:1px solid #2A2A2A;">
+      <div class="thumb-placeholder" style="color:#D43838;font-family:'DM Sans',sans-serif;font-weight:700;font-size:30px;letter-spacing:2px;">FESSIERS</div>
+      <div class="card-badge" style="background:#D43838;color:#F5F5F0;">EnyaWellness</div>
+      <div class="status-badge missing">⚠ À télécharger</div>
+    </div>
+    <div class="card-body" style="background:#161616;border-top:2px solid #D43838;">
+      <div class="card-meta">
+        <span class="card-num" style="color:#D43838;">Strength · 01</span>
+        <span class="card-slides">8 slides</span>
+      </div>
+      <h2 class="card-title" style="color:#F5F5F0;">La Séance Fessiers Complète — 5 exercices, protocoles exacts</h2>
+      <details class="card-details">
+        <summary style="color:#6B6B6B;">📝 Description &amp; hashtags</summary>
+        <div class="detail-block">
+          <div class="detail-label">Description <button class="cpy" data-copy="d_EW_fessiers">📋</button></div>
+          <pre class="detail-text" id="d_EW_fessiers">La séance fessiers complète — 5 exercices, protocoles exacts, conseils technique.
+
+🔥 10 min de mobilité (ne saute pas l&#39;éco)
+① RDL — 3×8 lourd — grand fessier + ischios
+② Step Up haltère — 3×8/côté — moyen fessier
+③ Hip Thrust — 3×8 lourd — isolation grand fessier
+④ Abduction — 8+8+8sec — brûlure totale
+⑤ Glute Hyperextension — 2×échec — finisher
+
+Sauvegarde pour ta prochaine séance 💾</pre>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Hashtags <button class="cpy" data-copy="h_EW_fessiers">📋</button></div>
+          <pre class="detail-text hashtags" id="h_EW_fessiers">#fessiers #musculationfemme #seancefessiers #salledesport #enyawellness</pre>
+        </div>
+      </details>
+      <div class="card-actions">
+        <a class="btn btn-warning" href="/editor/EW_Fessiers_Seance_Complete.html?autodl=1" target="_blank">⬇ Générer + télécharger</a>
+        <a class="btn btn-ghost" href="/editor/EW_Fessiers_Seance_Complete.html" target="_blank">🎨 Éditer</a>
+      </div>
+    </div>
+  </article>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 

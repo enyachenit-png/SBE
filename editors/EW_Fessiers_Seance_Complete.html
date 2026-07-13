@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EnyaWellness — Séance Fessiers Complète</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --noir:    #0A0A0A;
+  --charbon: #161616;
+  --graphite:#262626;
+  --ombre:   #1F1F1F;
+  --gris:    #6B6B6B;
+  --gris2:   #4A4A4A;
+  --blanc:   #F5F5F0;
+  --blanc2:  #E8E6DD;
+  --rouge:   #D43838;
+  --rouge2:  #A02525;
+  --rouge3:  #2D1414;
+  --line:    #2A2A2A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#050505;font-family:'DM Sans',sans-serif;color:var(--blanc);}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--noir);border-bottom:2px solid var(--rouge);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px;}
+.tb-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--blanc);}
+.tb-logo span{color:var(--rouge);}
+.tb-badge{background:transparent;color:var(--rouge);font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border:1px solid var(--rouge);margin-left:8px;font-family:'DM Sans',sans-serif;}
+.tb-info{font-size:11px;color:var(--gris);}
+.btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.5px;padding:7px 16px;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase;border-radius:0;}
+.btn-primary{background:var(--rouge);color:var(--blanc);}
+.btn-primary:hover{background:var(--rouge2);}
+.btn-ghost{background:rgba(255,255,255,0.05);color:var(--blanc);border:1px solid var(--line);}
+.btn-ghost:hover{background:rgba(255,255,255,0.1);}
+.btn-sm{padding:5px 12px;font-size:10px;}
+
+/* ── PAGE ── */
+.page{padding:32px;max-width:1400px;margin:0 auto;}
+
+/* ── EP SECTION ── */
+.ep-section{margin-bottom:60px;}
+.ep-header{display:flex;align-items:center;gap:16px;margin-bottom:20px;padding:18px 24px;background:var(--charbon);border-left:4px solid var(--rouge);box-shadow:4px 4px 0 var(--rouge);}
+.ep-num-big{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--rouge);opacity:.3;line-height:1;flex-shrink:0;}
+.ep-info{flex:1;}
+.ep-serie{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--rouge);margin-bottom:4px;}
+.ep-title-txt{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,2vw,22px);letter-spacing:1px;color:var(--blanc);}
+.ep-actions{display:flex;gap:8px;}
+
+/* ── LAYOUT ── */
+.slides-and-desc{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;}
+.slides-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+
+/* ── DESC PANEL ── */
+.desc-panel{background:var(--charbon);border:1px solid var(--line);overflow:hidden;position:sticky;top:80px;box-shadow:4px 4px 0 var(--rouge);}
+.desc-panel-head{background:var(--rouge);padding:12px 16px;}
+.desc-panel-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blanc);}
+.desc-section{padding:14px 16px;border-bottom:1px solid var(--line);}
+.desc-section:last-child{border-bottom:none;}
+.desc-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gris);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+.desc-text{font-size:12px;line-height:1.65;color:#bbb;white-space:pre-wrap;cursor:text;user-select:all;}
+.hashtag-wrap{font-size:11px;color:var(--rouge);line-height:1.8;cursor:text;user-select:all;}
+.copy-btn{background:var(--graphite);color:var(--blanc);border:1px solid var(--line);font-size:9px;font-weight:600;letter-spacing:.5px;padding:3px 8px;cursor:pointer;transition:all .2s;text-transform:uppercase;font-family:'DM Sans',sans-serif;border-radius:0;}
+.copy-btn:hover{background:var(--rouge);color:var(--blanc);}
+.copy-btn.copied{background:rgba(26,107,74,0.2);color:#4ade80;}
+
+/* ── SLIDE WRAPPER ── */
+.sw{display:flex;flex-direction:column;gap:7px;}
+.sw-label{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gris);display:flex;justify-content:space-between;align-items:center;}
+
+/* ── SLIDE 4:5 ── */
+.slide{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;container-type:inline-size;container-name:slide;border-radius:0;box-shadow:4px 4px 0 rgba(0,0,0,0.5);cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.slide:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--rouge);}
+
+/* BACKGROUNDS */
+.bg-noir{background:var(--noir);}
+.bg-charbon{background:var(--charbon);}
+.bg-graphite{background:var(--graphite);}
+.bg-rouge{background:var(--rouge);}
+.bg-rouge3{background:var(--rouge3);}
+.bg-blanc{background:var(--blanc);}
+.bg-grad-noir{background:linear-gradient(155deg,#0A0A0A 0%,#1a1a1a 100%);}
+.bg-grad-rouge{background:linear-gradient(155deg,var(--rouge) 0%,var(--rouge2) 100%);}
+
+/* SLIDE INNER */
+.si{width:100%;height:100%;padding:7% 8%;display:flex;flex-direction:column;position:relative;z-index:2;overflow-wrap:break-word;word-break:normal;hyphens:manual;}
+.slide *{word-wrap:break-word;overflow-wrap:break-word;}
+.dc{position:absolute;pointer-events:none;}
+
+/* TYPO */
+.ew-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(10px,2.8cqw,34px);letter-spacing:4px;text-transform:uppercase;margin-bottom:auto;}
+.ew-logo span{color:var(--rouge);}
+.ew-badge{display:inline-flex;align-items:center;font-size:clamp(7px,1.4cqw,18px);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;margin-bottom:4%;width:fit-content;}
+.ew-eye{font-size:clamp(8px,1.6cqw,20px);font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:2%;color:var(--gris);}
+.ew-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(16px,7cqw,90px);line-height:.95;letter-spacing:1px;margin-bottom:4%;}
+.ew-sub{font-size:clamp(9px,2cqw,26px);font-weight:300;line-height:1.5;opacity:.8;}
+.ew-sub strong{font-weight:600;opacity:1;}
+.ew-div{width:36px;height:2px;background:var(--rouge);margin-bottom:4%;}
+
+/* NUMÉRO BACKGROUND */
+.ew-nbg{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,28cqw,360px);line-height:.85;opacity:.04;right:2%;bottom:5%;pointer-events:none;letter-spacing:-2px;color:var(--blanc);}
+
+/* PROTOCOLE BOX */
+.proto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3%;margin:4% 0;}
+.proto-cell{background:rgba(255,255,255,0.04);border-top:2px solid var(--rouge);padding:4% 5%;}
+.proto-label{font-size:clamp(7px,1.3cqw,16px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rouge);margin-bottom:4%;}
+.proto-val{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,5cqw,64px);line-height:1;color:var(--blanc);}
+
+/* LISTE */
+.ew-list{display:flex;flex-direction:column;gap:3%;}
+.ew-li{display:flex;align-items:flex-start;gap:8px;font-size:clamp(8px,1.8cqw,24px);line-height:1.4;}
+.ew-dash{color:var(--rouge);font-weight:700;flex-shrink:0;font-size:clamp(9px,2cqw,26px);}
+
+/* CONSEIL BOX */
+.conseil{border-left:3px solid var(--rouge);padding:3% 5%;background:rgba(212,56,56,0.06);margin:4% 0;}
+.conseil p{font-size:clamp(9px,2cqw,26px);line-height:1.5;font-style:italic;color:var(--blanc2);}
+
+/* MUSCLE TAG */
+.muscle-tag{display:inline-flex;align-items:center;gap:6px;font-size:clamp(7px,1.4cqw,18px);font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3% 5%;background:rgba(212,56,56,0.1);border:1px solid rgba(212,56,56,0.25);color:var(--rouge);margin-bottom:4%;}
+
+/* PROTOCOLE SPECIAL 8-8-8 */
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3%;margin:4% 0;}
+.three-cell{background:rgba(255,255,255,0.04);border-top:2px solid var(--rouge);padding:3% 4%;text-align:center;}
+.three-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,6cqw,80px);color:var(--rouge);line-height:1;}
+.three-label{font-size:clamp(6px,1.2cqw,15px);font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gris);margin-top:2%;}
+
+/* CONTENT FLEX */
+.ew-content{flex:1;display:flex;flex-direction:column;justify-content:center;}
+
+/* CTA */
+.cta-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,7.5cqw,96px);line-height:.92;letter-spacing:1px;text-align:center;margin-bottom:5%;}
+.cta-sub{font-size:clamp(9px,1.8cqw,24px);font-weight:300;text-align:center;opacity:.75;line-height:1.5;}
+.cta-pill{display:inline-block;padding:3% 8%;font-size:clamp(8px,1.6cqw,20px);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:5%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);color:var(--blanc);}
+
+/* FOOTER */
+.ew-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:4%;border-top:1px solid var(--line);}
+.ew-wm{font-size:clamp(7px,1.3cqw,16px);font-weight:500;letter-spacing:2px;text-transform:uppercase;opacity:.25;}
+.ew-pg{font-size:clamp(7px,1.3cqw,16px);font-weight:700;letter-spacing:1px;opacity:.3;}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--charbon);border:2px solid var(--rouge);color:var(--blanc);padding:10px 18px;font-size:12px;font-weight:500;opacity:0;transform:translateY(8px);transition:all .3s;z-index:9999;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:1100px){.slides-and-desc{grid-template-columns:1fr;}.desc-panel{position:static;}}
+@media(max-width:600px){.page{padding:16px;}.topbar{padding:12px 16px;}.slides-row{grid-template-columns:repeat(3,1fr);gap:10px;}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:6px;">
+    <div class="tb-logo">ENYA<span>·</span>WELLNESS<span class="tb-badge">STRENGTH</span></div>
+    <div class="tb-info" style="margin-left:8px;">Séance Fessiers Complète · 8 slides</div>
+  </div>
+  <button class="btn btn-primary" onclick="dlAll()">⬇ Tout télécharger</button>
+</div>
+
+<div class="page">
+<div class="toast" id="toast"></div>
+
+<div class="ep-section">
+  <div class="ep-header">
+    <div class="ep-num-big">01</div>
+    <div class="ep-info">
+      <div class="ep-serie">EnyaWellness · Strength</div>
+      <div class="ep-title-txt">La Séance Fessiers — RDL · Step Up · Hip Thrust · Abduction · Finisher</div>
+    </div>
+    <div class="ep-actions"><button class="btn btn-ghost btn-sm" onclick="dlAll()">⬇ 8 slides</button></div>
+  </div>
+
+  <div class="slides-and-desc">
+    <div class="slides-row">
+
+      <!-- S1 HOOK -->
+      <div class="sw"><div class="sw-label">01 Hook <button class="btn btn-ghost btn-sm" onclick="dl('fs1','EW_Fessiers_01')">⬇</button></div>
+        <div class="slide bg-grad-noir" id="fs1" onclick="dl('fs1','EW_Fessiers_01')">
+          <div class="dc" style="width:100%;height:3px;background:var(--rouge);top:0;left:0;"></div>
+          <div class="dc" style="width:2px;height:55%;background:var(--rouge);left:0;top:22%;opacity:.4;"></div>
+          <div class="ew-nbg">F</div>
+          <div class="si">
+            <div class="ew-logo">ENYA<span>·</span>WELLNESS</div>
+            <span style="position:absolute;top:7%;right:8%;font-size:clamp(7px,1.3cqw,16px);font-weight:700;letter-spacing:1px;opacity:0.4;color:var(--blanc);font-family:'DM Sans',sans-serif;">STRENGTH</span>
+            <div class="ew-content">
+              <div class="ew-badge" style="background:var(--rouge);color:var(--blanc);">SÉANCE COMPLÈTE</div>
+              <div class="ew-h" style="color:var(--blanc);">LA SÉANCE FESSIERS QUI DONNE DES RÉSULTATS</div>
+              <div class="ew-div"></div>
+              <div class="ew-sub" style="color:var(--blanc2);">5 exercices · protocoles exacts · conseils technique 👇</div>
+            </div>
+            <div class="ew-foot">
+              <div class="ew-wm" style="color:var(--blanc);">@enyawellness</div>
+              <div class="ew-pg" style="color:var(--blanc);">1/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S2 MOBILITÉ -->
+      <div class="sw"><div class="sw-label">02 Mobilité <button class="btn btn-ghost btn-sm" onclick="dl('fs2','EW_Fessiers_02')">⬇</button></div>
+        <div class="slide bg-charbon" id="fs2" onclick="dl('fs2','EW_Fessiers_02')">
+          <div class="dc" style="width:100%;height:3px;background:var(--rouge);top:0;left:0;"></div>
+          <div class="ew-nbg" style="font-size:clamp(60px,20cqw,260px);">10</div>
+          <div class="si">
+            <div class="ew-logo">ENYA<span>·</span>WELLNESS</div>
+            <div class="ew-content">
+              <div class="ew-badge" style="background:rgba(212,56,56,0.12);color:var(--rouge);border:1px solid rgba(212,56,56,0.2);">AVANT DE COMMENCER</div>
+              <div class="ew-h" style="color:var(--blanc);">10 MIN DE MOBILITÉ</div>
+              <div class="ew-div"></div>
+              <div class="ew-list">
+                <div class="ew-li"><span class="ew-dash">—</span><span>Rotation des hanches · ouverture des fléchisseurs</span></div>
+                <div class="ew-li"><span class="ew-dash">—</span><span>Activation fessière au sol (clamshell, donkey kick)</span></div>
+                <div class="ew-li"><span class="ew-dash">—</span><span>Mobilité lombaire · chat-vache x 10 reps</span></div>
+              </div>
+              <div class="conseil" style="margin-top:5%;">
+                <p>Ne saute pas l'échauffement. Des fessiers froids = fessiers qui ne s'activent pas = lombaires qui compensent.</p>
+              </div>
+            </div>
+            <div class="ew-foot">
+              <div class="ew-wm">@enyawellness</div>
+              <div class="ew-pg">2/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S3 RDL -->
+      <div class="sw"><div class="sw-label">03 Ex.1 — RDL <button class="btn btn-ghost btn-sm" onclick="dl('fs3','EW_Fessiers_03')">⬇</button></div>
+        <div class="slide bg-noir" id="fs3" onclick="dl('fs3','EW_Fessiers_03')">
+          <div class="dc" style="width:100%;height:3px;background:var(--rouge);top:0;left:0;"></div>
+          <div class="ew-nbg">1</div>
+          <div class="si">
+            <div class="ew-logo">ENYA<span>·</span>WELLNESS</div>
+            <div class="ew-content">
+              <div class="ew-eye">EXERCICE 01</div>
+              <div class="ew-h" style="color:var(--blanc);">ROMANIAN DEADLIFT</div>
+              <div class="muscle-tag">Grand fessier · Ischio-jambiers</div>
+              <div class="proto-grid">
+                <div class="proto-cell">
+                  <div class="proto-label">Séries</div>
+                  <div class="proto-val">3</div>
+                </div>
+                <div class="proto-cell">
+                  <div class="proto-label">Répétitions</div>
+                  <div class="proto-val">8</div>
+                </div>
+              </div>
+              <div class="conseil">
+                <p>Charge lourd. Dos plat, genoux légèrement fléchis. La barre glisse le long des tibias. Tu dois sentir l'étirement dans les ischios — pas la douleur dans le bas du dos.</p>
+              </div>
+            </div>
+            <div class="ew-foot">
+              <div class="ew-wm">@enyawellness</div>
+              <div class="ew-pg">3/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S4 STEP UP -->
+      <div class="sw"><div class="sw-label">04 Ex.2 — Step Up <button class="btn btn-ghost btn-sm" onclick="dl('fs4','EW_Fessiers_04')">⬇</button></div>
+        <div class="slide bg-graphite" id="fs4" onclick="dl('fs4','EW_Fessiers_04')">
+          <div class="dc" style="width:100%;height:3px;background:var(--rouge);top:0;left:0;"></div>
+          <div class="ew-nbg">2</div>
+          <div class="si">
+            <div class="ew-logo">ENYA<span>·</span>WELLNESS</div>
+            <div class="ew-content">
+              <div class="ew-eye">EXERCICE 02</div>
+              <div class="ew-h" style="color:var(--blanc);">STEP UP À L'HALTÈRE</div>
+              <div class="muscle-tag">Moyen fessier · Arrondi</div>
+              <div class="proto-grid">
+                <div class="proto-cell">
+                  <div class="proto-label">Séries</div>
+                  <div class="proto-val">3</div>
+                </div>
+                <div class="proto-cell">
+                  <div class="proto-label">Reps / côté</div>
+                  <div class="proto-val">8</div>
+                </div>
+              </div>
+              <div class="conseil">
+                <p>Exercice unilatéral — travaille chaque jambe séparément. Pose le pied entier sur le step, pousse avec le talon. C'est le meilleur exo pour arrondir les fessiers latéralement.</p>
+              </div>
+            </div>
+            <div class="ew-foot">
+              <div class="ew-wm">@enyawellness</div>
+              <div class="ew-pg">4/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S5 HIP THRUST -->
+      <div class="sw"><div class="sw-label">05 Ex.3 — Hip Thrust <button class="btn btn-ghost btn-sm" onclick="dl('fs5','EW_Fessiers_05')">⬇</button></div>
+        <div class="slide bg-rouge3" id="fs5" onclick="dl('fs5','EW_Fessiers_05')">
+          <div class="dc" style="width:100%;height:3px;background:var(--rouge);top:0;left:0;"></div>
+          <div class="dc" style="width:100%;height:100%;background:radial-gradient(ellipse at 80% 20%,rgba(212,56,56,0.08),transparent 60%);top:0;left:0;"></div>
+          <div class="ew-nbg">3</div>
+          <div class="si">
+            <div class="ew-logo">ENYA<span>·</span>WELLNESS</div>
+            <div class="ew-content">
+              <div class="ew-eye">EXERCICE 03</div>
+              <div class="ew-h" style="color:var(--blanc);">HIP THRUST</div>
+              <div class="muscle-tag">Grand fessier · Isolation</div>
+              <div class="proto-grid">
+                <div class="proto-cell" style="border-top-color:var(--rouge2);">
+                  <div class="proto-label">Séries</div>
+                  <div class="proto-val">3</div>
+                </div>
+                <div class="proto-cell" style="border-top-color:var(--rouge2);">
+                  <div class="proto-label">Répétitions</div>
+                  <div class="proto-val">8</div>
+                </div>
+              </div>
+              <div class="conseil" style="border-left-color:rgba(212,56,56,0.5);">
+                <p>Charge lourd. En milieu de séance, le hip thrust isole le grand fessier au maximum. Contracte fort en haut — 1 seconde de maintien à chaque rep. Pas la colonne qui fait le travail.</p>
+              </div>
+            </div>
+            <div class="ew-foot" style="border-top-color:rgba(255,255,255,0.08);">
+              <div class="ew-wm">@enyawellness</div>
+              <div class="ew-pg">5/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S6 ABDUCTION -->
+      <div class="sw"><div class="sw-label">06 Ex.4 — Abduction <button class="btn btn-ghost btn-sm" onclick="dl('fs6','EW_Fessiers_06')">⬇</button></div>
+        <div class="slide bg-charbon" id="fs6" onclick="dl('fs6','EW_Fessiers_06')">
+          <div class="dc" style="width:100%;height:3px;background:var(--rouge);top:0;left:0;"></div>
+          <div class="ew-nbg">4</div>
+          <div class="si">
+            <div class="ew-logo">ENYA<span>·</span>WELLNESS</div>
+            <div class="ew-content">
+              <div class="ew-eye">EXERCICE 04</div>
+              <div class="ew-h" style="color:var(--blanc);">ABDUCTION</div>
+              <div class="muscle-tag">Moyen fessier · Brûlure totale</div>
+              <div class="three-col">
+                <div class="three-cell">
+                  <div class="three-num">8</div>
+                  <div class="three-label">Grande amplitude</div>
+                </div>
+                <div class="three-cell">
+                  <div class="three-num">8</div>
+                  <div class="three-label">Petite amplitude</div>
+                </div>
+                <div class="three-cell">
+                  <div class="three-num" style="font-size:clamp(14px,4.5cqw,60px);">8<span style="font-size:60%;letter-spacing:1px;">SEC</span></div>
+                  <div class="three-label">Maintien iso</div>
+                </div>
+              </div>
+              <div class="conseil">
+                <p>8 reps en amplitude complète → 8 reps en contraction max (petite amplitude) → 8 secondes de maintien en contraction. Pas de repos entre les 3 phases.</p>
+              </div>
+            </div>
+            <div class="ew-foot">
+              <div class="ew-wm">@enyawellness</div>
+              <div class="ew-pg">6/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S7 FINISHER -->
+      <div class="sw"><div class="sw-label">07 Ex.5 — Finisher <button class="btn btn-ghost btn-sm" onclick="dl('fs7','EW_Fessiers_07')">⬇</button></div>
+        <div class="slide bg-noir" id="fs7" onclick="dl('fs7','EW_Fessiers_07')">
+          <div class="dc" style="width:100%;height:3px;background:var(--rouge);top:0;left:0;"></div>
+          <div class="ew-nbg">5</div>
+          <div class="si">
+            <div class="ew-logo">ENYA<span>·</span>WELLNESS</div>
+            <div class="ew-content">
+              <div class="ew-eye">EXERCICE 05 · FINISHER</div>
+              <div class="ew-h" style="color:var(--blanc);">GLUTE HYPER­EXTENSION</div>
+              <div class="muscle-tag">Grand fessier · Contraction max</div>
+              <div class="proto-grid">
+                <div class="proto-cell">
+                  <div class="proto-label">Séries</div>
+                  <div class="proto-val">2</div>
+                </div>
+                <div class="proto-cell">
+                  <div class="proto-label">Reps</div>
+                  <div class="proto-val" style="font-size:clamp(12px,4cqw,52px);">ÉCHEC</div>
+                </div>
+              </div>
+              <div class="conseil">
+                <p>Le finisher. Travaille la contraction maximale du grand fessier. 8 reps minimum par série, jusqu'à l'échec musculaire. Tu dois brûler — si tu ne brûles pas, tu ne contractes pas assez fort.</p>
+              </div>
+            </div>
+            <div class="ew-foot">
+              <div class="ew-wm">@enyawellness</div>
+              <div class="ew-pg">7/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S8 CTA -->
+      <div class="sw"><div class="sw-label">08 CTA <button class="btn btn-ghost btn-sm" onclick="dl('fs8','EW_Fessiers_08')">⬇</button></div>
+        <div class="slide bg-grad-rouge" id="fs8" onclick="dl('fs8','EW_Fessiers_08')">
+          <div class="dc" style="width:100%;height:3px;background:rgba(0,0,0,0.3);top:0;left:0;"></div>
+          <div class="si">
+            <div class="ew-logo" style="color:rgba(255,255,255,0.9);">ENYA<span>·</span>WELLNESS</div>
+            <div class="ew-content" style="text-align:center;align-items:center;">
+              <div class="cta-h" style="color:var(--blanc);">SAUVEGARDE CETTE SÉANCE</div>
+              <div class="ew-div" style="margin:0 auto 5%;"></div>
+              <div class="cta-sub">Tu fais cette séance combien de fois par semaine ? Dis-moi en commentaire 💪</div>
+              <div class="cta-pill">Fessiers résultats en 6 semaines →</div>
+            </div>
+            <div class="ew-foot" style="border-top-color:rgba(255,255,255,0.15);">
+              <div class="ew-wm" style="color:rgba(255,255,255,0.5);">@enyawellness</div>
+              <div class="ew-pg" style="color:rgba(255,255,255,0.4);">8/8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- slides-row -->
+
+    <div class="desc-panel">
+      <div class="desc-panel-head"><div class="desc-panel-title">📋 Description & Hashtags</div></div>
+      <div class="desc-section">
+        <div class="desc-label">📝 Description <button class="copy-btn" onclick="copyEl('d_fessiers')">Copier</button></div>
+        <div class="desc-text" id="d_fessiers">La séance fessiers complète — 5 exercices, protocoles exacts, conseils technique.
+
+🔥 10 min de mobilité (ne saute pas l'éco)
+① RDL — 3×8 lourd — grand fessier + ischios
+② Step Up haltère — 3×8/côté — moyen fessier
+③ Hip Thrust — 3×8 lourd — isolation grand fessier
+④ Abduction — 8+8+8sec — brûlure totale
+⑤ Glute Hyperextension — 2×échec — finisher
+
+Sauvegarde pour ta prochaine séance 💾</div>
+      </div>
+      <div class="desc-section">
+        <div class="desc-label"># Hashtags <button class="copy-btn" onclick="copyEl('h_fessiers')">Copier</button></div>
+        <div class="hashtag-wrap" id="h_fessiers">#fessiers #musculationfemme #seancefessiers #salledesport #enyawellness</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function copyEl(id){
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    const btn = document.querySelector(`[onclick="copyEl('${id}')"]`);
+    if(btn){ btn.textContent = '✓ Copié'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 1800); }
+  });
+}
+
+async function captureSlide(id, filename){
+  const orig = document.getElementById(id);
+  if(!orig) return false;
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:fixed;top:0;left:-99999px;width:1080px;height:1350px;pointer-events:none;z-index:-1;background:transparent;';
+  const clone = orig.cloneNode(true);
+  clone.style.width = '1080px';
+  clone.style.height = '1350px';
+  clone.style.maxWidth = 'none';
+  clone.style.aspectRatio = 'auto';
+  clone.style.boxShadow = 'none';
+  clone.style.transform = 'none';
+  wrap.appendChild(clone);
+  document.body.appendChild(wrap);
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  if(document.fonts && document.fonts.ready){ try{ await document.fonts.ready; }catch(_){} }
+  try{
+    const c = await html2canvas(clone, {
+      scale: 1, width: 1080, height: 1350,
+      windowWidth: 1080, windowHeight: 1350,
+      useCORS: true, allowTaint: true,
+      backgroundColor: null, logging: false
+    });
+    const a = document.createElement('a');
+    a.download = `${filename}.png`;
+    a.href = c.toDataURL('image/png');
+    a.click();
+    return true;
+  }catch(e){ console.error(e); return false; }
+  finally{ document.body.removeChild(wrap); }
+}
+
+async function dl(id, name){
+  showToast('⏳ Génération…');
+  const ok = await captureSlide(id, name);
+  showToast(ok ? `✓ ${name}.png` : '❌ Erreur');
+}
+
+async function dlAll(){
+  const slides = [
+    ['fs1','EW_Fessiers_01'],['fs2','EW_Fessiers_02'],['fs3','EW_Fessiers_03'],
+    ['fs4','EW_Fessiers_04'],['fs5','EW_Fessiers_05'],['fs6','EW_Fessiers_06'],
+    ['fs7','EW_Fessiers_07'],['fs8','EW_Fessiers_08']
+  ];
+  showToast('⏳ Téléchargement…');
+  for(const [id,name] of slides){
+    await captureSlide(id, name);
+    await new Promise(r => setTimeout(r, 250));
+  }
+  showToast('✓ 8 slides téléchargées !');
+}
+</script>
+</body>
+</html>
